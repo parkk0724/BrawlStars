@@ -151,5 +151,3 @@ crashlytics-build.properties
 *.cache
 *.force
 *.CopyComplete
-*.pref
-*.pref

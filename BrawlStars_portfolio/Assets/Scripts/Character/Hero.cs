@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Hero : Character
 {
+    // 210709: Junseong Test String.
     // Start is called before the first frame update
     public LayerMask Picking_Mask;
     public float Move_Speed = 5.0f;

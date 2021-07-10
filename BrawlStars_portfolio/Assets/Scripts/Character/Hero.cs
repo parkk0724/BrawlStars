@@ -19,12 +19,11 @@ public class Hero : Character
     public Text m_tDie;
     void Start()
     {
-
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
         m_vOriginRot = this.transform.rotation.eulerAngles;
         m_nMaxHP = 100;
-        m_nHP = m_nMaxHP;
+        m_nHP = m_nMaxHP;   // Current Hp
         m_fMaxStamina = 3.0f;
         m_fStamina = m_fMaxStamina;
         m_fMaxFever = 10.0f;
@@ -35,6 +34,9 @@ public class Hero : Character
         m_fMoveSpeed = 5.0f;
         m_fAttackSpeed = 1.0f;
         m_fRange = 10.0f;
+
+        // UI: HP, Max
+        HealthBar.SetHealth(m_nMaxHP); 
     }
 
     // Update is called once per frame

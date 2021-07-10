@@ -5,11 +5,12 @@ using UnityEngine;
 public class Main_Camera_Moving : MonoBehaviour
 {
     public GameObject playercamera;
-    public GameObject player;
     public float speed = 0.0f;
     public bool startmove = true;
     Coroutine cameramove = null;
-           
+
+    float xAxis;
+    float yAxis;
     void Start()
     {
         if (startmove == true)
@@ -23,9 +24,13 @@ public class Main_Camera_Moving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        xAxis = Input.GetAxisRaw("Horizontal");
+        yAxis = Input.GetAxisRaw("Vertical");
+        float power = yAxis / Mathf.Sqrt(Mathf.Pow(yAxis, 2) + Mathf.Pow(xAxis, 2));
+        
         if (cameramove == null)
         {
-            
+            this.transform.Translate(Vector3.forward * power * 4.0f * Time.deltaTime);
         }
     }
 

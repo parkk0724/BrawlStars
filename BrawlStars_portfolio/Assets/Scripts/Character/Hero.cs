@@ -51,235 +51,43 @@ public class Hero : Character
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            float dot = Vector3.Dot(playerDir.transform.forward, this.transform.forward);
-            if (dot == 1.0f)
-            {
-                this.transform.Translate(this.transform.forward * delta, Space.World);
-            }
-            else
-            {
-                float dot1 = Vector3.Dot(playerDir.transform.right, this.transform.forward);
-                float rdelta = Rotate_Speed * Time.deltaTime;
-                float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
-                if (eurler - rdelta < 0.0f)
-                    rdelta = eurler;
-
-                if (dot1 >= 0.0f)
-                {
-                    this.transform.Translate(playerDir.transform.forward * delta, Space.World);
-                    this.transform.Rotate(-Vector3.up * rdelta, Space.World);
-                }
-                else
-                {
-                    this.transform.Translate(playerDir.transform.forward * delta, Space.World);
-                    this.transform.Rotate(Vector3.up * rdelta, Space.World);
-                }
-            }
+            RotaeProcess(playerDir.transform.forward, delta, 1.0f, playerDir.transform.right);           
         }
         if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            float dot = Vector3.Dot(-playerDir.transform.forward, this.transform.forward);
-            if (dot == 1.0f)
-            {
-                this.transform.Translate(this.transform.forward * delta, Space.World);
-            }
-            else
-            {
-                float dot1 = Vector3.Dot(playerDir.transform.right, this.transform.forward);
-                float rdelta = Rotate_Speed * Time.deltaTime;
-                float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
-                if (eurler - rdelta < 0.0f)
-                    rdelta = eurler;
-
-                if (dot1 >= 0.0f)
-                {
-                    this.transform.Translate(-playerDir.transform.forward * delta, Space.World);
-                    this.transform.Rotate(Vector3.up * rdelta, Space.World);
-                }
-                else
-                {
-                    this.transform.Translate(-playerDir.transform.forward * delta, Space.World);
-                    this.transform.Rotate(-Vector3.up * rdelta, Space.World);
-                }
-            }
+            RotaeProcess(-playerDir.transform.forward, delta, -1.0f, playerDir.transform.right);
         }
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            float dot = Vector3.Dot(-playerDir.transform.right, this.transform.forward);
-            if (dot == 1.0f)
-            {
-                this.transform.Translate(this.transform.forward * delta, Space.World);
-            }
-            else
-            {
-                float dot1 = Vector3.Dot(playerDir.transform.forward, this.transform.forward);
-                float rdelta = Rotate_Speed * Time.deltaTime;
-                float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
-                if (eurler - rdelta < 0.0f)
-                    rdelta = eurler;
-
-                if (dot1 >= 0.0f)
-                {
-                    this.transform.Translate(-playerDir.transform.right * delta, Space.World);
-                    this.transform.Rotate(-Vector3.up * rdelta, Space.World);
-                }
-                else
-                {
-                    this.transform.Translate(-playerDir.transform.right * delta, Space.World);
-                    this.transform.Rotate(Vector3.up * rdelta, Space.World);
-                }
-            }
+            RotaeProcess(-playerDir.transform.right, delta, 1.0f, playerDir.transform.forward);
         }
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
             m_Animator.SetBool("bMove", true);
-            float dot = Vector3.Dot(playerDir.transform.right, this.transform.forward);
-            if (dot == 1.0f)
-            {
-                this.transform.Translate(this.transform.forward * delta, Space.World);
-            }
-            else
-            {
-                float dot1 = Vector3.Dot(-playerDir.transform.forward, this.transform.forward);
-                float rdelta = Rotate_Speed * Time.deltaTime;
-                float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
-                if (eurler - rdelta < 0.0f)
-                    rdelta = eurler;
-
-                if (dot1 >= 0.0f)
-                {
-                    this.transform.Translate(playerDir.transform.right * delta, Space.World);
-                    this.transform.Rotate(-Vector3.up * rdelta, Space.World);
-                }
-                else
-                {
-                    this.transform.Translate(playerDir.transform.right * delta, Space.World);
-                    this.transform.Rotate(Vector3.up * rdelta, Space.World);
-                }
-            }
+            RotaeProcess(playerDir.transform.right, delta, 1.0f, -playerDir.transform.forward);
         }
 
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            float dot = Vector3.Dot((playerDir.transform.forward - playerDir.transform.right).normalized, this.transform.forward);
-            if (dot == 1.0f)
-            {
-                this.transform.Translate(this.transform.forward * delta, Space.World);
-            }
-            else
-            {
-                float dot1 = Vector3.Dot((playerDir.transform.forward + playerDir.transform.right).normalized, this.transform.forward);
-                float rdelta = Rotate_Speed * Time.deltaTime;
-                float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
-                if (eurler - rdelta < 0.0f)
-                    rdelta = eurler;
-
-                if (dot1 >= 0.0f)
-                {
-                    this.transform.Translate((playerDir.transform.forward - playerDir.transform.right).normalized * delta, Space.World);
-                    this.transform.Rotate(-Vector3.up * rdelta, Space.World);
-                }
-                else
-                {
-                    this.transform.Translate((playerDir.transform.forward - playerDir.transform.right).normalized * delta, Space.World);
-                    this.transform.Rotate(Vector3.up * rdelta, Space.World);
-                }
-            }
+            RotaeProcess((playerDir.transform.forward - playerDir.transform.right).normalized, delta, 1.0f, (playerDir.transform.forward + playerDir.transform.right).normalized);
         }
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
             m_Animator.SetBool("bMove", true);
-            float dot = Vector3.Dot((playerDir.transform.forward + playerDir.transform.right).normalized, this.transform.forward);
-            if (dot == 1.0f)
-            {
-                this.transform.Translate(this.transform.forward * delta, Space.World);
-            }
-            else
-            {
-                float dot1 = Vector3.Dot((-playerDir.transform.forward + playerDir.transform.right).normalized, this.transform.forward);
-                float rdelta = Rotate_Speed * Time.deltaTime;
-                float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
-                if (eurler - rdelta < 0.0f)
-                    rdelta = eurler;
-
-                if (dot1 >= 0.0f)
-                {
-                    this.transform.Translate((playerDir.transform.forward + playerDir.transform.right).normalized * delta, Space.World);
-                    this.transform.Rotate(-Vector3.up * rdelta, Space.World);
-                }
-                else
-                {
-                    this.transform.Translate((playerDir.transform.forward + playerDir.transform.right).normalized * delta, Space.World);
-                    this.transform.Rotate(Vector3.up * rdelta, Space.World);
-                }
-            }
+            RotaeProcess((playerDir.transform.forward + playerDir.transform.right).normalized, delta, 1.0f, (-playerDir.transform.forward + playerDir.transform.right).normalized);
         }
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            float dot = Vector3.Dot((-playerDir.transform.forward - playerDir.transform.right).normalized, this.transform.forward);
-            if (dot == 1.0f)
-            {
-                this.transform.Translate(this.transform.forward * delta, Space.World);
-            }
-            else
-            {
-                float dot1 = Vector3.Dot((playerDir.transform.forward - playerDir.transform.right).normalized, this.transform.forward);
-                float rdelta = Rotate_Speed * Time.deltaTime;
-                float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
-                if (eurler - rdelta < 0.0f)
-                    rdelta = eurler;
-
-                if (dot1 >= 0.0f)
-                {
-                    this.transform.Translate((-playerDir.transform.forward - playerDir.transform.right).normalized * delta, Space.World);
-                    this.transform.Rotate(-Vector3.up * rdelta, Space.World);
-                }
-                else
-                {
-                    this.transform.Translate((-playerDir.transform.forward - playerDir.transform.right).normalized * delta, Space.World);
-                    this.transform.Rotate(Vector3.up * rdelta, Space.World);
-                }
-            }
+            RotaeProcess((-playerDir.transform.forward - playerDir.transform.right).normalized, delta, 1.0f, (playerDir.transform.forward - playerDir.transform.right).normalized);
         }
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
         {
             m_Animator.SetBool("bMove", true);
-            float dot = Vector3.Dot((-playerDir.transform.forward + playerDir.transform.right).normalized, this.transform.forward);
-            if (dot == 1.0f)
-            {
-                this.transform.Translate(this.transform.forward * delta, Space.World);
-            }
-            else
-            {
-                float dot1 = Vector3.Dot((playerDir.transform.forward + playerDir.transform.right).normalized, this.transform.forward);
-                float rdelta = Rotate_Speed * Time.deltaTime;
-                float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
-                if (eurler - rdelta < 0.0f)
-                    rdelta = eurler;
-
-                if (dot1 >= 0.0f)
-                {
-                    this.transform.Translate((-playerDir.transform.forward + playerDir.transform.right).normalized * delta, Space.World);
-                    this.transform.Rotate(Vector3.up * rdelta, Space.World);
-                }
-                else
-                {
-                    this.transform.Translate((-playerDir.transform.forward + playerDir.transform.right).normalized * delta, Space.World);
-                    this.transform.Rotate(-Vector3.up * rdelta, Space.World);
-                }
-            }
+            RotaeProcess((-playerDir.transform.forward + playerDir.transform.right).normalized, delta, -1.0f, (playerDir.transform.forward + playerDir.transform.right).normalized);
         }
 
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
@@ -345,5 +153,34 @@ public class Hero : Character
         m_ptsRevival.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         m_ptsRevival.gameObject.SetActive(false);
+    }
+
+    void RotaeProcess(Vector3 playerdir, float delta, float movedir, Vector3 dir)
+    {
+        float dot = Vector3.Dot(playerdir, this.transform.forward);
+        if (dot == 1.0f)
+        {
+            this.transform.Translate(this.transform.forward * delta, Space.World);
+        }
+        else
+        {
+            float dot1 = Vector3.Dot(dir, this.transform.forward);
+            float rdelta = Rotate_Speed * Time.deltaTime;
+            float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
+
+            if (eurler - rdelta < 0.0f)
+                rdelta = eurler;
+
+            if (dot1 >= 0.0f)
+            {
+                this.transform.Translate(playerdir * delta, Space.World);
+                this.transform.Rotate(-Vector3.up * movedir * rdelta, Space.World);
+            }
+            else
+            {
+                this.transform.Translate(playerdir * delta, Space.World);
+                this.transform.Rotate(Vector3.up * movedir * rdelta, Space.World);
+            }
+        }
     }
 }

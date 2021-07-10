@@ -9,6 +9,7 @@ public class Main_Camera_Moving : MonoBehaviour
     public bool startmove = true;
     Coroutine cameramove = null;
 
+
     float xAxis;
     float yAxis;
     void Start()
@@ -20,15 +21,13 @@ public class Main_Camera_Moving : MonoBehaviour
             this.transform.position = playercamera.transform.position;
         }
     }
-
-    // Update is called once per frame
     void Update()
     {
         xAxis = Input.GetAxisRaw("Horizontal");
         yAxis = Input.GetAxisRaw("Vertical");
         float power = yAxis / Mathf.Sqrt(Mathf.Pow(yAxis, 2) + Mathf.Pow(xAxis, 2));
         
-        if (cameramove == null)
+        if (cameramove == null /*&& (dot == 1.0f || dot == -1.0f)*/)
         {
             this.transform.Translate(Vector3.forward * power * 4.0f * Time.deltaTime);
         }

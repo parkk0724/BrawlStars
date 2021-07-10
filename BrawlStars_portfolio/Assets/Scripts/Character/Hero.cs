@@ -53,44 +53,44 @@ public class Hero : Character
             m_Animator.SetBool("bMove", true);
             RotaeProcess(playerDir.transform.forward, delta, 1.0f, playerDir.transform.right);           
         }
-        if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
             RotaeProcess(-playerDir.transform.forward, delta, -1.0f, playerDir.transform.right);
         }
-        if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
             RotaeProcess(-playerDir.transform.right, delta, 1.0f, playerDir.transform.forward);
         }
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
             m_Animator.SetBool("bMove", true);
             RotaeProcess(playerDir.transform.right, delta, 1.0f, -playerDir.transform.forward);
         }
 
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
             RotaeProcess((playerDir.transform.forward - playerDir.transform.right).normalized, delta, 1.0f, (playerDir.transform.forward + playerDir.transform.right).normalized);
         }
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
             m_Animator.SetBool("bMove", true);
             RotaeProcess((playerDir.transform.forward + playerDir.transform.right).normalized, delta, 1.0f, (-playerDir.transform.forward + playerDir.transform.right).normalized);
         }
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
             RotaeProcess((-playerDir.transform.forward - playerDir.transform.right).normalized, delta, 1.0f, (playerDir.transform.forward - playerDir.transform.right).normalized);
         }
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
         {
             m_Animator.SetBool("bMove", true);
             RotaeProcess((-playerDir.transform.forward + playerDir.transform.right).normalized, delta, -1.0f, (playerDir.transform.forward + playerDir.transform.right).normalized);
         }
 
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        else 
         {
             m_Animator.SetBool("bMove", false);
         }

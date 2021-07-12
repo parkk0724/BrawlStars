@@ -115,6 +115,16 @@ public class Hero : Character
         //rig.MovePosition(this.transform.position + this.transform.forward * this.GetComponent<Picking>().Move_Speed * Time.deltaTime); // 충돌시 이동 안되게해주는 처리
         if (move != null) StopCoroutine(move);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+
+            Destroy(other.gameObject);
+        }
+    }
     public override IEnumerator Die()
     {
         Debug.Log("Die");

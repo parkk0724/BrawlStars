@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] protected UITextDamage m_UITextDamage;
     protected Animator m_Animator;
     protected Vector3 m_vOriginPos;
     protected Vector3 m_vOriginRot;
@@ -45,7 +46,8 @@ public abstract class Character : MonoBehaviour
         int DefDamage =  damage - m_nDEF;
 
         if(DefDamage > 0)
-        { 
+        {
+            m_UITextDamage.SetDamage(DefDamage, this.transform.position);
             m_nHP = m_nHP - DefDamage;      // 데미지 계산
             m_Animator.SetTrigger("tHit");  // 히트모션
             HealthBar.SetHealth(m_nHP);     // UI, 체력바 현재체력으로 증감

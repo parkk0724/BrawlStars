@@ -111,6 +111,8 @@ public class Hero : Character
 
     private void OnCollisionEnter(Collision collision) //콜리젼에 충돌이 발생했을 때
     {
+        Debug.Log("CollisionEnter");
+        Hit(30);
         //Rigidbody rig = this.GetComponent<Rigidbody>();
         //rig.MovePosition(this.transform.position + this.transform.forward * this.GetComponent<Picking>().Move_Speed * Time.deltaTime); // 충돌시 이동 안되게해주는 처리
         if (move != null) StopCoroutine(move);

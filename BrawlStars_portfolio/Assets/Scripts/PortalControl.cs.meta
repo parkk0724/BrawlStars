@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 7d56735f98bae91498e9896722b3e4ab
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ptsPortalIn: {fileID: 5433113175393464732, guid: 71f55e884437c644b8871c3e3fecd2e0, type: 3}
+  - m_ptsPortalOut: {fileID: 9020424954169396112, guid: 3d2379824bd3c8b43844fe7196c0412a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

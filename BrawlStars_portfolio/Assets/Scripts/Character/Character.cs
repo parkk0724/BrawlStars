@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum StandardShaderRenderingMode { Opaque, Cutout, Fade, Transparent }
 public abstract class Character : MonoBehaviour
 {
     // Start is called before the first frame update

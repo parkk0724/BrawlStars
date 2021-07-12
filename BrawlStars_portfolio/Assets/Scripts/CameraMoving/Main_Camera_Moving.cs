@@ -23,9 +23,13 @@ public class Main_Camera_Moving : MonoBehaviour
     }
     void Update()
     {
+        
         xAxis = Input.GetAxisRaw("Horizontal");
         yAxis = Input.GetAxisRaw("Vertical");
-        float power = yAxis / Mathf.Sqrt(Mathf.Pow(yAxis, 2) + Mathf.Pow(xAxis, 2));
+
+        float axis = Mathf.Sqrt(Mathf.Pow(yAxis, 2) + Mathf.Pow(xAxis, 2));
+        float power = 0.0f;
+        if (axis != 0) power = yAxis / Mathf.Sqrt(Mathf.Pow(yAxis, 2) + Mathf.Pow(xAxis, 2));
         
         if (cameramove == null /*&& (dot == 1.0f || dot == -1.0f)*/)
         {

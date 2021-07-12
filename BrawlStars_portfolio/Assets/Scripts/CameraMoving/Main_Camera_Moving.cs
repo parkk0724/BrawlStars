@@ -29,7 +29,15 @@ public class Main_Camera_Moving : MonoBehaviour
 
         if (cameramove == null)
         {
-            this.transform.position = Vector3.Lerp(this.transform.position, pos, 3.0f * Time.deltaTime);
+           // if (Vector3.Dot(this.transform.forward, player.transform.forward) == -1)
+           // {
+           //     pos.z = pos.z - 5.0f;
+           //     this.transform.position = Vector3.Lerp(this.transform.position, pos, 1.0f * Time.deltaTime);
+           // }
+           // else
+           // {
+                this.transform.position = Vector3.Lerp(this.transform.position, pos, 3.0f * Time.deltaTime);
+           // }
         }
     }
 

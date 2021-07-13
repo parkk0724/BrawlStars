@@ -66,13 +66,13 @@ public class PortalControl : MonoBehaviour
     IEnumerator MovePortal(Collider other, int index)
     {
         ResetCurTime();
-        other.gameObject.SetActive(false);
         Vector3 pos = m_tfPortals[index].transform.position;
+        other.transform.position = pos;
+        other.gameObject.SetActive(false);
         pos.y += 5.0f;
         m_ptsPortalOut.transform.position = pos;
         m_ptsPortalOut.Play();
         yield return new WaitForSeconds(1);
-        other.transform.position = m_tfPortals[index].transform.position;
         other.gameObject.SetActive(true);
         m_GameManager.SetCurDelayPortal(0.0f);
         m_bPortalOn = false;

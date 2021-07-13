@@ -12,6 +12,7 @@ public class Hero : Character
 
     Coroutine move = null;
     Coroutine rotate = null;
+    Coroutine fire = null;
     public ParticleSystem m_ptsRevival;
     public GameObject playerDir;
     public GameObject m_objCharacter;
@@ -101,7 +102,12 @@ public class Hero : Character
 
     public override void Attack()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            m_Animator.SetTrigger("tBAttack");
 
+            //fire = StartCoroutine(this.GetComponentInChildren<Bazooka>().fire()); // 어택 테스트            
+        }
     }
 
     public override void SkillAttack()

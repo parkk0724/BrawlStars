@@ -15,10 +15,8 @@ public class PortalControl : MonoBehaviour
     bool m_bPortalOn = false;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Player")
         {
-            Debug.Log("Enter");
             ResetCurTime();
             m_bPortalOn = false;
         }
@@ -57,7 +55,6 @@ public class PortalControl : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Exit");
             m_ptsPortalIn.Stop();
             ResetCurTime();
         }

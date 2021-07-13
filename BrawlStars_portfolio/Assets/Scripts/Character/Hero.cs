@@ -4,20 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Hero : Character
 {
-    // 210709: Junseong Test String.
-    // Start is called before the first frame update
-    public LayerMask Picking_Mask;
-    public float Move_Speed = 5.0f;
-    public float Rotate_Speed = 0.0f;
-
-    Coroutine move = null;
-    Coroutine rotate = null;
-    Coroutine fire = null;
+    [Header("Moving")]
+    public LayerMask m_lmPicking_Mask;
+    public float m_fMove_Speed = 5.0f;
+    public float m_fRotate_Speed = 0.0f;
     public ParticleSystem m_ptsRevival;
-    public GameObject playerDir;
+    public GameObject m_objPlayerDir;
     public GameObject m_objCharacter;
-    public GameObject m_uiDie;
+    public GameObject m_objUIDie;
     public Text m_tDie;
+
+    [Header("Target")]
+    public float m_fTargetRotSpeed = 10.0f;
+    public GameObject m_objTargetEffect;
+    Transform m_tfResultTarget;
+    public bool m_bRotStart = false;
+    public float m_fTargetRange = 0f;
+    public LayerMask m_lmEnemyLayer = 0;
     void Start()
     {
         m_Animator = this.GetComponentInChildren<Animator>();
@@ -37,63 +40,84 @@ public class Hero : Character
         m_fRange = 10.0f;
 
         // UI: HP, Max
-        HealthBar.SetHealth(m_nMaxHP); 
+        HealthBar.SetHealth(m_nMaxHP);
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            m_bRotStart = true;
+            SearchTarget();
+        }
+        if (m_bRotStart) LookEnemy();
         if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
     }
 
     public override void Move()
     {
-        float delta = Move_Speed * Time.deltaTime;
+        float delta = m_fMove_Speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            RotaeProcess(playerDir.transform.forward, delta, 1.0f, playerDir.transform.right);           
+            TransformHero(m_objPlayerDir.transform.forward, delta);
+            if (!m_bRotStart)
+                RotaeProcess(m_objPlayerDir.transform.forward, delta, 1.0f, m_objPlayerDir.transform.right);
         }
         else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            RotaeProcess(-playerDir.transform.forward, delta, -1.0f, playerDir.transform.right);
+            TransformHero(-m_objPlayerDir.transform.forward, delta);
+            if (!m_bRotStart)
+                RotaeProcess(-m_objPlayerDir.transform.forward, delta, -1.0f, m_objPlayerDir.transform.right);
         }
         else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            RotaeProcess(-playerDir.transform.right, delta, 1.0f, playerDir.transform.forward);
+            TransformHero(-m_objPlayerDir.transform.right, delta);
+            if (!m_bRotStart)
+                RotaeProcess(-m_objPlayerDir.transform.right, delta, 1.0f, m_objPlayerDir.transform.forward);
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
             m_Animator.SetBool("bMove", true);
-            RotaeProcess(playerDir.transform.right, delta, 1.0f, -playerDir.transform.forward);
+            TransformHero(m_objPlayerDir.transform.right, delta);
+            if (!m_bRotStart)
+                RotaeProcess(m_objPlayerDir.transform.right, delta, 1.0f, -m_objPlayerDir.transform.forward);
         }
 
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            RotaeProcess((playerDir.transform.forward - playerDir.transform.right).normalized, delta, 1.0f, (playerDir.transform.forward + playerDir.transform.right).normalized);
+            TransformHero(((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized), delta);
+            if (!m_bRotStart)
+                RotaeProcess((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
             m_Animator.SetBool("bMove", true);
-            RotaeProcess((playerDir.transform.forward + playerDir.transform.right).normalized, delta, 1.0f, (-playerDir.transform.forward + playerDir.transform.right).normalized);
+            TransformHero(((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized), delta);
+            if (!m_bRotStart)
+                RotaeProcess((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, 1.0f, (-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
         {
             m_Animator.SetBool("bMove", true);
-            RotaeProcess((-playerDir.transform.forward - playerDir.transform.right).normalized, delta, 1.0f, (playerDir.transform.forward - playerDir.transform.right).normalized);
+            TransformHero(((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized), delta);
+            if (!m_bRotStart)
+                RotaeProcess((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
         {
             m_Animator.SetBool("bMove", true);
-            RotaeProcess((-playerDir.transform.forward + playerDir.transform.right).normalized, delta, -1.0f, (playerDir.transform.forward + playerDir.transform.right).normalized);
+            TransformHero((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta);
+            if (!m_bRotStart)
+                RotaeProcess((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, -1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
         }
 
-        else 
+        else
         {
             m_Animator.SetBool("bMove", false);
         }
@@ -102,12 +126,7 @@ public class Hero : Character
 
     public override void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            m_Animator.SetTrigger("tBAttack");
 
-            //fire = StartCoroutine(this.GetComponentInChildren<Bazooka>().fire()); // 어택 테스트            
-        }
     }
 
     public override void SkillAttack()
@@ -117,11 +136,9 @@ public class Hero : Character
 
     private void OnCollisionEnter(Collision collision) //콜리젼에 충돌이 발생했을 때
     {
-        Debug.Log("CollisionEnter");
         Hit(30);
         //Rigidbody rig = this.GetComponent<Rigidbody>();
-        //rig.MovePosition(this.transform.position + this.transform.forward * this.GetComponent<Picking>().Move_Speed * Time.deltaTime); // 충돌시 이동 안되게해주는 처리
-        if (move != null) StopCoroutine(move);
+        //rig.MovePosition(this.transform.position + this.transform.forward * this.GetComponent<Picking>().m_fMove_Speed * Time.deltaTime); // 충돌시 이동 안되게해주는 처리
     }
 
     private void OnTriggerEnter(Collider other)
@@ -135,7 +152,6 @@ public class Hero : Character
     }
     public override IEnumerator Die()
     {
-        Debug.Log("Die");
         m_Animator.SetTrigger("tDie");
         m_bDie = true;
         yield return new WaitForSeconds(2);
@@ -143,7 +159,7 @@ public class Hero : Character
         int count = 3;
 
         m_objCharacter.SetActive(false);
-        m_uiDie.gameObject.SetActive(true);
+        m_objUIDie.SetActive(true);
 
         while (count > 0)
         {
@@ -151,14 +167,12 @@ public class Hero : Character
             yield return new WaitForSeconds(1);
             count--;
         }
-        m_uiDie.gameObject.SetActive(false);
+        m_objUIDie.SetActive(false);
 
         Revival();
     }
     public override void Revival()
     {
-        Debug.Log("Revival");
-        Debug.Log("m_voriginPos : " + m_vOriginPos);
         StartCoroutine(RevivalEffect());
         this.transform.position = m_vOriginPos;
         this.transform.rotation = Quaternion.Euler(m_vOriginRot);
@@ -174,18 +188,22 @@ public class Hero : Character
         yield return new WaitForSeconds(3);
         m_ptsRevival.gameObject.SetActive(false);
     }
-
-    void RotaeProcess(Vector3 playerdir, float delta, float movedir, Vector3 dir)
+    void TransformHero(Vector3 m_objPlayerDir, float delta) // 움직임
     {
-        float dot = Vector3.Dot(playerdir, this.transform.forward);
+        this.transform.Translate(m_objPlayerDir * delta, Space.World);
+    }
+
+    void RotaeProcess(Vector3 m_objPlayerDir, float delta, float movedir, Vector3 dir) //로테이션
+    {
+        float dot = Vector3.Dot(m_objPlayerDir, this.transform.forward);
         if (dot == 1.0f)
         {
-            this.transform.Translate(this.transform.forward * delta, Space.World);
+            //this.transform.Translate(this.transform.forward * delta, Space.World);
         }
         else
         {
             float dot1 = Vector3.Dot(dir, this.transform.forward);
-            float rdelta = Rotate_Speed * Time.deltaTime;
+            float rdelta = m_fRotate_Speed * Time.deltaTime;
             float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
 
             if (eurler - rdelta < 0.0f)
@@ -193,14 +211,62 @@ public class Hero : Character
 
             if (dot1 >= 0.0f)
             {
-                this.transform.Translate(playerdir * delta, Space.World);
+                //this.transform.Translate(m_objPlayerDir * delta, Space.World);
                 this.transform.Rotate(-Vector3.up * movedir * rdelta, Space.World);
             }
             else
             {
-                this.transform.Translate(playerdir * delta, Space.World);
+                //this.transform.Translate(m_objPlayerDir * delta, Space.World);
                 this.transform.Rotate(Vector3.up * movedir * rdelta, Space.World);
             }
+        }
+    }
+
+    void SearchTarget()
+    {
+        float Shortdist = 10;
+        Transform shorTarget = null;
+        Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
+        if (EnemyCollider.Length > 0)
+        {
+            for (int i = 0; i < EnemyCollider.Length; i++)
+            {
+                float Dist = Vector3.Distance(this.transform.position, EnemyCollider[i].transform.position);
+                if (Shortdist > Dist)
+                {
+                    Shortdist = Dist;
+                    shorTarget = EnemyCollider[i].transform;
+                }
+            }
+        }
+        m_tfResultTarget = shorTarget; // 최종값
+    }
+    void LookEnemy()
+    {
+        if (m_tfResultTarget == null)
+        {
+            m_bRotStart = false;
+        }
+        else
+        {
+            float rotDir = 1.0f;
+            float delta = m_fTargetRotSpeed * Time.deltaTime;
+            Vector3 dir = m_tfResultTarget.position - this.transform.position;
+            Vector3 Bot = new Vector3(dir.x, 0, dir.z);
+            Bot.Normalize();
+            float r = Mathf.Acos(Vector3.Dot(Bot, this.transform.forward)); //라디안
+            float angle = 180.0f * r / Mathf.PI; //this
+            float r2 = Vector3.Dot(Bot, this.transform.right);
+            if (r2 < 0.0f) rotDir = -1.0f;
+            Instantiate(m_objTargetEffect, m_tfResultTarget.position, Quaternion.Euler(m_tfResultTarget.rotation.x + 90, m_tfResultTarget.rotation.y, m_tfResultTarget.rotation.z));
+
+            if (angle - delta < 0.0f)
+            {
+                delta = angle;
+                m_bRotStart = false;
+            }
+
+            this.transform.Rotate(Vector3.up, delta * rotDir);
         }
     }
 }

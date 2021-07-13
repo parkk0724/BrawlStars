@@ -52,13 +52,11 @@ public abstract class Character : MonoBehaviour
             m_Animator.SetTrigger("tHit");  // 히트모션
             HealthBar.SetHealth(m_nHP);     // UI, 체력바 현재체력으로 증감
         }
-        Debug.Log(m_nHP);
 
         // 210710.0451: 플레이어에게 리지드바디 주면 버그 생겨서 총알에 리지드바디 주니 괜찮은데 나중에 가볍게 게임 만들려면 해결해야 할 듯.
         if (m_nHP <= 0)
         {
             m_nHP = 0;
-            m_Animator.SetBool("bDie", true);
         }
     }
 }

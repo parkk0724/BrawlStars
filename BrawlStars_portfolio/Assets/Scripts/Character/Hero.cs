@@ -126,7 +126,10 @@ public class Hero : Character
 
     public override void Attack()
     {
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            m_Animator.SetTrigger("tBAttack");
+        }
     }
 
     public override void SkillAttack()

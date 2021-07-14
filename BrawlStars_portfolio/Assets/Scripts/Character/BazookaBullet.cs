@@ -4,44 +4,51 @@ using UnityEngine;
 
 public class BazookaBullet : MonoBehaviour
 {
-    public GameObject player;
     public float speed = 5.0f;
     public float range = 7.0f;
     public float height = 3.0f;
 
-    float dist = 0.0f;    
-    bool crash = true;
+    Rigidbody myRigid; 
+
+    float dist = 0.0f;
 
     Coroutine bulletflying;
+
     // Start is called before the first frame update
     void Start()
     {
+        myRigid = this.GetComponent<Rigidbody>();
         bulletflying = StartCoroutine(BulletFlying());
-        if (!crash) StopCoroutine(BulletFlying());
     }
 
-    // Update is called once per frame
-    
+    void Update()
+    {
+
+    }
+ 
     IEnumerator BulletFlying()
     {
-        Vector3 pos = this.transform.position;
-        while (pos.y != 0.0f)
-        {           
-            float delta = speed * Time.deltaTime;
+        while (dist < range)
+        {
+            float delta = speed * Time.deltaTime;           
+           
+            if (range - dist < 0.0f)
+            {
+                delta = range - (dist - delta);
+            }
             dist += delta;
+            float h = Mathf.Sin(dist * (Mathf.PI / range));
 
-            pos.z += delta;
-            pos.y = (Mathf.Sin((Mathf.PI / range) * pos.z)) * height;
-
-            this.transform.position = pos;
+            this.transform.Translate(Vector3.forward * delta);
 
             yield return null;
         }
+        dist = 0.0f;
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        crash = false;
         if (collision.gameObject.tag == "Ground")
         {
             Destroy(this.gameObject);

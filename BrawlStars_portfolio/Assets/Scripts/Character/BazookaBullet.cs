@@ -8,7 +8,9 @@ public class BazookaBullet : MonoBehaviour
     public float range = 7.0f;
     public float height = 3.0f;
 
-    Rigidbody myRigid; 
+    Rigidbody myRigid;
+    Vector3 curPos;
+    Vector3 prePos;
 
     float dist = 0.0f;
 
@@ -21,11 +23,6 @@ public class BazookaBullet : MonoBehaviour
         bulletflying = StartCoroutine(BulletFlying());
     }
 
-    void Update()
-    {
-
-    }
- 
     IEnumerator BulletFlying()
     {
         while (dist < range)
@@ -37,14 +34,18 @@ public class BazookaBullet : MonoBehaviour
                 delta = range - (dist - delta);
             }
             dist += delta;
-            float h = Mathf.Sin(dist * (Mathf.PI / range));
-
+            
             this.transform.Translate(Vector3.forward * delta);
+            float h = Mathf.Sin(dist * (Mathf.PI / range)) * height;
+            Vector3 pos = this.transform.position;
+
+            pos.y = h;
+
+            this.transform.position = pos;
 
             yield return null;
         }
         dist = 0.0f;
-        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

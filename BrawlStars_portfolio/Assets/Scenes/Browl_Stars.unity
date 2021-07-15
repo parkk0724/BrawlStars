@@ -4932,10 +4932,10 @@ MonoBehaviour:
   bazooka_Basic_bullet: {fileID: 8410637849025619359, guid: ff9fbb25fe1792e458dfcd6198475f24, type: 3}
   bazooka_Skill_bullet: {fileID: 8410637849025619359, guid: 4c63e5143ba65b1499427f542a6cd2b5, type: 3}
   bazooka_bullet_pos: {fileID: 1491061284}
-  SkillBullet_Pos1: {fileID: 1828742412}
-  SkillBullet_Pos2: {fileID: 1377882329}
-  SkillBullet_Pos3: {fileID: 543027955}
-  SkillBullet_Pos4: {fileID: 2061521628}
+  Skill_Bullet_Pos1: {fileID: 1828742412}
+  Skill_Bullet_Pos2: {fileID: 1377882329}
+  Skill_Bullet_Pos3: {fileID: 543027955}
+  Skill_Bullet_Pos4: {fileID: 2061521628}
 --- !u!4 &1836371603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4401899335548328, guid: 4443a83b46730cf4aab1c505db4ec1ce, type: 3}

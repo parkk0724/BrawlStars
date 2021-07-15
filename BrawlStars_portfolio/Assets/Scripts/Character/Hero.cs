@@ -134,7 +134,10 @@ public class Hero : Character
 
     public override void SkillAttack()
     {
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            m_Animator.SetTrigger("tSAttack");
+        }
     }
 
     private void OnCollisionEnter(Collision collision) //콜리젼에 충돌이 발생했을 때

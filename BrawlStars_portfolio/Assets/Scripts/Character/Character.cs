@@ -33,6 +33,7 @@ public abstract class Character : MonoBehaviour
         {
             Move();
             Attack();
+            SkillAttack();
         }
     }
     public abstract void Attack(); 

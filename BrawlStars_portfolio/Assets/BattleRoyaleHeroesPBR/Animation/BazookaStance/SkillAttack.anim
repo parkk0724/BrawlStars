@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BasicAttack
+  m_Name: SkillAttack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -21967,7 +21967,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.1
-    functionName: Bazooka_Basic_Fire
+    functionName: Bazooka_Skill_Fire
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

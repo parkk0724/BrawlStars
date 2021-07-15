@@ -5,20 +5,45 @@ using UnityEngine;
 public class Animation_Event : MonoBehaviour
 {
     public GameObject player;
-    public GameObject bazooka_bullet;
+    public GameObject bazooka_Basic_bullet;
+    public GameObject bazooka_Skill_bullet;
     public Transform bazooka_bullet_pos;
 
+    Coroutine skillbullet = null;
     // Start is called before the first frame update
-    private void Bazooka_Fire()
+    private void Bazooka_Basic_Fire()
     {
-        GameObject Bazooka_Bullet = Instantiate(bazooka_bullet, bazooka_bullet_pos.position, Quaternion.identity);
-        float dot = Vector3.Dot(Bazooka_Bullet.transform.forward, player.transform.forward);
+        Bazooka_Bullet_Initiate(bazooka_Basic_bullet);
+    }
+
+    private void Bazooka_Skill_Fire()
+    {
+        skillbullet = StartCoroutine(Bazooka_SkillBullet_Initiate(1.0f));
+        if (skillbullet == null) StopCoroutine(skillbullet);
+    }
+
+    void Bazooka_Bullet_Initiate(GameObject bullet)
+    {
+        GameObject skillbullet = Instantiate(bullet, bazooka_bullet_pos.position, Quaternion.identity);
+        float dot = Vector3.Dot(skillbullet.transform.forward, player.transform.forward);
         float r = Mathf.Acos(dot);
         float e = 180.0f * (r / Mathf.PI);
 
-        if (Vector3.Dot(player.transform.forward, bazooka_bullet.transform.right) >= 0)
-            Bazooka_Bullet.transform.Rotate(Bazooka_Bullet.transform.up * e);
+        if (Vector3.Dot(player.transform.forward, bullet.transform.right) >= 0)
+            skillbullet.transform.Rotate(skillbullet.transform.up * e);
         else
-            Bazooka_Bullet.transform.Rotate(-Bazooka_Bullet.transform.up * e);
+            skillbullet.transform.Rotate(-skillbullet.transform.up * e);
+    }
+
+    IEnumerator Bazooka_SkillBullet_Initiate(float t)
+    {
+        Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
+        yield return new WaitForSeconds(t);
+        Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
+        yield return new WaitForSeconds(t);
+        Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
+        yield return new WaitForSeconds(t);
+        Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
+        skillbullet = null;
     }
 }

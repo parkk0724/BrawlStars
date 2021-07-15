@@ -20,6 +20,7 @@ public class Attack_Reset_Trigger : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("tBAttack");
+        animator.ResetTrigger("tSAttack");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

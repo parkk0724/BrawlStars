@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8410637849023626079}
   - component: {fileID: 4081942979832905820}
   - component: {fileID: 3440018619460156415}
-  - component: {fileID: 7532528637294210190}
+  - component: {fileID: -6944434219062925517}
   m_Layer: 0
-  m_Name: Bazooka_Skill_Missile
+  m_Name: Bazooka_Skill_Missile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7532528637294210190
+--- !u!114 &-6944434219062925517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8410637849025619359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c12e2439f0065c142a431a3d7a4aa06e, type: 3}
+  m_Script: {fileID: 11500000, guid: 46db1d9ff3a7bb7448d200ab305ea087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet_up_speed: 2
-  bullet__speed: 5
+  bullet_up_speed: 8
+  bullet__speed: 50

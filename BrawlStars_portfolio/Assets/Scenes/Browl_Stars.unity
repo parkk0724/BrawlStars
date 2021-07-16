@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1288,7 +1288,7 @@ GameObject:
   - component: {fileID: 543027958}
   - component: {fileID: 543027957}
   m_Layer: 7
-  m_Name: SkillBullet_Pos3
+  m_Name: skillbullet_pos2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1302,7 +1302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543027955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 2.97, z: 1.56}
+  m_LocalPosition: {x: 1, y: 2.97, z: 1.138142}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 955570589}
@@ -1643,7 +1643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &691735732
 Transform:
   m_ObjectHideFlags: 0
@@ -2118,7 +2118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1895128451538434624, guid: ac24486140b39ae45a1c0814a24fa3fc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1895128451538434625, guid: ac24486140b39ae45a1c0814a24fa3fc, type: 3}
       propertyPath: m_Avatar
@@ -4126,7 +4126,7 @@ GameObject:
   - component: {fileID: 1377882332}
   - component: {fileID: 1377882331}
   m_Layer: 7
-  m_Name: SkillBullet_Pos2
+  m_Name: skillbullet_pos1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4140,7 +4140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377882329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 2.97, z: 1.56}
+  m_LocalPosition: {x: -0.5, y: 2.97, z: 1.138142}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 955570589}
@@ -4673,6 +4673,101 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4854220545127460, guid: 60fd93cfbe5244942957332e3c60cf47, type: 3}
   m_PrefabInstance: {fileID: 7226647695232085053}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1628676440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1628676441}
+  - component: {fileID: 1628676444}
+  - component: {fileID: 1628676443}
+  - component: {fileID: 1628676442}
+  m_Layer: 7
+  m_Name: skillbullet_destination
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1628676441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628676440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.02, y: 0, z: 9}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 955570589}
+  m_RootOrder: 46
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1628676442
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628676440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1628676443
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628676440}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1628676444
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628676440}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1630707741 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4854220545127460, guid: 60fd93cfbe5244942957332e3c60cf47, type: 3}
@@ -5085,7 +5180,7 @@ GameObject:
   - component: {fileID: 1828742415}
   - component: {fileID: 1828742414}
   m_Layer: 7
-  m_Name: SkillBullet_Pos1
+  m_Name: skillbullet_pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5099,7 +5194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828742412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 2.97, z: 1.56}
+  m_LocalPosition: {x: -2, y: 2.97, z: 1.138142}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 955570589}
@@ -5206,7 +5301,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2058289523}
   bazooka_Basic_bullet: {fileID: 8410637849025619359, guid: ff9fbb25fe1792e458dfcd6198475f24, type: 3}
-  bazooka_Skill_bullet: {fileID: 8410637849025619359, guid: 4c63e5143ba65b1499427f542a6cd2b5, type: 3}
+  bazooka_Skill_bullet1: {fileID: 8410637849025619359, guid: 4c63e5143ba65b1499427f542a6cd2b5, type: 3}
+  bazooka_Skill_bullet2: {fileID: 8410637849025619359, guid: 932ed8e05618f6c4680266d1f8e05994, type: 3}
+  bazooka_Skill_bullet3: {fileID: 8410637849025619359, guid: 9daef9966ed28d1409c9b966bc8e471a, type: 3}
+  bazooka_Skill_bullet4: {fileID: 8410637849025619359, guid: f1926137f3b1cb3439dc368bf1517eda, type: 3}
   bazooka_bullet_pos: {fileID: 1491061284}
 --- !u!4 &1836371603 stripped
 Transform:
@@ -5752,7 +5850,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058289523}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 426be1b61c318554cb32352662be3fb1, type: 3}
   m_Name: 
@@ -5810,7 +5908,7 @@ GameObject:
   - component: {fileID: 2061521631}
   - component: {fileID: 2061521630}
   m_Layer: 7
-  m_Name: SkillBullet_Pos4
+  m_Name: skillbullet_pos3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5824,7 +5922,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061521628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 2.97, z: 1.56}
+  m_LocalPosition: {x: 2.5, y: 2.97, z: 1.138142}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 955570589}
@@ -8362,7 +8460,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   bazooka_Basic_bullet: {fileID: 0}
-  bazooka_Skill_bullet: {fileID: 0}
+  bazooka_Skill_bullet1: {fileID: 0}
+  bazooka_Skill_bullet2: {fileID: 0}
+  bazooka_Skill_bullet3: {fileID: 0}
+  bazooka_Skill_bullet4: {fileID: 0}
   bazooka_bullet_pos: {fileID: 0}
 --- !u!1 &5540633946432592980
 GameObject:

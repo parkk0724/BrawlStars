@@ -8,6 +8,9 @@ TagManager:
   - TextDamagePool
   - FxTemporaire
   - Ground
+  - Obstacle
+  - Wall
+  - Monster
   layers:
   - Default
   - TransparentFX

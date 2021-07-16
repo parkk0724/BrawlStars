@@ -22,15 +22,34 @@ public abstract class Character : MonoBehaviour
     protected float m_fRange;
     protected bool m_bDie;
 
-    public HealthBar HealthBar; // UI, 체력바, Hit가 여기서 처리돼서 여기에 배치
+    //public HealthBar HealthBar; // UI, 체력바, Hit가 여기서 처리돼서 여기에 배치
+
+    public int GetHp() { return m_nHP; }
+    public int GetMaxHp() { return m_nMaxHP; }
+    public float GetStamina() { return m_fStamina; }
+    public float GetMaxStamina() { return m_fMaxStamina; }
+
+    void RecoveryStamina()
+    {
+        if (m_fStamina < m_fMaxStamina)
+        {
+            m_fStamina += Time.deltaTime;
+            if (m_fStamina > m_fMaxStamina) m_fStamina = m_fMaxStamina;
+        }
+    }
+
+    protected abstract void Start();
     protected virtual void Update()
     {
+
+
         if (m_bDie)
         {
             Die();
         }
         else
         {
+            RecoveryStamina();
             Move();
             Attack();
         }
@@ -47,10 +66,11 @@ public abstract class Character : MonoBehaviour
 
         if(DefDamage > 0)
         {
+            Debug.Log("Hit");
             m_UITextDamage.SetDamage(DefDamage, this.transform.position);
             m_nHP = m_nHP - DefDamage;      // 데미지 계산
-            m_Animator.SetTrigger("tHit");  // 히트모션
-            HealthBar.SetHealth(m_nHP);     // UI, 체력바 현재체력으로 증감
+            if(m_nHP > 0) m_Animator.SetTrigger("tHit");  // 히트모션
+            //HealthBar.SetHealth(m_nHP);     // UI, 체력바 현재체력으로 증감
         }
 
         // 210710.0451: 플레이어에게 리지드바디 주면 버그 생겨서 총알에 리지드바디 주니 괜찮은데 나중에 가볍게 게임 만들려면 해결해야 할 듯.

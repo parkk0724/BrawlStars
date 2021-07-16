@@ -1,26 +1,56 @@
 fileFormatVersion: 2
 guid: 05050091aac2d024b9afdd3b047fd4ce
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: joint24
-    100002: joint25
-    100004: //RootNode
-    100006: SawGun
-    400000: joint24
-    400002: joint25
-    400004: //RootNode
-    400006: SawGun
-    2100000: lambert1
-    4300000: SawGun
-    7400000: Idle
-    7400002: Shoot
-    9500000: //RootNode
-    13700000: SawGun
-    2186277476908879412: ImportLogs
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: joint24
+  - first:
+      1: 100002
+    second: joint25
+  - first:
+      1: 100004
+    second: //RootNode
+  - first:
+      1: 100006
+    second: SawGun
+  - first:
+      4: 400000
+    second: joint24
+  - first:
+      4: 400002
+    second: joint25
+  - first:
+      4: 400004
+    second: //RootNode
+  - first:
+      4: 400006
+    second: SawGun
+  - first:
+      21: 2100000
+    second: lambert1
+  - first:
+      43: 4300000
+    second: SawGun
+  - first:
+      74: 7400000
+    second: Idle
+  - first:
+      74: 7400002
+    second: Shoot
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: SawGun
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -49,6 +79,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 40
       wrapMode: 0
@@ -77,6 +108,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Shoot
       takeName: Take 001
+      internalID: 0
       firstFrame: 50
       lastFrame: 65
       wrapMode: 0
@@ -85,7 +117,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -109,25 +141,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -136,10 +175,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -149,13 +188,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

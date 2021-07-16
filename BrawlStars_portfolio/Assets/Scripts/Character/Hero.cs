@@ -17,11 +17,11 @@ public class Hero : Character
     [Header("Target")]
     public float m_fTargetRotSpeed = 10.0f;
     public GameObject m_objTargetEffect;
-    Transform m_tfResultTarget;
+    public Transform m_tfResultTarget;
     public bool m_bRotStart = false;
     public float m_fTargetRange = 0f;
     public LayerMask m_lmEnemyLayer = 0;
-    void Start()
+    protected override void Start()
     {
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
@@ -40,14 +40,14 @@ public class Hero : Character
         m_fRange = 10.0f;
 
         // UI: HP, Max
-        HealthBar.SetHealth(m_nMaxHP);
+        //HealthBar.SetHealth(m_nMaxHP);
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             m_bRotStart = true;
             SearchTarget();
@@ -137,13 +137,6 @@ public class Hero : Character
 
     }
 
-    private void OnCollisionEnter(Collision collision) //콜리젼에 충돌이 발생했을 때
-    {
-        Hit(30);
-        //Rigidbody rig = this.GetComponent<Rigidbody>();
-        //rig.MovePosition(this.transform.position + this.transform.forward * this.GetComponent<Picking>().m_fMove_Speed * Time.deltaTime); // 충돌시 이동 안되게해주는 처리
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Item")
@@ -155,8 +148,9 @@ public class Hero : Character
     }
     public override IEnumerator Die()
     {
-        m_Animator.SetTrigger("tDie");
         m_bDie = true;
+        m_Animator.SetTrigger("tDie");
+        m_Animator.SetBool("bDie", m_bDie);
         yield return new WaitForSeconds(2);
 
         int count = 3;
@@ -181,9 +175,10 @@ public class Hero : Character
         this.transform.rotation = Quaternion.Euler(m_vOriginRot);
         m_nHP = m_nMaxHP;
 
+
         m_objCharacter.SetActive(true);
         m_bDie = false;
-        m_Animator.SetTrigger("tRevival");
+        m_Animator.SetBool("bDie", m_bDie);
     }
     IEnumerator RevivalEffect()
     {
@@ -248,7 +243,7 @@ public class Hero : Character
     {
         if (m_tfResultTarget == null)
         {
-            m_bRotStart = false;
+            //m_bRotStart = false;
         }
         else
         {
@@ -266,10 +261,14 @@ public class Hero : Character
             if (angle - delta < 0.0f)
             {
                 delta = angle;
-                m_bRotStart = false;
             }
 
             this.transform.Rotate(Vector3.up, delta * rotDir);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }
 }

@@ -16,16 +16,13 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //------------------------- Test용 코드 지워야함 -------------------------
-        this.transform.Translate(-this.transform.forward * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other) //리지드바디가 있는 게 들어왔을 때
     {
         if(other.tag.Equals("Player"))
         { 
-        other.GetComponentInChildren<Hero>().Hit(nBulletDamage);
-        Destroy(this.gameObject);
+            other.GetComponentInChildren<Hero>().Hit(nBulletDamage);
         }
     }
 }

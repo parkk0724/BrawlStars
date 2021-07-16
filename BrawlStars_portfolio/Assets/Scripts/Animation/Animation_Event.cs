@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class Animation_Event : MonoBehaviour
 {
     public GameObject player;
     public GameObject bazooka_Basic_bullet;
     public GameObject bazooka_Skill_bullet;
     public Transform bazooka_bullet_pos;
+    public UnityAction OnShoot = null;
+    public UnityAction OnSkillShoot = null;
 
     Coroutine skillbullet = null;
     // Start is called before the first frame update
@@ -45,5 +47,14 @@ public class Animation_Event : MonoBehaviour
         yield return new WaitForSeconds(t);
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
         skillbullet = null;
+    }
+
+    private void Shoot()
+    {
+        OnShoot?.Invoke();
+    }
+    private void SkillShoot()
+    {
+        OnSkillShoot?.Invoke();
     }
 }

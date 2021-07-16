@@ -134,7 +134,10 @@ public class Hero : Character
 
     public override void SkillAttack()
     {
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            m_Animator.SetTrigger("tSAttack");
+        }
     }
 
     private void OnTriggerEnter(Collider other)

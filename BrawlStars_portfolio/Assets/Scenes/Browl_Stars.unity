@@ -163,6 +163,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4958742158536588, guid: 31d1f7e1cbdbffa489500315226de50c, type: 3}
   m_PrefabInstance: {fileID: 7226647695715690312}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &25273623 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+  m_PrefabInstance: {fileID: 940863579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &33537381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4854220545127460, guid: 60fd93cfbe5244942957332e3c60cf47, type: 3}
@@ -1953,7 +1958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1895128451538434624, guid: ac24486140b39ae45a1c0814a24fa3fc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1895128451538434625, guid: ac24486140b39ae45a1c0814a24fa3fc, type: 3}
       propertyPath: m_Avatar
@@ -2618,6 +2623,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4471463608238588, guid: 49f7668e38e658d419250c3e9da25e02, type: 3}
   m_PrefabInstance: {fileID: 7226647695124166012}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &940863579
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2058289525}
+    m_Modifications:
+    - target: {fileID: 909545961731707779, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_Name
+      value: BearDefault
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
 --- !u!4 &941373368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4136914349076982, guid: 2a87cafd13afe594daeec7d07201997b, type: 3}
@@ -4932,10 +4994,6 @@ MonoBehaviour:
   bazooka_Basic_bullet: {fileID: 8410637849025619359, guid: ff9fbb25fe1792e458dfcd6198475f24, type: 3}
   bazooka_Skill_bullet: {fileID: 8410637849025619359, guid: 4c63e5143ba65b1499427f542a6cd2b5, type: 3}
   bazooka_bullet_pos: {fileID: 1491061284}
-  SkillBullet_Pos1: {fileID: 1828742412}
-  SkillBullet_Pos2: {fileID: 1377882329}
-  SkillBullet_Pos3: {fileID: 543027955}
-  SkillBullet_Pos4: {fileID: 2061521628}
 --- !u!4 &1836371603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4401899335548328, guid: 4443a83b46730cf4aab1c505db4ec1ce, type: 3}
@@ -5400,6 +5458,7 @@ Transform:
   - {fileID: 955570589}
   - {fileID: 2084233007}
   - {fileID: 1053651339}
+  - {fileID: 25273623}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

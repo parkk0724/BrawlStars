@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Bazooka_SkillBullet : MonoBehaviour
 {
+    public Transform SkillBullt_Pos1;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //SkillBullt_Pos1 = p
     }
 
     // Update is called once per frame
@@ -16,9 +17,9 @@ public class Bazooka_SkillBullet : MonoBehaviour
         
     }
 
-    IEnumerator Bazooka_SkillBullet_Pos(GameObject skillbullet, GameObject skillbullet_pos)
+    IEnumerator Bazooka_SkillBullet_Pos(GameObject skillbullet_pos)
     {
-        Vector3 dir = skillbullet_pos.transform.position - skillbullet.transform.position;
+        Vector3 dir = skillbullet_pos.transform.position - this.transform.position;
         float dist = dir.magnitude;
 
         while (dist > 0.0f)
@@ -32,7 +33,7 @@ public class Bazooka_SkillBullet : MonoBehaviour
 
             dist -= delta;
 
-            skillbullet.transform.Translate(dir * delta);
+            this.transform.Translate(dir * delta);
 
             yield return null;
         }

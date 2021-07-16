@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) //리지드바디가 있는 게 들어왔을 때
     {
-        if(other.tag.Equals("Player"))
+        if(!(other.tag.Equals("Player")))
         { 
             other.GetComponentInChildren<Hero>().Hit(nBulletDamage);
         }

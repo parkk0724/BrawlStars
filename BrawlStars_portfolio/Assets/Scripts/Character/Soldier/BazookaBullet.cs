@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BazookaBullet : MonoBehaviour // 바주카 기본 공격
+public class BazookaBullet : MonoBehaviour
 {
     public float speed = 5.0f;
     public float range = 7.0f;

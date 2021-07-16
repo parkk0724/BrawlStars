@@ -41,6 +41,8 @@ public abstract class Character : MonoBehaviour
     protected abstract void Start();
     protected virtual void Update()
     {
+
+
         if (m_bDie)
         {
             Die();

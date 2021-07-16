@@ -2,27 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class SawFire : MonoBehaviour
 {
-    public int nBulletDamage = 0;
-    public float fBulletSpeed = 0.0f;
-    
-    // Start is called before the first frame update
+    public GameObject BulletObject;
+    protected int nBulletDamage = 0;
+    protected float fBulletSpeed = 0.0f;
+
     void Start()
     {
-        
+        nBulletDamage = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(0))
+        {
+
+        }
     }
 
     private void OnTriggerEnter(Collider other) //리지드바디가 있는 게 들어왔을 때
     {
-        if(other.tag.Equals("Player"))
-        { 
+        if (other.tag.Equals("Player"))
+        {
             other.GetComponentInChildren<Hero>().Hit(nBulletDamage);
+            Destroy(this.gameObject);
         }
     }
 }

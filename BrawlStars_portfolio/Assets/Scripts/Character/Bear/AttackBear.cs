@@ -15,7 +15,8 @@ public class AttackBear : Hero
     {
         if (Input.GetMouseButtonDown(0))
         {
-            
+            GameObject myInstance = Instantiate(BulletPrepab);
+            myInstance.transform.position = this.transform.position;
         }
     }
 

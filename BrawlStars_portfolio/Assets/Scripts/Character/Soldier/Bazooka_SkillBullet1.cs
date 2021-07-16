@@ -49,6 +49,8 @@ public class Bazooka_SkillBullet1 : MonoBehaviour
             yield return null;
         }
         skillbulletpos = null;
+        this.transform.LookAt(SkillBullt_Destination);
+        skillbulletdestination = StartCoroutine(Bazooka_SkillBullet_Destination(SkillBullt_Destination));
     }
 
     IEnumerator Bazooka_SkillBullet_Destination(Transform skillbullet_pos)
@@ -61,22 +63,11 @@ public class Bazooka_SkillBullet1 : MonoBehaviour
         {
             float delta = bullet__speed * Time.deltaTime;
 
-            if (dist - delta < 0.0f)
-            {
-                delta = dist;
-            }
-
-            //dist -= delta;
-
             this.transform.Translate(dir * delta);
 
             yield return null;
         }
         skillbulletdestination = null;
-        //float d = Vector3.Dot(this.transform.forward, (SkillBullt_Destination.position - this.transform.position).normalized);
-        //float r = Mathf.Acos(d);
-        //float e = 180.0f * (r / Mathf.PI);
-        this.transform.Rotate(Vector3.right * 10.0f);// 정확한 각도가 구해지지 않아서 일단 -20도로 보정해줌..
     }
 
     private void OnCollisionEnter(Collision collision)

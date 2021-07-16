@@ -27,33 +27,33 @@ public class Bazooka_SkillBullet : MonoBehaviour
 
         }
     }
-    IEnumerator Bazooka_SkillBullet_Pos(Transform skillbullet_pos)
-    {
-        Vector3 dir = skillbullet_pos.position - this.transform.position;
-        float dist = dir.magnitude;
-        dir.Normalize();
-
-        while (dist > 0.0f)
-        {
-            float delta = bullet_up_speed * Time.deltaTime;
-
-            if (dist - delta < 0.0f)
-            {
-                delta = dist;
-            }
-
-            dist -= delta;
-
-            this.transform.Translate(dir * delta);
-
-            yield return null;
-        }
-        skillbulletpos = null;
-        float d = Vector3.Dot(this.transform.forward, (SkillBullt_Destination.position - this.transform.position).normalized);
-        float r = Mathf.Acos(d);
-        float e = 180.0f * (r / Mathf.PI);
-        this.transform.Rotate(Vector3.right * (e - 15.0f));
-    }
+   IEnumerator Bazooka_SkillBullet_Pos(Transform skillbullet_pos)
+   {
+       Vector3 dir = skillbullet_pos.position - this.transform.position;
+       float dist = dir.magnitude;
+       dir.Normalize();
+   
+       while (dist > 0.0f)
+       {
+           float delta = bullet_up_speed * Time.deltaTime;
+   
+           if (dist - delta < 0.0f)
+           {
+               delta = dist;
+           }
+   
+           dist -= delta;
+   
+           this.transform.Translate(dir * delta);
+   
+           yield return null;
+       }
+       skillbulletpos = null;
+       float d = Vector3.Dot(this.transform.forward, (SkillBullt_Destination.position - this.transform.position).normalized);
+       float r = Mathf.Acos(d);
+       float e = 180.0f * (r / Mathf.PI);
+       this.transform.Rotate(Vector3.right * (e -18.0f));// 정확한 각도가 구해지지 않아서 일단 -20도로 보정해줌..
+   }
 
     IEnumerator Bazooka_SkillBullet_Destination(Transform skillbullet_pos)
     {      

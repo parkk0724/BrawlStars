@@ -1958,7 +1958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1895128451538434624, guid: ac24486140b39ae45a1c0814a24fa3fc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1895128451538434625, guid: ac24486140b39ae45a1c0814a24fa3fc, type: 3}
       propertyPath: m_Avatar
@@ -2633,6 +2633,10 @@ PrefabInstance:
     - target: {fileID: 909545961731707779, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
       propertyPath: m_Name
       value: BearDefault
+      objectReference: {fileID: 0}
+    - target: {fileID: 909545961731707779, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 909545961731707805, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
       propertyPath: m_RootOrder
@@ -3331,7 +3335,7 @@ GameObject:
   - component: {fileID: 1237378115}
   m_Layer: 8
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

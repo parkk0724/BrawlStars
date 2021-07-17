@@ -43,14 +43,15 @@ public class Animation_Event : MonoBehaviour
 
     IEnumerator Bazooka_SkillBullet_Initiate(float t)
     {
-        Bazooka_Bullet_Initiate(bazooka_Skill_bullet1);
-        yield return new WaitForSeconds(t / 3.0f);
-        Bazooka_Bullet_Initiate(bazooka_Skill_bullet4);
-        yield return new WaitForSeconds(t);
-        Bazooka_Bullet_Initiate(bazooka_Skill_bullet2);
-        yield return new WaitForSeconds(t / 3.0f);
-        Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
-        skillbullet = null;
+       Bazooka_Bullet_Initiate(bazooka_Skill_bullet1);
+       yield return new WaitForSeconds(t / 3.0f);
+       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet4);
+       //yield return new WaitForSeconds(t);
+       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet2);
+       //yield return new WaitForSeconds(t / 3.0f);
+       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
+       //yield return null;
+       skillbullet = null;
     }
 
     private void Shoot()

@@ -4219,8 +4219,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   m_fFireReady: 0
-  m_fFireRate: 0.8
-  m_fCurfireTime: 0.8
+  m_fFireRate: 0.5
+  m_fCurfireTime: 1
   m_objBulletPos:
   - {fileID: 42795983}
   - {fileID: 1543896571}

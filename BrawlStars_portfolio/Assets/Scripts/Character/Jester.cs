@@ -14,7 +14,7 @@ public class Jester : Hero
     [SerializeField] Transform[] m_objBulletPos;
     [SerializeField] GameObject m_objbullet;
     Animator[] anim;
-    UnityEngine.Coroutine rotate = null;
+    UnityEngine.Coroutine m_cAttack = null;
     protected override void Start()
     {
         base.Start();
@@ -22,6 +22,7 @@ public class Jester : Hero
     }
     public override void Attack()
     {
+        if (m_tfResultTarget != null) m_bCheckStart = true;
         m_fCurfireTime += Time.deltaTime;
         m_fFireReady = m_fFireRate < m_fCurfireTime;
         if (m_fFireReady)
@@ -32,13 +33,17 @@ public class Jester : Hero
         switch (m_AttackState)
         {
             case AttackState.NONE:
-                if (Input.GetMouseButtonDown(0)) m_AttackState = AttackState.BASIC;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    StartCoroutine(coBasicAttack());
+                    m_AttackState = AttackState.BASIC;
+                }
                 else if (Input.GetMouseButtonDown(1)) m_AttackState = AttackState.SKILL;
                 break;
             case AttackState.BASIC:
                 //BasicAttack();
-                if (rotate != null) StopCoroutine(rotate);
-                rotate = StartCoroutine(coBasicAttack());
+                if (m_cAttack != null) StopCoroutine(m_cAttack);
+                m_cAttack = StartCoroutine(coBasicAttack());
                 break;
             case AttackState.SKILL:
                 SkillAttack();

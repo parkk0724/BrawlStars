@@ -19,10 +19,13 @@ public class Hero : Character
     public GameObject m_objTargetEffect;
     public Transform m_tfResultTarget;
     public bool m_bRotStart = false;
+    public bool m_bMoveStart;
+    public bool m_bCheckStart = false;
     public float m_fTargetRange = 0f;
     public LayerMask m_lmEnemyLayer = 0;
     protected override void Start()
     {
+        m_bMoveStart = true;
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
         m_vOriginRot = this.transform.rotation.eulerAngles;
@@ -61,7 +64,6 @@ public class Hero : Character
         float delta = m_fMove_Speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
-            m_Animator.SetBool("bMove", true);
             TransformHero(m_objPlayerDir.transform.forward, delta);
             if (!m_bRotStart)
                 RotaeProcess(m_objPlayerDir.transform.forward, delta, 1.0f, m_objPlayerDir.transform.right);
@@ -75,14 +77,12 @@ public class Hero : Character
         }
         else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
-            m_Animator.SetBool("bMove", true);
             TransformHero(-m_objPlayerDir.transform.right, delta);
             if (!m_bRotStart)
                 RotaeProcess(-m_objPlayerDir.transform.right, delta, 1.0f, m_objPlayerDir.transform.forward);
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
-            m_Animator.SetBool("bMove", true);
             TransformHero(m_objPlayerDir.transform.right, delta);
             if (!m_bRotStart)
                 RotaeProcess(m_objPlayerDir.transform.right, delta, 1.0f, -m_objPlayerDir.transform.forward);
@@ -90,28 +90,24 @@ public class Hero : Character
 
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
-            m_Animator.SetBool("bMove", true);
             TransformHero(((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized), delta);
             if (!m_bRotStart)
                 RotaeProcess((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
-            m_Animator.SetBool("bMove", true);
             TransformHero(((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized), delta);
             if (!m_bRotStart)
                 RotaeProcess((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, 1.0f, (-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
         {
-            m_Animator.SetBool("bMove", true);
             TransformHero(((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized), delta);
             if (!m_bRotStart)
                 RotaeProcess((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
         {
-            m_Animator.SetBool("bMove", true);
             TransformHero((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta);
             if (!m_bRotStart)
                 RotaeProcess((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, -1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
@@ -191,7 +187,11 @@ public class Hero : Character
     }
     void TransformHero(Vector3 m_objPlayerDir, float delta) // 움직임
     {
-        this.transform.Translate(m_objPlayerDir * delta, Space.World);
+        if(m_bMoveStart)
+        {
+            this.transform.Translate(m_objPlayerDir * delta, Space.World);
+            m_Animator.SetBool("bMove", true);
+        }   
     }
 
     void RotaeProcess(Vector3 m_objPlayerDir, float delta, float movedir, Vector3 dir) //로테이션
@@ -246,7 +246,7 @@ public class Hero : Character
     {
         if (m_tfResultTarget == null)
         {
-            m_bRotStart = false;
+            //m_bRotStart = false;
         }
         else
         {
@@ -264,6 +264,7 @@ public class Hero : Character
             if (angle - delta < 0.0f)
             {
                 delta = angle;
+                m_bCheckStart = true;
             }
 
             this.transform.Rotate(Vector3.up, delta * rotDir);

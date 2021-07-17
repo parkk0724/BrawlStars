@@ -126,18 +126,18 @@ public class Hero : Character
 
     public override void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            m_Animator.SetTrigger("tBAttack");
-        }
+       // if (Input.GetMouseButtonDown(0))
+       // {
+       //     m_Animator.SetTrigger("tBAttack");
+       // }
     }
 
     public override void SkillAttack()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            m_Animator.SetTrigger("tSAttack");
-        }
+       // if (Input.GetMouseButtonDown(1))
+       // {
+       //     m_Animator.SetTrigger("tSAttack");
+       // }
     }
 
     private void OnTriggerEnter(Collider other)

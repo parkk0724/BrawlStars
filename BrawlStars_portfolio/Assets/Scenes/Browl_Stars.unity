@@ -1222,7 +1222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.001
+      value: 2.53
       objectReference: {fileID: 0}
     - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4286,7 +4286,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   m_fFireReady: 0
-  m_fFireRate: 0.3
+  m_fFireRate: 0.25
   m_fCurfireTime: 1
   m_objBulletPos:
   - {fileID: 42795983}

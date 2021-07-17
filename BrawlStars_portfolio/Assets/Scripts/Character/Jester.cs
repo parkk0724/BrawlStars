@@ -98,20 +98,36 @@ public class Jester : Hero
     }
     IEnumerator BulletInit()
     {
+        
         if (m_bCheckStart)
         {
-            yield return new WaitForSeconds(0.1f);
+            Vector3 Bojung = m_tfResultTarget.position - m_objBulletPos[0].position;
+            Vector3 yBojung = new Vector3(Bojung.x, 0, Bojung.z);
+            yBojung.Normalize();
+            Vector3 Bojung_1 = m_tfResultTarget.position - m_objBulletPos[1].position;
+            Vector3 yBojung_1 = new Vector3(Bojung.x, 0, Bojung.z);
+            yBojung.Normalize();
+            Vector3 Bojung_2 = m_tfResultTarget.position - m_objBulletPos[2].position;
+            Vector3 yBojung_2 = new Vector3(Bojung.x, 0, Bojung.z);
+            yBojung.Normalize();
+            yBojung_1.Normalize();
+            yBojung_2.Normalize();
+
+            yield return new WaitForSeconds(0.15f);
             GameObject instantBullet = Instantiate(m_objbullet, m_objBulletPos[0].position, m_objBulletPos[0].rotation);
             Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
             bulletRigid.velocity = m_objBulletPos[0].forward * 30f;
-            yield return new WaitForSeconds(0.1f);
+            //bulletRigid.velocity = yBojung * 30f;
+            yield return new WaitForSeconds(0.05f);
             GameObject instantBullet_1 = Instantiate(m_objbullet, m_objBulletPos[1].position, m_objBulletPos[1].rotation);
             Rigidbody bulletRigid_1 = instantBullet_1.GetComponent<Rigidbody>();
             bulletRigid_1.velocity = m_objBulletPos[1].forward * 30f;
-            yield return new WaitForSeconds(0.1f);
+            //bulletRigid_1.velocity = yBojung_1 * 30f;
+            yield return new WaitForSeconds(0.05f);
             GameObject instantBullet_2 = Instantiate(m_objbullet, m_objBulletPos[2].position, m_objBulletPos[2].rotation);
             Rigidbody bulletRigid_2 = instantBullet_2.GetComponent<Rigidbody>();
             bulletRigid_2.velocity = m_objBulletPos[2].forward * 30f;
+            //bulletRigid_2.velocity = yBojung_2 * 30f;
         }
         if (!m_bCheckStart)
         {
@@ -119,11 +135,11 @@ public class Jester : Hero
             GameObject instantBullet = Instantiate(m_objbullet, m_objBulletPos[0].position, m_objBulletPos[0].rotation);
             Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
             bulletRigid.velocity = m_objBulletPos[0].forward * 30f;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             GameObject instantBullet_1 = Instantiate(m_objbullet, m_objBulletPos[1].position, m_objBulletPos[1].rotation);
             Rigidbody bulletRigid_1 = instantBullet_1.GetComponent<Rigidbody>();
             bulletRigid_1.velocity = m_objBulletPos[1].forward * 30f;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             GameObject instantBullet_2 = Instantiate(m_objbullet, m_objBulletPos[2].position, m_objBulletPos[2].rotation);
             Rigidbody bulletRigid_2 = instantBullet_2.GetComponent<Rigidbody>();
             bulletRigid_2.velocity = m_objBulletPos[2].forward * 30f;

@@ -1201,6 +1201,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4318763487150386, guid: c8891830cf9bef547a297752e6407698, type: 3}
   m_PrefabInstance: {fileID: 7226647695259999114}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &391884939
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1276970811}
+    m_Modifications:
+    - target: {fileID: 6820891147726091270, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_Name
+      value: Jester_Skill
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091271, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 75d0587bb6ee3424d89552a97938e71e, type: 2}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
 --- !u!4 &393499487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4854220545127460, guid: 60fd93cfbe5244942957332e3c60cf47, type: 3}
@@ -2950,6 +3011,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4854220545127460, guid: 60fd93cfbe5244942957332e3c60cf47, type: 3}
   m_PrefabInstance: {fileID: 7226647694411552398}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &907699944 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6820891147726091288, guid: e30be79e85d920c47aafe406e0425ae4, type: 3}
+  m_PrefabInstance: {fileID: 391884939}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &908318930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4854220545127460, guid: 60fd93cfbe5244942957332e3c60cf47, type: 3}
@@ -4181,6 +4247,7 @@ Transform:
   - {fileID: 42795983}
   - {fileID: 1543896571}
   - {fileID: 255307903}
+  - {fileID: 907699944}
   m_Father: {fileID: 2058289525}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4219,7 +4286,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   m_fFireReady: 0
-  m_fFireRate: 0.5
+  m_fFireRate: 0.3
   m_fCurfireTime: 1
   m_objBulletPos:
   - {fileID: 42795983}
@@ -5703,7 +5770,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836058172}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ad61aeb3e4dff844b0f287be25731ee, type: 3}
   m_Name: 

@@ -122,6 +122,7 @@ public class Jester : Hero
             GameObject instantBullet_2 = Instantiate(m_objbullet, m_objBulletPos[2].position, m_objBulletPos[2].rotation);
             Rigidbody bulletRigid_2 = instantBullet_2.GetComponent<Rigidbody>();
             bulletRigid_2.velocity = m_objBulletPos[2].forward * 30f;
+
         }
 
     }

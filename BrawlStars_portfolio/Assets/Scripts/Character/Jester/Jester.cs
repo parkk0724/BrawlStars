@@ -32,7 +32,11 @@ public class Jester : Hero
         switch (m_AttackState)
         {
             case AttackState.NONE:
-                if (Input.GetMouseButtonDown(0)) m_AttackState = AttackState.BASIC;
+                if (Input.GetMouseButton(0))
+                {
+                    StartCoroutine(coBasicAttack());
+                    m_AttackState = AttackState.BASIC;
+                }
                 else if (Input.GetMouseButtonDown(1)) m_AttackState = AttackState.SKILL;
                 break;
             case AttackState.BASIC:

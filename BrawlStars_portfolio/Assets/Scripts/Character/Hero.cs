@@ -55,7 +55,9 @@ public class Hero : Character
             m_bRotStart = true;
             SearchTarget();
         }
-        if (m_bRotStart) LookatEnemy();//LookEnemy(); // 임시로 lookat만들어서 사용
+        if (m_bRotStart)
+            LookEnemy();
+            //LookatEnemy();//LookEnemy(); // 임시로 lookat만들어서 사용
         if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
     }
 
@@ -253,7 +255,7 @@ public class Hero : Character
     {
         if (m_tfResultTarget == null)
         {
-            //m_bRotStart = false;
+            m_bRotStart = false;
         }
         else
         {
@@ -271,6 +273,7 @@ public class Hero : Character
             if (angle - delta < 0.0f)
             {
                 delta = angle;
+                m_bRotStart = false;
             }
 
             this.transform.Rotate(Vector3.up, delta * rotDir);

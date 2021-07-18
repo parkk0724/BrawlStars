@@ -16,7 +16,7 @@ public class Jester : Hero
     [SerializeField] Transform m_tBulletPosCase;
     [SerializeField] GameObject m_objBulletCase;
     Animator[] anim;
-    UnityEngine.Coroutine rotate = null;
+    UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
 
@@ -48,8 +48,8 @@ public class Jester : Hero
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (rotate != null) StopCoroutine(rotate);
-                    rotate = StartCoroutine(coBasicAttack());
+                    if (j_Attack != null) StopCoroutine(j_Attack);
+                    j_Attack = StartCoroutine(coBasicAttack());
                 }
 
                 break;

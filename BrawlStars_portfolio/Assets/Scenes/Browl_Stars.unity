@@ -3250,7 +3250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 909545961731707779, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 909545961731707779, guid: 5cacba29a1abb9a4aa2b32001a835a1f, type: 3}
       propertyPath: m_TagString
@@ -4461,7 +4461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1276970811
 Transform:
   m_ObjectHideFlags: 0
@@ -4517,7 +4517,10 @@ MonoBehaviour:
   m_fFireReady: 0
   m_fFireRate: 0.25
   m_fCurfireTime: 1
-  m_objBulletPos: []
+  m_objBulletPos:
+  - {fileID: 42795983}
+  - {fileID: 1543896571}
+  - {fileID: 255307903}
   m_objbullet: {fileID: 5653741987950916145, guid: 1d53d76abcc3ebc4c87947c17033a4e0, type: 3}
 --- !u!65 &1276970813
 BoxCollider:

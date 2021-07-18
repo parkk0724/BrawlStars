@@ -30,8 +30,8 @@ public class Hero : Character
         m_nHP = m_nMaxHP;   // Current Hp
         m_fMaxStamina = 3.0f;
         m_fStamina = m_fMaxStamina;
-        m_fMaxFever = 10.0f;
-        m_fFever = m_fMaxFever;
+        m_fMaxFever = 100.0f;
+        m_fFever = 0.0f;
         m_nATK = 10;
         m_nDEF = 5;
         m_nSkillDamage = 20;
@@ -148,6 +148,11 @@ public class Hero : Character
 
             Destroy(other.gameObject);
         }
+
+        if(other.tag == "Monster")
+        {
+            Hit(20);
+        }
     }
     public override IEnumerator Die()
     {
@@ -246,7 +251,7 @@ public class Hero : Character
     {
         if (m_tfResultTarget == null)
         {
-            //m_bRotStart = false;
+           // m_bRotStart = false;
         }
         else
         {

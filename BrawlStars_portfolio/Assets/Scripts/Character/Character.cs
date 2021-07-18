@@ -28,6 +28,13 @@ public abstract class Character : MonoBehaviour
     public int GetMaxHp() { return m_nMaxHP; }
     public float GetStamina() { return m_fStamina; }
     public float GetMaxStamina() { return m_fMaxStamina; }
+    public float GetFever() { return m_fFever; }
+    public float GetMaxFever() { return m_fMaxFever; }
+    public void FeverUp() 
+    {
+        if (m_fFever < m_fMaxFever) m_fFever += 10.0f;
+        else m_fFever = m_fMaxFever; 
+    }
 
     void RecoveryStamina()
     {
@@ -41,8 +48,6 @@ public abstract class Character : MonoBehaviour
     protected abstract void Start();
     protected virtual void Update()
     {
-
-
         if (m_bDie)
         {
             Die();
@@ -52,7 +57,7 @@ public abstract class Character : MonoBehaviour
             RecoveryStamina();
             Move();
             Attack();
-            SkillAttack();
+            //SkillAttack();
         }
     }
     public abstract void Attack(); 
@@ -68,7 +73,7 @@ public abstract class Character : MonoBehaviour
         if(DefDamage > 0)
         {
             Debug.Log("Hit");
-            m_UITextDamage.SetDamage(DefDamage, this.transform.position);
+            m_UITextDamage.SetDamage(DefDamage, this.transform.position, new Color(1,0,0,1));
             m_nHP = m_nHP - DefDamage;      // 데미지 계산
             if(m_nHP > 0) m_Animator.SetTrigger("tHit");  // 히트모션
             //HealthBar.SetHealth(m_nHP);     // UI, 체력바 현재체력으로 증감

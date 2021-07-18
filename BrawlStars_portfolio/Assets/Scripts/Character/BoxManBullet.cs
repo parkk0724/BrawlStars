@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoxManBullet : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class BoxManBullet : MonoBehaviour
     Transform m_tfHero = null;
     CapsuleCollider m_Collider;
     [SerializeField] Transform m_tfRotChild = null;
+    public UnityAction OnFeverUp = null;
+    UITextDamage m_uiTextDamage = null;
     float m_fMoveSpeed = 0.0f;
     float m_fRotSpeed = 0.0f;
     float m_fDistance = 0.0f;
     float m_fSkillSize = 0.0f;
     float m_fSkillMaxStay = 0.0f;
     float m_fSkillStay = 0.0f;
+    float m_fSkillAttackDelay = 0.0f;
+    float m_fCurSkillAttack = 0.0f;
     
     bool m_bTurn = false;
     bool m_bSkill = false;
@@ -24,11 +29,13 @@ public class BoxManBullet : MonoBehaviour
     void Start()
     {
         // m_tfRotChild = this.GetComponentInChildren<Transform>();
+        m_uiTextDamage = GameObject.FindGameObjectWithTag("TextDamagePool").GetComponent<UITextDamage>();
         m_Collider = this.GetComponent<CapsuleCollider>();
         m_fMoveSpeed = 10f;
         m_fRotSpeed = 1000f;
         m_fSkillSize = 5.0f;
         m_fSkillMaxStay = 3.0f;
+        m_fSkillAttackDelay = 0.2f;
         m_fSkillStay = m_fSkillMaxStay;
         m_vOriPos = this.transform.position;
     }
@@ -36,8 +43,15 @@ public class BoxManBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_bSkill) Skill();
-        else Basic();
+        if (m_bSkill)
+        {
+            Skill();
+            m_fCurSkillAttack += Time.deltaTime;
+        }
+        else
+        {
+            Basic();
+        }
 
         m_tfRotChild.Rotate(m_tfRotChild.up * Time.deltaTime * m_fRotSpeed, Space.Self);
     }
@@ -45,7 +59,13 @@ public class BoxManBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (m_bTurn)
+        if (other.tag == "Monster")
+        {
+            OnFeverUp?.Invoke();
+            m_uiTextDamage.SetDamage(20, other.transform.position, new Color(0, 0, 0, 1));
+        }
+
+        if (m_bTurn && m_fSkillStay >= m_fSkillMaxStay)
         {
             if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player") Destroy(this.gameObject);
         }
@@ -54,11 +74,25 @@ public class BoxManBullet : MonoBehaviour
             if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster")
             {
                 m_bTurn = true;
-                m_fSkillStay = 0.0f;
+                if(m_bSkill) m_fSkillStay = 0.0f;
             }
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Monster" && m_bSkill)
+        {
+            if (m_fCurSkillAttack >= m_fSkillAttackDelay)
+            {
+
+                Debug.Log("SkillAttack!!!" + m_fCurSkillAttack);
+                OnFeverUp?.Invoke();
+                m_uiTextDamage.SetDamage(20, other.transform.position, new Color(0, 0, 0, 1));
+                m_fCurSkillAttack = 0.0f;
+            }
+        }
+    }
     void Basic()
     {
         if (m_bTurn)
@@ -76,7 +110,6 @@ public class BoxManBullet : MonoBehaviour
 
     void Skill()
     {
-        Debug.Log("Skill");
         if(m_fSkillStay < m_fSkillMaxStay)
         {
             m_fSkillStay += Time.deltaTime;

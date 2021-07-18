@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoxManWeapon : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BoxManWeapon : MonoBehaviour
     Transform m_tfHero = null;
     [SerializeField] GameObject m_objBullet = null;
     [SerializeField] GameObject m_objShootPos = null;
+    public UnityAction OnFeverUp = null;
 
     public void SetRange(float f) { m_fRange = f; }
     void Start()
@@ -26,6 +28,7 @@ public class BoxManWeapon : MonoBehaviour
         BoxManBullet bullet = obj.GetComponent<BoxManBullet>();
         bullet.SetDistance(m_fRange - Vector3.Distance(this.transform.position, m_tfHero.position));
         bullet.SetPosParent(m_tfHero);
+        bullet.OnFeverUp = OnFeverUp;
 
         GetComponentInParent<BoxMan>().SetRotStart(false);
     }
@@ -39,6 +42,7 @@ public class BoxManWeapon : MonoBehaviour
         bullet.SetDistance(m_fRange - Vector3.Distance(this.transform.position, m_tfHero.position));
         bullet.SetPosParent(m_tfHero);
         bullet.OnSkill();
+        bullet.OnFeverUp = OnFeverUp;
 
         GetComponentInParent<BoxMan>().SetRotStart(false);
     }

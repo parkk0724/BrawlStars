@@ -31,8 +31,9 @@ public class UITextDamage : MonoBehaviour
         textDamage[n].gameObject.SetActive(false);
     }
 
-    public void SetDamage(int damage, Vector3 pos)
+    public void SetDamage(int damage, Vector3 pos, Color c)
     {
+        textDamage[count].color = c;
         textDamage[count].text = damage.ToString();
         textDamage[count].gameObject.SetActive(true);
         textDamage[count].transform.position = pos;

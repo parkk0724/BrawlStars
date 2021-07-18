@@ -19,12 +19,13 @@ public class BoxMan : Hero
         base.Start();
         m_BoxManWeapon = GetComponentInChildren<BoxManWeapon>();
         m_BoxManWeapon.SetRange(m_fRange = 10.0f);
+        m_BoxManWeapon.OnFeverUp = FeverUp;
         m_fMaxMouseButton = 0.2f;
         m_fAttackStamina = 1.0f;
     }
     public override void Attack()
     {
-        switch(m_AttackState)
+        switch (m_AttackState)
         {
             case AttackState.NONE:
                 if (Input.GetMouseButtonDown(0)) m_AttackState = AttackState.BASIC;
@@ -96,10 +97,10 @@ public class BoxMan : Hero
             m_AttackState = AttackState.NONE;
             m_objDirSkillAttack.SetActive(false);
             m_fCurMouseButton = 0.0f;
-            if (m_fStamina > m_fAttackStamina)
+            if (m_fFever >= m_fMaxFever)
             {
                 m_Animator.SetTrigger("tSAttack");
-                m_fStamina -= m_fAttackStamina;
+                m_fFever = 0.0f;
             }
         }
     }

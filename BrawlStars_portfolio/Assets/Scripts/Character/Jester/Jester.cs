@@ -15,6 +15,10 @@ public class Jester : Hero
     [SerializeField] GameObject m_objbullet;
     Animator[] anim;
     UnityEngine.Coroutine rotate = null;
+
+    //오류나서 추가
+    public bool m_bMoveStart = false;
+    public bool m_bCheckStart = false;
     protected override void Start()
     {
         base.Start();

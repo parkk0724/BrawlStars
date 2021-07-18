@@ -19,13 +19,10 @@ public class Hero : Character
     public GameObject m_objTargetEffect;
     public Transform m_tfResultTarget;
     public bool m_bRotStart = false;
-    public bool m_bMoveStart;
-    public bool m_bCheckStart = false;
     public float m_fTargetRange = 0f;
     public LayerMask m_lmEnemyLayer = 0;
     protected override void Start()
     {
-        m_bMoveStart = true;
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
         m_vOriginRot = this.transform.rotation.eulerAngles;
@@ -33,8 +30,8 @@ public class Hero : Character
         m_nHP = m_nMaxHP;   // Current Hp
         m_fMaxStamina = 3.0f;
         m_fStamina = m_fMaxStamina;
-        m_fMaxFever = 10.0f;
-        m_fFever = m_fMaxFever;
+        m_fMaxFever = 100.0f;
+        m_fFever = 0.0f;
         m_nATK = 10;
         m_nDEF = 5;
         m_nSkillDamage = 20;
@@ -55,9 +52,7 @@ public class Hero : Character
             m_bRotStart = true;
             SearchTarget();
         }
-        if (m_bRotStart)
-            LookEnemy();
-            //LookatEnemy();//LookEnemy(); // 임시로 lookat만들어서 사용
+        if (m_bRotStart) LookEnemy();
         if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
     }
 
@@ -66,6 +61,7 @@ public class Hero : Character
         float delta = m_fMove_Speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
+            m_Animator.SetBool("bMove", true);
             TransformHero(m_objPlayerDir.transform.forward, delta);
             if (!m_bRotStart)
                 RotaeProcess(m_objPlayerDir.transform.forward, delta, 1.0f, m_objPlayerDir.transform.right);
@@ -79,12 +75,14 @@ public class Hero : Character
         }
         else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
+            m_Animator.SetBool("bMove", true);
             TransformHero(-m_objPlayerDir.transform.right, delta);
             if (!m_bRotStart)
                 RotaeProcess(-m_objPlayerDir.transform.right, delta, 1.0f, m_objPlayerDir.transform.forward);
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
+            m_Animator.SetBool("bMove", true);
             TransformHero(m_objPlayerDir.transform.right, delta);
             if (!m_bRotStart)
                 RotaeProcess(m_objPlayerDir.transform.right, delta, 1.0f, -m_objPlayerDir.transform.forward);
@@ -92,24 +90,28 @@ public class Hero : Character
 
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
+            m_Animator.SetBool("bMove", true);
             TransformHero(((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized), delta);
             if (!m_bRotStart)
                 RotaeProcess((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
+            m_Animator.SetBool("bMove", true);
             TransformHero(((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized), delta);
             if (!m_bRotStart)
                 RotaeProcess((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, 1.0f, (-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
         {
+            m_Animator.SetBool("bMove", true);
             TransformHero(((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized), delta);
             if (!m_bRotStart)
                 RotaeProcess((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized);
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
         {
+            m_Animator.SetBool("bMove", true);
             TransformHero((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta);
             if (!m_bRotStart)
                 RotaeProcess((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, -1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
@@ -124,18 +126,18 @@ public class Hero : Character
 
     public override void Attack()
     {
-       // if (Input.GetMouseButtonDown(0))
-       // {
-       //     m_Animator.SetTrigger("tBAttack");
-       // }
+        if (Input.GetMouseButtonDown(0))
+        {
+            m_Animator.SetTrigger("tBAttack");
+        }
     }
 
     public override void SkillAttack()
     {
-       // if (Input.GetMouseButtonDown(1))
-       // {
-       //     m_Animator.SetTrigger("tSAttack");
-       // }
+        if (Input.GetMouseButtonDown(1))
+        {
+            m_Animator.SetTrigger("tSAttack");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -145,6 +147,11 @@ public class Hero : Character
             Item item = other.GetComponent<Item>();
 
             Destroy(other.gameObject);
+        }
+
+        if(other.tag == "Monster")
+        {
+            Hit(20);
         }
     }
     public override IEnumerator Die()
@@ -189,11 +196,7 @@ public class Hero : Character
     }
     void TransformHero(Vector3 m_objPlayerDir, float delta) // 움직임
     {
-        if(m_bMoveStart)
-        {
-            this.transform.Translate(m_objPlayerDir * delta, Space.World);
-            m_Animator.SetBool("bMove", true);
-        }   
+        this.transform.Translate(m_objPlayerDir * delta, Space.World);
     }
 
     void RotaeProcess(Vector3 m_objPlayerDir, float delta, float movedir, Vector3 dir) //로테이션
@@ -244,18 +247,11 @@ public class Hero : Character
         }
         m_tfResultTarget = shorTarget; // 최종값
     }
-    void LookatEnemy()
-    {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        this.transform.LookAt(m_tfResultTarget);
-    }
-
     void LookEnemy()
     {
         if (m_tfResultTarget == null)
         {
-            m_bRotStart = false;
+           // m_bRotStart = false;
         }
         else
         {
@@ -273,7 +269,6 @@ public class Hero : Character
             if (angle - delta < 0.0f)
             {
                 delta = angle;
-                m_bRotStart = false;
             }
 
             this.transform.Rotate(Vector3.up, delta * rotDir);

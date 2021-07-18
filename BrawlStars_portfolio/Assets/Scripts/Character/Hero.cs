@@ -55,7 +55,7 @@ public class Hero : Character
             m_bRotStart = true;
             SearchTarget();
         }
-        if (m_bRotStart) LookEnemy();
+        if (m_bRotStart) LookatEnemy();//LookEnemy(); // 임시로 lookat만들어서 사용
         if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
     }
 
@@ -242,6 +242,13 @@ public class Hero : Character
         }
         m_tfResultTarget = shorTarget; // 최종값
     }
+    void LookatEnemy()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        this.transform.LookAt(m_tfResultTarget);
+    }
+
     void LookEnemy()
     {
         if (m_tfResultTarget == null)
@@ -264,7 +271,6 @@ public class Hero : Character
             if (angle - delta < 0.0f)
             {
                 delta = angle;
-                m_bCheckStart = true;
             }
 
             this.transform.Rotate(Vector3.up, delta * rotDir);

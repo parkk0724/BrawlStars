@@ -9,7 +9,7 @@ public class JesterSkill : MonoBehaviour
     {
         CREATE,IDE,RUN,ATTACK,DESTROY
     }
-    [SerializeField] GameObject m_objSkill;
+    public GameObject m_objSkillEffect;
     [SerializeField] Transform m_tTarget;
     NavMeshAgent nav;
     SkillState State = SkillState.CREATE;
@@ -21,6 +21,7 @@ public class JesterSkill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //m_objSkillEffect = GetComponent<ParticleSystem>();
         anim = GetComponent<Animator>();
         State = SkillState.IDE;
         nav = GetComponent<NavMeshAgent>();
@@ -29,6 +30,8 @@ public class JesterSkill : MonoBehaviour
     //
     void Update()
     {
+        //StartCoroutine(DestEffect());
+        Dist = Vector3.Distance(this.transform.position, m_tTarget.position);
         chageSate();
     }
     void chageSate()
@@ -49,7 +52,7 @@ public class JesterSkill : MonoBehaviour
                     nav.speed = Random.Range(3, 10);
                     nav.SetDestination(m_tTarget.position);
                     anim.SetBool("bMove", true);
-                    Dist = Vector3.Distance(this.transform.position, m_tTarget.position);
+                   
                     if (DistRange > Dist)
                     {
                         State = SkillState.ATTACK;
@@ -58,12 +61,16 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.ATTACK:
                 {
+                    
+                    Vector3 rate = new Vector3(m_tTarget.position.x, 0, m_tTarget.position.z);
                     if (DistRange > Dist)
                     {
+                        this.transform.LookAt(rate);
+                        nav.speed = 0;
                         anim.SetBool("bMove", false);
                         anim.SetTrigger("tBAttack");
                     }
-                    else 
+                    else if(DistRange <= Dist)
                     {
                         State = SkillState.RUN;
                     }
@@ -74,16 +81,17 @@ public class JesterSkill : MonoBehaviour
                 }
                 break;
             case SkillState.DESTROY:
-                //DestEffect(2);
+                //DestEffect();
+                StartCoroutine(DestEffect());
                 Destroy(this.gameObject);
                 break;
         }
     }
 
-    IEnumerator DestEffect(float time)
+    IEnumerator DestEffect()
     {
-        m_objSkill.gameObject.SetActive(true);
-        yield return new WaitForSeconds(time);
-        m_objSkill.gameObject.SetActive(false);
+        Instantiate(m_objSkillEffect, this.transform.position, this.transform.rotation);
+        yield return null;
+
     }
 }

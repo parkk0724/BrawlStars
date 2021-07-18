@@ -5,6 +5,11 @@ using UnityEngine;
 public class Soldier : Hero
 {
     // Start is called before the first frame update
+
+    protected override void Start()
+    {
+        base.Start();
+    }
     public override void Attack()
     {
         if (Input.GetMouseButtonDown(0))

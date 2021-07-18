@@ -5,27 +5,20 @@ using UnityEngine;
 public class Bazooka_SkillBullet3 : MonoBehaviour
 {
     public float bullet_up_speed;
-    public float bullet__speed;
+    public float bullet_speed;
 
-    Transform SkillBullt_Pos;
-    Transform SkillBullt_Destination;
+    Transform SkillBullt_Pos = null;
+    Transform SkillBullt_Destination = null;
 
     Coroutine skillbulletpos = null;
     Coroutine skillbulletdestination = null;
+
+    float dist = 0.0f;
     void Start()
     {
         SkillBullt_Destination = GameObject.Find("skillbullet_destination").transform;
         SkillBullt_Pos = GameObject.Find("skillbullet_pos3").transform;
         skillbulletpos = StartCoroutine(Bazooka_SkillBullet_Pos(SkillBullt_Pos));
-    }
-    void Update()
-    {
-        if (skillbulletpos == null)
-        {
-            if (skillbulletdestination != null) StopCoroutine(skillbulletdestination);
-            skillbulletdestination = StartCoroutine(Bazooka_SkillBullet_Destination(SkillBullt_Destination));
-
-        }
     }
     IEnumerator Bazooka_SkillBullet_Pos(Transform skillbullet_pos)
     {
@@ -44,35 +37,34 @@ public class Bazooka_SkillBullet3 : MonoBehaviour
 
             dist -= delta;
 
-            this.transform.Translate(dir * delta);
+            this.transform.Translate(dir * delta, Space.World);
 
             yield return null;
         }
         skillbulletpos = null;
-        this.transform.LookAt(SkillBullt_Destination);
-        skillbulletdestination = StartCoroutine(Bazooka_SkillBullet_Destination(SkillBullt_Destination));
+
+        this.transform.LookAt(SkillBullt_Destination.position);
+        skillbulletdestination = StartCoroutine(Bazooka_SkillBullet_Destination());
     }
 
-    IEnumerator Bazooka_SkillBullet_Destination(Transform skillbullet_pos)
+    IEnumerator Bazooka_SkillBullet_Destination()
     {
-        Vector3 dir = skillbullet_pos.position - this.transform.position;
-        float dist = dir.magnitude;
-        dir.Normalize();
-
-        while (dist > 0.0f)
+        while (dist < 20.0f)
         {
-            float delta = bullet__speed * Time.deltaTime;
+            float delta = bullet_speed * Time.deltaTime;
+            dist += delta;
 
-            this.transform.Translate(dir * delta);
+            this.transform.Translate(this.transform.forward * delta, Space.World);
 
             yield return null;
         }
+        dist = 0.0f;
         skillbulletdestination = null;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground")
         {
             Debug.Log("dd");
             Destroy(this.gameObject);

@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 8410637849024756127}
   - component: {fileID: 8410637849023626079}
   - component: {fileID: 4081942979832905820}
-  - component: {fileID: 7532528637294210190}
-  - component: {fileID: 9070444310755349886}
-  - component: {fileID: 2985397019541319184}
+  - component: {fileID: 3440018619460156415}
+  - component: {fileID: -6924547695119921748}
+  - component: {fileID: -6657754105357619525}
   m_Layer: 0
-  m_Name: Bazooka_Skill_Missile
+  m_Name: Bazooka_Skill_Missile 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.16725685, y: 0.16725677, z: 0.6963769}
   m_Center: {x: 0.000000037252903, y: -0.0000007599592, z: 0.22905129}
---- !u!114 &7532528637294210190
+--- !u!54 &3440018619460156415
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410637849025619359}
+  serializedVersion: 2
+  m_Mass: 0.5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &-6924547695119921748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,12 +123,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8410637849025619359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c12e2439f0065c142a431a3d7a4aa06e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b4cdef9f0453d14b85a33b97f457ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullet_up_speed: 8
-  bullet_speed: 50
---- !u!96 &9070444310755349886
+  bullet__speed: 50
+--- !u!96 &-6657754105357619525
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -219,19 +235,3 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!54 &2985397019541319184
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8410637849025619359}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0

@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Animation_Event : MonoBehaviour
 {
+    [Header("Bazooka")]
     public GameObject player;
     public GameObject bazooka_Basic_bullet;
-    public GameObject bazooka_Skill_bullet;
+    public GameObject bazooka_Skill_bullet1;
+    public GameObject bazooka_Skill_bullet2;
+    public GameObject bazooka_Skill_bullet3;
+    public GameObject bazooka_Skill_bullet4;
     public Transform bazooka_bullet_pos;
     public UnityAction OnShoot = null;
     public UnityAction OnSkillShoot = null;
@@ -20,7 +24,7 @@ public class Animation_Event : MonoBehaviour
 
     private void Bazooka_Skill_Fire()
     {
-        skillbullet = StartCoroutine(Bazooka_SkillBullet_Initiate(1.0f));
+        skillbullet = StartCoroutine(Bazooka_SkillBullet_Initiate(0.5f));
         if (skillbullet == null) StopCoroutine(skillbullet);
     }
 
@@ -39,14 +43,15 @@ public class Animation_Event : MonoBehaviour
 
     IEnumerator Bazooka_SkillBullet_Initiate(float t)
     {
-        Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
-        yield return new WaitForSeconds(t);
-        Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
-        yield return new WaitForSeconds(t);
-        Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
-        yield return new WaitForSeconds(t);
-        Bazooka_Bullet_Initiate(bazooka_Skill_bullet);
-        skillbullet = null;
+       Bazooka_Bullet_Initiate(bazooka_Skill_bullet1);
+       yield return new WaitForSeconds(t / 3.0f);
+       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet4);
+       //yield return new WaitForSeconds(t);
+       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet2);
+       //yield return new WaitForSeconds(t / 3.0f);
+       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
+       //yield return null;
+       skillbullet = null;
     }
 
     private void Shoot()

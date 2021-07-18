@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class Animation_Event : MonoBehaviour
 {
     [Header("Bazooka")]
-    public GameObject player;
     public GameObject bazooka_Basic_bullet;
     public GameObject bazooka_Skill_bullet1;
     public GameObject bazooka_Skill_bullet2;

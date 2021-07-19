@@ -46,3 +46,31 @@ public class Turret : MonoBehaviour
         tfTarget = NearbyEnemy;
     }
 }
+
+/*
+void SearchTarget()
+{
+    float Shortdist = 10;
+    Transform shorTarget = null;
+    Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
+    if (EnemyCollider.Length > 0)
+    {
+        for (int i = 0; i < EnemyCollider.Length; i++)
+        {
+            float Dist = Vector3.Distance(this.transform.position, EnemyCollider[i].transform.position);
+            if (Shortdist > Dist)
+            {
+                Shortdist = Dist;
+                shorTarget = EnemyCollider[i].transform;
+            }
+        }
+    }
+    m_tfResultTarget = shorTarget; // ÃÖÁ¾°ª
+}
+void LookatEnemy()
+{
+    float h = Input.GetAxis("Horizontal");
+    float v = Input.GetAxis("Vertical");
+    this.transform.LookAt(m_tfResultTarget);
+}
+*/

@@ -22,7 +22,7 @@ public class JesterAnimationEv : MonoBehaviour
         OnShot_0?.Invoke();
         ///if (OnShot_0 != null)
         ///{
-        ///    evShoot();
+        ///    OnShot_0();
         ///}
     }
     void evShoot_1()
@@ -30,7 +30,7 @@ public class JesterAnimationEv : MonoBehaviour
         OnShot_1?.Invoke();
         //if (OnShot_1 != null)
         //{
-        //    evShoot_1();
+        //    OnShot_1();
         //}
     }
     void evShoot_2()
@@ -38,7 +38,7 @@ public class JesterAnimationEv : MonoBehaviour
         OnShot_2?.Invoke();
         //if (OnShot_2 != null)
         //{
-        //    evShoot_2();
+        //    OnShot_2();
         //}
     }
     void AnimEnd()

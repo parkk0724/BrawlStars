@@ -34,13 +34,24 @@ public class Jester : Hero
     }
     void BasicAttack()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit,1000.0f, m_lmPicking_Mask))
+        if(Input.GetMouseButtonDown(0))
         {
-            this.transform.LookAt(hit.point);
-            anim.SetTrigger("tBAttack");
+            if (m_tfResultTarget != null)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
+                {
+                    this.transform.LookAt(hit.point);
+                    anim.SetTrigger("tBAttack");
+                }
+            }
         }
+        if(Input.GetMouseButtonUp(0))
+        {
+            m_AttackState = AttackState.BASIC;
+        }
+        
     }
     #region coBasicAttck_first
     /*IEnumerator coBasicAttack()

@@ -250,7 +250,7 @@ public class Hero : Character
     {
         if (m_tfResultTarget == null)
         {
-           // m_bRotStart = false;
+            //m_bRotStart = false;
         }
         else
         {

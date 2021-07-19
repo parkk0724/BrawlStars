@@ -8,11 +8,11 @@ public class Jester : Hero
     enum AttackState
     { NONE, BASIC, SKILL }
     AttackState m_AttackState = AttackState.NONE;
-    [SerializeField] bool m_fFireReady;
-    [SerializeField] float m_fFireRate;
-    [SerializeField] float m_fCurfireTime;
-    [SerializeField] Transform[] m_tBulletPos;
-    [SerializeField] GameObject m_objbullet;
+    //[SerializeField] bool m_fFireReady;
+    //[SerializeField] float m_fFireRate;
+    //[SerializeField] float m_fCurfireTime;
+    //[SerializeField] Transform[] m_tBulletPos;
+    //[SerializeField] GameObject m_objbullet;
     [SerializeField] Transform m_tBulletPosCase;
     [SerializeField] GameObject m_objBulletCase;
     public ParticleSystem m_ptsBoom;
@@ -26,20 +26,20 @@ public class Jester : Hero
     }
     public override void Attack()
     {
-        m_fCurfireTime += Time.deltaTime;
-        m_fFireReady = m_fFireRate < m_fCurfireTime;
-        if (m_tfResultTarget != null) m_bCheckStart = true;
-        if (m_fFireReady)
-        {
-            m_bMoveStart = true;
-            m_bRotStart = false;
-        }
+        //m_fCurfireTime += Time.deltaTime;
+        //m_fFireReady = m_fFireRate < m_fCurfireTime;
+        //if (m_tfResultTarget != null) m_bCheckStart = true;
+        //if (m_fFireReady)
+        //{
+        //    m_bMoveStart = true;
+        //    m_bRotStart = false;
+        //}
         switch (m_AttackState)
         {
             case AttackState.NONE:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    StartCoroutine(coBasicAttack());
+                    //StartCoroutine(coBasicAttack());
                     m_AttackState = AttackState.BASIC;
                 }
                 else if (Input.GetMouseButtonDown(1))
@@ -52,10 +52,11 @@ public class Jester : Hero
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (j_Attack != null) StopCoroutine(j_Attack);
-                    j_Attack = StartCoroutine(coBasicAttack());
+                    BasicAttack();
+                    //if (j_Attack != null) StopCoroutine(j_Attack);
+                    //j_Attack = StartCoroutine(coBasicAttack());
                 }
-                if(Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     m_AttackState = AttackState.NONE;
                 }
@@ -66,7 +67,15 @@ public class Jester : Hero
                 break;
         }
     }
-    IEnumerator coBasicAttack()
+    void BasicAttack()
+    {
+
+
+
+
+    }
+    #region coBasicAttck_first
+    /*IEnumerator coBasicAttack()
     {
 
         //Instantiate(m_objbullet, m_objBulletPos[0].position, m_objBulletPos[0].rotation);
@@ -104,8 +113,10 @@ public class Jester : Hero
             }
             yield return null;
         }
-    }
-    IEnumerator BulletInit()
+    }*/
+    #endregion
+    #region
+    /*IEnumerator BulletInit()
     {
         if (m_bCheckStart)
         {
@@ -150,7 +161,8 @@ public class Jester : Hero
 
         }
 
-    }
+    }*/
+    #endregion
     void BullutCaseInit(float time)
     {
         GameObject instanBulletCase = Instantiate(m_objBulletCase, m_tBulletPosCase.position, m_tBulletPosCase.rotation);

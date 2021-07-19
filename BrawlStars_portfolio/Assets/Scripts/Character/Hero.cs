@@ -276,6 +276,7 @@ public class Hero : Character
             if (angle - delta < 0.0f)
             {
                 delta = angle;
+                //m_bRotStart = false;
             }
 
             this.transform.Rotate(Vector3.up, delta * rotDir);

@@ -57,7 +57,7 @@ public abstract class Character : MonoBehaviour
             RecoveryStamina();
             Move();
             Attack();
-            SkillAttack();
+            //SkillAttack();
         }
     }
     public abstract void Attack(); 

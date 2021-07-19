@@ -11,7 +11,6 @@ public class Soldier : Hero
     public GameObject bazooka_Skill_bullet4;
     public Transform bazooka_bullet_pos;
 
-    Coroutine skillbullet = null;
     protected override void Start()
     {
         base.Start();
@@ -36,15 +35,8 @@ public class Soldier : Hero
     }
     private void Bazooka_Skill_Fire()
     {
-        skillbullet = StartCoroutine(Bazooka_SkillBullet_Initiate(0.5f));
-        if (skillbullet == null) StopCoroutine(skillbullet);
+        StartCoroutine(Bazooka_SkillBullet_Initiate(0.5f));
     }
-
-    public void SetRotStart(bool b)
-    {
-        m_bRotStart = b;
-    }
-
     void Bazooka_Bullet_Initiate(GameObject bullet)
     {
         GameObject skillbullet = Instantiate(bullet, bazooka_bullet_pos.position, bazooka_bullet_pos.rotation);
@@ -60,6 +52,10 @@ public class Soldier : Hero
         yield return new WaitForSeconds(t / 3.0f);
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
         yield return null;
-        skillbullet = null;
+    }
+
+    public void SetRotStart(bool b)
+    {
+        m_bRotStart = b;
     }
 }

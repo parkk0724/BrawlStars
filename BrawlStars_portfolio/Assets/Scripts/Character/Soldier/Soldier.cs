@@ -24,6 +24,7 @@ public class Soldier : Hero
         {
             m_Animator.SetTrigger("tBAttack");            
         }
+        
         if (Input.GetMouseButtonDown(1))
         {
             m_Animator.SetTrigger("tSAttack");           
@@ -32,7 +33,6 @@ public class Soldier : Hero
 
     private void Basic_Fire()
     {
-        Debug.Log("ff");
         Bazooka_Bullet_Initiate(bazooka_Basic_bullet);
     }
     private void Skill_Fire()

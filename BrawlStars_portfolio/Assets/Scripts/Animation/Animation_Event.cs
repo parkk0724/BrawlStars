@@ -5,7 +5,6 @@ using UnityEngine.Events;
 public class Animation_Event : MonoBehaviour
 {
     [Header("Bazooka")]
-    public GameObject player;
     public GameObject bazooka_Basic_bullet;
     public GameObject bazooka_Skill_bullet1;
     public GameObject bazooka_Skill_bullet2;
@@ -30,27 +29,19 @@ public class Animation_Event : MonoBehaviour
 
     void Bazooka_Bullet_Initiate(GameObject bullet)
     {
-        GameObject skillbullet = Instantiate(bullet, bazooka_bullet_pos.position, Quaternion.identity);
-        float dot = Vector3.Dot(skillbullet.transform.forward, player.transform.forward);
-        float r = Mathf.Acos(dot);
-        float e = 180.0f * (r / Mathf.PI);
-
-        if (Vector3.Dot(player.transform.forward, bullet.transform.right) >= 0)
-            skillbullet.transform.Rotate(skillbullet.transform.up * e);
-        else
-            skillbullet.transform.Rotate(-skillbullet.transform.up * e);
+        GameObject skillbullet = Instantiate(bullet, bazooka_bullet_pos.position, bazooka_bullet_pos.rotation);
     }
 
     IEnumerator Bazooka_SkillBullet_Initiate(float t)
     {
        Bazooka_Bullet_Initiate(bazooka_Skill_bullet1);
        yield return new WaitForSeconds(t / 3.0f);
-       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet4);
-       //yield return new WaitForSeconds(t);
-       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet2);
-       //yield return new WaitForSeconds(t / 3.0f);
-       //Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
-       //yield return null;
+       Bazooka_Bullet_Initiate(bazooka_Skill_bullet4);
+       yield return new WaitForSeconds(t);
+       Bazooka_Bullet_Initiate(bazooka_Skill_bullet2);
+       yield return new WaitForSeconds(t / 3.0f);
+       Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
+       yield return null;
        skillbullet = null;
     }
 

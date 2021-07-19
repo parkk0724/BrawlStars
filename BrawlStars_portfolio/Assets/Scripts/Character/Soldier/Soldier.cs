@@ -15,11 +15,8 @@ public class Soldier : Hero
         if (Input.GetMouseButtonDown(0))
         {
             m_Animator.SetTrigger("tBAttack");
-        }
-    }
 
-    public override void SkillAttack()
-    {
+        }
         if (Input.GetMouseButtonDown(1))
         {
             m_Animator.SetTrigger("tSAttack");

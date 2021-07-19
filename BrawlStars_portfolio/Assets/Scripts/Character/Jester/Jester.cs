@@ -15,6 +15,7 @@ public class Jester : Hero
     [SerializeField] GameObject m_objbullet;
     [SerializeField] Transform m_tBulletPosCase;
     [SerializeField] GameObject m_objBulletCase;
+    public ParticleSystem m_ptsBoom;
     Animator[] anim;
     UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
@@ -41,7 +42,10 @@ public class Jester : Hero
                     StartCoroutine(coBasicAttack());
                     m_AttackState = AttackState.BASIC;
                 }
-                else if (Input.GetMouseButtonDown(1)) m_AttackState = AttackState.SKILL;
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    m_AttackState = AttackState.SKILL;
+                }
                 break;
             case AttackState.BASIC:
                 //BasicAttack();
@@ -51,9 +55,13 @@ public class Jester : Hero
                     if (j_Attack != null) StopCoroutine(j_Attack);
                     j_Attack = StartCoroutine(coBasicAttack());
                 }
-
+                if(Input.GetMouseButtonUp(0))
+                {
+                    m_AttackState = AttackState.NONE;
+                }
                 break;
             case AttackState.SKILL:
+                m_ptsBoom.gameObject.SetActive(true);
                 SkillAttack();
                 break;
         }
@@ -105,20 +113,20 @@ public class Jester : Hero
             GameObject instantBullet = Instantiate(m_objbullet, m_tBulletPos[0].position, m_tBulletPos[0].rotation);
             Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
             bulletRigid.velocity = m_tBulletPos[0].forward * 30f;
-            BullutCaseInit();
+            BullutCaseInit(2);
             yield return new WaitForSeconds(0.1f);
 
             GameObject instantBullet_1 = Instantiate(m_objbullet, m_tBulletPos[1].position, m_tBulletPos[1].rotation);
             Rigidbody bulletRigid_1 = instantBullet_1.GetComponent<Rigidbody>();
             bulletRigid_1.velocity = m_tBulletPos[1].forward * 30f;
-            BullutCaseInit();
+            BullutCaseInit(2);
 
             yield return new WaitForSeconds(0.1f);
 
             GameObject instantBullet_2 = Instantiate(m_objbullet, m_tBulletPos[2].position, m_tBulletPos[2].rotation);
             Rigidbody bulletRigid_2 = instantBullet_2.GetComponent<Rigidbody>();
             bulletRigid_2.velocity = m_tBulletPos[2].forward * 30f;
-            BullutCaseInit();
+            BullutCaseInit(2);
         }
         if (!m_bCheckStart)
         {
@@ -126,30 +134,31 @@ public class Jester : Hero
             GameObject instantBullet = Instantiate(m_objbullet, m_tBulletPos[0].position, m_tBulletPos[0].rotation);
             Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
             bulletRigid.velocity = m_tBulletPos[0].forward * 30f;
-            BullutCaseInit();
+            BullutCaseInit(2);
             yield return new WaitForSeconds(0.1f);
 
             GameObject instantBullet_1 = Instantiate(m_objbullet, m_tBulletPos[1].position, m_tBulletPos[1].rotation);
             Rigidbody bulletRigid_1 = instantBullet_1.GetComponent<Rigidbody>();
             bulletRigid_1.velocity = m_tBulletPos[1].forward * 30f;
-            BullutCaseInit();
+            BullutCaseInit(2);
             yield return new WaitForSeconds(0.1f);
 
             GameObject instantBullet_2 = Instantiate(m_objbullet, m_tBulletPos[2].position, m_tBulletPos[2].rotation);
             Rigidbody bulletRigid_2 = instantBullet_2.GetComponent<Rigidbody>();
             bulletRigid_2.velocity = m_tBulletPos[2].forward * 30f;
-            BullutCaseInit();
+            BullutCaseInit(2);
 
         }
 
     }
-    void BullutCaseInit()
+    void BullutCaseInit(float time)
     {
         GameObject instanBulletCase = Instantiate(m_objBulletCase, m_tBulletPosCase.position, m_tBulletPosCase.rotation);
         Rigidbody bulletcaseRigid = instanBulletCase.GetComponent<Rigidbody>();
         Vector3 pos = m_tBulletPosCase.forward * Random.Range(-3, -2) + m_tBulletPosCase.up * Random.Range(2, 5);
         bulletcaseRigid.AddForce(pos, ForceMode.Impulse);
         bulletcaseRigid.AddTorque(Vector3.up * Random.Range(-10, 10));
+        Destroy(instanBulletCase,time);
     }
 
     public override void SkillAttack()

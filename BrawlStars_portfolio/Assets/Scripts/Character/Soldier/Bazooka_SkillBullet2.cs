@@ -64,9 +64,8 @@ public class Bazooka_SkillBullet2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
         {
-            Debug.Log("dd");
             Destroy(this.gameObject);
         }
     }

@@ -26,11 +26,13 @@ public class BazookaBullet : MonoBehaviour
 
     IEnumerator BulletFlying()
     {
-        dist += 0.5f;// 바주카포에서 발사하는 높이가 0높이보다 크므로 sin그래프에서 중간부터 시작하는건데 정확한 수치 계산이 지금은 힘들어서 일단 0.5만큼 보정함
+        dist += 0.7f;// 바주카포에서 발사하는 높이가 0높이보다 크므로 sin그래프에서 중간부터 시작하는건데 정확한 수치 계산이 지금은 힘들어서 일단 0.7만큼 보정함
         while (dist < range)
         {
             //전 위치, 방향을 저장
-
+            prePos = this.transform.position;
+            Vector3 predir_forward = this.transform.forward;
+            Vector3 predir_up = this.transform.up;
             float delta = speed * Time.deltaTime;           
            
             if (range - dist < 0.0f)
@@ -40,14 +42,24 @@ public class BazookaBullet : MonoBehaviour
             dist += delta;
             
             //이동 값에 따른 높이를 sin 값을 통해 높이 값 도출
-            this.transform.Translate(Vector3.forward * delta);
-            float h = Mathf.Sin(dist * (Mathf.PI / range)) * height; //0.5는 처음 시작 위치 보정 값 
-            Vector3 pos = this.transform.position;
+            this.transform.Translate(this.transform.forward * delta, Space.World);
 
+            float h = Mathf.Sin(dist * (Mathf.PI / range)) * height; 
+            Vector3 pos = this.transform.position;
             pos.y = h;
             this.transform.position = pos;
 
             //전 위치, 방향 -> 현재 위치, 방향을 내적해서 각도를 구함
+            Vector3 dir = this.transform.position - prePos;
+            dir.Normalize();
+            float d = Vector3.Dot(predir_forward, dir);
+            float r = Mathf.Acos(d);
+            float e = 180.0f * (r / Mathf.PI);
+
+           if (Vector3.Dot(predir_up, dir) >= 0.0f)
+               this.transform.Rotate(-this.transform.right * e, Space.World);
+           else
+               this.transform.Rotate(this.transform.right * e, Space.World);
 
             yield return null;
         }

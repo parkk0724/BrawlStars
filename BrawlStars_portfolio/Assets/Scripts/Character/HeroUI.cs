@@ -3,25 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeroUI : MonoBehaviour
-{
+public class HeroUI : CharacterUI
+{ 
     // Start is called before the first frame update
-    [SerializeField] Image m_imgHpBar;
     [SerializeField] Image m_imgStaminaBar;
-    [SerializeField] Character m_Character;
+   
     void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        Vector3 pos = m_Character.transform.position;
-        pos.z += 1.0f;
-        this.transform.position = pos;
-
-        m_imgHpBar.fillAmount = (float)m_Character.GetHp() / (float)m_Character.GetMaxHp();
+        base.Update();
         m_imgStaminaBar.fillAmount = (float)m_Character.GetStamina() / (float)m_Character.GetMaxStamina();
     }
 }

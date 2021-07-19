@@ -5,13 +5,15 @@ using UnityEngine.Events;
 
 public class BoxManWeapon : MonoBehaviour
 {
-    Animator m_Animator = null;
-    float m_fRange = 0.0f;
-    Transform m_tfHero = null;
     [SerializeField] GameObject m_objBullet = null;
     [SerializeField] GameObject m_objShootPos = null;
+    Animator m_Animator = null;
+    Transform m_tfHero = null;
+    float m_fRange = 0.0f;
+    float m_fATK = 0.0f;
     public UnityAction OnFeverUp = null;
 
+    public void SetATK(float f) { m_fATK = f; }
     public void SetRange(float f) { m_fRange = f; }
     void Start()
     {
@@ -29,6 +31,7 @@ public class BoxManWeapon : MonoBehaviour
         bullet.SetDistance(m_fRange - Vector3.Distance(this.transform.position, m_tfHero.position));
         bullet.SetPosParent(m_tfHero);
         bullet.OnFeverUp = OnFeverUp;
+        bullet.SetDamage(m_fATK);
 
         GetComponentInParent<BoxMan>().SetRotStart(false);
     }
@@ -43,6 +46,7 @@ public class BoxManWeapon : MonoBehaviour
         bullet.SetPosParent(m_tfHero);
         bullet.OnSkill();
         bullet.OnFeverUp = OnFeverUp;
+        bullet.SetDamage(m_fATK);
 
         GetComponentInParent<BoxMan>().SetRotStart(false);
     }

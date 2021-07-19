@@ -35,13 +35,14 @@ public class Hero : Character
         m_fStamina = m_fMaxStamina;
         m_fMaxFever = 100.0f;
         m_fFever = 0.0f;
-        m_nATK = 10;
+        m_nATK = 20;
         m_nDEF = 5;
         m_nSkillDamage = 20;
         m_fMoveSpeed = 5.0f;
         m_fAttackSpeed = 1.0f;
         m_fRange = 10.0f;
-
+        m_fBodyAttackDelay = 1.0f;
+        m_fCurBodyAttack = m_fBodyAttackDelay;
         // UI: HP, Max
         //HealthBar.SetHealth(m_nMaxHP);
     }
@@ -143,10 +144,17 @@ public class Hero : Character
 
             Destroy(other.gameObject);
         }
-
-        if(other.tag == "Monster")
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (m_fCurBodyAttack >= m_fBodyAttackDelay)
         {
-            Hit(20);
+            if (other.tag == "Monster")
+            {
+                Monster m = other.GetComponent<Monster>();
+                if (m != null) Hit((int)other.GetComponent<Monster>()?.GetATK(), new Color(1, 0, 0, 1)); // (과녁용)몬스터스크립트 없을때
+                m_fCurBodyAttack = 0.0f;
+            }
         }
     }
     public override IEnumerator Die()

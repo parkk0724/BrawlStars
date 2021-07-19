@@ -8,8 +8,8 @@ public class BoxMan : Hero
     // Start is called before the first frame update
     AttackState m_AttackState = AttackState.NONE;
     BoxManWeapon m_BoxManWeapon;
-    [SerializeField] GameObject m_objDirBasicAttack;
-    [SerializeField] GameObject m_objDirSkillAttack;
+    [SerializeField] GameObject m_objDirBasicAttack = null;
+    [SerializeField] GameObject m_objDirSkillAttack = null;
     [SerializeField] float m_fMaxMouseButton = 0.0f;
     float m_fCurMouseButton = 0.0f;
     float m_fAttackStamina = 0.0f;
@@ -20,6 +20,7 @@ public class BoxMan : Hero
         m_BoxManWeapon = GetComponentInChildren<BoxManWeapon>();
         m_BoxManWeapon.SetRange(m_fRange = 10.0f);
         m_BoxManWeapon.OnFeverUp = FeverUp;
+        m_BoxManWeapon.SetATK(m_nATK);
         m_fMaxMouseButton = 0.2f;
         m_fAttackStamina = 1.0f;
     }

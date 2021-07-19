@@ -6509,7 +6509,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2058289523}
   bazooka_Basic_bullet: {fileID: 8410637849025619359, guid: ff9fbb25fe1792e458dfcd6198475f24, type: 3}
-  bazooka_Skill_bullet: {fileID: 8410637849025619359, guid: 4c63e5143ba65b1499427f542a6cd2b5, type: 3}
+  bazooka_Skill_bullet1: {fileID: 0}
+  bazooka_Skill_bullet2: {fileID: 0}
+  bazooka_Skill_bullet3: {fileID: 0}
+  bazooka_Skill_bullet4: {fileID: 0}
   bazooka_bullet_pos: {fileID: 1491061284}
 --- !u!4 &1836371603 stripped
 Transform:
@@ -7928,6 +7931,10 @@ PrefabInstance:
     - target: {fileID: 812137236191921111, guid: 028b18939a86d2c4faa15abfa8bd30d6, type: 3}
       propertyPath: m_Name
       value: BoxMan
+      objectReference: {fileID: 0}
+    - target: {fileID: 812137236191921111, guid: 028b18939a86d2c4faa15abfa8bd30d6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028b18939a86d2c4faa15abfa8bd30d6, type: 3}

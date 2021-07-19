@@ -26,7 +26,7 @@ public class SawFire : MonoBehaviour
     {
         if (other.tag.Equals("Player"))
         {
-            other.GetComponentInChildren<Hero>().Hit(nBulletDamage);
+            other.GetComponentInChildren<Hero>().Hit(nBulletDamage, new Color(1,1,1,1));
             Destroy(this.gameObject);
         }
     }

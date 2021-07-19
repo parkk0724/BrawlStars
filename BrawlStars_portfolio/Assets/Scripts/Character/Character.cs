@@ -21,6 +21,8 @@ public abstract class Character : MonoBehaviour
     protected float m_fMaxFever;
     protected float m_fRange;
     protected bool m_bDie;
+    protected float m_fBodyAttackDelay;
+    protected float m_fCurBodyAttack;
 
     //public HealthBar HealthBar; // UI, 체력바, Hit가 여기서 처리돼서 여기에 배치
 
@@ -30,6 +32,7 @@ public abstract class Character : MonoBehaviour
     public float GetMaxStamina() { return m_fMaxStamina; }
     public float GetFever() { return m_fFever; }
     public float GetMaxFever() { return m_fMaxFever; }
+    public int GetATK() { return m_nATK; }
     public void FeverUp() 
     {
         if (m_fFever < m_fMaxFever) m_fFever += 10.0f;
@@ -48,16 +51,13 @@ public abstract class Character : MonoBehaviour
     protected abstract void Start();
     protected virtual void Update()
     {
-        if (m_bDie)
+        // 쓸모없는 코드가 있어서 변경
+        if (!m_bDie)
         {
-            Die();
-        }
-        else
-        {
+            m_fCurBodyAttack += Time.deltaTime;
             RecoveryStamina();
             Move();
             Attack();
-            //SkillAttack();
         }
     }
     public abstract void Attack(); 
@@ -65,7 +65,7 @@ public abstract class Character : MonoBehaviour
     public abstract void Move();
     public abstract void Revival();
     public abstract IEnumerator Die();
-    public virtual void Hit(int damage) // 온콜라이더에서 호출하는게 좋을 것 같음
+    public virtual void Hit(int damage, Color c) // 온콜라이더에서 호출하는게 좋을 것 같음 *데미지마다 색상을 틀리게하기위해 color값 추가
     {
         // 총알이 닿으면, Bullet 스크립트에서 Hit 함수 발생.
         int DefDamage =  damage - m_nDEF;
@@ -73,7 +73,7 @@ public abstract class Character : MonoBehaviour
         if(DefDamage > 0)
         {
             Debug.Log("Hit");
-            m_UITextDamage.SetDamage(DefDamage, this.transform.position, new Color(1,0,0,1));
+            m_UITextDamage.SetDamage(DefDamage, this.transform.position, c);
             m_nHP = m_nHP - DefDamage;      // 데미지 계산
             if(m_nHP > 0) m_Animator.SetTrigger("tHit");  // 히트모션
             //HealthBar.SetHealth(m_nHP);     // UI, 체력바 현재체력으로 증감

@@ -11,7 +11,6 @@ public class BoxManBullet : MonoBehaviour
     CapsuleCollider m_Collider;
     [SerializeField] Transform m_tfRotChild = null;
     public UnityAction OnFeverUp = null;
-    UITextDamage m_uiTextDamage = null;
     float m_fMoveSpeed = 0.0f;
     float m_fRotSpeed = 0.0f;
     float m_fDistance = 0.0f;
@@ -20,16 +19,18 @@ public class BoxManBullet : MonoBehaviour
     float m_fSkillStay = 0.0f;
     float m_fSkillAttackDelay = 0.0f;
     float m_fCurSkillAttack = 0.0f;
+    float m_fDamage = 0.0f;
     
     bool m_bTurn = false;
     bool m_bSkill = false;
+
+    public void SetDamage(float f) { m_fDamage = f; }
     public void SetDistance(float f) { m_fDistance = f; }
     public void SetPosParent(Transform pos) { m_tfHero = pos; }
     public void OnSkill() { m_bSkill = true; }
+    
     void Start()
     {
-        // m_tfRotChild = this.GetComponentInChildren<Transform>();
-        m_uiTextDamage = GameObject.FindGameObjectWithTag("TextDamagePool").GetComponent<UITextDamage>();
         m_Collider = this.GetComponent<CapsuleCollider>();
         m_fMoveSpeed = 10f;
         m_fRotSpeed = 1000f;
@@ -62,7 +63,7 @@ public class BoxManBullet : MonoBehaviour
         if (other.tag == "Monster")
         {
             OnFeverUp?.Invoke();
-            m_uiTextDamage.SetDamage(20, other.transform.position, new Color(0, 0, 0, 1));
+            other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0,0,0,1));
         }
 
         if (m_bTurn && m_fSkillStay >= m_fSkillMaxStay)
@@ -88,7 +89,7 @@ public class BoxManBullet : MonoBehaviour
 
                 Debug.Log("SkillAttack!!!" + m_fCurSkillAttack);
                 OnFeverUp?.Invoke();
-                m_uiTextDamage.SetDamage(20, other.transform.position, new Color(0, 0, 0, 1));
+                other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
                 m_fCurSkillAttack = 0.0f;
             }
         }
@@ -98,6 +99,7 @@ public class BoxManBullet : MonoBehaviour
         if (m_bTurn)
         {
             Vector3 dir = (m_tfHero.position - this.transform.position).normalized;
+            dir.y = 0;
             this.transform.position += dir * Time.deltaTime * m_fMoveSpeed;
         }
         else
@@ -120,6 +122,7 @@ public class BoxManBullet : MonoBehaviour
             m_Collider.radius -= (Time.deltaTime * 1.5f);
 
             Vector3 dir = (m_tfHero.position - this.transform.position).normalized;
+            dir.y = 0;
             this.transform.position += dir * Time.deltaTime * m_fMoveSpeed;
         }
         else

@@ -58,7 +58,6 @@ public class BazookaBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            Debug.Log("dd");
             Destroy(this.gameObject);
         }
     }

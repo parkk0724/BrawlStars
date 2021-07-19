@@ -31,6 +31,7 @@ public class Soldier : Hero
 
     private void Bazooka_Basic_Fire()
     {
+        Debug.Log("ff");
         Bazooka_Bullet_Initiate(bazooka_Basic_bullet);
     }
     private void Bazooka_Skill_Fire()

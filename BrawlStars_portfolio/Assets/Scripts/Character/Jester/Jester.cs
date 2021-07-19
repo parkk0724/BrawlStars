@@ -8,71 +8,39 @@ public class Jester : Hero
     enum AttackState
     { NONE, BASIC, SKILL }
     AttackState m_AttackState = AttackState.NONE;
-    //[SerializeField] bool m_fFireReady;
-    //[SerializeField] float m_fFireRate;
-    //[SerializeField] float m_fCurfireTime;
-    //[SerializeField] Transform[] m_tBulletPos;
-    //[SerializeField] GameObject m_objbullet;
-    [SerializeField] Transform m_tBulletPosCase;
-    [SerializeField] GameObject m_objBulletCase;
     public ParticleSystem m_ptsBoom;
-    Animator[] anim;
-    UnityEngine.Coroutine j_Attack = null;
+    Animator anim;
+    //UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
-
         base.Start();
-        anim = GetComponentsInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
     public override void Attack()
     {
-        //m_fCurfireTime += Time.deltaTime;
-        //m_fFireReady = m_fFireRate < m_fCurfireTime;
-        //if (m_tfResultTarget != null) m_bCheckStart = true;
-        //if (m_fFireReady)
-        //{
-        //    m_bMoveStart = true;
-        //    m_bRotStart = false;
-        //}
         switch (m_AttackState)
         {
             case AttackState.NONE:
-                if (Input.GetMouseButtonDown(0))
-                {
-                    //StartCoroutine(coBasicAttack());
-                    m_AttackState = AttackState.BASIC;
-                }
-                else if (Input.GetMouseButtonDown(1))
-                {
-                    m_AttackState = AttackState.SKILL;
-                }
+                if (Input.GetMouseButtonDown(0)) m_AttackState = AttackState.BASIC;
+                else if (Input.GetMouseButtonDown(1)) m_AttackState = AttackState.SKILL;
                 break;
             case AttackState.BASIC:
-                //BasicAttack();
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    BasicAttack();
-                    //if (j_Attack != null) StopCoroutine(j_Attack);
-                    //j_Attack = StartCoroutine(coBasicAttack());
-                }
-                if (Input.GetMouseButtonUp(0))
-                {
-                    m_AttackState = AttackState.NONE;
-                }
+                BasicAttack();
                 break;
             case AttackState.SKILL:
-                m_ptsBoom.gameObject.SetActive(true);
                 SkillAttack();
                 break;
         }
     }
     void BasicAttack()
     {
-
-
-
-
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit,1000.0f, m_lmPicking_Mask))
+        {
+            this.transform.LookAt(hit.point);
+            anim.SetTrigger("tBAttack");
+        }
     }
     #region coBasicAttck_first
     /*IEnumerator coBasicAttack()
@@ -163,20 +131,13 @@ public class Jester : Hero
 
     }*/
     #endregion
-    void BullutCaseInit(float time)
-    {
-        GameObject instanBulletCase = Instantiate(m_objBulletCase, m_tBulletPosCase.position, m_tBulletPosCase.rotation);
-        Rigidbody bulletcaseRigid = instanBulletCase.GetComponent<Rigidbody>();
-        Vector3 pos = m_tBulletPosCase.forward * Random.Range(-3, -2) + m_tBulletPosCase.up * Random.Range(2, 5);
-        bulletcaseRigid.AddForce(pos, ForceMode.Impulse);
-        bulletcaseRigid.AddTorque(Vector3.up * Random.Range(-10, 10));
-        Destroy(instanBulletCase,time);
-    }
-
     public override void SkillAttack()
     {
 
     }
     // Update is called once per frame
-
+    public void SetRot_flase(bool b)
+    {
+        m_bRotStart = b;
+    }
 }

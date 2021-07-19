@@ -5,24 +5,41 @@ using UnityEngine;
 public class JesterWeapon : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] Transform[] m_tBulletPos;
-    [SerializeField] GameObject m_objbullet;
-    [SerializeField] Transform m_tBulletPosCase;
-    [SerializeField] GameObject m_objBulletCase;
+    public Transform[] m_tBulletPos;
+    public  GameObject m_objbullet;
+    public Transform m_tBulletPosCase;
+    public GameObject m_objBulletCase;
     Animator anim;
     void Start()
     {
         anim = this.GetComponent<Animator>();
-        //this.GetComponentInParent<JesterAnimationEv>.Shoot
-
+        this.GetComponentInParent<JesterAnimationEv>().OnShot_0 = Shoot_0;
+        this.GetComponentInParent<JesterAnimationEv>().OnShot_1 = Shoot_1;
+        this.GetComponentInParent<JesterAnimationEv>().OnShot_2 = Shoot_2;
+        this.GetComponentInParent<JesterAnimationEv>().Anim_end = Anim_end;
     }
-    void Shoot()
+    void Shoot_0()
     {
-        anim.SetTrigger("Shoot");
+        anim.SetTrigger("doShoot");
         Instantiate(m_objbullet, m_tBulletPos[0].position, m_tBulletPos[0].rotation);
-
+        BullutCaseInit(2);
     }
-
+    void Shoot_1()
+    {
+        anim.SetTrigger("doShoot");
+        Instantiate(m_objbullet, m_tBulletPos[1].position, m_tBulletPos[1].rotation);
+        BullutCaseInit(2);
+    }
+    void Shoot_2()
+    {
+        anim.SetTrigger("doShoot");
+        Instantiate(m_objbullet, m_tBulletPos[2].position, m_tBulletPos[2].rotation);
+        BullutCaseInit(2);
+    }
+    void Anim_end()
+    {
+        this.GetComponentInParent<Jester>().SetRot_flase(false);
+    }
     void BullutCaseInit(float time)
     {
         GameObject instanBulletCase = Instantiate(m_objBulletCase, m_tBulletPosCase.position, m_tBulletPosCase.rotation);

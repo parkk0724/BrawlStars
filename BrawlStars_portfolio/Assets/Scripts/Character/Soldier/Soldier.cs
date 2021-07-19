@@ -11,11 +11,12 @@ public class Soldier : Hero
     public GameObject bazooka_Skill_bullet4;
     public Transform bazooka_bullet_pos;
 
+    Animation_Event animation_event;
     protected override void Start()
     {
         base.Start();
-        this.GetComponent<Animation_Event>().bazooka_basic_fire += () => Bazooka_Basic_Fire();
-        this.GetComponent<Animation_Event>().bazooka_skill_fire += () => Bazooka_Skill_Fire();
+        this.GetComponent<Animation_Event>().bazooka_basic_fire = Basic_Fire;
+        this.GetComponent<Animation_Event>().bazooka_skill_fire = Skill_Fire;
     }
     public override void Attack()
     {
@@ -29,11 +30,11 @@ public class Soldier : Hero
         }
     }
 
-    private void Bazooka_Basic_Fire()
+    private void Basic_Fire()
     {
         Bazooka_Bullet_Initiate(bazooka_Basic_bullet);
     }
-    private void Bazooka_Skill_Fire()
+    private void Skill_Fire()
     {
         StartCoroutine(Bazooka_SkillBullet_Initiate(0.5f));
     }

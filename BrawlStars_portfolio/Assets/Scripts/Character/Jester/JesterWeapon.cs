@@ -9,6 +9,7 @@ public class JesterWeapon : MonoBehaviour
     public  GameObject m_objbullet;
     public Transform m_tBulletPosCase;
     public GameObject m_objBulletCase;
+    public ParticleSystem Shooteffect;
     Animator anim;
     void Start()
     {
@@ -17,6 +18,7 @@ public class JesterWeapon : MonoBehaviour
         this.GetComponentInParent<JesterAnimationEv>().OnShot_1 = Shoot_1;
         this.GetComponentInParent<JesterAnimationEv>().OnShot_2 = Shoot_2;
         this.GetComponentInParent<JesterAnimationEv>().Anim_end = Anim_end;
+        this.GetComponentInParent<JesterAnimationEv>().FireEffect = () => StartCoroutine(Fire());
     }
     void Shoot_0()
     {
@@ -39,6 +41,12 @@ public class JesterWeapon : MonoBehaviour
     void Anim_end()
     {
         this.GetComponentInParent<Jester>().SetRot_flase(false);
+    }
+    IEnumerator Fire()
+    {
+        Shooteffect.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        Shooteffect.gameObject.SetActive(false);
     }
     void BullutCaseInit(float time)
     {

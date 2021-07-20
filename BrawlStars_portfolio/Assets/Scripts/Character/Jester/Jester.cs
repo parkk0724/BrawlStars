@@ -187,9 +187,10 @@ public class Jester : Hero
             if (m_objDirSkillAttack.activeSelf)
             {
                 m_objtsBoom.gameObject.transform.position = m_objDirSkillAttack.transform.position;
-                Instantiate(m_objJesterSkill, m_objtsBoom.gameObject.transform.position, Quaternion.identity);
+              
                 if (skill != null) StopCoroutine(skill);
                 skill = StartCoroutine(Effect());
+                Instantiate(m_objJesterSkill, m_objtsBoom.gameObject.transform.position, Quaternion.identity);
             }
             m_Animator.SetTrigger("tSAttack");
             m_AttackState = AttackState.NONE;

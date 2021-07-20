@@ -16,7 +16,7 @@ public class Hero : Character
 
     [Header("Target")]
     public float m_fTargetRotSpeed = 10.0f;
-    public GameObject m_objTargetEffect;
+    public ParticleSystem m_objTargetEffect;
     public Transform m_tfResultTarget;
     public bool m_bRotStart = false;
     public bool m_bMoveStart;
@@ -25,6 +25,7 @@ public class Hero : Character
     public LayerMask m_lmEnemyLayer = 0;
     protected override void Start()
     {
+        m_objTargetEffect = GetComponent<ParticleSystem>();
         m_bMoveStart = true;
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
@@ -272,7 +273,7 @@ public class Hero : Character
             float r2 = Vector3.Dot(Bot, this.transform.right);
             if (r2 < 0.0f) rotDir = -1.0f;
             //Instantiate(m_objTargetEffect, m_tfResultTarget.position, Quaternion.Euler(m_tfResultTarget.rotation.x + 90, m_tfResultTarget.rotation.y, m_tfResultTarget.rotation.z));
-
+            //m_objTargetEffect.Play();
             if (angle - delta < 0.0f)
             {
                 delta = angle;

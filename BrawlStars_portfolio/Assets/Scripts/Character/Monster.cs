@@ -8,7 +8,6 @@ public class Monster : Character
     // Start is called before the first frame update
     NavMeshAgent m_NavMeshAgent;
     Transform m_tfTarget;
-
     protected override void Start()
     {
         m_Animator = this.GetComponentInChildren<Animator>();

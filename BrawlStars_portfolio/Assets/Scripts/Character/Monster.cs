@@ -36,7 +36,14 @@ public class Monster : Character
     }
     public override void Move()
     {
-        m_NavMeshAgent.SetDestination(m_tfTarget.position); // target따라다니도록 목적지를 매번 갱신
+        if (m_tfTarget == null)
+        {
+            m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+        }
+        else
+        {
+            m_NavMeshAgent.SetDestination(m_tfTarget.position); // target따라다니도록 목적지를 매번 갱신
+        }
     }
     public override IEnumerator Die()
     {

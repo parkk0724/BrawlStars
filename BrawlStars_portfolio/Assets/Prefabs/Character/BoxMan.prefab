@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &240752890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 240752891}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &240752891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240752890}
+  m_LocalRotation: {x: 0.0017873342, y: 0.0013369058, z: 0.0018298973, w: 0.9999958}
+  m_LocalPosition: {x: 0.32917118, y: 0.6191089, z: 0.98069215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 812137236191921104}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &812137236191921111
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +61,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5161410722356486597}
+  - {fileID: 240752891}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -598,6 +629,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c706130faae09d34399f0373a0b9776b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bazooka_fire_effect: {fileID: 0}
+  bazooka_fire_effect_pos: {fileID: 0}
+  run_effect: {fileID: 0}
+  Lfoot_pos: {fileID: 0}
+  Rfoot_pos: {fileID: 0}
 --- !u!1 &5161410722367257130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,6 +2088,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5161410723561646836}
     m_Modifications:
+    - target: {fileID: -1108823124571435924, guid: 238dc08009a35274085400a929cf8cbe, type: 3}
+      propertyPath: m_objShootPos
+      value: 
+      objectReference: {fileID: 240752890}
     - target: {fileID: 5416553806760229562, guid: 238dc08009a35274085400a929cf8cbe, type: 3}
       propertyPath: m_Name
       value: BoxManGun

@@ -8,13 +8,17 @@ public class Jester : Hero
     enum AttackState
     { NONE, BASIC, SKILL }
     AttackState m_AttackState = AttackState.NONE;
-    public ParticleSystem m_ptsBoom;
-    Animator anim;
+    public float m_fCurMouseButton = 0;
+    public float m_fMaxMouseButton = 0;
+    public GameObject m_objDirSkillAttack = null;
+    public GameObject m_objtsBoom = null;
+    public GameObject m_objJesterSkill = null;
+    UnityEngine.Coroutine skill = null;
     //UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
+        //m_ptsBoom = GetComponent<ParticleSystem>();
         base.Start();
-        anim = GetComponentInChildren<Animator>();
     }
     public override void Attack()
     {
@@ -34,24 +38,38 @@ public class Jester : Hero
     }
     void BasicAttack()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            if (m_tfResultTarget != null)
+            m_fCurMouseButton += Time.deltaTime;
+            if (m_fCurMouseButton > m_fMaxMouseButton)
             {
+                m_tfResultTarget = null;
+                //if (!m_objDirBasicAttack.activeSelf)
+                //{
+                //    m_objDirBasicAttack.SetActive(true);
+                //    
+                //}
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
                 {
                     this.transform.LookAt(hit.point);
-                    anim.SetTrigger("tBAttack");
                 }
             }
         }
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            m_AttackState = AttackState.BASIC;
+            m_AttackState = AttackState.NONE;
+            //m_objDirBasicAttack.SetActive(false);
+            m_fCurMouseButton = 0.0f;
+            m_Animator.SetTrigger("tBAttack");
+            //if (m_fStamina > m_fAttackStamina)
+            //{
+            //  
+            //    m_fStamina -= m_fAttackStamina;
+            //}
         }
-        
+
     }
     #region coBasicAttck_first
     /*IEnumerator coBasicAttack()
@@ -144,11 +162,57 @@ public class Jester : Hero
     #endregion
     public override void SkillAttack()
     {
+        if (Input.GetMouseButton(1))
+        {
+            m_fCurMouseButton += Time.deltaTime;
+            if (m_fCurMouseButton > m_fMaxMouseButton)
+            {
+                if (!m_objDirSkillAttack.activeSelf)
+                {
+                    m_objDirSkillAttack.SetActive(true);
 
+                    m_tfResultTarget = null;
+                }
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
+                {
+                    m_objDirSkillAttack.transform.position = new Vector3(hit.point.x, 4, hit.point.z);
+                    this.transform.LookAt(hit.point);
+                }
+            }
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            if (m_objDirSkillAttack.activeSelf)
+            {
+                m_objtsBoom.gameObject.transform.position = m_objDirSkillAttack.transform.position;
+                Instantiate(m_objJesterSkill, m_objtsBoom.gameObject.transform.position, Quaternion.identity);
+                if (skill != null) StopCoroutine(skill);
+                skill = StartCoroutine(Effect());
+            }
+            m_Animator.SetTrigger("tSAttack");
+            m_AttackState = AttackState.NONE;
+            m_objDirSkillAttack.SetActive(false);
+            m_fCurMouseButton = 0.0f;
+
+
+            //if (m_fFever >= m_fMaxFever)
+            //{
+            //    
+            //    m_fFever = 0.0f;
+            //}
+        }
     }
     // Update is called once per frame
     public void SetRot_flase(bool b)
     {
         m_bRotStart = b;
+    }
+    IEnumerator Effect()
+    {
+        Instantiate(m_objtsBoom.gameObject, m_objDirSkillAttack.transform.position, m_objDirSkillAttack.transform.rotation);
+        yield return new WaitForSeconds(2);
+        DestroyImmediate(m_objtsBoom.gameObject, true);
     }
 }

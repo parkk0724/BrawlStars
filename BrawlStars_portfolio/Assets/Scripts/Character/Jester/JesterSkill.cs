@@ -7,7 +7,7 @@ public class JesterSkill : MonoBehaviour
 {
     enum SkillState
     {
-        CREATE,IDE,RUN,ATTACK,DESTROY
+        CREATE, IDE, RUN, ATTACK, DESTROY
     }
     public GameObject m_objSkillEffect;
     [SerializeField] Transform m_tTarget;
@@ -19,6 +19,9 @@ public class JesterSkill : MonoBehaviour
     float DestroyTime;
     public float DeathTime;
     Rigidbody rigid;
+    Transform m_tfResultTarget;
+    public float m_fTargetRange;
+    public LayerMask m_lmEnemyLayer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +35,9 @@ public class JesterSkill : MonoBehaviour
     //
     void Update()
     {
+        SearchTarget();
         //StartCoroutine(DestEffect());
-        Dist = Vector3.Distance(this.transform.position, m_tTarget.position);
+        Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
         chageSate();
@@ -47,7 +51,7 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.IDE:
                 //nav.speed = Random.Range(3, 10);
-                if (m_tTarget != null)
+                if (m_tfResultTarget != null)
                 {
                     State = SkillState.RUN;
                 }
@@ -55,9 +59,9 @@ public class JesterSkill : MonoBehaviour
             case SkillState.RUN:
                 {
                     nav.speed = 7;
-                    nav.SetDestination(m_tTarget.position);
+                    nav.SetDestination(m_tfResultTarget.position);
                     anim.SetBool("bMove", true);
-                   
+
                     if (DistRange > Dist)
                     {
                         State = SkillState.ATTACK;
@@ -66,22 +70,20 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.ATTACK:
                 {
-                    Vector3 distrot = m_tTarget.position -this.transform.position;
-                    Vector3 distbojung = new Vector3(0, distrot.y, 0);
-                    Vector3 rate = new Vector3(0, m_tTarget.position.y,0);
+                    Vector3 distrot = m_tfResultTarget.position - this.transform.position;
+                    Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
                     if (DistRange > Dist)
                     {
-                        //this.transform.rotation = Quaternion.Euler(distbojung.normalized);
-                        this.transform.LookAt(distrot);
+                        this.transform.LookAt(resultYtarget);
                         anim.SetBool("bMove", false);
                         anim.SetTrigger("tBAttack");
                         nav.speed = 0;
                     }
-                    else if(DistRange <= Dist)
+                    else if (DistRange <= Dist)
                     {
                         State = SkillState.RUN;
                     }
-                    if(DestroyTime > DeathTime)
+                    if (DestroyTime > DeathTime)
                     {
                         State = SkillState.DESTROY;
                     }
@@ -101,12 +103,24 @@ public class JesterSkill : MonoBehaviour
         yield return null;
 
     }
-    private void OnTriggerEnter(Collider other)
+    void SearchTarget()
     {
-        if(other.gameObject.CompareTag("Monster"))
+        float Shortdist = 15;
+        Transform shorTarget = null;
+        Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
+        if (EnemyCollider.Length > 0)
         {
-            anim.SetTrigger("tBAttack");
+            for (int i = 0; i < EnemyCollider.Length; i++)
+            {
+                float Dist = Vector3.Distance(this.transform.position, EnemyCollider[i].transform.position);
+                if (Shortdist > Dist)
+                {
+                    Shortdist = Dist;
+                    shorTarget = EnemyCollider[i].transform;
+                }
+            }
         }
+        m_tfResultTarget = shorTarget; // ÃÖÁ¾°ª
     }
-
 }
+

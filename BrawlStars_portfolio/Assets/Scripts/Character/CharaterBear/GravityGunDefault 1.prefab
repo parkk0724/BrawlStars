@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2440554163672563446}
   - component: {fileID: 2440554163673562166}
   m_Layer: 0
-  m_Name: GravityGun
+  m_Name: GravityGunDefault 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

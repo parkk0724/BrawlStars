@@ -40,7 +40,6 @@ public class Animation_Event : MonoBehaviour
         bazooka_skill_fire?.Invoke();
     }
        
-
     private void Shoot()
     {
         OnShoot?.Invoke();

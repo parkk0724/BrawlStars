@@ -7,9 +7,9 @@ public class PlayerUI : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Character m_Character = null;
-    [SerializeField] Text m_tFeverGauge = null;
+    [SerializeField] TMPro.TMP_Text m_tFeverGauge = null;
     [SerializeField] Image m_imgSkull = null;
-    [SerializeField] RawImage m_rimgFullGauge = null;
+    [SerializeField] Image m_imgFullGauge = null;
     void Start()
     {
         
@@ -31,11 +31,11 @@ public class PlayerUI : MonoBehaviour
         c.a = 0.5f;
         if (feverGauge <= 0) 
         {
-            if (m_rimgFullGauge.gameObject.activeSelf) m_rimgFullGauge.gameObject.SetActive(false);
+            if (m_imgFullGauge.gameObject.activeSelf) m_imgFullGauge.gameObject.SetActive(false);
         }
         else if (feverGauge >= 1)
         {
-            if (!m_rimgFullGauge.gameObject.activeSelf) m_rimgFullGauge.gameObject.SetActive(true);
+            if (!m_imgFullGauge.gameObject.activeSelf) m_imgFullGauge.gameObject.SetActive(true);
             c.a = 1.0f;
         }
         m_imgSkull.color = c;

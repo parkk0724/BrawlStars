@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class UITextDamage : MonoBehaviour
 {
     // Start is called before the first frame update
-    Text[] textDamage;
+    public TMPro.TMP_Text[] textDamage;
     static int count = 0;
     void Start()
     {
-        textDamage = GetComponentsInChildren<Text>();
+        textDamage = GetComponentsInChildren<TMPro.TMP_Text>();
         for (int i = 0; i < textDamage.Length; i++)
         {
             Init(i);

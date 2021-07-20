@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4cdef9f0453d14b85a33b97f457ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet_up_speed: 8
-  bullet_speed: 50
+  bullet_up_speed: 10
+  bullet_speed: 60
 --- !u!96 &-6657754105357619525
 TrailRenderer:
   serializedVersion: 2

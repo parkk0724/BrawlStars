@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090e4fb62a14e5540b0ad60b579b02ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion_effect: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
   speed: 12
   range: 14
   height: 4
@@ -108,7 +109,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8410637849025619359}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.16725685, y: 0.16725677, z: 0.6963769}

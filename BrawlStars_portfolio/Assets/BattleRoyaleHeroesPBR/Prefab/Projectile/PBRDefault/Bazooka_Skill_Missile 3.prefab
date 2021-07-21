@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd85b026b5ea5e4f9521653bda6773b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion_effect: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
   bullet_up_speed: 10
   bullet_speed: 60
 --- !u!96 &401839436556415800

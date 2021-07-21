@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BazookaBullet : MonoBehaviour
 {
+    public GameObject explosion_effect;
     public float speed = 5.0f;
     public float range = 7.0f;
     public float height = 3.0f;
@@ -66,10 +67,11 @@ public class BazookaBullet : MonoBehaviour
         dist = 0.0f;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
         {
+            GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

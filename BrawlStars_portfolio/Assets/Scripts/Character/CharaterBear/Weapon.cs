@@ -10,8 +10,10 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         myAnimator = GetComponentInParent<Animator>();
+        this.GetComponentInParent<BearAnimationEvent>().OnShoot = Shoot;
+        this.GetComponentInParent<BearAnimationEvent>().OnSkillShoot = SkillShoot;
     }
-    public void Shot()
+    public void Shoot()
     {
         // ---------------------------------------- 총알발사 ----------------------------------------
         GameObject InstantBullet = Instantiate(Bullet, BulletPos.position, BulletPos.rotation); // 총알을 인스턴스화 한다
@@ -20,9 +22,8 @@ public class Weapon : MonoBehaviour
         myAnimator.SetTrigger("tBAttack");
     }
 
-    public void Reload()
-    {
-        
-    }
-    
+    void SkillShoot()
+    { }
+
+
 }

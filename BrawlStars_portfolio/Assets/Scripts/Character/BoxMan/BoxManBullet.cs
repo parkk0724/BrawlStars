@@ -6,10 +6,14 @@ using UnityEngine.Events;
 public class BoxManBullet : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] Transform m_tfRotChild = null;
+    [SerializeField] GameObject m_objHitMonsterEffect = null;
+    [SerializeField] GameObject m_objHitObstacleEffect = null;
+
+    TrailRenderer m_trailRenderer;
     Vector3 m_vOriPos;
     Transform m_tfHero = null;
     CapsuleCollider m_Collider;
-    [SerializeField] Transform m_tfRotChild = null;
     public UnityAction OnFeverUp = null;
     float m_fMoveSpeed = 0.0f;
     float m_fRotSpeed = 0.0f;
@@ -31,6 +35,7 @@ public class BoxManBullet : MonoBehaviour
     
     void Start()
     {
+        m_trailRenderer = this.GetComponent<TrailRenderer>();
         m_Collider = this.GetComponent<CapsuleCollider>();
         m_fMoveSpeed = 10f;
         m_fRotSpeed = 1000f;
@@ -62,33 +67,30 @@ public class BoxManBullet : MonoBehaviour
     {
         if (other.tag == "Monster")
         {
-            OnFeverUp?.Invoke();
-            other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0,0,0,1));
+            if (!m_bSkill)
+            {
+                OnFeverUp?.Invoke();
+                other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
+                CreateHitEffect(true, other.transform);
+                if(!m_bTurn) m_bTurn = true;
+                else Destroy(this.gameObject);
+            }
         }
+        else if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Player")
+        {
+            if (other.tag != "Player") CreateHitEffect(false, other.transform);
 
-        if (m_bTurn && m_fSkillStay >= m_fSkillMaxStay)
-        {
-            if (other.tag == "Monster" && m_bSkill)
+            if (m_bTurn)
             {
-                //null
+                if (m_fSkillStay >= m_fSkillMaxStay) Destroy(this.gameObject);
             }
-            else if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            if(other.tag == "Monster" && m_bSkill)
-            {
-                // null
-            }
-            else if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster")
+            else
             {
                 m_bTurn = true;
                 if (m_bSkill) m_fSkillStay = 0.0f;
             }
         }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -99,7 +101,15 @@ public class BoxManBullet : MonoBehaviour
             {
 
                 OnFeverUp?.Invoke();
-                other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
+                CreateHitEffect(true, other.transform);
+                m_fCurSkillAttack = 0.0f;
+            }
+        }
+        else if(other.tag == "Obstacle" || other.tag == "Wall")
+        {
+            if (m_fCurSkillAttack >= m_fSkillAttackDelay)
+            {
+                CreateHitEffect(false, other.transform);
                 m_fCurSkillAttack = 0.0f;
             }
         }
@@ -132,6 +142,8 @@ public class BoxManBullet : MonoBehaviour
             {
                 m_tfRotChild.localScale -= Vector3.one * Time.deltaTime * m_fSkillSize;
                 m_Collider.radius -= (Time.deltaTime * 1.5f);
+                m_trailRenderer.startWidth -= Time.deltaTime * m_fSkillSize;
+                m_trailRenderer.time -= Time.deltaTime / m_fSkillSize;
             }
 
             Vector3 dir = (m_tfHero.position - this.transform.position).normalized;
@@ -142,6 +154,8 @@ public class BoxManBullet : MonoBehaviour
         {
             m_tfRotChild.localScale += Vector3.one * Time.deltaTime * m_fSkillSize;
             m_Collider.radius += (Time.deltaTime * 1.5f);
+            m_trailRenderer.startWidth += Time.deltaTime * m_fSkillSize;
+            m_trailRenderer.time += Time.deltaTime / m_fSkillSize;
 
             this.transform.position += this.transform.forward * Time.deltaTime * m_fMoveSpeed;
 
@@ -152,5 +166,14 @@ public class BoxManBullet : MonoBehaviour
                 m_fSkillStay = 0.0f;
             }
         }
+    }
+
+    void CreateHitEffect(bool isMonster, Transform other)
+    {
+        Vector3 dir = (other.position - this.transform.position).normalized;
+        dir *= m_Collider.radius;
+
+        if (isMonster) Instantiate(m_objHitMonsterEffect, this.transform.position + dir, this.transform.rotation);
+        else Instantiate(m_objHitObstacleEffect, this.transform.position + dir, this.transform.rotation);
     }
 }

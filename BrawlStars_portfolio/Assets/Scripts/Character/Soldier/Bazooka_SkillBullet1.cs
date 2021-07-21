@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bazooka_SkillBullet1 : MonoBehaviour
 {
+    public GameObject explosion_effect;
     public float bullet_up_speed;
     public float bullet_speed;
 
@@ -51,7 +52,6 @@ public class Bazooka_SkillBullet1 : MonoBehaviour
     {        
         while (dist < 20.0f)
         {
-            Debug.Log("ddf");
             float delta = bullet_speed * Time.deltaTime;
             dist += delta;
 
@@ -65,8 +65,9 @@ public class Bazooka_SkillBullet1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
+        if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
         {
+            GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

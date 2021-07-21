@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Soldier : Hero
 {
+    public LayerMask pickingmask;
     public GameObject bazooka_Basic_bullet;
     public GameObject bazooka_Skill_bullet1;
     public GameObject bazooka_Skill_bullet2;
@@ -22,12 +23,14 @@ public class Soldier : Hero
     {
         if (Input.GetMouseButtonDown(0))
         {
-            m_Animator.SetTrigger("tBAttack");            
+            m_Animator.SetTrigger("tBAttack");
+            SetRotStart(false);
         }
-        
-        if (Input.GetMouseButtonDown(1))
+
+        if (Input.GetMouseButton(1))
         {
-            m_Animator.SetTrigger("tSAttack");           
+            m_Animator.SetTrigger("tSAttack");
+            SetRotStart(false);
         }
     }
 

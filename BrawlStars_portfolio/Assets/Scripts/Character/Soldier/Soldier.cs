@@ -15,14 +15,10 @@ public class Soldier : Hero
     public float Jump_Speed = 0.0f;
     public float Jump_Height = 0.0f;
 
-
-    Transform jump_destination;
-
     Animation_Event animation_event;
     protected override void Start()
     {
         base.Start();
-        jump_destination = GameObject.Find("Jump_Destination_Pos").transform;
         this.GetComponent<Animation_Event>().bazooka_basic_fire = Basic_Fire;
         this.GetComponent<Animation_Event>().bazooka_skill_fire = Skill_Fire;
     }
@@ -71,49 +67,6 @@ public class Soldier : Hero
         yield return new WaitForSeconds(t / 3.0f);
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
         yield return null;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Jump")
-        {
-            StartCoroutine(Jump());
-        }
-    }
-
-    IEnumerator Jump()
-    {
-        yield return new WaitForSeconds(1.0f);
-
-        this.transform.LookAt(jump_destination.position);
-        Vector3 dir = jump_destination.position - this.transform.position;
-        float dist1 = dir.magnitude;
-        dir.Normalize();
-        float dist2 = 0.0f;
-                
-
-        while (dist2 <= dist1)
-        {
-            float delta = Jump_Speed * Time.deltaTime;
-            dist2 += delta;
-
-            if (dist2 > dist1)
-            {
-                delta = dist1 - (dist2 - delta);
-                dist2 = dist1;
-            }
-            
-            float height = Mathf.Sin(dist2 * (Mathf.PI / dist1)) * Jump_Height;
-
-            this.transform.Translate(dir * delta, Space.World);
-
-            Vector3 pos = this.transform.position;
-            pos.y = height;
-
-            this.transform.position = pos;
-
-            yield return null;
-        }
     }
     public void SetRotStart(bool b)
     {

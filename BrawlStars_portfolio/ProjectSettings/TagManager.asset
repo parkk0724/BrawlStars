@@ -12,6 +12,7 @@ TagManager:
   - Wall
   - Monster
   - Jump
+  - Jump2
   layers:
   - Default
   - TransparentFX

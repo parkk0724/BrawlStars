@@ -8,6 +8,8 @@ public class Hero : Character
     public LayerMask m_lmPicking_Mask;
     public float m_fMove_Speed = 5.0f;
     public float m_fRotate_Speed = 0.0f;
+    public float m_fJump_Height = 0.0f;
+    public float m_fJump_Speed = 0.0f;
     public ParticleSystem m_ptsRevival;
     public GameObject m_objPlayerDir;
     public GameObject m_objCharacter;
@@ -23,8 +25,16 @@ public class Hero : Character
     public bool m_bCheckStart = false;
     public float m_fTargetRange = 0f;
     public LayerMask m_lmEnemyLayer = 0;
+
+    Transform Jump_Destination_Pos1;
+    Transform Jump_Destination_Pos2;
+    Coroutine Jump1;
+    Coroutine Jump2;
+
     protected override void Start()
     {
+        Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
+        Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;
         m_objTargetEffect = GetComponent<ParticleSystem>();
         m_bMoveStart = true;
         m_Animator = this.GetComponentInChildren<Animator>();
@@ -44,6 +54,8 @@ public class Hero : Character
         m_fRange = 10.0f;
         m_fBodyAttackDelay = 1.0f;
         m_fCurBodyAttack = m_fBodyAttackDelay;
+        m_fJump_Height = 5.0f;
+        m_fJump_Speed = 10.0f;
         // UI: HP, Max
         //HealthBar.SetHealth(m_nMaxHP);
     }
@@ -144,6 +156,14 @@ public class Hero : Character
             Item item = other.GetComponent<Item>();
 
             Destroy(other.gameObject);
+        }
+        if (other.tag == "Jump")
+        {
+            Jump1 = StartCoroutine(Jump(Jump_Destination_Pos1));
+        }
+        if (other.tag == "Jump2")
+        {
+            Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
         }
     }
     private void OnTriggerStay(Collider other)
@@ -282,6 +302,42 @@ public class Hero : Character
 
             this.transform.Rotate(Vector3.up, delta * rotDir);
         }
+    }
+
+    IEnumerator Jump(Transform destination)
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        this.transform.LookAt(destination.position);
+        Vector3 dir = destination.position - this.transform.position;
+        float dist1 = dir.magnitude;
+        dir.Normalize();
+
+        float dist2 = 0.0f;
+
+        while (dist2 <= dist1)
+        {
+            float delta = m_fJump_Speed * Time.deltaTime;
+            dist2 += delta;
+
+            if (dist2 > dist1)
+            {
+                delta = dist1 - (dist2 - delta);
+                dist2 = dist1;
+            }
+
+            float height = Mathf.Sin(dist2 * (Mathf.PI / dist1)) * m_fJump_Height;
+
+            this.transform.Translate(dir * delta, Space.World);
+
+            Vector3 pos = this.transform.position;
+            pos.y = height;
+
+            this.transform.position = pos;
+
+            yield return null;
+        }
+
     }
 
     private void OnDrawGizmos()

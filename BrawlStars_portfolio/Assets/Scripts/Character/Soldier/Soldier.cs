@@ -12,6 +12,9 @@ public class Soldier : Hero
     public GameObject bazooka_Skill_bullet4;
     public Transform bazooka_bullet_pos;
 
+    public float Jump_Speed = 0.0f;
+    public float Jump_Height = 0.0f;
+
     Animation_Event animation_event;
     protected override void Start()
     {
@@ -24,12 +27,19 @@ public class Soldier : Hero
         if (Input.GetMouseButtonDown(0))
         {
             m_Animator.SetTrigger("tBAttack");
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
             SetRotStart(false);
         }
 
         if (Input.GetMouseButton(1))
         {
             m_Animator.SetTrigger("tSAttack");
+            SetRotStart(false);
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
             SetRotStart(false);
         }
     }
@@ -58,7 +68,6 @@ public class Soldier : Hero
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
         yield return null;
     }
-
     public void SetRotStart(bool b)
     {
         m_bRotStart = b;

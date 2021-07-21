@@ -23,25 +23,14 @@ public class Soldier : Hero
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //SetRotStart(true);
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000.0f, pickingmask))
-            {
-                this.transform.LookAt(hit.point);
-            }
-            
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
             m_Animator.SetTrigger("tBAttack");
             SetRotStart(false);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
-            //SetRotStart(false);
-            m_Animator.SetTrigger("tSAttack");           
+            m_Animator.SetTrigger("tSAttack");
+            SetRotStart(false);
         }
     }
 

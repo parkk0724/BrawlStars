@@ -10,19 +10,18 @@ public class Bear : Hero
     protected override void Start()
     {
         base.Start();
+        myWeapon = GetComponentInChildren<Weapon>();
+        myWeapon.SetRange(m_fRange = 10.0f);
+        myWeapon.SetATK(m_nATK);
     }
 
     public override void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-        }
+        if (Input.GetMouseButtonDown(0)) myWeapon.Shoot();
+        if (Input.GetMouseButtonDown(1)) myWeapon.SkillShoot();
     } 
 }
+
 /*
     GetComponentInChildren<Weapon>().Shot();
     210721

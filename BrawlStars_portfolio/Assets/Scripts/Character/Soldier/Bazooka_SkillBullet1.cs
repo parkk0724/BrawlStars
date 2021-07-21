@@ -52,7 +52,6 @@ public class Bazooka_SkillBullet1 : MonoBehaviour
     {        
         while (dist < 20.0f)
         {
-            Debug.Log("ddf");
             float delta = bullet_speed * Time.deltaTime;
             dist += delta;
 

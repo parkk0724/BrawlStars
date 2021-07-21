@@ -54,6 +54,7 @@ public class Jester : Hero
                 if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
                 {
                     this.transform.LookAt(hit.point);
+                  
                 }
             }
         }
@@ -62,7 +63,10 @@ public class Jester : Hero
             m_AttackState = AttackState.NONE;
             //m_objDirBasicAttack.SetActive(false);
             m_fCurMouseButton = 0.0f;
-            m_Animator.SetTrigger("tBAttack");
+            
+                m_Animator.SetTrigger("tBAttack");
+            
+           
             //if (m_fStamina > m_fAttackStamina)
             //{
             //  

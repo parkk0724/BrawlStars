@@ -28,13 +28,13 @@ public class JesterWeapon : MonoBehaviour
     }
     void Shoot_1()
     {
-        anim.SetTrigger("doShoot");
+        //anim.SetTrigger("doShoot");
         Instantiate(m_objbullet, m_tBulletPos[1].position, m_tBulletPos[1].rotation);
         BullutCaseInit(2);
     }
     void Shoot_2()
     {
-        anim.SetTrigger("doShoot");
+        //anim.SetTrigger("doShoot");
         Instantiate(m_objbullet, m_tBulletPos[2].position, m_tBulletPos[2].rotation);
         BullutCaseInit(2);
     }

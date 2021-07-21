@@ -28,8 +28,12 @@ public class JesterBullet : MonoBehaviour
         if(other.gameObject.CompareTag("Monster"))
         {
             other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
-            Destroy(gameObject);
+          
 
+        }
+        if(other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
         }
     }
 }

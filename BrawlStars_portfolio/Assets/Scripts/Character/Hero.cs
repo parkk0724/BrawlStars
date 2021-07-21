@@ -28,6 +28,9 @@ public class Hero : Character
 
     Transform Jump_Destination_Pos1;
     Transform Jump_Destination_Pos2;
+    Coroutine Jump1;
+    Coroutine Jump2;
+
     protected override void Start()
     {
         Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
@@ -156,11 +159,11 @@ public class Hero : Character
         }
         if (other.tag == "Jump")
         {
-            StartCoroutine(Jump(Jump_Destination_Pos1));
+            Jump1 = StartCoroutine(Jump(Jump_Destination_Pos1));
         }
         if (other.tag == "Jump2")
         {
-            StartCoroutine(Jump(Jump_Destination_Pos2));
+            Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
         }
     }
     private void OnTriggerStay(Collider other)
@@ -309,16 +312,6 @@ public class Hero : Character
         Vector3 dir = destination.position - this.transform.position;
         float dist1 = dir.magnitude;
         dir.Normalize();
-
-        //float d = Vector3.Dot(this.transform.forward, dir);
-        //float r = Mathf.Acos(d);
-        //float e = 180.0f * (r / Mathf.PI);
-        //
-        //if (d >= 0.0f)
-        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(-Vector3.up * e), 1.0f * Time.deltaTime);
-        //else
-        //    this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(-Vector3.up * e), 1.0f * Time.deltaTime);
-
 
         float dist2 = 0.0f;
 

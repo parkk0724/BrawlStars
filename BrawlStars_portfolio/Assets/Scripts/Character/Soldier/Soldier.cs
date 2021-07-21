@@ -77,7 +77,6 @@ public class Soldier : Hero
     {
         if (other.tag == "Jump")
         {
-            Debug.Log("jump");
             StartCoroutine(Jump());
         }
     }
@@ -86,7 +85,6 @@ public class Soldier : Hero
     {
         yield return new WaitForSeconds(1.0f);
 
-        Debug.Log("coroutine");
         this.transform.LookAt(jump_destination.position);
         Vector3 dir = jump_destination.position - this.transform.position;
         float dist1 = dir.magnitude;

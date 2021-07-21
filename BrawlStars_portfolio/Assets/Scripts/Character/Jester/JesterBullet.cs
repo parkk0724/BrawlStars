@@ -8,9 +8,10 @@ public class JesterBullet : MonoBehaviour
     Rigidbody rigid;
     JesterWeapon jwaepon;
     Monster monster;
-    public float m_fDamage = 0;
+    private float m_fDamage = 0;
     void Start()
     {
+        SetDamage(10f);
         Destroy(this.gameObject, 2f);
         monster = GetComponent<Monster>();
         rigid = GetComponent<Rigidbody>();
@@ -18,6 +19,7 @@ public class JesterBullet : MonoBehaviour
     }
     public void SetDamage(float f) { m_fDamage = f; }
 
+    
     // Update is called once per frame
     void Update()
     {

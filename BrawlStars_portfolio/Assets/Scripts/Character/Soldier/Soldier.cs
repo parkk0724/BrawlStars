@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Soldier : Hero
 {
+    public LayerMask pickingmask;
     public GameObject bazooka_Basic_bullet;
     public GameObject bazooka_Skill_bullet1;
     public GameObject bazooka_Skill_bullet2;
@@ -22,11 +23,24 @@ public class Soldier : Hero
     {
         if (Input.GetMouseButtonDown(0))
         {
-            m_Animator.SetTrigger("tBAttack");            
+            //SetRotStart(true);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1000.0f, pickingmask))
+            {
+                this.transform.LookAt(hit.point);
+            }
+            
         }
-        
+        if (Input.GetMouseButtonUp(0))
+        {
+            m_Animator.SetTrigger("tBAttack");
+            SetRotStart(false);
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
+            //SetRotStart(false);
             m_Animator.SetTrigger("tSAttack");           
         }
     }

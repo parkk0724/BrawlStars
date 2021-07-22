@@ -24,14 +24,19 @@ public class Soldier : Hero
     }
     public override void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (m_fStamina >= 1.0f)
         {
-            m_Animator.SetTrigger("tBAttack");
+            if (Input.GetMouseButtonDown(0))
+            {
+                m_fStamina -= 1.0f; 
+                m_Animator.SetTrigger("tBAttack");
+            }
         }
         if (Input.GetMouseButtonUp(0))
         {
             SetRotStart(false);
         }
+        
 
         if (Input.GetMouseButton(1))
         {

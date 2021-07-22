@@ -13,6 +13,7 @@ TagManager:
   - Monster
   - Jump
   - Jump2
+  - Bullet
   layers:
   - Default
   - TransparentFX

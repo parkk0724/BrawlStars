@@ -9,6 +9,8 @@ public class BazookaBullet : MonoBehaviour
     public float range = 7.0f;
     public float height = 3.0f;
 
+    BoxCollider collider_size = null;
+
     Rigidbody myRigid;
 
     Vector3 curPos;
@@ -21,6 +23,7 @@ public class BazookaBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        collider_size = this.GetComponent<BoxCollider>();
         myRigid = this.GetComponent<Rigidbody>();
         bulletflying = StartCoroutine(BulletFlying());
     }
@@ -65,12 +68,14 @@ public class BazookaBullet : MonoBehaviour
             yield return null;
         }
         dist = 0.0f;
+       
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
         {
+            //collider_size.size = new Vector3(30.0f, 30.0f, 30.0f);
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }

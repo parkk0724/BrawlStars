@@ -63,5 +63,11 @@ public class Monster : Character
 
     }
 
-
+    private void OnTriggerEnter(Collider other)// 일단 총알에 맞으면 데미지 처리 테스트 위해 여기다 둠 -유석
+    {
+        if (other.tag == "Bullet")
+        {
+            Hit(10, new Color(1, 0, 0, 1));
+        }
+    }
 }

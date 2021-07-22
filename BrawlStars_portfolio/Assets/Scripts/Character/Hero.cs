@@ -20,6 +20,7 @@ public class Hero : Character
     public float m_fTargetRotSpeed = 10.0f;
     public ParticleSystem m_objTargetEffect;
     public Transform m_tfResultTarget;
+    private Transform m_tfEfResultTarget;
     public bool m_bRotStart = false;
     public bool m_bMoveStart;
     public bool m_bCheckStart = false;
@@ -63,12 +64,13 @@ public class Hero : Character
     protected override void Update()
     {
         base.Update();
-        SearchTarget();
+        
+        SearchTargetEffect();
         TargetEffect();
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
+            SearchTarget();
             m_bRotStart = true;
-            
         }
         if (m_bRotStart) LookEnemy();
         if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
@@ -305,15 +307,34 @@ public class Hero : Character
             this.transform.Rotate(Vector3.up, delta * rotDir);
         }
     }
+    void SearchTargetEffect()
+    {
+        float Shortdist = 10;
+        Transform shorTarget = null;
+        Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
+        if (EnemyCollider.Length > 0)
+        {
+            for (int i = 0; i < EnemyCollider.Length; i++)
+            {
+                float Dist = Vector3.Distance(this.transform.position, EnemyCollider[i].transform.position);
+                if (Shortdist > Dist)
+                {
+                    Shortdist = Dist;
+                    shorTarget = EnemyCollider[i].transform;
+                }
+            }
+        }
+        m_tfEfResultTarget = shorTarget; // ÃÖÁ¾°ª
+    }
     void TargetEffect()
     {
-        if (m_tfResultTarget == null)
+        if (m_tfEfResultTarget == null)
         {
             m_objTargetEffect.Stop();
         }
         else
         {
-            m_objTargetEffect.gameObject.transform.position = m_tfResultTarget.transform.position;
+            m_objTargetEffect.gameObject.transform.position = m_tfEfResultTarget.transform.position;
             m_objTargetEffect.Play();
         }
     }

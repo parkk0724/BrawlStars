@@ -171,11 +171,11 @@ public class Jester : Hero
             m_fCurMouseButton += Time.deltaTime;
             if (m_fCurMouseButton > m_fMaxMouseButton)
             {
+                m_tfResultTarget = null;
                 if (!m_objDirSkillAttack.activeSelf)
                 {
                     m_objDirSkillAttack.SetActive(true);
-
-                    m_tfResultTarget = null;
+                  
                 }
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;

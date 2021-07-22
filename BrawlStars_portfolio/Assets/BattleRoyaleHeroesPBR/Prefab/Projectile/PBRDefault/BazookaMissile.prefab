@@ -99,8 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion_effect: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
   speed: 12
-  range: 14
-  height: 4
+  range: 10
+  height: 3
 --- !u!65 &4081942979832905820
 BoxCollider:
   m_ObjectHideFlags: 0

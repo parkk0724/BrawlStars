@@ -76,7 +76,7 @@ public class Hero : Character
         if (m_bRotStart) LookEnemy();
         if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
     }
-
+    #region Hero Move
     public override void Move()
     {
         if (m_bMoveValid)
@@ -139,7 +139,7 @@ public class Hero : Character
         }
     }
 
-
+    #endregion
     public override void Attack()
     {
        //if (Input.GetMouseButtonDown(0))
@@ -262,7 +262,7 @@ public class Hero : Character
             }
         }
     }
-
+    #region SearchTarget
     void SearchTarget()
     {
         float Shortdist = 10;
@@ -282,6 +282,8 @@ public class Hero : Character
         }
         m_tfResultTarget = shorTarget; // ÃÖÁ¾°ª
     }
+    #endregion
+    #region Lookenemy
     void LookEnemy()
     {
         if (m_tfResultTarget == null)
@@ -311,6 +313,8 @@ public class Hero : Character
             this.transform.Rotate(Vector3.up, delta * rotDir);
         }
     }
+    #endregion
+    #region SerchTargetEffect
     void SearchTargetEffect()
     {
         float Shortdist = 10;
@@ -342,6 +346,7 @@ public class Hero : Character
             m_objTargetEffect.Play();
         }
     }
+    #endregion
     IEnumerator Jump(Transform destination)
     {       
         yield return new WaitForSeconds(1.0f);

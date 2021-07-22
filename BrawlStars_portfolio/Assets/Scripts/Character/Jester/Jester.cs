@@ -218,8 +218,8 @@ public class Jester : Hero
     }
     IEnumerator Effect()
     {
-        Instantiate(m_objtsBoom.gameObject, m_objDirSkillAttack.transform.position, m_objDirSkillAttack.transform.rotation);
+        GameObject obs = Instantiate(m_objtsBoom.gameObject, m_objDirSkillAttack.transform.position, m_objDirSkillAttack.transform.rotation);
         yield return new WaitForSeconds(2);
-        DestroyImmediate(m_objtsBoom.gameObject);
+        Destroy(obs);
     }
 }

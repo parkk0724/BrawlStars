@@ -35,7 +35,6 @@ public class Hero : Character
     {
         Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
         Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;
-        m_objTargetEffect = GetComponent<ParticleSystem>();
         m_bMoveStart = true;
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
@@ -64,10 +63,12 @@ public class Hero : Character
     protected override void Update()
     {
         base.Update();
+        SearchTarget();
+        TargetEffect();
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             m_bRotStart = true;
-            SearchTarget();
+            
         }
         if (m_bRotStart) LookEnemy();
         if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
@@ -279,7 +280,7 @@ public class Hero : Character
     {
         if (m_tfResultTarget == null)
         {
-           // m_bRotStart = false;
+            m_objTargetEffect.Stop();
         }
         else
         {
@@ -292,6 +293,7 @@ public class Hero : Character
             float angle = 180.0f * r / Mathf.PI; //this
             float r2 = Vector3.Dot(Bot, this.transform.right);
             if (r2 < 0.0f) rotDir = -1.0f;
+            
             //Instantiate(m_objTargetEffect, m_tfResultTarget.position, Quaternion.Euler(m_tfResultTarget.rotation.x + 90, m_tfResultTarget.rotation.y, m_tfResultTarget.rotation.z));
             //m_objTargetEffect.Play();
             if (angle - delta < 0.0f)
@@ -303,7 +305,18 @@ public class Hero : Character
             this.transform.Rotate(Vector3.up, delta * rotDir);
         }
     }
-
+    void TargetEffect()
+    {
+        if (m_tfResultTarget == null)
+        {
+            m_objTargetEffect.Stop();
+        }
+        else
+        {
+            m_objTargetEffect.gameObject.transform.position = m_tfResultTarget.transform.position;
+            m_objTargetEffect.Play();
+        }
+    }
     IEnumerator Jump(Transform destination)
     {
         yield return new WaitForSeconds(1.0f);

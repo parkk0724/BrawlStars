@@ -191,11 +191,12 @@ public class Jester : Hero
             if (m_objDirSkillAttack.activeSelf)
             {
                 m_objtsBoom.gameObject.transform.position = m_objDirSkillAttack.transform.position;
-                Vector3 newPos = new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-2,2), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-2,2));
+                Vector3 newPos = new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1,1));
+                Vector3 newPos_1 = new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1, 1));
                 if (skill != null) StopCoroutine(skill);
                 skill = StartCoroutine(Effect());
                 Instantiate(m_objJesterSkill, newPos, Quaternion.identity);
-                Instantiate(m_objJesterSkill, newPos, Quaternion.identity);
+                Instantiate(m_objJesterSkill, newPos_1, Quaternion.identity);
             }
             m_Animator.SetTrigger("tSAttack");
             m_AttackState = AttackState.NONE;

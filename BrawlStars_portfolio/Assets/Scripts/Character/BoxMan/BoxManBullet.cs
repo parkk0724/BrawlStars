@@ -47,12 +47,19 @@ public class BoxManBullet : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void FixedUpdate()
+    {
+        m_fCurSkillAttack += Time.deltaTime;
+    }
     void Update()
     {
         if (m_bSkill)
         {
             Skill();
-            m_fCurSkillAttack += Time.deltaTime;
+            if (m_fCurSkillAttack >= m_fSkillAttackDelay)
+            {
+                m_fCurSkillAttack = 0.0f;
+            }
         }
         else
         {
@@ -61,18 +68,16 @@ public class BoxManBullet : MonoBehaviour
 
         m_tfRotChild.Rotate(m_tfRotChild.up * Time.deltaTime * m_fRotSpeed, Space.Self);
     }
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Monster")
         {
+            OnFeverUp?.Invoke();
+            other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
+            CreateHitEffect(true, other.transform);
             if (!m_bSkill)
             {
-                OnFeverUp?.Invoke();
-                other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
-                CreateHitEffect(true, other.transform);
-                if(!m_bTurn) m_bTurn = true;
+                if (!m_bTurn) m_bTurn = true;
                 else Destroy(this.gameObject);
             }
         }
@@ -97,12 +102,11 @@ public class BoxManBullet : MonoBehaviour
     {
         if (other.tag == "Monster" && m_bSkill)
         {
-            if (m_fCurSkillAttack >= m_fSkillAttackDelay)
+            if (m_fCurSkillAttack >= m_fSkillAttackDelay && m_fSkillStay < m_fSkillMaxStay)
             {
-
                 OnFeverUp?.Invoke();
+                other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
                 CreateHitEffect(true, other.transform);
-                m_fCurSkillAttack = 0.0f;
             }
         }
         else if(other.tag == "Obstacle" || other.tag == "Wall")

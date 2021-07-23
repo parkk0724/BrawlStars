@@ -19,7 +19,7 @@ public class Weapon : MonoBehaviour
     public void Shoot()
     {
         // ---------------------------------------- 총알발사 ----------------------------------------
-        myAnimator.SetTrigger("tBAttack");
+        //myAnimator.SetTrigger("tBAttack");
         GameObject InstantBullet = Instantiate(Bullet, BulletPos.position, BulletPos.rotation); // 총알을 인스턴스화 한다
         Rigidbody BulletRigid = InstantBullet.GetComponent<Rigidbody>();                        // 인스턴스된 총알의 리지드바디 갖고 온다
         BulletRigid.velocity = BulletPos.forward * 50;                                          // 총알이 생성되면서 속도 50이 붙는다
@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
 
     public void SkillShoot()
     {
-        myAnimator.SetTrigger("tBAttack");
+        //myAnimator.SetTrigger("tBAttack");
 
     }
 

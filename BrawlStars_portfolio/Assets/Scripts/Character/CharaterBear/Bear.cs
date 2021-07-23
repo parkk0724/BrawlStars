@@ -19,7 +19,7 @@ public class Bear : Hero
     {
         if (Input.GetMouseButtonDown(0)) myWeapon.Shoot();
         if (Input.GetMouseButtonDown(1)) myWeapon.SkillShoot();
-    } 
+    }
 }
 
 /*

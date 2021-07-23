@@ -13,10 +13,15 @@ public class BearBullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Wall") 
+        if (other.gameObject.tag == "Wall")
             Destroy(gameObject);
-        if (other.gameObject.tag == "Monster") Debug.Log("몬스터 맞춤");
-            // other.GetComponent<Monster>().Hit();
+
+        if (other.gameObject.tag == "Monster" || other.gameObject.tag == "Obstacle")
+        { 
+            Debug.Log("몬스터 맞춤");
+            Destroy(gameObject);
+            // other.GetComponent<Monster>().(); 
+        }
     }
 
     IEnumerator DestoryBullet()

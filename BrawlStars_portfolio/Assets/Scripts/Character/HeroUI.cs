@@ -10,7 +10,7 @@ public class HeroUI : CharacterUI
    
     void Start()
     {
-        
+        m_Character = this.transform.parent.GetComponentInChildren<Character>();
     }
 
     // Update is called once per frame

@@ -14,6 +14,7 @@ public class Main_Camera_Moving : MonoBehaviour
     float dist = 0.0f;
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player"); // 캐릭바꿀때마다 변경해야되서 알아서 찾아서 넣어주게 함. -금환
         if (startmove == true)
             cameramove = StartCoroutine(StartCameraMoving());
         else

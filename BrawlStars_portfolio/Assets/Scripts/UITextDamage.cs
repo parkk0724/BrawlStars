@@ -54,7 +54,7 @@ public class UITextDamage : MonoBehaviour
         while (color.a > 0.0f)
         {
             color.a -= 0.01f;
-            pos.y += 0.01f;
+            pos.y += 0.05f;
             textDamage[n].color = color;
             textDamage[n].transform.position = Camera.main.WorldToScreenPoint(pos);
 

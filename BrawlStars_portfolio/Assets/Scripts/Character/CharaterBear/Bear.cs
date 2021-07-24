@@ -20,6 +20,11 @@ public class Bear : Hero
         if (Input.GetMouseButtonDown(0)) myWeapon.Shoot();
         if (Input.GetMouseButtonDown(1)) myWeapon.SkillShoot();
     }
+
+    public void SetRotStart(bool b)
+    {
+        m_bRotStart = b;
+    }
 }
 
 /*

@@ -67,6 +67,7 @@ void SearchTarget()
     }
     m_tfResultTarget = shorTarget; // ÃÖÁ¾°ª
 }
+
 void LookatEnemy()
 {
     float h = Input.GetAxis("Horizontal");

@@ -21,6 +21,7 @@ public class BearBullet : MonoBehaviour
             Debug.Log("몬스터 맞춤");
             Destroy(gameObject);
             // other.GetComponent<Monster>().(); 
+            Collider[] Cols = Physics.OverlapSphere(this.transform.position, 100f);
         }
     }
 

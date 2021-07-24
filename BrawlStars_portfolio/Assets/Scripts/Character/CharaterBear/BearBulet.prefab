@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8751558028420065128}
   m_Layer: 0
   m_Name: BearBulet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,4 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba6d188e8548e1488acae8584270c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 20
+  curTime: 0
+  BulletLiveMaxTime: 2

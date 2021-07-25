@@ -64,7 +64,7 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.RUN:
                 {
-                    nav.speed = 20;
+                    nav.speed = 10;
                     nav.SetDestination(m_tfResultTarget.position);
                     anim.SetBool("bMove", true);
 
@@ -83,7 +83,7 @@ public class JesterSkill : MonoBehaviour
                         this.transform.LookAt(resultYtarget);
                         anim.SetBool("bMove", false);
                         anim.SetTrigger("tBAttack");
-                        nav.speed = 0;
+                        nav.speed = 3;
                     }
                     else if (DistRange <= Dist)
                     {

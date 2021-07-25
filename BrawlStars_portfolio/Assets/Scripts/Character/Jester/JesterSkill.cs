@@ -96,9 +96,28 @@ public class JesterSkill : MonoBehaviour
                 }
                 break;
             case SkillState.DESTROY:
-                StartCoroutine(dess());
-                Destroy(this.gameObject,0.5f);
+                test();
+                DestEffect();
+                DestEffect();
+                //StartCoroutine(dess());
+                Destroy(this.gameObject,0.2f);
                 break;
+        }
+    }
+    void test()
+    {
+        float test_range = 10f;
+        GameObject[] monster = GameObject.FindGameObjectsWithTag("Monster");
+        Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position,test_range, m_lmEnemyLayer);
+        for (int i = 0; i < monster.Length; i++)
+        {
+            for (int j = 0; j < EnemyCollider.Length; j++)
+            {
+                if (monster[i].GetComponent<Collider>() == EnemyCollider[j])
+                {
+                    monster[i].GetComponent<Monster>()?.Hit(20, Color.red);
+                }
+            }
         }
     }
     IEnumerator dess()
@@ -145,7 +164,7 @@ public class JesterSkill : MonoBehaviour
         Attackcollider.enabled = false;
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, Range);
     }

@@ -7,22 +7,25 @@ public class BearBullet : MonoBehaviour
     public int damage = 20;
     public float curTime = 0.0f;
     public float BulletLiveMaxTime = 2.0f;
-    
+    Vector3 TargetDirVector; 
     Coroutine Temp;
 
     private void Start()
     {
         StartCoroutine("DestoryBullet");
+        Rigidbody ribody = GetComponent<Rigidbody>();
+        ribody.velocity = this.transform.forward * 5f;
+        TargetDirVector = this.transform.forward * 5f * Time.deltaTime;
     }
 
     private void Update()
     {
-        this.transform.Translate(this.transform.forward * 5f * Time.deltaTime, Space.World);
+        this.transform.Translate(TargetDirVector, Space.World);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Wall" | other.gameObject.tag == "Obstacle")
+        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Obstacle")
             Destroy(gameObject);
 
         if (other.gameObject.tag == "Monster")
@@ -32,11 +35,6 @@ public class BearBullet : MonoBehaviour
             //other.GetComponent<Monster>().Hit(damage, Color.red);
         }
     }
-    /*
-       구현할 내용
-
-       총알이 맞춘다  -> 주변 콜라이더 객체 검출 -> 콜라이더.pos - 불렛위치.pos 
-    */
     IEnumerator DestoryBullet()
     {
         yield return new WaitForSecondsRealtime(4);
@@ -48,7 +46,7 @@ public class BearBullet : MonoBehaviour
         Debug.Log("Search Start");
         float Shortdist = Mathf.Infinity;                       // 최소값: 무한대
         float SecondShortdist = Mathf.Infinity;                 // 두 번째 최소값: 무한대 초기화
-        float range = 100.0f;                                    // 탐색범위
+        float range = 3.0f;                                    // 탐색범위
         Transform ShortTarget = null;                           // 가까운 대상
         Transform SecondShortTarget = null;                     // 가까운 대상
         Transform ResultTarget = null;                          // 최종대상
@@ -57,21 +55,49 @@ public class BearBullet : MonoBehaviour
         Debug.Log("Target: " + EnemyLayer);
         // 현재 자신의 위치에서 EnemyLayer를 가진 충돌체를 찾는다.
 
-
         /*
+          만들 알고리즘
+            1. 총알이 부딪친다. OnTriggerEnter 진입
+            2. OnTrigeerEnter
+                {
+                    collider[] arrCol = OverlapSphere(센터, 반경)
+
+                    foreach(collider col in arrCol)
+                     {
+                        float distance = sqrmagnitude(콜라이더.pos - 불렛위치.pos);
+
+                        if (distance < ShortDistance)
+                        {
+                            
+                            ShortDistance  = distance;
+                            ShortTarget = col;
+                        }
+
+                        else if (distance < SecondShortDistance || distance > ShortDistance) 
+                        {
+                            SecondShortDistance = distance;
+                            SecondeShortTarget = col;
+                        }
+                     }
+                }
+
+
            주변 콜라이더 검출   
 
            검출된 에러
                 1. 제일 가까운 것을 찾을 경우 이게 총알에서 찾는 거기 때문에 총알과 겹쳐있는 것이 제일 가까운 순위가 된다.
                 
-                해결방안: 두 번째로 가까운 것을 찾아보자
+                    해결방안: 두 번째로 가까운 것을 찾아보자
+
 
                 2. 몬스터 레이어 설정이 되어 있지 않음
 
-                해결방안: 전체검출
+                    해결방안: 전체검출
+
 
                 3. 검출이 안 되고 있음.
         */
+
         Collider[] EnemyColliders = Physics.OverlapSphere(this.transform.position, range);
 
         if (EnemyColliders.Length > 0) // 검출된 게 있으면 진행.
@@ -82,24 +108,34 @@ public class BearBullet : MonoBehaviour
 
                 if (!colTarget.gameObject.tag.Equals("Monster")) // 몬스터 아니라면 스킵
                     continue;
-                else if (Shortdist > Dist) // Dist가 최소값보다 작다면
+
+                if (Dist < Shortdist)
                 {
-                    if(Shortdist < Dist & Dist < SecondShortdist)
-                    {
-                        SecondShortdist = Dist; // 두 번째 값
-                        SecondShortTarget = colTarget.transform;
-                    }
-                    else
-                    { 
-                        Shortdist = Dist;   // 최소값
-                        ShortTarget = colTarget.transform;
-                    }
+                    Shortdist = Dist;
+                    ShortTarget = colTarget.transform;
+                }
+
+                else if (Dist < SecondShortdist || Dist > Shortdist)
+                {
+                    SecondShortdist = Dist;
+                    SecondShortTarget = colTarget.transform;
                 }
             }
+                //else if (Shortdist > Dist) // Dist가 최소값보다 작다면
+                //{
+                //    if(Shortdist < Dist & Dist < SecondShortdist)
+                //    {
+                //        SecondShortdist = Dist; // 두 번째 값
+                //        SecondShortTarget = colTarget.transform;
+                //    }
+                //    else
+                //    { 
+                //        Shortdist = Dist;   // 최소값
+                //        ShortTarget = colTarget.transform;
+                //    }
         }
 
         ResultTarget = SecondShortTarget; // 최종값
-        
 
         if (ResultTarget != null)
         {
@@ -107,11 +143,19 @@ public class BearBullet : MonoBehaviour
             // 검출된 콜라이더를 향해 방향 잡고
             Vector3 dir = ResultTarget.position - this.transform.position;
             dir.Normalize();
+            dir.y = 0f;
+            TargetDirVector = dir * 5f * Time.deltaTime;
 
-            // Rigidbody ribody = GetComponent<Rigidbody>();
-            dir.y = 0;
-            this.transform.Translate(dir * 5f * Time.deltaTime );
-            //ribody.velocity = dir * 20f;
+            //문제상황
+            /* 해당 방향으로 탄환이 안 틀어감. 검출은 거의 다 됐음.
+             
+             */
+            //this.transform.LookAt(ResultTarget);
+            //Rigidbody ribody = GetComponent<Rigidbody>();
+            //ribody.velocity = Vector3.zero;
+            //ribody.velocity = dir * 5f;
+            //dir.y = 0;
+            // this.transform.Translate(dir * 5f * Time.deltaTime );
 
             Debug.Log("Search End");
         }

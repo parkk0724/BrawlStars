@@ -76,7 +76,7 @@ public class JesterSkill : MonoBehaviour
                     if (DistRange > Dist)
                     {
                         this.transform.LookAt(resultYtarget);
-                        collider.gameObject.SetActive(true);
+                        //collider.gameObject.SetActive(true);
                         anim.SetBool("bMove", false);
                         anim.SetTrigger("tBAttack");
                         nav.speed = 0;

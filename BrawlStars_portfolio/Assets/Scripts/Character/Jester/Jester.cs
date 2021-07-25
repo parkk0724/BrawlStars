@@ -171,6 +171,11 @@ public class Jester : Hero
     #endregion
     public override void SkillAttack()
     {
+        if (m_fFever != m_fMaxFever)
+        {
+            m_bRotStart = false;
+            m_AttackState = AttackState.NONE;
+        }
         if (Input.GetMouseButton(1))
         {
             m_fCurMouseButton += Time.deltaTime;
@@ -207,8 +212,6 @@ public class Jester : Hero
             m_AttackState = AttackState.NONE;
             m_objDirSkillAttack.SetActive(false);
             m_fCurMouseButton = 0.0f;
-
-
             if (m_fFever >= m_fMaxFever)
             {
                 m_fFever = 0.0f;

@@ -62,7 +62,7 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.RUN:
                 {
-                    nav.speed = 7;
+                    nav.speed = 15;
                     nav.SetDestination(m_tfResultTarget.position);
                     anim.SetBool("bMove", true);
 

@@ -21,11 +21,14 @@ public class JesterSkill : MonoBehaviour
     Rigidbody rigid;
     Transform m_tfResultTarget;
     public float m_fTargetRange;
-    public new Collider collider;
+    public BoxCollider Attackcollider;
     public LayerMask m_lmEnemyLayer = 0;
+    float Range = 10f;
+    bool start = false;
     // Start is called before the first frame update
     void Start()
     {
+        //Attackcollider = GetComponentInChildren<BoxCollider>();
         //m_objSkillEffect = GetComponent<ParticleSystem>();
         anim = GetComponent<Animator>();
         State = SkillState.IDE;
@@ -76,7 +79,6 @@ public class JesterSkill : MonoBehaviour
                     if (DistRange > Dist)
                     {
                         this.transform.LookAt(resultYtarget);
-                        //collider.gameObject.SetActive(true);
                         anim.SetBool("bMove", false);
                         anim.SetTrigger("tBAttack");
                         nav.speed = 0;
@@ -92,18 +94,23 @@ public class JesterSkill : MonoBehaviour
                 }
                 break;
             case SkillState.DESTROY:
-                //DestEffect();
-                StartCoroutine(DestEffect());
-                Destroy(this.gameObject);
+                DestEffect();
+                //Destroy(this.gameObject,0.5f);
                 break;
         }
     }
-
-    IEnumerator DestEffect()
+    IEnumerator dess()
     {
-        Instantiate(m_objSkillEffect, this.transform.position, this.transform.rotation);
-        yield return null;
+        start = true;
+        
+        yield return new WaitForSeconds(0.1f);
 
+        start = false;
+    }
+    void DestEffect()
+    {
+        
+        GameObject obj = Instantiate(m_objSkillEffect, this.transform.position, this.transform.rotation);
     }
     void SearchTarget()
     {
@@ -123,6 +130,21 @@ public class JesterSkill : MonoBehaviour
             }
         }
         m_tfResultTarget = shorTarget; // ÃÖÁ¾°ª
+    }
+    void JesterSkillShot()
+    {
+        StartCoroutine(skilShot());
+    }
+    IEnumerator skilShot()
+    {
+        Attackcollider.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        Attackcollider.enabled = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(this.transform.position, Range);
     }
 }
 

@@ -26,8 +26,8 @@ public class JesterWeapon : MonoBehaviour
     {
         anim.SetTrigger("doShoot");
         GameObject obj =Instantiate(m_objbullet, m_tBulletPos[0].position, m_tBulletPos[0].rotation);
-        JesterBullet bullet = obj.GetComponent<JesterBullet>();
-        bullet.Fever = onFever;
+        //JesterBullet bullet = obj.GetComponent<JesterBullet>();
+        //bullet.Fever = onFever;
         BullutCaseInit(2);
     }
     void Shoot_1()

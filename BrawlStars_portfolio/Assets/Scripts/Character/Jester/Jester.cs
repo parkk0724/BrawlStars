@@ -19,11 +19,20 @@ public class Jester : Hero
     JesterWeapon Jweapon;
     float m_fAttackStamina = 0.0f;
     //UnityEngine.Coroutine j_Attack = null;
+    private void Awake()
+    {
+        //jesterbullet = GetComponent<JesterBullet>();
+        //GameObject clone = FindObjectOfType<JesterBullet>();
+        //if(jesterbullet != null)
+        //{
+        //    jesterbullet.Fever = FeverUp;
+        //}
+    }
     protected override void Start()
     {
         m_fAttackStamina = 1.0f;
-        Jweapon = GetComponentInChildren<JesterWeapon>();
-        Jweapon.onFever = FeverUp;
+        //Jweapon = GetComponentInChildren<JesterWeapon>();
+        //Jweapon.onFever = FeverUp;
         //m_ptsBoom = GetComponent<ParticleSystem>();
         base.Start();
 

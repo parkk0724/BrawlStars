@@ -9,10 +9,10 @@ public class JesterBullet : MonoBehaviour
     Rigidbody rigid;
     JesterWeapon jwaepon;
     private float m_fDamage = 0;
-
     public UnityAction Fever = null;
     void Start()
     {
+        
         SetDamage(10f);
         Destroy(this.gameObject, 2f);
         rigid = GetComponent<Rigidbody>();
@@ -29,12 +29,14 @@ public class JesterBullet : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Monster"))
         {
-            Feverup();
+            Character chaar = GameObject.FindWithTag("Player").GetComponent<Character>();
+            chaar.FeverUp();
             // other.GetComponent<Monster>()?.Hit((int)m_fDamage + Random.Range(-5,5), new Color(0, 0, 0, 1));
             if (other.GetComponent<Monster>())
             {
                 other.GetComponent<Monster>().Hit((int)m_fDamage + Random.Range(-5, 5), Color.red);
-                
+               
+
             }
         }
         if(other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Obstacle"))

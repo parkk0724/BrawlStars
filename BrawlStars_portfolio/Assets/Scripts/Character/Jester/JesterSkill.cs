@@ -21,6 +21,7 @@ public class JesterSkill : MonoBehaviour
     Rigidbody rigid;
     Transform m_tfResultTarget;
     public float m_fTargetRange;
+    private SphereCollider Boomattck;
     public BoxCollider Attackcollider;
     public LayerMask m_lmEnemyLayer = 0;
     float Range = 10f;
@@ -34,6 +35,7 @@ public class JesterSkill : MonoBehaviour
         State = SkillState.IDE;
         nav = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
+        Boomattck = GetComponentInChildren<SphereCollider>();
     }
     // Update is called once per frame
     //
@@ -62,7 +64,7 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.RUN:
                 {
-                    nav.speed = 15;
+                    nav.speed = 20;
                     nav.SetDestination(m_tfResultTarget.position);
                     anim.SetBool("bMove", true);
 
@@ -94,22 +96,23 @@ public class JesterSkill : MonoBehaviour
                 }
                 break;
             case SkillState.DESTROY:
-                DestEffect();
-                //Destroy(this.gameObject,0.5f);
+                StartCoroutine(dess());
+                Destroy(this.gameObject,0.5f);
                 break;
         }
     }
     IEnumerator dess()
     {
         start = true;
-        
-        yield return new WaitForSeconds(0.1f);
-
+        Boomattck.enabled = true;
+        yield return new WaitForSeconds(0.05f);
         start = false;
+        Boomattck.enabled = false;
+        DestEffect();
+        yield return new WaitForSeconds(0.05f);
     }
     void DestEffect()
     {
-        
         GameObject obj = Instantiate(m_objSkillEffect, this.transform.position, this.transform.rotation);
     }
     void SearchTarget()
@@ -145,6 +148,27 @@ public class JesterSkill : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(this.transform.position, Range);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(start)
+        {
+            if (other.GetComponent<Monster>())
+            {
+                
+                other.GetComponent<Monster>().Hit(20, Color.red);
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (!start)
+        {
+            if (other.GetComponent<Monster>())
+            {
+                
+            }
+        }
     }
 }
 

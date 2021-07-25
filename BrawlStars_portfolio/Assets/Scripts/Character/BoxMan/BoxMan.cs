@@ -101,8 +101,8 @@ public class BoxMan : Hero
             if (m_fFever >= m_fMaxFever)
             {
                 m_Animator.SetTrigger("tSAttack");
-                m_fFever = 0.0f;
-            }
+                m_fFever = 0.0f;            }
+            Debug.Log(m_fFever);
         }
     }
     public void SetRotStart(bool b)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class JesterWeapon : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class JesterWeapon : MonoBehaviour
     public Transform m_tBulletPosCase;
     public GameObject m_objBulletCase;
     public ParticleSystem Shooteffect;
+    public UnityAction onFever = null;
     Animator anim;
     void Start()
     {
@@ -23,7 +25,9 @@ public class JesterWeapon : MonoBehaviour
     void Shoot_0()
     {
         anim.SetTrigger("doShoot");
-        Instantiate(m_objbullet, m_tBulletPos[0].position, m_tBulletPos[0].rotation);
+        GameObject obj =Instantiate(m_objbullet, m_tBulletPos[0].position, m_tBulletPos[0].rotation);
+        JesterBullet bullet = obj.GetComponent<JesterBullet>();
+        bullet.Fever = onFever;
         BullutCaseInit(2);
     }
     void Shoot_1()

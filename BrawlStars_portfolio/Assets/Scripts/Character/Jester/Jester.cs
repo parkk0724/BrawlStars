@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Jester : Hero
 {
@@ -14,11 +15,18 @@ public class Jester : Hero
     public GameObject m_objtsBoom = null;
     public GameObject m_objJesterSkill = null;
     UnityEngine.Coroutine skill = null;
+    JesterBullet jesterbullet;
+    JesterWeapon Jweapon;
+    float m_fAttackStamina = 0.0f;
     //UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
+        m_fAttackStamina = 1.0f;
+        Jweapon = GetComponentInChildren<JesterWeapon>();
+        Jweapon.onFever = FeverUp;
         //m_ptsBoom = GetComponent<ParticleSystem>();
         base.Start();
+
     }
     public override void Attack()
     {
@@ -40,6 +48,7 @@ public class Jester : Hero
     {
         if (Input.GetMouseButton(0))
         {
+            if (m_fStamina < m_fAttackStamina) m_AttackState=AttackState.NONE;
             m_fCurMouseButton += Time.deltaTime;
             if (m_fCurMouseButton > m_fMaxMouseButton)
             {
@@ -63,15 +72,11 @@ public class Jester : Hero
             m_AttackState = AttackState.NONE;
             //m_objDirBasicAttack.SetActive(false);
             m_fCurMouseButton = 0.0f;
-            
-                m_Animator.SetTrigger("tBAttack");
-            
-           
-            //if (m_fStamina > m_fAttackStamina)
-            //{
-            //  
-            //    m_fStamina -= m_fAttackStamina;
-            //}
+            m_Animator.SetTrigger("tBAttack");
+            if (m_fStamina > m_fAttackStamina)
+            {
+                m_fStamina -= m_fAttackStamina;
+            }
         }
 
     }
@@ -204,11 +209,10 @@ public class Jester : Hero
             m_fCurMouseButton = 0.0f;
 
 
-            //if (m_fFever >= m_fMaxFever)
-            //{
-            //    
-            //    m_fFever = 0.0f;
-            //}
+            if (m_fFever >= m_fMaxFever)
+            {
+                m_fFever = 0.0f;
+            }
         }
     }
     // Update is called once per frame

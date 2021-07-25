@@ -21,6 +21,7 @@ public class JesterSkill : MonoBehaviour
     Rigidbody rigid;
     Transform m_tfResultTarget;
     public float m_fTargetRange;
+    public new Collider collider;
     public LayerMask m_lmEnemyLayer = 0;
     // Start is called before the first frame update
     void Start()
@@ -75,6 +76,7 @@ public class JesterSkill : MonoBehaviour
                     if (DistRange > Dist)
                     {
                         this.transform.LookAt(resultYtarget);
+                        collider.gameObject.SetActive(true);
                         anim.SetBool("bMove", false);
                         anim.SetTrigger("tBAttack");
                         nav.speed = 0;

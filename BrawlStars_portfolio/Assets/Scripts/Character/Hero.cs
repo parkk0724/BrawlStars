@@ -64,8 +64,8 @@ public class Hero : Character
     // Update is called once per frame
     protected override void Update()
     {
+        Debug.Log(m_fStamina);
         base.Update();
-        
         SearchTargetEffect();
         TargetEffect();
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))

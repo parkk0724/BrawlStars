@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class JesterBullet : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class JesterBullet : MonoBehaviour
     Rigidbody rigid;
     JesterWeapon jwaepon;
     private float m_fDamage = 0;
+
+    public UnityAction Fever = null;
     void Start()
     {
         SetDamage(10f);
@@ -17,7 +20,6 @@ public class JesterBullet : MonoBehaviour
     }
     public void SetDamage(float f) { m_fDamage = f; }
 
-    
     // Update is called once per frame
     void Update()
     {
@@ -27,16 +29,24 @@ public class JesterBullet : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Monster"))
         {
+            Feverup();
             // other.GetComponent<Monster>()?.Hit((int)m_fDamage + Random.Range(-5,5), new Color(0, 0, 0, 1));
             if (other.GetComponent<Monster>())
             {
                 other.GetComponent<Monster>().Hit((int)m_fDamage + Random.Range(-5, 5), Color.red);
+                
             }
-
         }
         if(other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Obstacle"))
         {
             Destroy(gameObject);
+        }
+    }
+    public void Feverup()
+    {
+        if (Fever != null)
+        {
+            Fever();
         }
     }
 }

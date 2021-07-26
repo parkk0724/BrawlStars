@@ -22,7 +22,7 @@ public class Monster : Character
         m_fAttackSpeed = 1.0f;
         m_fRange = 10.0f;
         m_NavMeshAgent = this.GetComponent<NavMeshAgent>();
-        m_tfTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     // Update is called once per frame
@@ -80,7 +80,9 @@ public class Monster : Character
         }
         else
         {
-            m_NavMeshAgent.SetDestination(m_tfTarget.position); // target따라다니도록 목적지를 매번 갱신
+            Vector3 pos = m_tfTarget.position; // 점프대에서 점프하면 y값이 변화하여 navMesh에서 인식을 못함
+            pos.y = 0;
+            m_NavMeshAgent.SetDestination(pos); // target따라다니도록 목적지를 매번 갱신
             if (m_NavMeshAgent.remainingDistance < 1.0f) ChangeState(State.ATTACK); // 목저지와 거리가 1.0f보다 작다면 공격전환
         }
     }

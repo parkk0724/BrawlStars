@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Soldier : Hero
 {
@@ -11,6 +12,8 @@ public class Soldier : Hero
     public GameObject bazooka_Skill_bullet3;
     public GameObject bazooka_Skill_bullet4;
     public Transform bazooka_bullet_pos;
+
+    GameObject Bullet;
 
     public float Jump_Speed = 0.0f;
     public float Jump_Height = 0.0f;
@@ -36,12 +39,15 @@ public class Soldier : Hero
         {
             SetRotStart(false);
         }
-        
 
-        if (Input.GetMouseButton(1))
+        if (m_fFever >= m_fMaxFever)
         {
-            m_Animator.SetTrigger("tSAttack");
-            SetRotStart(false);
+            if (Input.GetMouseButton(1))
+            {
+                m_Animator.SetTrigger("tSAttack");
+                SetRotStart(false);
+                m_fFever = 0.0f;
+            }
         }
         if (Input.GetMouseButtonUp(1))
         {
@@ -52,6 +58,8 @@ public class Soldier : Hero
     private void Basic_Fire()
     {
         Bazooka_Bullet_Initiate(bazooka_Basic_bullet);
+        BazookaBullet basic_bullet = Bullet.GetComponent<BazookaBullet>();
+        basic_bullet.Fever_up = FeverUp;
     }
     private void Skill_Fire()
     {
@@ -59,7 +67,7 @@ public class Soldier : Hero
     }
     void Bazooka_Bullet_Initiate(GameObject bullet)
     {
-        GameObject skillbullet = Instantiate(bullet, bazooka_bullet_pos.position, bazooka_bullet_pos.rotation);
+        Bullet = Instantiate(bullet, bazooka_bullet_pos.position, bazooka_bullet_pos.rotation);
     }
 
     IEnumerator Bazooka_SkillBullet_Initiate(float t)
@@ -77,4 +85,5 @@ public class Soldier : Hero
     {
         m_bRotStart = b;
     }
+
 }

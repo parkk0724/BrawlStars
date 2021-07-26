@@ -20,7 +20,6 @@ public class JesterSkill : MonoBehaviour
     Rigidbody rigid;
     Transform m_tfResultTarget;
     public float m_fTargetRange;
-    private SphereCollider Boomattck;
     public BoxCollider Attackcollider;
     public LayerMask m_lmEnemyLayer = 0;
     public float f_Range = 5f;
@@ -35,7 +34,6 @@ public class JesterSkill : MonoBehaviour
         State = SkillState.IDE;
         nav = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
-        Boomattck = GetComponentInChildren<SphereCollider>();
     }
     // Update is called once per frame
     //
@@ -99,7 +97,7 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.Death:
 
-                test();
+                DeathAttack();
                 DestEffect();
                 DestEffect();
                 State = SkillState.DESTROY;
@@ -110,7 +108,7 @@ public class JesterSkill : MonoBehaviour
                 break;
         }
     }
-    void test()
+    void DeathAttack()
     {
         GameObject[] monster = GameObject.FindGameObjectsWithTag("Monster");
         Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, f_Range, m_lmEnemyLayer);

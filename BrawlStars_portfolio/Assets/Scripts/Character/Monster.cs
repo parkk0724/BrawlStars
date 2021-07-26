@@ -28,6 +28,11 @@ public class Monster : Character
     // Update is called once per frame
     void Update()
     {
+        if (m_nHP <= 0)
+        {
+            StartCoroutine(Die());
+            ChangeState(State.DEAD);
+        }
         ProgressState();
     }
     protected void ChangeState(State state)
@@ -50,7 +55,6 @@ public class Monster : Character
 
     protected void ProgressState()
     {
-        if (m_nHP <= 0) StartCoroutine(Die());
         switch (m_eState)
         {
             case State.IDLE:

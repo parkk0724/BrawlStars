@@ -40,7 +40,6 @@ public class JesterSkill : MonoBehaviour
     void Update()
     {
         SearchTarget();
-        //StartCoroutine(DestEffect());
         Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;

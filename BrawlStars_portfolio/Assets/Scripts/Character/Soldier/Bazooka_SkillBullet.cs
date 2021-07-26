@@ -8,6 +8,8 @@ public class Bazooka_SkillBullet : MonoBehaviour
     public float bullet_up_speed;
     public float bullet_speed;
 
+    float m_fDamage = 50.0f;
+
     Transform SkillBullt_Pos = null;
     Transform SkillBullt_Destination = null;
 
@@ -65,8 +67,16 @@ public class Bazooka_SkillBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
+        if (other.tag == "Ground" || other.tag == "Wall" || other.tag == "Player")
         {
+            //collider_size.size = new Vector3(30.0f, 30.0f, 30.0f);
+            GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "Monster")
+        {
+            other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }

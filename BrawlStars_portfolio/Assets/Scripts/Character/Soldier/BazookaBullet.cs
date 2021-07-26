@@ -12,6 +12,8 @@ public class BazookaBullet : MonoBehaviour
     public float range = 7.0f;
     public float height = 3.0f;
 
+    float m_fDamage = 30.0f;
+
     Soldier soldier = null;
     BoxCollider collider_size = null;
 
@@ -89,6 +91,7 @@ public class BazookaBullet : MonoBehaviour
         if (other.tag == "Monster")
         {
             Fever_up?.Invoke();
+            other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }

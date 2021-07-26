@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BazookaBullet : MonoBehaviour
 {
+    public UnityAction Fever_up = null;
+
     public GameObject explosion_effect;
     public float speed = 5.0f;
     public float range = 7.0f;
     public float height = 3.0f;
 
+    Soldier soldier = null;
     BoxCollider collider_size = null;
 
     Rigidbody myRigid;
@@ -26,6 +30,8 @@ public class BazookaBullet : MonoBehaviour
         collider_size = this.GetComponent<BoxCollider>();
         myRigid = this.GetComponent<Rigidbody>();
         bulletflying = StartCoroutine(BulletFlying());
+
+        soldier = GameObject.Find("Soldier").GetComponent<Soldier>();
     }
 
     IEnumerator BulletFlying()
@@ -73,9 +79,16 @@ public class BazookaBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
+        if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Player")
         {
             //collider_size.size = new Vector3(30.0f, 30.0f, 30.0f);
+            GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "Monster")
+        {
+            Fever_up?.Invoke();
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }

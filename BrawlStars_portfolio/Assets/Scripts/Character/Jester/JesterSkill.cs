@@ -97,13 +97,14 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.DiZZY:
                 float speed = 0.5f;
-                Vector3 thisScale = new Vector3(1.5f, 1.5f, 1.5f);
+                Vector3 thisScale = new Vector3(2f, 2f, 2f);
                 float thisgob = this.transform.localScale.x * this.transform.localScale.y * this.transform.localScale.z;
                 float thisgob_2 = thisScale.x * thisScale.y * thisScale.z;
                 if (thisgob_2 > thisgob)
                 {
                     anim.SetTrigger("Dizzy");
                     this.transform.localScale += new Vector3(0.3f, 0.3f, 0.3f) * Time.deltaTime;
+                    this.transform.Rotate(0, 1f, 0);
                 }
                 else
                 {

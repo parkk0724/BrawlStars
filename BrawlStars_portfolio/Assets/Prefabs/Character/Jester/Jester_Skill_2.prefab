@@ -3029,7 +3029,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_objSkillEffect: {fileID: 107068138432218113, guid: 784da0eddfbfa624d944694f16b71a5b, type: 3}
-  m_tTarget: {fileID: 0}
   DistRange: 2
   DeathTime: 10
   m_fTargetRange: 15
@@ -3037,6 +3036,7 @@ MonoBehaviour:
   m_lmEnemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  f_Range: 5
 --- !u!195 &8141167854329728377
 NavMeshAgent:
   m_ObjectHideFlags: 0

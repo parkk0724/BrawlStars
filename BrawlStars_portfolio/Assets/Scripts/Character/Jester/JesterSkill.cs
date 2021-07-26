@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.Events;
 public class JesterSkill : MonoBehaviour
 {
     enum SkillState
     {
         CREATE, IDE, RUN, PATROL ,ATTACK, DESTROY ,Death
     }
-    public GameObject m_objSkillEffect;
-    [SerializeField] Transform m_tTarget;
-    NavMeshAgent nav;
     SkillState State = SkillState.CREATE;
+    public GameObject m_objSkillEffect;
+    NavMeshAgent nav;
     Animator anim;
     float Dist;
-    public float DistRange;
     float DestroyTime;
+    public float DistRange;
     public float DeathTime;
     Rigidbody rigid;
     Transform m_tfResultTarget;
@@ -24,11 +23,12 @@ public class JesterSkill : MonoBehaviour
     private SphereCollider Boomattck;
     public BoxCollider Attackcollider;
     public LayerMask m_lmEnemyLayer = 0;
-    float Range = 10f;
-    bool start = false;
+    public float f_Range = 5f;
+    public UnityAction Animationevent = null;
     // Start is called before the first frame update
     void Start()
     {
+        Animationevent = () => StartCoroutine(skilShot());
         //Attackcollider = GetComponentInChildren<BoxCollider>();
         //m_objSkillEffect = GetComponent<ParticleSystem>();
         anim = GetComponent<Animator>();
@@ -56,7 +56,6 @@ public class JesterSkill : MonoBehaviour
             case SkillState.CREATE:
                 break;
             case SkillState.IDE:
-                //nav.speed = Random.Range(3, 10);
                 if (m_tfResultTarget != null)
                 {
                     State = SkillState.RUN;
@@ -80,7 +79,6 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.ATTACK:
                 {
-                    Vector3 distrot = m_tfResultTarget.position - this.transform.position;
                     Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
                     if (DistRange > Dist)
                     {
@@ -95,24 +93,27 @@ public class JesterSkill : MonoBehaviour
                     }
                     if (DestroyTime > DeathTime)
                     {
-                        State = SkillState.DESTROY;
+                        State = SkillState.Death;
                     }
                 }
                 break;
-            case SkillState.DESTROY:
+            case SkillState.Death:
+
                 test();
                 DestEffect();
                 DestEffect();
-                //StartCoroutine(dess());
-                Destroy(this.gameObject,0.2f);
+                State = SkillState.DESTROY;
+                break;
+
+            case SkillState.DESTROY:
+                Destroy(this.gameObject);
                 break;
         }
     }
     void test()
     {
-        float test_range = 10f;
         GameObject[] monster = GameObject.FindGameObjectsWithTag("Monster");
-        Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position,test_range, m_lmEnemyLayer);
+        Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, f_Range, m_lmEnemyLayer);
         for (int i = 0; i < monster.Length; i++)
         {
             for (int j = 0; j < EnemyCollider.Length; j++)
@@ -123,16 +124,6 @@ public class JesterSkill : MonoBehaviour
                 }
             }
         }
-    }
-    IEnumerator dess()
-    {
-        start = true;
-        Boomattck.enabled = true;
-        yield return new WaitForSeconds(0.05f);
-        start = false;
-        Boomattck.enabled = false;
-        DestEffect();
-        yield return new WaitForSeconds(0.05f);
     }
     void DestEffect()
     {
@@ -157,9 +148,10 @@ public class JesterSkill : MonoBehaviour
         }
         m_tfResultTarget = shorTarget; // ÃÖÁ¾°ª
     }
-    void JesterSkillShot()
+    void onAnimationEv()
     {
-        StartCoroutine(skilShot());
+        if (Animationevent != null)
+            Animationevent();
     }
     IEnumerator skilShot()
     {
@@ -170,28 +162,7 @@ public class JesterSkill : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(this.transform.position, Range);
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(start)
-        {
-            if (other.GetComponent<Monster>())
-            {
-                
-                other.GetComponent<Monster>().Hit(20, Color.red);
-            }
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (!start)
-        {
-            if (other.GetComponent<Monster>())
-            {
-                
-            }
-        }
+        Gizmos.DrawWireSphere(this.transform.position, f_Range);
     }
 }
 

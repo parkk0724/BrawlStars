@@ -89,7 +89,6 @@ public class BazookaBullet : MonoBehaviour
         if (other.tag == "Monster")
         {
             Fever_up?.Invoke();
-            //soldier.FeverUp();
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }

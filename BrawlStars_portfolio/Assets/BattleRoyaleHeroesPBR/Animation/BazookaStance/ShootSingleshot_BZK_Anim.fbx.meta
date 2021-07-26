@@ -320,7 +320,7 @@ ModelImporter:
       name: BasicAttack
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
+      firstFrame: 6
       lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0

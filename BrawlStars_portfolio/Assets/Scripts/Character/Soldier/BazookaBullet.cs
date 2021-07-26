@@ -79,7 +79,7 @@ public class BazookaBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Player")
+        if (other.tag == "Ground" || other.tag == "Wall" || other.tag == "Player")
         {
             //collider_size.size = new Vector3(30.0f, 30.0f, 30.0f);
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);

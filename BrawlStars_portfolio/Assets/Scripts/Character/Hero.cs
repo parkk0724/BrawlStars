@@ -35,11 +35,15 @@ public class Hero : Character
     public bool m_bMoveStart;
     public bool m_bMoveValid = true; // 점프대 사용 시 이동 막는 bool값
     public bool m_bCheckStart = false;
-    public float m_fTargetRange = 0f;
+    public float m_fTargetRange = 0f;    
     public LayerMask m_lmEnemyLayer = 0;
+
+    public float m_Jump_maxDelay = 0.0f;
+    float m_Jump_curDelay = 0.0f;
 
     Transform Jump_Destination_Pos1;
     Transform Jump_Destination_Pos2;
+    Coroutine Jump_Delay;
     Coroutine Jump1;
     Coroutine Jump2;
 
@@ -186,14 +190,6 @@ public class Hero : Character
 
             Destroy(other.gameObject);
         }
-        if (other.tag == "Jump")
-        {
-            Jump1 = StartCoroutine(Jump(Jump_Destination_Pos1));
-        }
-        if (other.tag == "Jump2")
-        {
-            Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
-        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -205,6 +201,32 @@ public class Hero : Character
                 if (m != null) Hit((int)other.GetComponent<Monster>()?.GetATK(), new Color(1, 0, 0, 1)); // (과녁용)몬스터스크립트 없을때
                 m_fCurBodyAttack = 0.0f;
             }
+        }
+        if (other.tag == "Jump")
+        {
+            m_Jump_curDelay += Time.deltaTime;
+            if (m_Jump_curDelay > m_Jump_maxDelay)
+            {
+                if (Jump1 != null) StopCoroutine(Jump1);
+                Jump1 = StartCoroutine(Jump(Jump_Destination_Pos1));
+            }
+        }
+        if (other.tag == "Jump2")
+        {
+            m_Jump_curDelay += Time.deltaTime;
+            if (m_Jump_curDelay > m_Jump_maxDelay)
+            {
+                if (Jump2 != null) StopCoroutine(Jump2);
+                Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Jump" || other.tag == "Jump2")
+        {
+            m_Jump_curDelay = 0.0f;
         }
     }
     public override IEnumerator Die()
@@ -370,9 +392,7 @@ public class Hero : Character
     }
     #endregion
     IEnumerator Jump(Transform destination)
-    {       
-        yield return new WaitForSeconds(1.0f);
-
+    {
         m_bMoveValid = false;
         this.transform.LookAt(destination.position);
         Vector3 dir = destination.position - this.transform.position;
@@ -403,10 +423,11 @@ public class Hero : Character
 
             yield return null;
         }
+        m_Jump_curDelay = 0.0f;
         m_bMoveValid = true;
     }
 
-    private void OnDrawGizmos()
+        private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }

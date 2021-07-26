@@ -12,7 +12,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Image m_imgFullGauge = null;
     void Start()
     {
-        
+        m_Character = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
 
     // Update is called once per frame

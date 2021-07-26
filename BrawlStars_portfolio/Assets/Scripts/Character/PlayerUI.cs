@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] Character m_Character = null;
+    [SerializeField] Hero m_Hero = null;
     [SerializeField] TMPro.TMP_Text m_tFeverGauge = null;
     [SerializeField] Image m_imgSkull = null;
     [SerializeField] Image m_imgFullGauge = null;
     void Start()
     {
-        m_Character = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
+        m_Hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class PlayerUI : MonoBehaviour
     void UpdateFeverGauge()
     {
 
-        float feverGauge = m_Character.GetFever() / m_Character.GetMaxFever();
+        float feverGauge = m_Hero.GetFever() / m_Hero.GetMaxFever();
         m_imgSkull.fillAmount = feverGauge;
 
         Color c = m_imgSkull.color;

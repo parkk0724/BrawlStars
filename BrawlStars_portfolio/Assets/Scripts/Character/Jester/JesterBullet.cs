@@ -29,7 +29,7 @@ public class JesterBullet : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Monster"))
         {
-            Character chaar = GameObject.FindWithTag("Player").GetComponent<Character>();
+            Hero chaar = GameObject.FindWithTag("Player").GetComponent<Hero>();
             chaar.FeverUp();
             // other.GetComponent<Monster>()?.Hit((int)m_fDamage + Random.Range(-5,5), new Color(0, 0, 0, 1));
             if (other.GetComponent<Monster>())

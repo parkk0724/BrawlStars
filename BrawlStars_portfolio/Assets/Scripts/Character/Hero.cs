@@ -4,6 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Hero : Character
 {
+    [Header("Status")]
+    protected float m_fStamina;
+    protected float m_fMaxStamina;
+    protected float m_fFever;
+    protected float m_fMaxFever;
+    protected int m_nSkillDamage;
+    protected bool m_bDie;
+    protected float m_fBodyAttackDelay;
+    protected float m_fCurBodyAttack;
+
     [Header("Moving")]
     public LayerMask m_lmPicking_Mask;
     public float m_fMove_Speed = 5.0f;
@@ -33,7 +43,24 @@ public class Hero : Character
     Coroutine Jump1;
     Coroutine Jump2;
 
-    protected override void Start()
+    public float GetFever() { return m_fFever; }
+    public float GetMaxFever() { return m_fMaxFever; }
+    public virtual void FeverUp()
+    {
+        if (m_fFever < m_fMaxFever) m_fFever += 10.0f;
+        else m_fFever = m_fMaxFever;
+    }
+    public float GetStamina() { return m_fStamina; }
+    public float GetMaxStamina() { return m_fMaxStamina; }
+    void RecoveryStamina()
+    {
+        if (m_fStamina < m_fMaxStamina)
+        {
+            m_fStamina += Time.deltaTime;
+            if (m_fStamina > m_fMaxStamina) m_fStamina = m_fMaxStamina;
+        }
+    }
+    protected virtual void Start()
     {
         Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
         Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;
@@ -57,14 +84,19 @@ public class Hero : Character
         m_fCurBodyAttack = m_fBodyAttackDelay;
         m_fJump_Height = 5.0f;
         m_fJump_Speed = 10.0f;
-        // UI: HP, Max
-        //HealthBar.SetHealth(m_nMaxHP);
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        base.Update();
+        if (!m_bDie)
+        {
+            m_fCurBodyAttack += Time.deltaTime;
+            RecoveryStamina();
+            Move();
+            Attack();
+        }
+
         SearchTargetEffect();
         TargetEffect();
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
@@ -139,19 +171,11 @@ public class Hero : Character
     }
 
     #endregion
-    public override void Attack()
+    public virtual void Attack()
     {
-       //if (Input.GetMouseButtonDown(0))
-       //{
-       //    m_Animator.SetTrigger("tBAttack");
-       //}
     }
-    public override void SkillAttack()
+    public virtual void SkillAttack()
     {
-       // if (Input.GetMouseButtonDown(1))
-       // {
-       //     m_Animator.SetTrigger("tSAttack");
-       // }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -205,7 +229,7 @@ public class Hero : Character
 
         Revival();
     }
-    public override void Revival()
+    public void Revival()
     {
         StartCoroutine(RevivalEffect());
         this.transform.position = m_vOriginPos;

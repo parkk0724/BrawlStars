@@ -5,10 +5,12 @@ using UnityEngine.AI;
 
 public class Monster : Character
 {
-    // Start is called before the first frame update
+    protected enum State { IDLE, MOVE, ATTACK, DEAD }
+
+    State m_eState = State.MOVE;
     NavMeshAgent m_NavMeshAgent;
     Transform m_tfTarget;
-    protected override void Start()
+    protected virtual void Start()
     {
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
@@ -24,14 +26,51 @@ public class Monster : Character
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        if(!m_bDie)
+        ProgressState();
+    }
+    protected void ChangeState(State state)
+    {
+        if (m_eState == state) return;
+        m_eState = state;
+
+        switch (m_eState)
         {
-            Move();
-            Attack();
-            if(m_nHP <= 0) StartCoroutine(Die());
+            case State.IDLE:
+                break;
+            case State.MOVE:
+                break;
+            case State.ATTACK:
+                break;
+            case State.DEAD:
+                break;
         }
+    }
+
+    protected void ProgressState()
+    {
+        if (m_nHP <= 0) StartCoroutine(Die());
+        switch (m_eState)
+        {
+            case State.IDLE:
+                Idle();
+                break;
+            case State.MOVE:
+                Move();
+                break;
+            case State.ATTACK:
+                Attack();
+                break;
+            case State.DEAD:
+                Die();
+                break;
+        }
+    }
+
+    void Idle()
+    {
+
     }
     public override void Move()
     {
@@ -42,6 +81,7 @@ public class Monster : Character
         else
         {
             m_NavMeshAgent.SetDestination(m_tfTarget.position); // target따라다니도록 목적지를 매번 갱신
+            if (m_NavMeshAgent.remainingDistance < 1.0f) ChangeState(State.ATTACK); // 목저지와 거리가 1.0f보다 작다면 공격전환
         }
     }
     public override IEnumerator Die()
@@ -49,20 +89,11 @@ public class Monster : Character
         Destroy(this.transform.parent.gameObject); // 일단 죽으면 사라지게 만듬
         yield return null;
     }
-
-    public override void Revival()
+    public virtual void Attack()
     {
+        ChangeState(State.MOVE); // test용
+        //if (m_NavMeshAgent.remainingDistance > 1.0f) ChangeState(State.MOVE); // 목저지와 거리가 1.0f보다 크다면 이동전환
     }
-    public override void Attack()
-    {
-
-    }
-
-    public override void SkillAttack()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)// 일단 총알에 맞으면 데미지 처리 테스트 위해 여기다 둠 -유석
     {
         if (other.tag == "Bullet")

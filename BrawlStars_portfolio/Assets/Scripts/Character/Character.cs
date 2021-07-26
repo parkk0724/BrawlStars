@@ -3,67 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] protected UITextDamage m_UITextDamage;
     protected Animator m_Animator;
     protected Vector3 m_vOriginPos;
     protected Vector3 m_vOriginRot;
     [SerializeField] protected int m_nHP;
     protected int m_nMaxHP;
-    protected float m_fStamina;
-    protected float m_fMaxStamina;
+
     protected int m_nATK;
     protected int m_nDEF;
-    protected int m_nSkillDamage;
     protected float m_fMoveSpeed;
     protected float m_fAttackSpeed;
-    protected float m_fFever;
-    protected float m_fMaxFever;
     protected float m_fRange;
-    protected bool m_bDie;
-    protected float m_fBodyAttackDelay;
-    protected float m_fCurBodyAttack;
-
-    //public HealthBar HealthBar; // UI, 체력바, Hit가 여기서 처리돼서 여기에 배치
-
     public int GetHp() { return m_nHP; }
     public int GetMaxHp() { return m_nMaxHP; }
-    public float GetStamina() { return m_fStamina; }
-    public float GetMaxStamina() { return m_fMaxStamina; }
-    public float GetFever() { return m_fFever; }
-    public float GetMaxFever() { return m_fMaxFever; }
     public int GetATK() { return m_nATK; }
-    public virtual void FeverUp() 
-    {
-        if (m_fFever < m_fMaxFever) m_fFever += 10.0f;
-        else m_fFever = m_fMaxFever; 
-    }
-
-    void RecoveryStamina()
-    {
-        if (m_fStamina < m_fMaxStamina)
-        {
-            m_fStamina += Time.deltaTime;
-            if (m_fStamina > m_fMaxStamina) m_fStamina = m_fMaxStamina;
-        }
-    }
-
-    protected abstract void Start();
-    protected virtual void Update()
-    {
-        // 쓸모없는 코드가 있어서 변경
-        if (!m_bDie)
-        {
-            m_fCurBodyAttack += Time.deltaTime;
-            RecoveryStamina();
-            Move();
-            Attack();
-        }
-    }
-    public abstract void Attack(); 
-    public abstract void SkillAttack();
     public abstract void Move();
-    public abstract void Revival();
     public abstract IEnumerator Die();
     public virtual void Hit(int damage, Color c) // 온콜라이더에서 호출하는게 좋을 것 같음 *데미지마다 색상을 틀리게하기위해 color값 추가
     {

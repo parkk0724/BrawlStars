@@ -8,6 +8,8 @@ public class Bazooka_SkillBullet2 : MonoBehaviour
     public float bullet_up_speed;
     public float bullet_speed;
 
+    float m_fDamage = 50.0f;
+
     Transform SkillBullt_Pos = null;
     Transform SkillBullt_Destination = null;
 
@@ -65,7 +67,15 @@ public class Bazooka_SkillBullet2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Monster" || other.tag == "Player")
+        Collider[] colls = Physics.OverlapSphere(other.transform.position, 3.5f);
+
+        for (int i = 0; i < colls.Length; i++)
+        {
+            if (colls[i].tag == "Monster")
+                colls[i].GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
+        }
+
+        if (other.tag == "Ground" || other.tag == "Wall" || other.tag == "Player" || other.tag == "Monster")
         {
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);

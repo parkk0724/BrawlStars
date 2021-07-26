@@ -12,7 +12,8 @@ public class BazookaBullet : MonoBehaviour
     public float range = 7.0f;
     public float height = 3.0f;
 
-    Soldier soldier = null;
+    float m_fDamage = 30.0f;
+
     BoxCollider collider_size = null;
 
     Rigidbody myRigid;
@@ -30,8 +31,6 @@ public class BazookaBullet : MonoBehaviour
         collider_size = this.GetComponent<BoxCollider>();
         myRigid = this.GetComponent<Rigidbody>();
         bulletflying = StartCoroutine(BulletFlying());
-
-        soldier = GameObject.Find("Soldier").GetComponent<Soldier>();
     }
 
     IEnumerator BulletFlying()
@@ -74,21 +73,23 @@ public class BazookaBullet : MonoBehaviour
             yield return null;
         }
         dist = 0.0f;
-       
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ground" || other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Player")
+        Collider[] colls = Physics.OverlapSphere(other.transform.position, 2.0f);
+
+        for (int i = 0; i < colls.Length; i++)
         {
-            //collider_size.size = new Vector3(30.0f, 30.0f, 30.0f);
-            GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            if (colls[i].tag == "Monster")
+            {
+                colls[i].GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
+                Fever_up?.Invoke();
+            }
         }
 
-        if (other.tag == "Monster")
-        {
-            Fever_up?.Invoke();
+        if (other.tag == "Ground" || other.tag == "Wall" || other.tag == "Player" || other.tag == "Monster")
+        {           
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }

@@ -7,7 +7,7 @@ public class JesterSkill : MonoBehaviour
 {
     enum SkillState
     {
-        CREATE, IDE, RUN, ATTACK, DESTROY
+        CREATE, IDE, RUN, PATROL ,ATTACK, DESTROY ,Death
     }
     public GameObject m_objSkillEffect;
     [SerializeField] Transform m_tTarget;
@@ -61,10 +61,14 @@ public class JesterSkill : MonoBehaviour
                 {
                     State = SkillState.RUN;
                 }
+                else
+                {
+                    State = SkillState.RUN;
+                }
                 break;
             case SkillState.RUN:
                 {
-                    nav.speed = 10;
+                    nav.speed = 5;
                     nav.SetDestination(m_tfResultTarget.position);
                     anim.SetBool("bMove", true);
 
@@ -83,7 +87,7 @@ public class JesterSkill : MonoBehaviour
                         this.transform.LookAt(resultYtarget);
                         anim.SetBool("bMove", false);
                         anim.SetTrigger("tBAttack");
-                        nav.speed = 3;
+                        nav.speed = 2;
                     }
                     else if (DistRange <= Dist)
                     {

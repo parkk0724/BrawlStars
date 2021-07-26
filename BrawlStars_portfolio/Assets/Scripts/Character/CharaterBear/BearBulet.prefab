@@ -101,8 +101,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.9999897
-        value: 0
+        time: 1
+        value: 0.50942993
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -193,4 +193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   curTime: 0
+  BulletSpeed: 5
   BulletLiveMaxTime: 2
+  HitEffect: {fileID: 128064, guid: 557a9288b54587242b99b2aa51f80fe9, type: 3}

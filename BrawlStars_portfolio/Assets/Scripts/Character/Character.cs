@@ -33,7 +33,7 @@ public abstract class Character : MonoBehaviour
     public float GetFever() { return m_fFever; }
     public float GetMaxFever() { return m_fMaxFever; }
     public int GetATK() { return m_nATK; }
-    public void FeverUp() 
+    public virtual void FeverUp() 
     {
         if (m_fFever < m_fMaxFever) m_fFever += 10.0f;
         else m_fFever = m_fMaxFever; 

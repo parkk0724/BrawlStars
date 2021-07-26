@@ -146,7 +146,6 @@ public class Hero : Character
        //    m_Animator.SetTrigger("tBAttack");
        //}
     }
-
     public override void SkillAttack()
     {
        // if (Input.GetMouseButtonDown(1))

@@ -39,7 +39,7 @@ public class JesterBullet : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Obstacle"))
         {
-            GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
+            GameObject obj = Instantiate(HitEffect, other.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
             Destroy(obj.gameObject, 0.2f);
         }

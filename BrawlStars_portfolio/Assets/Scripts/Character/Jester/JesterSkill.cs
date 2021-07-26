@@ -5,20 +5,21 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 public class JesterSkill : MonoBehaviour
 {
+    NavMeshAgent nav;
+    Animator anim;
+    Rigidbody rigid;
+    Transform m_tfResultTarget;
     enum SkillState
     {
         CREATE, IDE, RUN, PATROL ,ATTACK, DESTROY ,Death
     }
     SkillState State = SkillState.CREATE;
     public GameObject m_objSkillEffect;
-    NavMeshAgent nav;
-    Animator anim;
+    
     float Dist;
     float DestroyTime;
     public float DistRange;
     public float DeathTime;
-    Rigidbody rigid;
-    Transform m_tfResultTarget;
     public float m_fTargetRange;
     public BoxCollider Attackcollider;
     public LayerMask m_lmEnemyLayer = 0;

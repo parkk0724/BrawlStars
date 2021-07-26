@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bear : Hero
 {
-    Animator myAnimator;
+    public Animator myAnimator;
     public Weapon myWeapon;
 
     protected override void Start()
@@ -17,8 +17,12 @@ public class Bear : Hero
 
     public override void Attack()
     {
-        if (Input.GetMouseButtonDown(0)) myWeapon.Shoot();
-        if (Input.GetMouseButtonDown(1)) myWeapon.SkillShoot();
+        if (Input.GetMouseButtonDown(0)) 
+        { 
+           myAnimator.SetTrigger("tBAttack");
+          //myWeapon.Shoot();
+        }
+        if (Input.GetMouseButtonDown(1)) { } //myWeapon.SkillShoot();
     }
 
     public void SetRotStart(bool b)

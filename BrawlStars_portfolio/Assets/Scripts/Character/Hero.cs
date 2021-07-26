@@ -346,8 +346,6 @@ public class Hero : Character
             float r2 = Vector3.Dot(Bot, this.transform.right);
             if (r2 < 0.0f) rotDir = -1.0f;
             
-            //Instantiate(m_objTargetEffect, m_tfResultTarget.position, Quaternion.Euler(m_tfResultTarget.rotation.x + 90, m_tfResultTarget.rotation.y, m_tfResultTarget.rotation.z));
-            //m_objTargetEffect.Play();
             if (angle - delta < 0.0f)
             {
                 delta = angle;

@@ -10,9 +10,9 @@ public class JesterBullet : MonoBehaviour
     JesterWeapon jwaepon;
     private float m_fDamage = 0;
     public UnityAction Fever = null;
+    public GameObject HitEffect = null;
     void Start()
     {
-
         SetDamage(10f);
         Destroy(this.gameObject, 2f);
         rigid = GetComponent<Rigidbody>();
@@ -39,7 +39,9 @@ public class JesterBullet : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Obstacle"))
         {
-            Destroy(gameObject);
+            GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
+            Destroy(obj.gameObject, 0.2f);
         }
     }
 }

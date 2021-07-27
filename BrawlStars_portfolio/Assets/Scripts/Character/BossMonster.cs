@@ -10,6 +10,7 @@ public class BossMonster : Monster
     float m_fMaxMoveTime = 0.0f;
     float m_fMaxIdleTime = 0.0f;
     float m_fBasicAttackRange = 0.0f;
+    float m_fSkill2_AttackRange = 0.0f;
 
     Coroutine die = null;
     protected override void Start()
@@ -26,6 +27,7 @@ public class BossMonster : Monster
         m_fMaxMoveTime = 3.0f;
         m_fMaxIdleTime = 3.0f;
         m_fBasicAttackRange = 2.0f;
+        m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
     }
 
@@ -126,11 +128,13 @@ public class BossMonster : Monster
     {
         if (m_nHP < m_nMaxHP / 2 && !m_bPhase[0]) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 첫 페이즈가 바뀔때)
         {
+            m_Animator.SetTrigger("tPowerUp");
             m_bPhase[0] = true;
             // 여기서 상태값 조절
         }
         else if (m_nHP < m_nMaxHP / 4 && !m_bPhase[1]) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 두번째 페이즈가 바뀔때)
         {
+            m_Animator.SetTrigger("tPowerUp");
             m_bPhase[1] = true;
         }
     }
@@ -169,7 +173,12 @@ public class BossMonster : Monster
     }
     void SkillAttack2()
     {
+        if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange)
+        {
+            this.transform.LookAt(m_tfTarget);
+            m_Animator.SetTrigger("tSkillAttack2");
 
+        }
     }
     void EndAttack()
     {

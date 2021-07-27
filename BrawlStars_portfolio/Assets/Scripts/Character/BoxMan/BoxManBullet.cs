@@ -114,7 +114,6 @@ public class BoxManBullet : MonoBehaviour
             if (m_fCurSkillAttack >= m_fSkillAttackDelay)
             {
                 CreateHitEffect(false, other.transform);
-                m_fCurSkillAttack = 0.0f;
             }
         }
     }

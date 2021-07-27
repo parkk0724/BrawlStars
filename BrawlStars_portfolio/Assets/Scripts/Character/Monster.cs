@@ -7,11 +7,12 @@ public class Monster : Character
 {
     protected enum State { IDLE, MOVE, ATTACK, DEAD }
 
-    State m_eState = State.MOVE;
-    NavMeshAgent m_NavMeshAgent;
-    Transform m_tfTarget;
+    protected State m_eState = State.IDLE;
+    protected NavMeshAgent m_NavMeshAgent;
+    protected Transform m_tfTarget;
     protected virtual void Start()
     {
+        m_UITextDamage = GameObject.Find("UI").GetComponentInChildren<UITextDamage>();
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
         m_vOriginRot = this.transform.rotation.eulerAngles;
@@ -35,7 +36,7 @@ public class Monster : Character
         }
         ProgressState();
     }
-    protected void ChangeState(State state)
+    protected virtual void ChangeState(State state)
     {
         if (m_eState == state) return;
         m_eState = state;
@@ -53,7 +54,7 @@ public class Monster : Character
         }
     }
 
-    protected void ProgressState()
+    protected virtual void ProgressState()
     {
         switch (m_eState)
         {
@@ -72,7 +73,7 @@ public class Monster : Character
         }
     }
 
-    void Idle()
+    public virtual void Idle()
     {
 
     }

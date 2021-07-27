@@ -266,6 +266,7 @@ public class Hero : Character
     IEnumerator RevivalEffect()
     {
         m_ptsRevival.gameObject.SetActive(true);
+        m_ptsRevival.Play();
         yield return new WaitForSeconds(3);
         m_ptsRevival.gameObject.SetActive(false);
     }

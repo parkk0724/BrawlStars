@@ -13,9 +13,12 @@ public class Animation_Event : MonoBehaviour
     public Transform Lfoot_pos;
     public Transform Rfoot_pos;
 
+    [Header("BoxMan")]
     public UnityAction OnShoot = null;
     public UnityAction OnSkillShoot = null;
 
+    [Header("BossMonster")]
+    public UnityAction endAttack = null;
     // Start is called before the first frame update
 
     private void Run_Effect_L()
@@ -47,5 +50,10 @@ public class Animation_Event : MonoBehaviour
     private void SkillShoot()
     {
         OnSkillShoot?.Invoke();
+    }
+
+    private void EndAttack()
+    {
+        endAttack?.Invoke();
     }
 }

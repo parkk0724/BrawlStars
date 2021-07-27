@@ -9,6 +9,7 @@ public class JesterSkill : MonoBehaviour
     Animator anim;
     Rigidbody rigid;
     Transform m_tfResultTarget;
+    Renderer[] myRender;
     enum SkillState
     {
         CREATE, IDE, RUN, DiZZY ,ATTACK, DESTROY ,Death
@@ -28,9 +29,8 @@ public class JesterSkill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myRender = GetComponentsInChildren<Renderer>();
         Animationevent = () => StartCoroutine(skilShot());
-        //Attackcollider = GetComponentInChildren<BoxCollider>();
-        //m_objSkillEffect = GetComponent<ParticleSystem>();
         anim = GetComponent<Animator>();
         State = SkillState.IDE;
         nav = GetComponent<NavMeshAgent>();
@@ -96,20 +96,7 @@ public class JesterSkill : MonoBehaviour
                 }
                 break;
             case SkillState.DiZZY:
-                float speed = 0.5f;
-                Vector3 thisScale = new Vector3(2f, 2f, 2f);
-                float thisgob = this.transform.localScale.x * this.transform.localScale.y * this.transform.localScale.z;
-                float thisgob_2 = thisScale.x * thisScale.y * thisScale.z;
-                if (thisgob_2 > thisgob)
-                {
-                    anim.SetTrigger("Dizzy");
-                    this.transform.localScale += new Vector3(0.3f, 0.3f, 0.3f) * Time.deltaTime;
-                    this.transform.Rotate(0, 1f, 0);
-                }
-                else
-                {
-                    State = SkillState.Death;
-                }
+                StartCoroutine(Dizzy());
                 break;
             case SkillState.Death:
 
@@ -177,6 +164,30 @@ public class JesterSkill : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, f_Range);
+    }
+    IEnumerator Dizzy()
+    {
+        Vector3 thisScale = new Vector3(2f, 2f, 2f);
+        float thisgob = this.transform.localScale.x * this.transform.localScale.y * this.transform.localScale.z;
+        float thisgob_2 = thisScale.x * thisScale.y * thisScale.z;
+        this.transform.localScale += new Vector3(0.6f, 0.3f, 0.6f) * Time.deltaTime;
+        this.transform.Rotate(0, 3f, 0);
+        if (thisgob_2 > thisgob)
+        {
+            //float Gobdelta = thisgob_2 - thisgob;
+            anim.SetTrigger("Dizzy");
+            for (int i = 0; i < 5; i++)
+            {
+                myRender[0].material.color = Color.white;
+                myRender[1].material.color = Color.white;
+                yield return new WaitForSeconds(0.3f);
+                myRender[0].material.color = Color.red;
+                myRender[1].material.color = Color.red;
+            }
+        }
+
+        if (thisgob > thisgob_2)
+            State = SkillState.Death;
     }
 }
 

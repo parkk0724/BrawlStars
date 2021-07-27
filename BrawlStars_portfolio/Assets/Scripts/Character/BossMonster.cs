@@ -10,6 +10,8 @@ public class BossMonster : Monster
     float m_fMaxMoveTime = 0.0f;
     float m_fMaxIdleTime = 0.0f;
     float m_fBasicAttackRange = 0.0f;
+
+    Coroutine die = null;
     protected override void Start()
     {
         base.Start();
@@ -30,6 +32,10 @@ public class BossMonster : Monster
     // Update is called once per frame
     void Update()
     {
+        if (m_nHP <= 0)
+        {
+            ChangeState(State.DEAD);
+        }
         m_fCurTime += Time.deltaTime;
         ProgressState();
         CheckPhase();
@@ -66,7 +72,8 @@ public class BossMonster : Monster
                 Attack();
                 break;
             case State.DEAD:
-                StartCoroutine(Die());
+                if (die == null)
+                    die = StartCoroutine(Die());
                 break;
         }
     }

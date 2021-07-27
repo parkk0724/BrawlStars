@@ -94,8 +94,12 @@ public class Monster : Character
     public override IEnumerator Die()
     {
         m_Animator.SetTrigger("tDie");
-        Destroy(this.transform.parent.gameObject); // 일단 죽으면 사라지게 만듬
-        yield return null;
+
+        while (true) //일단 죽고나서 게임 종료 시킬 거 생각해서 디스트로이는 주석처리 함
+        {
+            //Destroy(this.transform.parent.gameObject); // 일단 죽으면 사라지게 만듬
+            yield return null;
+        }
     }
     public virtual void Attack()
     {

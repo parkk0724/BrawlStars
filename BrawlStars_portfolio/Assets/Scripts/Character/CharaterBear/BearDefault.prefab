@@ -472,6 +472,8 @@ MonoBehaviour:
     m_Bits: 64
   m_fMove_Speed: 4
   m_fRotate_Speed: 250
+  m_fJump_Height: 0
+  m_fJump_Speed: 0
   m_ptsRevival: {fileID: 0}
   m_objPlayerDir: {fileID: 0}
   m_objCharacter: {fileID: 0}
@@ -482,11 +484,14 @@ MonoBehaviour:
   m_tfResultTarget: {fileID: 0}
   m_bRotStart: 0
   m_bMoveStart: 0
+  m_bMoveValid: 1
   m_bCheckStart: 0
   m_fTargetRange: 0
   m_lmEnemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  m_Jump_maxDelay: 0
+  myAnimator: {fileID: 0}
   myWeapon: {fileID: 0}
 --- !u!1 &909545961797152503
 GameObject:

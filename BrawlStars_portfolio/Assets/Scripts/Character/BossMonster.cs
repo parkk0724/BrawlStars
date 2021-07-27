@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BossMonster : Monster
 {
-    // Start is called before the first frame update
     bool[] m_bPhase = new bool[2] { false, false };
     float m_fCurTime = 0.0f;
     float m_fMaxMoveTime = 0.0f;
@@ -141,7 +140,7 @@ public class BossMonster : Monster
     public override void Attack()
     {
         int rnd = Random.Range(1, 100);
-        if (rnd < 5 && m_bPhase[1])
+        if (rnd < 50 && m_bPhase[1])
         {
             SkillAttack2();
         }
@@ -173,11 +172,14 @@ public class BossMonster : Monster
     }
     void SkillAttack2()
     {
-        if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange)
+        if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
         {
             this.transform.LookAt(m_tfTarget);
             m_Animator.SetTrigger("tSkillAttack2");
-
+        }
+        else
+        {
+            ChangeState(State.MOVE);
         }
     }
     void EndAttack()

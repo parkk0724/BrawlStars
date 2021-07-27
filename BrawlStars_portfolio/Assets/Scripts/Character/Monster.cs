@@ -10,6 +10,8 @@ public class Monster : Character
     State m_eState = State.MOVE;
     NavMeshAgent m_NavMeshAgent;
     Transform m_tfTarget;
+
+    Coroutine die = null;
     protected virtual void Start()
     {
         m_Animator = this.GetComponentInChildren<Animator>();
@@ -26,11 +28,10 @@ public class Monster : Character
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (m_nHP <= 0)
         {
-            StartCoroutine(Die());
             ChangeState(State.DEAD);
         }
         ProgressState();
@@ -67,7 +68,8 @@ public class Monster : Character
                 Attack();
                 break;
             case State.DEAD:
-                Die();
+                if (die == null)
+                    die = StartCoroutine(Die());
                 break;
         }
     }
@@ -93,8 +95,11 @@ public class Monster : Character
     public override IEnumerator Die()
     {
         m_Animator.SetTrigger("tDie");
-        Destroy(this.transform.parent.gameObject); // 일단 죽으면 사라지게 만듬
-        yield return null;
+        while (true)
+        {   
+            //Destroy(this.transform.parent.gameObject); // 일단 죽으면 사라지게 만듬
+            yield return null;
+        }
     }
     public virtual void Attack()
     {

@@ -21,7 +21,7 @@ public class BossMonster : Monster
     // Update is called once per frame
     void Update()
     {
-        ProgressState();
+        base.Update();
         CheckPhase();
     }
 

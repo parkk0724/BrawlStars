@@ -92,6 +92,7 @@ public class Monster : Character
     }
     public override IEnumerator Die()
     {
+        m_Animator.SetTrigger("tDie");
         Destroy(this.transform.parent.gameObject); // 일단 죽으면 사라지게 만듬
         yield return null;
     }
@@ -100,11 +101,4 @@ public class Monster : Character
         ChangeState(State.MOVE); // test용
         //if (m_NavMeshAgent.remainingDistance > 1.0f) ChangeState(State.MOVE); // 목저지와 거리가 1.0f보다 크다면 이동전환
     }
-   // private void OnTriggerEnter(Collider other)// 일단 총알에 맞으면 데미지 처리 테스트 위해 여기다 둠 -유석
-   // {
-   //     if (other.tag == "Bullet")
-   //     {
-   //         Hit(10, new Color(1, 0, 0, 1));
-   //     }
-   // }
 }

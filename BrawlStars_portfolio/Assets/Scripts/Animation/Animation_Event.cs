@@ -22,6 +22,7 @@ public class Animation_Event : MonoBehaviour
     [Header("BossMonster")]
     public UnityAction endAttack = null;
     public UnityAction skill_attack2 = null;
+    public UnityAction basicAttack = null;
     public BossMonsterFire bossMonFire = null;
     // Start is called before the first frame update
 
@@ -76,5 +77,10 @@ public class Animation_Event : MonoBehaviour
     private void BossMonFire(int n)
     {
         bossMonFire?.Invoke(n);
+    }
+
+    private void BasicAttack()
+    {
+        basicAttack?.Invoke();
     }
 }

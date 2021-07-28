@@ -12,7 +12,7 @@ public class BazookaBullet : MonoBehaviour
     public float range = 7.0f;
     public float height = 3.0f;
 
-    float m_fDamage = 30.0f;
+    float m_fDamage = 25.0f;
 
     BoxCollider collider_size = null;
 

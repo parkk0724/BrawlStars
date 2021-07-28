@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Animation_Event : MonoBehaviour
 {
-    [Header("Bazooka")]    
+    [Header("Bazooka")]
     public UnityAction bazooka_basic_fire = null;
     public UnityAction bazooka_skill_fire = null;
     public GameObject bazooka_fire_effect;
@@ -19,8 +19,10 @@ public class Animation_Event : MonoBehaviour
 
     [Header("BossMonster")]
     public UnityAction endAttack = null;
+    public UnityAction skill_attack2 = null;
     // Start is called before the first frame update
 
+    Animator myAnimator;
     private void Run_Effect_L()
     {
         GameObject fire_effect = Instantiate(run_effect, Lfoot_pos.position, Quaternion.identity);
@@ -42,7 +44,7 @@ public class Animation_Event : MonoBehaviour
     {
         bazooka_skill_fire?.Invoke();
     }
-       
+
     private void Shoot()
     {
         OnShoot?.Invoke();
@@ -55,5 +57,17 @@ public class Animation_Event : MonoBehaviour
     private void EndAttack()
     {
         endAttack?.Invoke();
+    }
+
+    private void Skill_Attack2()
+    {
+        skill_attack2?.Invoke();
+    }
+
+    private void PlaySpeed(float speed)
+    {
+        myAnimator = this.GetComponent<Animator>();
+
+        myAnimator.SetFloat("PlaySpeed", speed);
     }
 }

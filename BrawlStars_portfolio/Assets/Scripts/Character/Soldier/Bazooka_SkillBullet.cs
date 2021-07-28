@@ -8,7 +8,7 @@ public class Bazooka_SkillBullet : MonoBehaviour
     public float bullet_up_speed;
     public float bullet_speed;
 
-    float m_fDamage = 40.0f;
+    float m_fDamage = 50.0f;
 
     Transform SkillBullt_Pos = null;
     Transform SkillBullt_Destination = null;

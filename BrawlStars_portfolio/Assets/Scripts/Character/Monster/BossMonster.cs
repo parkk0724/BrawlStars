@@ -7,6 +7,7 @@ public class BossMonster : Monster
     public Material m_mHeader = null;
     public Material m_mBody = null;
     public GameObject m_objBullet = null;
+    public Transform[] m_FirePos = null;
 
     bool[] m_bPhase = new bool[2] { false, false };
     float m_fCurTime = 0.0f;
@@ -29,11 +30,14 @@ public class BossMonster : Monster
         m_fRange = 10.0f;
 
         m_fMaxMoveTime = 3.0f;
-        m_fMaxIdleTime = 3.0f;
+        m_fMaxIdleTime = 1.0f;
         m_fBasicAttackRange = 2.0f;
-        m_fSkill1_AttackRange = 5.0f;
+        m_fSkill1_AttackRange = 10.0f;
         m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
+        this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
+        ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
+        ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
     }
 
     // Update is called once per frame
@@ -157,7 +161,7 @@ public class BossMonster : Monster
         {
             SkillAttack2();
         }
-        else if (rnd < 25 && m_bPhase[0])
+        else if (rnd < 100 && m_bPhase[0])
         {
             SkillAttack1();
 
@@ -216,5 +220,10 @@ public class BossMonster : Monster
         c.g = g;
         c.b = b;
         m.SetColor("_Color", c);
+    }
+
+    void BossMonFire(int n)
+    {
+        Instantiate(m_objBullet, m_FirePos[n].position, m_FirePos[n].rotation);
     }
 }

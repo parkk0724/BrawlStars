@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
+public delegate void BossMonsterFire(int n);
 public class Animation_Event : MonoBehaviour
 {
     [Header("Bazooka")]    
@@ -19,7 +21,7 @@ public class Animation_Event : MonoBehaviour
 
     [Header("BossMonster")]
     public UnityAction endAttack = null;
-    // Start is called before the first frame update
+    public BossMonsterFire bossMonFire = null;
 
     private void Run_Effect_L()
     {
@@ -55,5 +57,10 @@ public class Animation_Event : MonoBehaviour
     private void EndAttack()
     {
         endAttack?.Invoke();
+    }
+
+    private void BossMonFire(int n)
+    {
+        bossMonFire?.Invoke(n);
     }
 }

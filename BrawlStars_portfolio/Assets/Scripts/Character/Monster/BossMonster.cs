@@ -169,13 +169,30 @@ public class BossMonster : Monster
         int rnd = Random.Range(1, 100);
         if (m_bPhase[1])
         {
-            if (Vector3.Distance(this.transform.position, m_tfTarget.position) >= m_fSkill2_AttackRange)
-                SkillAttack2();
-            if (rnd < 70)
-                SkillAttack1();
-            else
-                SkillAttack1();
+            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
+            {
+                if (rnd <= 60)
+                {
+                    BasicAttack();
+                }
+                // else if (rnd > 60 && rnd <= 90)
+                //     SkillAttack1();
+                else
+                {
+                    SkillAttack2();
+                }
 
+            }
+            else if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange)
+            {
+                //if (rnd <= 60)
+                //    SkillAttack1();                
+                SkillAttack2();
+            }
+            else
+            {
+                SkillAttack2();
+            }
         }
         else if (rnd < 100 && m_bPhase[0])
         {
@@ -218,8 +235,9 @@ public class BossMonster : Monster
         {
             this.transform.LookAt(m_tfTarget);
             m_Animator.SetTrigger("tSkillAttack2");
+            ChangeState(State.MOVE);
         }
-        else
+        else 
         {
             ChangeState(State.MOVE);
         }

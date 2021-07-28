@@ -37,7 +37,7 @@ public class BossMonster : Monster
         m_fSkill1_AttackRange = 10.0f;
         m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
-        //this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
+        this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
         Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
         ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);

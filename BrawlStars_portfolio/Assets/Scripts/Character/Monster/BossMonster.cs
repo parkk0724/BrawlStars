@@ -7,6 +7,7 @@ public class BossMonster : Monster
     public Material m_mHeader = null;
     public Material m_mBody = null;
     public GameObject m_objBullet = null;
+    public GameObject m_Skill2 = null;
     public GameObject m_objBasicAttackPos = null;
     public Transform[] m_FirePos = null;
 
@@ -39,6 +40,7 @@ public class BossMonster : Monster
         m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
         this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
+        this.GetComponentInChildren<Animation_Event>().skill_attack2 = BossMon_Skill2;
         this.GetComponentInChildren<Animation_Event>().basicAttack = OnBasicAttack;
         Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
@@ -274,6 +276,11 @@ public class BossMonster : Monster
     void BossMonFire(int n)
     {
         Instantiate(m_objBullet, m_FirePos[n].position, m_FirePos[n].rotation);
+    }
+
+    void BossMon_Skill2()
+    {
+        Instantiate(m_Skill2, this.transform.position, Quaternion.identity);
     }
 
     void OnBasicAttack()

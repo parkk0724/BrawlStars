@@ -17,6 +17,8 @@ public class BossMonster : Monster
     float m_fSkill1_AttackRange = 0.0f;
     float m_fSkill2_AttackRange = 0.0f;
 
+    GameObject Dark_Effect;
+
     Coroutine die = null;
     protected override void Start()
     {
@@ -36,8 +38,10 @@ public class BossMonster : Monster
         m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
         this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
+        Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
         ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
+        Dark_Effect.SetActive(false);
     }
 
     // Update is called once per frame
@@ -138,7 +142,12 @@ public class BossMonster : Monster
     }
     void CheckPhase()
     {
-        if (m_nHP < m_nMaxHP / 2 && !m_bPhase[0]) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 첫 페이즈가 바뀔때)
+        if (m_nHP <= m_nMaxHP && m_nHP > m_nMaxHP / 2 && !m_bPhase[0] && !m_bPhase[1])
+        {
+            ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
+            ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
+        }
+        else if (m_nHP <= m_nMaxHP / 2 && !m_bPhase[0]) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 첫 페이즈가 바뀔때)
         {
             m_Animator.SetTrigger("tPowerUp");
             ColorChange(m_mHeader, 1.0f, 0.5f, 0.5f);
@@ -146,7 +155,7 @@ public class BossMonster : Monster
             m_bPhase[0] = true;
             // 여기서 상태값 조절
         }
-        else if (m_nHP < m_nMaxHP / 4 && !m_bPhase[1]) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 두번째 페이즈가 바뀔때)
+        else if (m_nHP <= m_nMaxHP / 4 && !m_bPhase[1]) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 두번째 페이즈가 바뀔때)
         {
             m_Animator.SetTrigger("tPowerUp");
             ColorChange(m_mHeader, 1.0f, 0.0f, 0.0f);

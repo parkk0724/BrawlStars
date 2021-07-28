@@ -8,7 +8,7 @@ public enum ITemType
 }
 public enum USE
 {
-    HP, MP, MOO, SLSL // 즉발 아이템 이름 대충 만들었음 수정할것
+    HP, STAMINA, FEVER, TSTOP, INVINCIBLE // 즉발 아이템 이름 대충 만들었음 수정할것
 }
 [System.Serializable]
 public class Item

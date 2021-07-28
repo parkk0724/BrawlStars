@@ -198,12 +198,24 @@ public class Hero : Character
                     switch (dropitem.GetItem().use) 
                     {
                         case USE.HP:
+                            m_nHP += dropitem.GetItem().itemCount;
+                            if (m_nHP > m_nMaxHP)
+                                m_nHP = m_nMaxHP;
                             break;
-                        case USE.MP:
+                        case USE.STAMINA:
+                            m_fStamina += dropitem.GetItem().itemCount;
+                            if (m_fStamina > m_fMaxStamina)
+                                m_fStamina = m_fMaxStamina;
                             break;
-                        case USE.SLSL: 
+                        case USE.FEVER:
+                            m_fFever += dropitem.GetItem().itemCount;
+                            if (m_fFever > m_fMaxFever)
+                                m_fFever = m_fMaxFever;
                             break;
-                        case USE.MOO:
+                        case USE.TSTOP:
+
+                            break;
+                        case USE.INVINCIBLE:
                             break;
                     }
                 }
@@ -213,14 +225,6 @@ public class Hero : Character
                 }
                 dropitem.Death();
             }
-           
-            ///Feilditem fieditems = other.GetComponent<Feilditem>();
-            ///if(items.Count > 0)
-            ///items.Add(fieditems.GetItem());
-            ///else
-            ///{
-            ///
-            ///}
         }
     }
     private void OnTriggerStay(Collider other)

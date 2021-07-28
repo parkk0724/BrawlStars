@@ -47,6 +47,8 @@ public class Hero : Character
     Coroutine Jump1;
     Coroutine Jump2;
 
+
+    public List<Item> items = new List<Item>();
     public float GetFever() { return m_fFever; }
     public float GetMaxFever() { return m_fMaxFever; }
     public virtual void FeverUp()
@@ -182,13 +184,43 @@ public class Hero : Character
     {
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Item")
+        if (other.gameObject.CompareTag("Item"))
         {
-            Item item = other.GetComponent<Item>();
+            if (other.GetComponent<DropItem>())
+            {
+                DropItem dropitem = other.GetComponent<DropItem>();
 
-            Destroy(other.gameObject);
+                if (dropitem.GetItem().itemtype == ITemType.Potion)
+                {
+                    switch (dropitem.GetItem().use) 
+                    {
+                        case USE.HP:
+                            break;
+                        case USE.MP:
+                            break;
+                        case USE.SLSL: 
+                            break;
+                        case USE.MOO:
+                            break;
+                    }
+                }
+                else
+                {
+                    items.Add(dropitem.GetItem());
+                }
+                dropitem.Death();
+            }
+           
+            ///Feilditem fieditems = other.GetComponent<Feilditem>();
+            ///if(items.Count > 0)
+            ///items.Add(fieditems.GetItem());
+            ///else
+            ///{
+            ///
+            ///}
         }
     }
     private void OnTriggerStay(Collider other)

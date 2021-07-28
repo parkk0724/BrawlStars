@@ -2,48 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public enum ITemType
 {
-    float dist = 0.0f;
-    //float dir = 1.0f;
+    Potion, Equipment //즉발 // 비즉발
+}
+public enum USE
+{
+    HP, MP, MOO, SLSL // 즉발 아이템 이름 대충 만들었음 수정할것
+}
+[System.Serializable]
+public class Item
+{
+    public ITemType itemtype;
+    public USE use;
+    public string itemName;
+    public int itemCount;
 
-    Coroutine item_updown;
-    public enum ItemType
+    public bool Use()
     {
-        NONE, HEAL
-    }    
-    // Start is called before the first frame update
-    void Start()
-    {
-        item_updown = StartCoroutine(ItemUpDown());
+        return false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-     
-    }
-
-    IEnumerator ItemUpDown()
-    {
-        float dir = 1.0f;
-        while (true)
-        {
-            float delta = 0.2f * Time.deltaTime;
-      
-            dist += delta;
-
-            if (dist > 0.3f)
-            {
-                delta = 0.3f - (dist - delta);
-                dist = 0.0f;
-                dir *= -1.0f;
-            }
-
-            this.transform.Translate(Vector3.up * dir * delta, Space.World);
-
-            yield return null;
-        }
-       
-    }
 }

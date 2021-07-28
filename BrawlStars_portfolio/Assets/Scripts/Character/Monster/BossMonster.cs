@@ -43,7 +43,7 @@ public class BossMonster : Monster
         Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
         ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
-        Dark_Effect.SetActive(true);
+        Dark_Effect.SetActive(false);
     }
 
     // Update is called once per frame
@@ -155,6 +155,7 @@ public class BossMonster : Monster
             m_Animator.SetTrigger("tPowerUp");
             ColorChange(m_mHeader, 1.0f, 0.5f, 0.5f);
             ColorChange(m_mBody, 1.0f, 0.5f, 0.5f);
+            Dark_Effect.SetActive(true);
             m_bPhase[0] = true;
 
             m_fMaxIdleTime = 0.5f;
@@ -175,13 +176,38 @@ public class BossMonster : Monster
         int rnd = Random.Range(1, 100);
         if (m_bPhase[1])
         {
-            if (Vector3.Distance(this.transform.position, m_tfTarget.position) >= m_fSkill2_AttackRange)
-                SkillAttack2();
-            if (rnd < 70)
-                SkillAttack1();
-            else
-                SkillAttack1();
+            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
+            {
+                if (rnd <= 50)
+                    BasicAttack();
+                else if (rnd > 50 && rnd <= 80)
+                {
+                    if (rnd > 50 && rnd < 60)
+                        SkillAttack1();
+                    else
+                        ChangeState(State.MOVE);
+                }
+                    
+                else
+                    SkillAttack2();
 
+            }
+            else if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange)
+            {
+                if (rnd <= 60)
+                {
+                    if (rnd > 0 && rnd < 35)
+                        SkillAttack1();
+                    else
+                        ChangeState(State.MOVE);
+                }               
+                else 
+                    SkillAttack2();
+            }
+            else
+            {
+                SkillAttack2();
+            }
         }
         else if (rnd < 100 && m_bPhase[0])
         {
@@ -224,8 +250,9 @@ public class BossMonster : Monster
         {
             this.transform.LookAt(m_tfTarget);
             m_Animator.SetTrigger("tSkillAttack2");
+            ChangeState(State.MOVE);
         }
-        else
+        else 
         {
             ChangeState(State.MOVE);
         }

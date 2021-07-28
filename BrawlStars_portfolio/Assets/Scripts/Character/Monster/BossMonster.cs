@@ -7,6 +7,7 @@ public class BossMonster : Monster
     public Material m_mHeader = null;
     public Material m_mBody = null;
     public GameObject m_objBullet = null;
+    public GameObject m_skill2 = null;
     public Transform[] m_FirePos = null;
 
     bool[] m_bPhase = new bool[2] { false, false };
@@ -38,6 +39,7 @@ public class BossMonster : Monster
         m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
         this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
+        this.GetComponentInChildren<Animation_Event>().skill_attack2 = BossMon_Skill2;
         Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
         ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
@@ -139,7 +141,7 @@ public class BossMonster : Monster
         {
             ChangeState(State.IDLE);
         }
-        
+
     }
     void CheckPhase()
     {
@@ -181,10 +183,10 @@ public class BossMonster : Monster
                     else
                         ChangeState(State.MOVE);
                 }
-                    
+            
                 else
                     SkillAttack2();
-
+            
             }
             else if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange)
             {
@@ -194,8 +196,8 @@ public class BossMonster : Monster
                         SkillAttack1();
                     else
                         ChangeState(State.MOVE);
-                }               
-                else 
+                }
+                else
                     SkillAttack2();
             }
             else
@@ -216,7 +218,7 @@ public class BossMonster : Monster
 
     void BasicAttack()
     {
-        if(Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
+        if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
         {
             this.transform.LookAt(m_tfTarget);
             m_Animator.SetTrigger("tBAttack");
@@ -246,7 +248,7 @@ public class BossMonster : Monster
             m_Animator.SetTrigger("tSkillAttack2");
             ChangeState(State.MOVE);
         }
-        else 
+        else
         {
             ChangeState(State.MOVE);
         }
@@ -268,5 +270,9 @@ public class BossMonster : Monster
     void BossMonFire(int n)
     {
         Instantiate(m_objBullet, m_FirePos[n].position, m_FirePos[n].rotation);
+    }
+    void BossMon_Skill2()
+    {
+        Instantiate(m_skill2, this.transform.position, Quaternion.identity);
     }
 }

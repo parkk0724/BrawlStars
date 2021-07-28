@@ -21,21 +21,11 @@ public class Turret : MonoBehaviour
     {
         if (tfTarget != null)
         {
+            this.transform.LookAt(tfTarget.position );
+            // 해결방안
+            //      1. LookAt + offset 추가
+            //      2. 내적, dir, y축 회전
 
-            // ------------------------ 제대로 안 돌아가네 왜 그럴까?? ---------------------
-            // LookRotation: 특정 좌표를 바라보게 만드는 회전값 리턴
-            Quaternion LookRotation = Quaternion.LookRotation(tfTarget.position);
-
-            // RotateTowards: A 지점에서 B 지점까지 C의 스피드로 회전
-            Vector3 VecterEulerValue = Quaternion.RotateTowards(this.transform.rotation, LookRotation, fRotSpeed).eulerAngles;           
-
-            // 오일러값에서 y축만 반영되게 수정한 뒤 쿼터니온으로 변환
-            this.transform.rotation = Quaternion.Euler(0, VecterEulerValue.y, 0);
-
-            Debug.Log("LookRotation:" + LookRotation);
-            Debug.Log("오일러값:" + VecterEulerValue);
-            Debug.Log("현재 회전값:" + this.transform.rotation);
-            // -------------------------- 까지 해결 중인 부분 ---------------------------------
         }
         else
             this.transform.Rotate(new Vector3(0, 45, 0) * Time.deltaTime);
@@ -65,23 +55,8 @@ public class Turret : MonoBehaviour
             }
         }
         tfTarget = ShortTransform;
-        Debug.Log("타겟위치: " +tfTarget.position);
-        //if(tfTarget != null)
-        //{
+        Debug.Log("타겟위치: " + tfTarget.position);
 
-        //    ////Debug.Log(tfTarget.position);
-        //    //Vector3 TargetDir = (tfTarget.position - this.transform.position).normalized;
-        //    //float DotValue = Vector3.Dot(this.transform.forward, TargetDir);
-
-        //    //float Angle = Mathf.Acos(DotValue);
-        //    //float theta = Angle * Mathf.Rad2Deg;
-
-        //    ////Vector3 dir = tfTarget.position;
-        //    ////dir.y = this.transform.position.y;
-
-        //    //this.transform.Rotate(0, theta, 0);
-        //    //Debug.Log(theta);
-        //}
     }
 
 }
@@ -118,4 +93,38 @@ void LookatEnemy()
     터렛 방향 변경시 야기되는 문제
         1. 일단 제대로 안 돌아간다. -> 값이 잘못됐다 or 추출된 값이 잘못 들어왔다 or 오브젝트문제.
                 -> 오브젝트 시험
+
+
+            // ------------------------ 제대로 안 돌아가네 왜 그럴까?? ---------------------
+            // LookRotation: 특정 좌표를 바라보게 만드는 회전값 리턴
+            //Quaternion LookRotation = Quaternion.LookRotation(tfTarget.position);
+
+            // RotateTowards: A 지점에서 B 지점까지 C의 스피드로 회전
+            //Vector3 VecterEulerValue = Quaternion.RotateTowards(this.transform.rotation, LookRotation, fRotSpeed).eulerAngles;           
+
+            // 오일러값에서 y축만 반영되게 수정한 뒤 쿼터니온으로 변환
+            //this.transform.rotation = Quaternion.Euler(0, VecterEulerValue.y, 0);
+
+            //Debug.Log("LookRotation:" + LookRotation);
+            //Debug.Log("오일러값:" + VecterEulerValue);
+            //Debug.Log("현재 회전값:" + this.transform.rotation);
+            // -------------------------- 까지 해결 중인 부분 ---------------------------------
+
+
+        //if(tfTarget != null)
+        //{
+
+        //    ////Debug.Log(tfTarget.position);
+        //    //Vector3 TargetDir = (tfTarget.position - this.transform.position).normalized;
+        //    //float DotValue = Vector3.Dot(this.transform.forward, TargetDir);
+
+        //    //float Angle = Mathf.Acos(DotValue);
+        //    //float theta = Angle * Mathf.Rad2Deg;
+
+        //    ////Vector3 dir = tfTarget.position;
+        //    ////dir.y = this.transform.position.y;
+
+        //    //this.transform.Rotate(0, theta, 0);
+        //    //Debug.Log(theta);
+        //}
 */

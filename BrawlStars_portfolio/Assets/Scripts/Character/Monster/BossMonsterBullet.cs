@@ -12,8 +12,6 @@ public class BossMonsterBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
-
         if(other.tag == "Player")
         {
             other.GetComponent<Character>().Hit(10, Color.red);

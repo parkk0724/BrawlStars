@@ -37,11 +37,11 @@ public class BossMonster : Monster
         m_fSkill1_AttackRange = 10.0f;
         m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
-        this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
+        //this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
         Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
         ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
-        Dark_Effect.SetActive(false);
+        Dark_Effect.SetActive(true);
     }
 
     // Update is called once per frame
@@ -53,6 +53,7 @@ public class BossMonster : Monster
             ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
 
             ChangeState(State.DEAD);
+            Dark_Effect.SetActive(false);
         }
         m_fCurTime += Time.deltaTime;
         ProgressState();
@@ -166,9 +167,15 @@ public class BossMonster : Monster
     public override void Attack()
     {
         int rnd = Random.Range(1, 100);
-        if (rnd < 50 && m_bPhase[1])
+        if (m_bPhase[1])
         {
-            SkillAttack2();
+            if (Vector3.Distance(this.transform.position, m_tfTarget.position) >= m_fSkill2_AttackRange)
+                SkillAttack2();
+            if (rnd < 70)
+                SkillAttack1();
+            else
+                SkillAttack1();
+
         }
         else if (rnd < 100 && m_bPhase[0])
         {

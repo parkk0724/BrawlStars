@@ -91,7 +91,6 @@ public class Hero : Character
         m_fJump_Height = 5.0f;
         m_fJump_Speed = 10.0f;
     }
-
     // Update is called once per frame
     protected virtual void Update()
     {
@@ -183,7 +182,6 @@ public class Hero : Character
     public virtual void SkillAttack()
     {
     }
-
 
     private void OnTriggerEnter(Collider other)
     {

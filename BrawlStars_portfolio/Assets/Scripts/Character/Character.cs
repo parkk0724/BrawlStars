@@ -20,6 +20,7 @@ public abstract class Character : MonoBehaviour
     public int GetATK() { return m_nATK; }
     public abstract void Move();
     public abstract IEnumerator Die();
+
     public virtual void Hit(int damage, Color c) // 온콜라이더에서 호출하는게 좋을 것 같음 *데미지마다 색상을 틀리게하기위해 color값 추가
     {
         // 총알이 닿으면, Bullet 스크립트에서 Hit 함수 발생.

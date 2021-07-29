@@ -2,8 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class itemDatabase : MonoBehaviour
-{
+public class itemDatabase : MonoBehaviour {
+
+    static public itemDatabase instane;
+    private void Awake()
+    {
+        if(instane != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject); ;
+            instane = this;
+        }
+    }
+
     public List<Item> itemList = new List<Item>();
 
     void Start()

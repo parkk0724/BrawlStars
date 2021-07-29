@@ -58,7 +58,7 @@ public class Hero : Character
     }
     public float GetStamina() { return m_fStamina; }
     public float GetMaxStamina() { return m_fMaxStamina; }
-    void RecoveryStamina()
+    public void RecoveryStamina()
     {
         if (m_fStamina < m_fMaxStamina)
         {
@@ -93,7 +93,7 @@ public class Hero : Character
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (!m_bDie)
         {
@@ -345,7 +345,7 @@ public class Hero : Character
         }
     }
     #region SearchTarget
-    void SearchTarget()
+    protected void SearchTarget()
     {
         float Shortdist = 10;
         Transform shorTarget = null;
@@ -366,7 +366,7 @@ public class Hero : Character
     }
     #endregion
     #region Lookenemy
-    void LookEnemy()
+    protected void LookEnemy()
     {
         if (m_tfResultTarget == null)
         {
@@ -395,7 +395,7 @@ public class Hero : Character
     }
     #endregion
     #region SerchTargetEffect
-    void SearchTargetEffect()
+    protected void SearchTargetEffect()
     {
         float Shortdist = 10;
         Transform shorTarget = null;
@@ -414,7 +414,7 @@ public class Hero : Character
         }
         m_tfEfResultTarget = shorTarget; // ÃÖÁ¾°ª
     }
-    void TargetEffect()
+   protected void TargetEffect()
     {
         if (m_tfEfResultTarget == null)
         {

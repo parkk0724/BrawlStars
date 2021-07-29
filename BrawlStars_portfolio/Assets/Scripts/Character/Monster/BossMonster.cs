@@ -135,18 +135,45 @@ public class BossMonster : Monster
     }
     public override void Move()
     {
-        if (m_fCurTime < m_fMaxMoveTime)
+        int rnd = Random.Range(1, 100);
+        if (m_bPhase[1])
         {
-            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
+            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
             {
-                ChangeState(State.ATTACK);
+                if (rnd <= 65)
+                    ChangeState(State.ATTACK);
+                else
+                    ChangeState(State.MOVE);
+            }
+        }
+        else if (m_bPhase[0])
+        {
+            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
+            {
+                if (rnd <= 35)
+                    ChangeState(State.ATTACK);
+                else
+                    ChangeState(State.MOVE);
+            }
+            else
+            {
+                ChangeState(State.MOVE);
             }
         }
         else
         {
-            ChangeState(State.IDLE);
+            if (m_fCurTime < m_fMaxMoveTime)
+            {
+                if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
+                    ChangeState(State.ATTACK);
+                else
+                    ChangeState(State.MOVE);
+            }
+            else
+            {
+                ChangeState(State.IDLE);
+            }
         }
-        
     }
     void CheckPhase()
     {

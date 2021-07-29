@@ -8,11 +8,13 @@ public class JesterBullet : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody rigid;
     JesterWeapon jwaepon;
+    //Hero hero;
     private float m_fDamage = 0;
     public UnityAction Fever = null;
     public GameObject HitEffect = null;
     void Start()
     {
+        //hero = GetComponent<Hero>();
         SetDamage(10f);
         Destroy(this.gameObject, 2f);
         rigid = GetComponent<Rigidbody>();
@@ -33,7 +35,7 @@ public class JesterBullet : MonoBehaviour
             jester.FeverUp();
             if (other.GetComponent<Monster>())
             {
-                other.GetComponent<Monster>().Hit((int)m_fDamage + Random.Range(-5, 5), Color.red);
+                other.GetComponent<Monster>().Hit(jester.GetATK() + Random.Range(-5, 5), Color.red);
 
             }
         }

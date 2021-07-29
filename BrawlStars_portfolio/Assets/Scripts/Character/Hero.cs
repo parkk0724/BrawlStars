@@ -216,6 +216,7 @@ public class Hero : Character
 
                             break;
                         case USE.INVINCIBLE:
+                            StartCoroutine(Invincible(5f));
                             break;
                     }
                 }
@@ -465,5 +466,11 @@ public class Hero : Character
         private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
+    }
+    IEnumerator Invincible(float time)
+    {
+        this.gameObject.layer = 9;
+        yield return new WaitForSeconds(time);
+        this.gameObject.layer = 7;
     }
 }

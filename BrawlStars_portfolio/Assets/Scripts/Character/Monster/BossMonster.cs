@@ -183,36 +183,48 @@ public class BossMonster : Monster
         {
             if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
             {
-                if (rnd <= 50)
+                if (rnd <= 40)
                     BasicAttack();
-                else if (rnd > 50 && rnd <= 80)
-                {
-                    if (rnd > 50 && rnd < 60)
-                        SkillAttack1();
-                    else
-                        ChangeState(State.MOVE);
-                }
-                    
+                else if (rnd > 40 && rnd <= 60)               
+                    SkillAttack1();               
+                else if (rnd > 60 && rnd <= 70)
+                    SkillAttack2();
                 else
-                    SkillAttack2();
-
+                    ChangeState(State.IDLE);
             }
-            else if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange)
+            else if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fSkill2_AttackRange)
             {
-                if (rnd <= 60)
+                if (rnd <= 80)
                 {
-                    if (rnd > 0 && rnd < 35)
+                    if (rnd < 60)
                         SkillAttack1();
                     else
+                    {
                         ChangeState(State.MOVE);
-                }               
-                else 
+                    }
+                }
+                else
+                {
                     SkillAttack2();
+                }
+            }
+            else if (Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange)
+            {
+                if (rnd <= 30)
+                {
+                    SkillAttack2();
+                    ChangeState(State.MOVE);
+                }
+                else if (rnd > 30 && rnd < 60)
+                {
+                    SkillAttack1();
+                    ChangeState(State.MOVE);
+                }
+                else
+                    ChangeState(State.IDLE);
             }
             else
-            {
-                SkillAttack2();
-            }
+                ChangeState(State.MOVE);
         }
         else if (rnd < 100 && m_bPhase[0])
         {
@@ -250,16 +262,8 @@ public class BossMonster : Monster
     }
     void SkillAttack2()
     {
-        if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange)
-        {
-            this.transform.LookAt(m_tfTarget);
-            m_Animator.SetTrigger("tSkillAttack2");
-            ChangeState(State.MOVE);
-        }
-        else 
-        {
-            ChangeState(State.MOVE);
-        }
+        this.transform.LookAt(m_tfTarget);
+        m_Animator.SetTrigger("tSkillAttack2");           
     }
     void EndAttack()
     {
@@ -283,6 +287,15 @@ public class BossMonster : Monster
     void BossMon_Skill2()
     {
         Instantiate(m_Skill2, this.transform.position, Quaternion.identity);
+        Collider[] player = Physics.OverlapSphere(this.transform.position, m_fSkill2_AttackRange);
+
+        foreach (Collider Player in player)
+        {
+            if (Player.tag == "Player")
+            {
+                Player.GetComponent<Character>().Hit(15, Color.red);
+            }
+        }
     }
 
     void OnBasicAttack()

@@ -121,34 +121,35 @@ public class BossMonster : Monster
     }
     public override void Idle()
     {
-        if(m_bPhase[1])
+        if (m_fCurTime < m_fMaxIdleTime)
         {
-            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
-            {
-                ChangeState(State.ATTACK);
-            }
-            else
-            {
-                ChangeState(State.MOVE);
-            }
-        }
-        else if(m_bPhase[0])
-        {
-            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
-            {
-                ChangeState(State.ATTACK);
-            }
-            else
-            {
-                ChangeState(State.MOVE);
-            }
+            // Idle상태 유지
         }
         else
         {
-            if (m_fCurTime < m_fMaxIdleTime)
+            if (m_bPhase[1])
             {
-                // Idle상태 유지
+                if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
+                {
+                    ChangeState(State.ATTACK);
+                }
+                else
+                {
+                    ChangeState(State.MOVE);
+                }
             }
+            else if (m_bPhase[0])
+            {
+                if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
+                {
+                    ChangeState(State.ATTACK);
+                }
+                else
+                {
+                    ChangeState(State.MOVE);
+                }
+            }
+           
             else
             {
                 if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
@@ -159,17 +160,15 @@ public class BossMonster : Monster
                 {
                     ChangeState(State.MOVE);
                 }
-            }
-        }
-
-        
+            }            
+        }        
     }
     public override void Move()
     {
         int rnd = Random.Range(1, 100);
         if (m_bPhase[1])
         {
-            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
+            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange) // 이 부분에서 계속 걸려서 이동을 안함.. 여기는 내일 고쳐야즤
             {
                 if (rnd <= 65)
                     ChangeState(State.ATTACK);
@@ -241,48 +240,54 @@ public class BossMonster : Monster
         {
             if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
             {
-                if (rnd <= 40)
+                if (rnd <= 70)
                     BasicAttack();
-                else if (rnd > 40 && rnd <= 60)               
-                    SkillAttack1();               
-                else if (rnd > 60 && rnd <= 70)
-                    SkillAttack2();
                 else
                     ChangeState(State.IDLE);
             }
             else if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fSkill2_AttackRange)
             {
-                if (rnd <= 80)
+                if (rnd <= 90)
                 {
-                    if (rnd < 60)
+                    if (rnd < 20)
+                    {
+                        Debug.Log("skill1");
                         SkillAttack1();
+                    }
                     else
                     {
+                        Debug.Log("Move");
                         ChangeState(State.MOVE);
                     }
                 }
                 else
                 {
+                    Debug.Log("skill2");
                     SkillAttack2();
                 }
             }
             else if (Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange)
             {
-                if (rnd <= 30)
+                if (rnd <= 20)
                 {
+                    //Debug.Log("skill2");
                     SkillAttack2();
-                    ChangeState(State.MOVE);
                 }
-                else if (rnd > 30 && rnd < 60)
+                else if (rnd > 20 && rnd < 40)
                 {
+                    //Debug.Log("skill1");
                     SkillAttack1();
-                    ChangeState(State.MOVE);
                 }
                 else
+                {
+                    //Debug.Log("Idle");
                     ChangeState(State.IDLE);
+                }
             }
             else
+            {
                 ChangeState(State.MOVE);
+            }
         }
         else if (m_bPhase[0])
         {
@@ -319,24 +324,24 @@ public class BossMonster : Monster
     {
         if(Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
         {
-            this.transform.LookAt(m_tfTarget);
-            m_Animator.SetTrigger("tBAttack");
+          this.transform.LookAt(m_tfTarget);
+          m_Animator.SetTrigger("tBAttack");
         }
         else
         {
-            ChangeState(State.MOVE);
+          ChangeState(State.MOVE);
         }
     }
     void SkillAttack1()
     {
         if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
         {
-            this.transform.LookAt(m_tfTarget);
-            m_Animator.SetTrigger("tSkillAttack1");
+          this.transform.LookAt(m_tfTarget);
+          m_Animator.SetTrigger("tSkillAttack1");
         }
         else
         {
-            ChangeState(State.MOVE);
+          ChangeState(State.MOVE);
         }
     }
     void SkillAttack2()

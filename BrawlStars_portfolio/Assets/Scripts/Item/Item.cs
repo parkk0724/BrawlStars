@@ -4,17 +4,23 @@ using UnityEngine;
 
 public enum ITemType
 {
-    Potion, Equipment //즉발 // 비즉발
+    Potion, Equipment 
 }
 public enum USE
 {
-    HP, STAMINA, FEVER, TSTOP, INVINCIBLE // 즉발 아이템 이름 대충 만들었음 수정할것
+    HP, STAMINA, FEVER, TSTOP, INVINCIBLE 
 }
+public enum ITemGrade
+{
+    A,B,C,D
+}
+
 [System.Serializable]
 public class Item
 {
     public ITemType itemtype;
     public USE use;
+    public ITemGrade itemGrade;
     public string itemName;
     public int itemCount;
 

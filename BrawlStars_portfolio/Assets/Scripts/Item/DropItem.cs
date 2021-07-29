@@ -9,6 +9,7 @@ public class DropItem : MonoBehaviour // 셋 아이템
     {
         item.itemtype = _item.itemtype;
         item.use = _item.use;
+        item.itemGrade = _item.itemGrade;
         item.itemName = _item.itemName;
         item.itemCount = _item.itemCount;
     }

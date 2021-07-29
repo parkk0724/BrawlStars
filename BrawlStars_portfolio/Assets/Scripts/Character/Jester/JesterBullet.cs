@@ -15,7 +15,6 @@ public class JesterBullet : MonoBehaviour
     void Start()
     {
         //hero = GetComponent<Hero>();
-        SetDamage(10f);
         Destroy(this.gameObject, 2f);
         rigid = GetComponent<Rigidbody>();
         jwaepon = FindObjectOfType<JesterWeapon>();

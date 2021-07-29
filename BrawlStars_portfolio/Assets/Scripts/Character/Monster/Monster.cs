@@ -6,12 +6,13 @@ using UnityEngine.AI;
 public class Monster : Character
 {
     protected enum State { IDLE, MOVE, ATTACK, DEAD }
-
+    itemDatabase databas;
     protected State m_eState = State.IDLE;
     protected NavMeshAgent m_NavMeshAgent;
     protected Transform m_tfTarget;
     protected virtual void Start()
     {
+        databas = GetComponentInParent<itemDatabase>();
         m_UITextDamage = GameObject.Find("UI").GetComponentInChildren<UITextDamage>();
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
@@ -94,7 +95,7 @@ public class Monster : Character
     public override IEnumerator Die()
     {
         m_Animator.SetTrigger("tDie");
-
+        ItemDrop();
         while (true) //일단 죽고나서 게임 종료 시킬 거 생각해서 디스트로이는 주석처리 함
         {
             //Destroy(this.transform.parent.gameObject); // 일단 죽으면 사라지게 만듬
@@ -105,5 +106,41 @@ public class Monster : Character
     {
         ChangeState(State.MOVE); // test용
         //if (m_NavMeshAgent.remainingDistance > 1.0f) ChangeState(State.MOVE); // 목저지와 거리가 1.0f보다 크다면 이동전환
+    }
+    public virtual void ItemDrop()
+    {
+        int firstrage = Random.Range(0, 10);
+
+        if (firstrage < 5)
+        {
+            Debug.Log("아이템 없음");
+        }
+        else if (firstrage < 8)
+        {
+            ArrayList table = new ArrayList();
+            for (int i = 0; i < databas.itemList.Count; i++)
+            {
+                if (databas.itemList[i].itemGrade == (ITemGrade)3)
+                {
+                    table.Add(i);
+                }
+            }
+            int range = Random.Range(0, table.Count);
+            Instantiate(databas.itemList[(int)table[range]].itemPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
+
+        }
+        else if (firstrage < 10)
+        {
+            ArrayList table = new ArrayList();
+            for (int i = 0; i < databas.itemList.Count; i++)
+            {
+                if (databas.itemList[i].itemGrade == (ITemGrade)2)
+                {
+                    table.Add(i);
+                }
+            }
+            int range = Random.Range(0, table.Count);
+            Instantiate(databas.itemList[(int)table[range]].itemPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
+        }
     }
 }

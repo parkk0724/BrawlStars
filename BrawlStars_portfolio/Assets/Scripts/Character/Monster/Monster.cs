@@ -111,11 +111,11 @@ public class Monster : Character
     {
         int firstrage = Random.Range(0, 10);
 
-        if (firstrage < 5)
+        if (firstrage < 3)
         {
-            Debug.Log("아이템 없음");
+            return;
         }
-        else if (firstrage < 8)
+        else if (firstrage < 6)
         {
             ArrayList table = new ArrayList();
             for (int i = 0; i < databas.itemList.Count; i++)
@@ -126,7 +126,7 @@ public class Monster : Character
                 }
             }
             int range = Random.Range(0, table.Count);
-            Instantiate(databas.itemList[(int)table[range]].itemPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            Instantiate(databas.itemList[(int)table[range]].itemPrefab, this.gameObject.transform.position, databas.itemList[(int)table[range]].itemPrefab.transform.rotation);
 
         }
         else if (firstrage < 10)
@@ -140,7 +140,7 @@ public class Monster : Character
                 }
             }
             int range = Random.Range(0, table.Count);
-            Instantiate(databas.itemList[(int)table[range]].itemPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            Instantiate(databas.itemList[(int)table[range]].itemPrefab, this.gameObject.transform.position, databas.itemList[(int)table[range]].itemPrefab.transform.rotation);
         }
     }
 }

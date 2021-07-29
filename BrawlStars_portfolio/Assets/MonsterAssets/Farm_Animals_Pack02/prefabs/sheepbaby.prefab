@@ -1,0 +1,1316 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479104}
+  m_Layer: 0
+  m_Name: sheepbaby_Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100072}
+  m_LocalRotation: {x: -0.00000012167861, y: -0.00000008042001, z: 0.23407792, w: 0.97221786}
+  m_LocalPosition: {x: -0.09419489, y: 0.000000029802322, z: 0}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
+  m_Children:
+  - {fileID: 444484}
+  - {fileID: 459838}
+  m_Father: {fileID: 498610}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.0746}
+--- !u!1 &100490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417092}
+  m_Layer: 0
+  m_Name: sheepbaby_Ribcage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100490}
+  m_LocalRotation: {x: 2.4703292e-10, y: -0.0000000020866195, z: 0.0004453399, w: 0.99999994}
+  m_LocalPosition: {x: -0.11087346, y: 0, z: -2.842171e-14}
+  m_LocalScale: {x: 1, y: 0.9999999, z: 1}
+  m_Children:
+  - {fileID: 479038}
+  - {fileID: 498610}
+  - {fileID: 459094}
+  m_Father: {fileID: 441884}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.051}
+--- !u!1 &102562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400992}
+  m_Layer: 0
+  m_Name: sheepbaby_RLegDigit11 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102562}
+  m_LocalRotation: {x: -0.0003630121, y: 0.00061222765, z: -0.5090514, w: 0.86073583}
+  m_LocalPosition: {x: -0.060854357, y: 0.002703756, z: -0.0000028945506}
+  m_LocalScale: {x: 0.9999998, y: 1.0000002, z: 1}
+  m_Children: []
+  m_Father: {fileID: 401074}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -0.0001, y: 0.081599995, z: -61.201397}
+--- !u!1 &104068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 416530}
+  m_Layer: 0
+  m_Name: sheepbaby_LLeg2 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &416530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104068}
+  m_LocalRotation: {x: -0.086184435, y: 0.03547533, z: -0.3570359, w: 0.9294295}
+  m_LocalPosition: {x: -0.101040736, y: 0.0000058189034, z: -0.0000003501773}
+  m_LocalScale: {x: 1.0000025, y: 0.9999982, z: 0.9999991}
+  m_Children:
+  - {fileID: 458000}
+  m_Father: {fileID: 451076}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -7.7511997, y: 7.3922, z: -42.5296}
+--- !u!1 &116552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413756}
+  m_Layer: 0
+  m_Name: sheepbaby_RLegDigit11
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &413756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116552}
+  m_LocalRotation: {x: -0.0000379447, y: 0.00006364301, z: -0.5102359, w: 0.86003447}
+  m_LocalPosition: {x: -0.042438418, y: 0.0020543784, z: -0.00000055134296}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 488574}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0.0084999995, z: -61.3591}
+--- !u!1 &116710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479548}
+  m_Layer: 0
+  m_Name: sheepbaby_Pelvis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116710}
+  m_LocalRotation: {x: 0.6841015, y: -0.17889993, z: -0.6841014, w: 0.17889993}
+  m_LocalPosition: {x: 0.00000006962232, y: 0.36289027, z: -0.12681627}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 404608}
+  - {fileID: 400788}
+  - {fileID: 422674}
+  - {fileID: 444032}
+  m_Father: {fileID: 419200}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -150.6895}
+--- !u!1 &122874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407728}
+  m_Layer: 0
+  m_Name: sheepbaby_LLegAnkle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122874}
+  m_LocalRotation: {x: 0.12105094, y: 0.0021774203, z: -0.14233746, w: 0.9823859}
+  m_LocalPosition: {x: -0.12793922, y: -0.000000007450581, z: 0.000000007450581}
+  m_LocalScale: {x: 0.9999995, y: 1.0000031, z: 0.99999714}
+  m_Children:
+  - {fileID: 496946}
+  m_Father: {fileID: 479568}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 13.7955, y: -1.7809999, z: -16.7039}
+--- !u!1 &123454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 422674}
+  m_Layer: 0
+  m_Name: sheepbaby_Spine1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &422674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123454}
+  m_LocalRotation: {x: -0.00000006978999, y: 0.0000003036693, z: -0.31938383, w: 0.94762546}
+  m_LocalPosition: {x: -0.0496559, y: -0.007237017, z: -0.000000009313233}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
+  m_Children:
+  - {fileID: 468508}
+  m_Father: {fileID: 479548}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -37.2513}
+--- !u!1 &124846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413696}
+  m_Layer: 0
+  m_Name: sheepbaby_
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &413696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124846}
+  m_LocalRotation: {x: 0.50000006, y: -0.5, z: -0.4999999, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 419200}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!1 &132210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 427488}
+  m_Layer: 0
+  m_Name: sheepbaby_LLegDigit11 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &427488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132210}
+  m_LocalRotation: {x: 0.00036301182, y: -0.0006122276, z: -0.50905126, w: 0.8607359}
+  m_LocalPosition: {x: -0.060854353, y: 0.0027038306, z: 0.0000028945506}
+  m_LocalScale: {x: 1.0000002, y: 0.9999998, z: 1}
+  m_Children: []
+  m_Father: {fileID: 458000}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0.0001, y: -0.0815, z: -61.201298}
+--- !u!1 &133586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 418542}
+  m_Layer: 0
+  m_Name: sheepbaby_RLeg2 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &418542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133586}
+  m_LocalRotation: {x: 0.08618832, y: -0.03546559, z: -0.35701883, w: 0.929436}
+  m_LocalPosition: {x: -0.101040766, y: 0.000005841255, z: 0.0000003501773}
+  m_LocalScale: {x: 1.0000007, y: 0.99999976, z: 0.9999998}
+  m_Children:
+  - {fileID: 401074}
+  m_Father: {fileID: 442276}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 7.7521996, y: -7.3911996, z: -42.5275}
+--- !u!1 &134784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461708}
+  m_Layer: 0
+  m_Name: sheepbaby_RLegPlatform 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &461708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134784}
+  m_LocalRotation: {x: 0.5000001, y: -0.50000006, z: -0.4999999, w: 0.49999997}
+  m_LocalPosition: {x: 0.03876231, y: 0.000000024597432, z: 0.15097794}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 419200}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!1 &140412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444484}
+  m_Layer: 0
+  m_Name: sheepbaby_L_Ear1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &444484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140412}
+  m_LocalRotation: {x: -0.07011245, y: 0.78915274, z: 0.05399906, w: 0.607788}
+  m_LocalPosition: {x: -0.020182371, y: -0.027701318, z: 0.03527005}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 0.99999994}
+  m_Children: []
+  m_Father: {fileID: 479104}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -9.814199, y: 105.0195, z: -2.6187}
+--- !u!1 &141320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468050}
+  - component: {fileID: 13781358}
+  m_Layer: 0
+  m_Name: sheepbaby
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &468050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141320}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.24515834, z: 0.05439438}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 419200}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!137 &13781358
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141320}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d17c2202da14fb449bdbc66f6f742d6b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 4300000, guid: 2d9f3f127a3e8d54794405059422c938, type: 3}
+  m_Bones:
+  - {fileID: 417092}
+  - {fileID: 441884}
+  - {fileID: 468508}
+  - {fileID: 422674}
+  - {fileID: 479548}
+  - {fileID: 404608}
+  - {fileID: 400788}
+  - {fileID: 471220}
+  - {fileID: 442612}
+  - {fileID: 485906}
+  - {fileID: 451076}
+  - {fileID: 442276}
+  - {fileID: 416530}
+  - {fileID: 479568}
+  - {fileID: 407728}
+  - {fileID: 479038}
+  - {fileID: 458000}
+  - {fileID: 427488}
+  - {fileID: 401074}
+  - {fileID: 498610}
+  - {fileID: 479104}
+  - {fileID: 444484}
+  - {fileID: 442144}
+  - {fileID: 444032}
+  - {fileID: 418542}
+  - {fileID: 459094}
+  - {fileID: 488574}
+  - {fileID: 400992}
+  - {fileID: 459838}
+  - {fileID: 472372}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 479548}
+  m_AABB:
+    m_Center: {x: -0.13491198, y: 0.17921132, z: 0}
+    m_Extent: {x: 0.35680315, y: 0.28847605, z: 0.14323708}
+  m_DirtyAABB: 0
+--- !u!1 &143738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479038}
+  m_Layer: 0
+  m_Name: sheepbaby_LLegCollarbone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143738}
+  m_LocalRotation: {x: -0.41610387, y: 0.3020665, z: -0.48372632, w: 0.70825297}
+  m_LocalPosition: {x: 0.025924578, y: -0.010409266, z: 0.039349005}
+  m_LocalScale: {x: 1.0000001, y: 0.9999999, z: 0.99999994}
+  m_Children:
+  - {fileID: 451076}
+  m_Father: {fileID: 417092}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -17.2882, y: 60.427597, z: -78.783295}
+--- !u!1 &145406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 401074}
+  m_Layer: 0
+  m_Name: sheepbaby_RLegAnkle 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &401074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145406}
+  m_LocalRotation: {x: -0.02186882, y: 0.022201475, z: -0.23443775, w: 0.9716315}
+  m_LocalPosition: {x: -0.1548941, y: 0, z: 0}
+  m_LocalScale: {x: 0.9999998, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400992}
+  m_Father: {fileID: 418542}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -1.8386999, y: 3.0625, z: -27.1796}
+--- !u!1 &146650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444032}
+  m_Layer: 0
+  m_Name: sheepbaby_Tail1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &444032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146650}
+  m_LocalRotation: {x: 0.00000022363325, y: -0.000005855571, z: 0.9992643, w: 0.038352765}
+  m_LocalPosition: {x: 0.041900538, y: -0.040936768, z: 0.000000024935842}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
+  m_Children:
+  - {fileID: 472372}
+  m_Father: {fileID: 479548}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0.0007, y: 0, z: 175.60399}
+--- !u!1 &151058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 472372}
+  m_Layer: 0
+  m_Name: sheepbaby_Tail2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &472372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151058}
+  m_LocalRotation: {x: 0.0000057715642, y: -0.00000032276847, z: 0.12928027, w: 0.9916081}
+  m_LocalPosition: {x: -0.036864817, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.9999998, z: 0.9999999}
+  m_Children:
+  - {fileID: 442144}
+  m_Father: {fileID: 444032}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0.0007, y: 0, z: 14.856}
+--- !u!1 &151322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459094}
+  m_Layer: 0
+  m_Name: sheepbaby_RLegCollarbone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &459094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151322}
+  m_LocalRotation: {x: 0.41610402, y: -0.30206645, z: -0.4837262, w: 0.70825297}
+  m_LocalPosition: {x: 0.025924578, y: -0.010409266, z: -0.039349016}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 0.9999999}
+  m_Children:
+  - {fileID: 442276}
+  m_Father: {fileID: 417092}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 17.2882, y: -60.427597, z: -78.783295}
+--- !u!1 &153186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419200}
+  - component: {fileID: 11150452}
+  m_Layer: 0
+  m_Name: sheepbaby
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &419200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 468050}
+  - {fileID: 413696}
+  - {fileID: 427696}
+  - {fileID: 404022}
+  - {fileID: 479548}
+  - {fileID: 444890}
+  - {fileID: 461708}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &11150452
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153186}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: bd44a9ddc20b8974fb3f874292c01e60, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bd44a9ddc20b8974fb3f874292c01e60, type: 2}
+  - {fileID: 7400000, guid: e20c6859980b592459a75884bd9c60b6, type: 2}
+  - {fileID: 7400000, guid: d020e66c7de31d047b4168069298bbd7, type: 2}
+  - {fileID: 7400000, guid: ae433b7a3fa977b4eb58612089a45685, type: 2}
+  - {fileID: 7400000, guid: 301618f82da0d914f9e57110c5bbce7c, type: 2}
+  - {fileID: 7400000, guid: 48ebd9584bc14564bb636d2017f751f2, type: 2}
+  - {fileID: 7400000, guid: e82e9e53039c95241ad893dfffd4efb7, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 1
+--- !u!1 &153814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 441884}
+  m_Layer: 0
+  m_Name: sheepbaby_Spine3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &441884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153814}
+  m_LocalRotation: {x: 0.00000013088241, y: -0.00000023173465, z: 0.013462746, w: 0.9999094}
+  m_LocalPosition: {x: -0.06071467, y: 0, z: 0}
+  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
+  m_Children:
+  - {fileID: 417092}
+  m_Father: {fileID: 468508}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.5428}
+--- !u!1 &153860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 427696}
+  m_Layer: 0
+  m_Name: sheepbaby_LLegPlatform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &427696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153860}
+  m_LocalRotation: {x: 0.5000001, y: -0.50000006, z: -0.4999999, w: 0.49999997}
+  m_LocalPosition: {x: -0.038762353, y: 0.000000024597435, z: 0.15097794}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 419200}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!1 &154098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479568}
+  m_Layer: 0
+  m_Name: sheepbaby_LLeg3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154098}
+  m_LocalRotation: {x: -0.07565506, y: 0.047760904, z: -0.41071525, w: 0.9073633}
+  m_LocalPosition: {x: -0.12755893, y: 0.0000016987324, z: 0.000000044703484}
+  m_LocalScale: {x: 1.0000017, y: 0.99999624, z: 1.0000024}
+  m_Children:
+  - {fileID: 407728}
+  m_Father: {fileID: 471220}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -5.6275997, y: 8.6002, z: -49.131}
+--- !u!1 &154904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 404608}
+  m_Layer: 0
+  m_Name: sheepbaby_LLeg1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &404608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154904}
+  m_LocalRotation: {x: 0.77863836, y: -0.6274297, z: -0.0070982473, w: -0.0020038513}
+  m_LocalPosition: {x: 0.01761929, y: -0.012374252, z: 0.051660765}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
+  m_Children:
+  - {fileID: 471220}
+  m_Father: {fileID: 479548}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -0.6892, y: -179.5107, z: -102.2789}
+--- !u!1 &157266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496946}
+  m_Layer: 0
+  m_Name: sheepbaby_LLegDigit11
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157266}
+  m_LocalRotation: {x: 0.000037944556, y: -0.00006364265, z: -0.5102359, w: 0.86003447}
+  m_LocalPosition: {x: -0.04243841, y: 0.002054356, z: 0.00000055506825}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
+  m_Children: []
+  m_Father: {fileID: 407728}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -0.0084999995, z: -61.3591}
+--- !u!1 &159004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444890}
+  m_Layer: 0
+  m_Name: sheepbaby_RLegPlatform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &444890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159004}
+  m_LocalRotation: {x: 0.5000001, y: -0.50000006, z: -0.4999999, w: 0.49999997}
+  m_LocalPosition: {x: 0.042729456, y: -0.0000000147312065, z: -0.11312828}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 419200}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!1 &160816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442612}
+  m_Layer: 0
+  m_Name: sheepbaby_RLeg2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &442612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160816}
+  m_LocalRotation: {x: 0.024375642, y: -0.012089239, z: 0.63027453, w: 0.7758954}
+  m_LocalPosition: {x: -0.11030781, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 0.9999999}
+  m_Children:
+  - {fileID: 485906}
+  m_Father: {fileID: 400788}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 3.0418, y: 0.68659997, z: 78.1935}
+--- !u!1 &164208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 471220}
+  m_Layer: 0
+  m_Name: sheepbaby_LLeg2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &471220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164208}
+  m_LocalRotation: {x: -0.024176769, y: 0.011686207, z: 0.63027984, w: 0.7759035}
+  m_LocalPosition: {x: -0.11030775, y: 0.000000014901161, z: -0.0000000037252903}
+  m_LocalScale: {x: 1, y: 0.9999998, z: 1.0000002}
+  m_Children:
+  - {fileID: 479568}
+  m_Father: {fileID: 404608}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -2.995, y: -0.70809996, z: 78.193596}
+--- !u!1 &164248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 404022}
+  m_Layer: 0
+  m_Name: sheepbaby_LLegPlatform 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &404022
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164248}
+  m_LocalRotation: {x: 0.5000001, y: -0.50000006, z: -0.4999999, w: 0.49999997}
+  m_LocalPosition: {x: -0.04272942, y: -0.000000014731205, z: -0.1131283}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 419200}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!1 &172892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468508}
+  m_Layer: 0
+  m_Name: sheepbaby_Spine2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &468508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172892}
+  m_LocalRotation: {x: 0.00000024861615, y: 0.00000024753638, z: 0.05921655, w: 0.9982452}
+  m_LocalPosition: {x: -0.068944946, y: 0, z: -7.1054274e-15}
+  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
+  m_Children:
+  - {fileID: 441884}
+  m_Father: {fileID: 422674}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.7897}
+--- !u!1 &174458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 458000}
+  m_Layer: 0
+  m_Name: sheepbaby_LLegAnkle 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &458000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174458}
+  m_LocalRotation: {x: 0.021872297, y: -0.022212785, z: -0.2344251, w: 0.97163427}
+  m_LocalPosition: {x: -0.15489411, y: 0.000000007450581, z: 0}
+  m_LocalScale: {x: 0.9999983, y: 1.000001, z: 1.0000011}
+  m_Children:
+  - {fileID: 427488}
+  m_Father: {fileID: 416530}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 1.8389, y: -3.0637999, z: -27.178099}
+--- !u!1 &175792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 488574}
+  m_Layer: 0
+  m_Name: sheepbaby_RLegAnkle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &488574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175792}
+  m_LocalRotation: {x: -0.12098597, y: -0.0021360978, z: -0.14232688, w: 0.98239547}
+  m_LocalPosition: {x: -0.12793925, y: 0.000000007450581, z: 0}
+  m_LocalScale: {x: 0.9999987, y: 0.99999833, z: 1.0000035}
+  m_Children:
+  - {fileID: 413756}
+  m_Father: {fileID: 485906}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -13.787399, y: 1.7844, z: -16.702799}
+--- !u!1 &176804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 451076}
+  m_Layer: 0
+  m_Name: sheepbaby_LLeg1 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &451076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176804}
+  m_LocalRotation: {x: -0.6916327, y: 0.443172, z: 0.24219501, w: 0.51631814}
+  m_LocalPosition: {x: -0.09662168, y: 0, z: 0.000000014901161}
+  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
+  m_Children:
+  - {fileID: 416530}
+  m_Father: {fileID: 479038}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -68.259895, y: 160.66829, z: -101.5289}
+--- !u!1 &177496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442276}
+  m_Layer: 0
+  m_Name: sheepbaby_RLeg1 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &442276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177496}
+  m_LocalRotation: {x: 0.6916339, y: -0.44316986, z: 0.24219422, w: 0.5163187}
+  m_LocalPosition: {x: -0.09662169, y: 0, z: 0.000000044703484}
+  m_LocalScale: {x: 0.9999998, y: 1.0000002, z: 1}
+  m_Children:
+  - {fileID: 418542}
+  m_Father: {fileID: 459094}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 68.259895, y: -160.6684, z: -101.5293}
+--- !u!1 &180636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400788}
+  m_Layer: 0
+  m_Name: sheepbaby_RLeg1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180636}
+  m_LocalRotation: {x: 0.77862704, y: -0.62744164, z: 0.007175605, w: 0.0023235332}
+  m_LocalPosition: {x: 0.017619304, y: -0.012374252, z: -0.051660765}
+  m_LocalScale: {x: 1, y: 1, z: 0.99999994}
+  m_Children:
+  - {fileID: 442612}
+  m_Father: {fileID: 479548}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0.7233, y: 179.5268, z: -102.2771}
+--- !u!1 &186504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 498610}
+  m_Layer: 0
+  m_Name: sheepbaby_Neck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &498610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186504}
+  m_LocalRotation: {x: -0.0000001859315, y: -0.00000015942433, z: 0.20518467, w: 0.9787233}
+  m_LocalPosition: {x: -0.016673014, y: 0.0042521358, z: -0.0000000033629703}
+  m_LocalScale: {x: 0.9999999, y: 0.99999994, z: 0.9999999}
+  m_Children:
+  - {fileID: 479104}
+  m_Father: {fileID: 417092}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 23.6806}
+--- !u!1 &191836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442144}
+  m_Layer: 0
+  m_Name: sheepbaby_Tail3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &442144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191836}
+  m_LocalRotation: {x: -0.00000006699538, y: 0.000000051047003, z: 0.072109334, w: 0.99739677}
+  m_LocalPosition: {x: -0.027682751, y: 0, z: 3.5527137e-15}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
+  m_Children: []
+  m_Father: {fileID: 472372}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 8.2703}
+--- !u!1 &193630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459838}
+  m_Layer: 0
+  m_Name: sheepbaby_RArm1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &459838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193630}
+  m_LocalRotation: {x: 0.07011256, y: -0.7891528, z: 0.053999145, w: 0.607788}
+  m_LocalPosition: {x: -0.020182371, y: -0.027701318, z: -0.035270065}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
+  m_Children: []
+  m_Father: {fileID: 479104}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 9.814199, y: -105.0195, z: -2.6187}
+--- !u!1 &197468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 485906}
+  m_Layer: 0
+  m_Name: sheepbaby_RLeg3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &485906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197468}
+  m_LocalRotation: {x: 0.0753945, y: -0.04763672, z: -0.41074273, w: 0.9073791}
+  m_LocalPosition: {x: -0.12755895, y: 0.0000017285347, z: -0.000000052154064}
+  m_LocalScale: {x: 1.0000021, y: 0.9999946, z: 1.0000032}
+  m_Children:
+  - {fileID: 488574}
+  m_Father: {fileID: 442612}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 5.6061997, y: -8.5746, z: -49.1302}

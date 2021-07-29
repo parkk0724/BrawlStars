@@ -74,7 +74,7 @@ public class Hero : Character
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
         m_vOriginRot = this.transform.rotation.eulerAngles;
-        m_nMaxHP = 100;
+        m_nMaxHP = 1000;
         m_nHP = m_nMaxHP;   // Current Hp
         m_fMaxStamina = 3.0f;
         m_fStamina = m_fMaxStamina;

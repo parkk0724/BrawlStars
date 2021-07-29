@@ -1,151 +1,395 @@
 fileFormatVersion: 2
 guid: c861571094470b540bca02ea9c48067b
-timeCreated: 1478499547
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: chicken
-    100002: //RootNode
-    100004: chicken_
-    100006: chicken_ Footsteps
-    100008: chicken_ Head
-    100010: chicken_ HeadNub
-    100012: chicken_ L Calf
-    100014: chicken_ L Clavicle
-    100016: chicken_ L Finger0
-    100018: chicken_ L Finger0Nub
-    100020: chicken_ L Foot
-    100022: chicken_ L Forearm
-    100024: chicken_ L Hand
-    100026: chicken_ L HorseLink
-    100028: chicken_ L Thigh
-    100030: chicken_ L Toe0
-    100032: chicken_ L Toe0Nub
-    100034: chicken_ L UpperArm
-    100036: chicken_ Neck
-    100038: chicken_ Neck1
-    100040: chicken_ Neck2
-    100042: chicken_ Pelvis
-    100044: chicken_ Ponytail1
-    100046: chicken_ Ponytail11
-    100048: chicken_ Ponytail1Nub
-    100050: chicken_ Ponytail2
-    100052: chicken_ Ponytail2Nub
-    100054: chicken_ R Calf
-    100056: chicken_ R Clavicle
-    100058: chicken_ R Finger0
-    100060: chicken_ R Finger0Nub
-    100062: chicken_ R Foot
-    100064: chicken_ R Forearm
-    100066: chicken_ R Hand
-    100068: chicken_ R HorseLink
-    100070: chicken_ R Thigh
-    100072: chicken_ R Toe0
-    100074: chicken_ R Toe0Nub
-    100076: chicken_ R UpperArm
-    100078: chicken_ Spine
-    100080: chicken_ Tail
-    100082: chicken_ Tail1
-    100084: chicken_ TailNub
-    100086: chicken_ Xtra01
-    100088: chicken_ Xtra01Nub
-    400000: chicken
-    400002: //RootNode
-    400004: chicken_
-    400006: chicken_ Footsteps
-    400008: chicken_ Head
-    400010: chicken_ HeadNub
-    400012: chicken_ L Calf
-    400014: chicken_ L Clavicle
-    400016: chicken_ L Finger0
-    400018: chicken_ L Finger0Nub
-    400020: chicken_ L Foot
-    400022: chicken_ L Forearm
-    400024: chicken_ L Hand
-    400026: chicken_ L HorseLink
-    400028: chicken_ L Thigh
-    400030: chicken_ L Toe0
-    400032: chicken_ L Toe0Nub
-    400034: chicken_ L UpperArm
-    400036: chicken_ Neck
-    400038: chicken_ Neck1
-    400040: chicken_ Neck2
-    400042: chicken_ Pelvis
-    400044: chicken_ Ponytail1
-    400046: chicken_ Ponytail11
-    400048: chicken_ Ponytail1Nub
-    400050: chicken_ Ponytail2
-    400052: chicken_ Ponytail2Nub
-    400054: chicken_ R Calf
-    400056: chicken_ R Clavicle
-    400058: chicken_ R Finger0
-    400060: chicken_ R Finger0Nub
-    400062: chicken_ R Foot
-    400064: chicken_ R Forearm
-    400066: chicken_ R Hand
-    400068: chicken_ R HorseLink
-    400070: chicken_ R Thigh
-    400072: chicken_ R Toe0
-    400074: chicken_ R Toe0Nub
-    400076: chicken_ R UpperArm
-    400078: chicken_ Spine
-    400080: chicken_ Tail
-    400082: chicken_ Tail1
-    400084: chicken_ TailNub
-    400086: chicken_ Xtra01
-    400088: chicken_ Xtra01Nub
-    4300000: chicken
-    7400000: Take 001
-    9500000: //RootNode
-    11100000: //RootNode
-    13700000: chicken
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: chicken
+  - first:
+      1: 100002
+    second: //RootNode
+  - first:
+      1: 100004
+    second: chicken_
+  - first:
+      1: 100006
+    second: chicken_ Footsteps
+  - first:
+      1: 100008
+    second: chicken_ Head
+  - first:
+      1: 100010
+    second: chicken_ HeadNub
+  - first:
+      1: 100012
+    second: chicken_ L Calf
+  - first:
+      1: 100014
+    second: chicken_ L Clavicle
+  - first:
+      1: 100016
+    second: chicken_ L Finger0
+  - first:
+      1: 100018
+    second: chicken_ L Finger0Nub
+  - first:
+      1: 100020
+    second: chicken_ L Foot
+  - first:
+      1: 100022
+    second: chicken_ L Forearm
+  - first:
+      1: 100024
+    second: chicken_ L Hand
+  - first:
+      1: 100026
+    second: chicken_ L HorseLink
+  - first:
+      1: 100028
+    second: chicken_ L Thigh
+  - first:
+      1: 100030
+    second: chicken_ L Toe0
+  - first:
+      1: 100032
+    second: chicken_ L Toe0Nub
+  - first:
+      1: 100034
+    second: chicken_ L UpperArm
+  - first:
+      1: 100036
+    second: chicken_ Neck
+  - first:
+      1: 100038
+    second: chicken_ Neck1
+  - first:
+      1: 100040
+    second: chicken_ Neck2
+  - first:
+      1: 100042
+    second: chicken_ Pelvis
+  - first:
+      1: 100044
+    second: chicken_ Ponytail1
+  - first:
+      1: 100046
+    second: chicken_ Ponytail11
+  - first:
+      1: 100048
+    second: chicken_ Ponytail1Nub
+  - first:
+      1: 100050
+    second: chicken_ Ponytail2
+  - first:
+      1: 100052
+    second: chicken_ Ponytail2Nub
+  - first:
+      1: 100054
+    second: chicken_ R Calf
+  - first:
+      1: 100056
+    second: chicken_ R Clavicle
+  - first:
+      1: 100058
+    second: chicken_ R Finger0
+  - first:
+      1: 100060
+    second: chicken_ R Finger0Nub
+  - first:
+      1: 100062
+    second: chicken_ R Foot
+  - first:
+      1: 100064
+    second: chicken_ R Forearm
+  - first:
+      1: 100066
+    second: chicken_ R Hand
+  - first:
+      1: 100068
+    second: chicken_ R HorseLink
+  - first:
+      1: 100070
+    second: chicken_ R Thigh
+  - first:
+      1: 100072
+    second: chicken_ R Toe0
+  - first:
+      1: 100074
+    second: chicken_ R Toe0Nub
+  - first:
+      1: 100076
+    second: chicken_ R UpperArm
+  - first:
+      1: 100078
+    second: chicken_ Spine
+  - first:
+      1: 100080
+    second: chicken_ Tail
+  - first:
+      1: 100082
+    second: chicken_ Tail1
+  - first:
+      1: 100084
+    second: chicken_ TailNub
+  - first:
+      1: 100086
+    second: chicken_ Xtra01
+  - first:
+      1: 100088
+    second: chicken_ Xtra01Nub
+  - first:
+      4: 400000
+    second: chicken
+  - first:
+      4: 400002
+    second: //RootNode
+  - first:
+      4: 400004
+    second: chicken_
+  - first:
+      4: 400006
+    second: chicken_ Footsteps
+  - first:
+      4: 400008
+    second: chicken_ Head
+  - first:
+      4: 400010
+    second: chicken_ HeadNub
+  - first:
+      4: 400012
+    second: chicken_ L Calf
+  - first:
+      4: 400014
+    second: chicken_ L Clavicle
+  - first:
+      4: 400016
+    second: chicken_ L Finger0
+  - first:
+      4: 400018
+    second: chicken_ L Finger0Nub
+  - first:
+      4: 400020
+    second: chicken_ L Foot
+  - first:
+      4: 400022
+    second: chicken_ L Forearm
+  - first:
+      4: 400024
+    second: chicken_ L Hand
+  - first:
+      4: 400026
+    second: chicken_ L HorseLink
+  - first:
+      4: 400028
+    second: chicken_ L Thigh
+  - first:
+      4: 400030
+    second: chicken_ L Toe0
+  - first:
+      4: 400032
+    second: chicken_ L Toe0Nub
+  - first:
+      4: 400034
+    second: chicken_ L UpperArm
+  - first:
+      4: 400036
+    second: chicken_ Neck
+  - first:
+      4: 400038
+    second: chicken_ Neck1
+  - first:
+      4: 400040
+    second: chicken_ Neck2
+  - first:
+      4: 400042
+    second: chicken_ Pelvis
+  - first:
+      4: 400044
+    second: chicken_ Ponytail1
+  - first:
+      4: 400046
+    second: chicken_ Ponytail11
+  - first:
+      4: 400048
+    second: chicken_ Ponytail1Nub
+  - first:
+      4: 400050
+    second: chicken_ Ponytail2
+  - first:
+      4: 400052
+    second: chicken_ Ponytail2Nub
+  - first:
+      4: 400054
+    second: chicken_ R Calf
+  - first:
+      4: 400056
+    second: chicken_ R Clavicle
+  - first:
+      4: 400058
+    second: chicken_ R Finger0
+  - first:
+      4: 400060
+    second: chicken_ R Finger0Nub
+  - first:
+      4: 400062
+    second: chicken_ R Foot
+  - first:
+      4: 400064
+    second: chicken_ R Forearm
+  - first:
+      4: 400066
+    second: chicken_ R Hand
+  - first:
+      4: 400068
+    second: chicken_ R HorseLink
+  - first:
+      4: 400070
+    second: chicken_ R Thigh
+  - first:
+      4: 400072
+    second: chicken_ R Toe0
+  - first:
+      4: 400074
+    second: chicken_ R Toe0Nub
+  - first:
+      4: 400076
+    second: chicken_ R UpperArm
+  - first:
+      4: 400078
+    second: chicken_ Spine
+  - first:
+      4: 400080
+    second: chicken_ Tail
+  - first:
+      4: 400082
+    second: chicken_ Tail1
+  - first:
+      4: 400084
+    second: chicken_ TailNub
+  - first:
+      4: 400086
+    second: chicken_ Xtra01
+  - first:
+      4: 400088
+    second: chicken_ Xtra01Nub
+  - first:
+      43: 4300000
+    second: chicken
+  - first:
+      74: 7400000
+    second: walk
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      111: 11100000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: chicken
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: walk
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -155,11 +399,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

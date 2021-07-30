@@ -16,12 +16,16 @@ public class TurretBulletCtrl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other == null) return;
+
         if (other.CompareTag("Monster"))
         {
             other.GetComponent<Monster>().Hit(10, Color.red);
             Destroy(this.gameObject);
         }
-        //else
-        //    Destroy(gameObject);
+        else if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Player")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

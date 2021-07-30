@@ -83,9 +83,7 @@ public class BossMonster : Monster
                 }
                 else
                 {
-                    Vector3 pos = m_tfTarget.position; // 점프대에서 점프하면 y값이 변화하여 navMesh에서 인식을 못함
-                    pos.y = 0;
-                    m_NavMeshAgent.SetDestination(pos);
+                    FollowPlayer();
                     m_Animator.SetBool("bMove", true);
                 }
                 m_fCurTime = 0.0f;
@@ -168,6 +166,8 @@ public class BossMonster : Monster
         int rnd = Random.Range(1, 100);
         if (m_bPhase[1])
         {
+            FollowPlayer();
+
             if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange) // 이 부분에서 계속 걸려서 이동을 안함.. 여기는 내일 고쳐야즤
             {
                 if (rnd <= 65)
@@ -178,6 +178,8 @@ public class BossMonster : Monster
         }
         else if (m_bPhase[0])
         {
+            FollowPlayer();
+
             if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
             {
                 if (rnd <= 35)
@@ -392,5 +394,12 @@ public class BossMonster : Monster
     {
         yield return new WaitForSeconds(0.05f);
         m_objBasicAttackPos.SetActive(false);
+    }
+
+    void FollowPlayer()
+    {
+        Vector3 pos = m_tfTarget.position; // 점프대에서 점프하면 y값이 변화하여 navMesh에서 인식을 못함
+        pos.y = 0;
+        m_NavMeshAgent.SetDestination(pos); // 플레이어 계속 따라다니게
     }
 }

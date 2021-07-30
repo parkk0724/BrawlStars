@@ -20,7 +20,7 @@ public class itemDatabase : MonoBehaviour {
     public List<Item> itemList = new List<Item>();
     GameObject[] monster;
     int itemDorp_Nomal = 1;
-    int itemDorp_Boss = 5;
+    int itemDorp_Boss = 3;
 
 
     void Start()
@@ -32,6 +32,10 @@ public class itemDatabase : MonoBehaviour {
 
     }
     void Update()
+    {
+        monsterSearch(itemDorp_Nomal , itemDorp_Boss);
+    }
+    void monsterSearch(int DropCount , int DropCount_2)
     {
         monster = GameObject.FindGameObjectsWithTag("Monster");
         if (monster.Length <= 0)
@@ -48,18 +52,17 @@ public class itemDatabase : MonoBehaviour {
                     {
                         Transform monsterTransform;
                         monsterTransform = monster[i].transform;
-                        ItemDrop(monsterTransform, itemDorp_Nomal);
+                        ItemDrop(monsterTransform, DropCount);
                     }
                 }
             }
         }
     }
-
-    public void ItemDrop(Transform monsterTansform, int _itemCount)
+    public void ItemDrop(Transform monsterTansform, int _itemCount) // 아이템드랍
     {
-        for (int z = 0; z < _itemCount; z++)
+        for (int z = 0; z < _itemCount; z++) // 아이템 드랍 몇번 할꺼냐
         {
-            int firstrage = Random.Range(0, 10);
+            int firstrage = Random.Range(0, 10); 
             if (firstrage < 4)
             {
                 return;
@@ -69,14 +72,14 @@ public class itemDatabase : MonoBehaviour {
                 ArrayList table = new ArrayList();
                 for (int i = 0; i < instane.itemList.Count; i++)
                 {
-                    if (instane.itemList[i].itemGrade == (ITemGrade)3)
+                    if (instane.itemList[i].itemGrade == (ITemGrade)3) // 등급비교
                     {
-                        table.Add(i);
+                        table.Add(i); //테이블에 아이템의 인덱스값을 저장
                     }
                 }
-                int tableindex = Random.Range(0, table.Count);
-                GameObject obj = Instantiate(instane.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instane.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
-                obj.GetComponent<DropItem>().item.itemtype = instane.itemList[(int)table[tableindex]].itemtype;
+                int tableindex = Random.Range(0, table.Count); // 테이블의 값을 랜덤으로 돌린 인덱스값
+                GameObject obj = Instantiate(instane.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instane.itemList[(int)table[tableindex]].itemPrefab.transform.rotation); //생성
+                obj.GetComponent<DropItem>().item.itemtype = instane.itemList[(int)table[tableindex]].itemtype; //생성된 드랍아이템의 아이템 타입을 아이템데이터베이스 형식으로 바꿈
                 obj.GetComponent<DropItem>().item.itemName = instane.itemList[(int)table[tableindex]].itemName;
                 obj.GetComponent<DropItem>().item.itemGrade = instane.itemList[(int)table[tableindex]].itemGrade;
                 obj.GetComponent<DropItem>().item.itemCount = instane.itemList[(int)table[tableindex]].itemCount;

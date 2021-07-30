@@ -5,7 +5,6 @@ using UnityEngine;
 public class itemDatabase : MonoBehaviour {
 
     static public itemDatabase instane;
-    itemDatabase database;
     private void Awake()
     {
         if(instane != null)
@@ -20,7 +19,6 @@ public class itemDatabase : MonoBehaviour {
     }
     public List<Item> itemList = new List<Item>();
     GameObject[] monster;
-    Transform monsterTransform;
     void Start()
     {
         itemList.Add(new Item(ITemType.Potion, USE.HP, ITemGrade.D, "HpPotion", 50, Resources.Load<GameObject>("Prefabs/Item/HpPotion")));
@@ -28,9 +26,6 @@ public class itemDatabase : MonoBehaviour {
         itemList.Add(new Item(ITemType.Potion, USE.FEVER, ITemGrade.D, "FeverPotion", 50, Resources.Load<GameObject>("Prefabs/Item/FeverPotion")));
         itemList.Add(new Item(ITemType.Potion, USE.INVINCIBLE, ITemGrade.C, "InviciblePotion", 0, Resources.Load<GameObject>("Prefabs/Item/InviciblePotion")));
 
-       
-        database = FindObjectOfType<itemDatabase>();
-      
     }
     void Update()
     {
@@ -47,15 +42,16 @@ public class itemDatabase : MonoBehaviour {
                 {
                     if (monster[i].GetComponent<Monster>().GetHp() <= 0)
                     {
+                        Transform monsterTransform;
                         monsterTransform = monster[i].transform;
-                        ItemDrop();
+                        ItemDrop(monsterTransform);
                     }
                 }
             }
         }
     }
 
-    public void ItemDrop()
+    public void ItemDrop(Transform monsterTansform)
     {
        
         int firstrage = Random.Range(0, 10);
@@ -66,29 +62,29 @@ public class itemDatabase : MonoBehaviour {
         else if (firstrage < 6)
         {
             ArrayList table = new ArrayList();
-            for (int i = 0; i < database.itemList.Count; i++)
+            for (int i = 0; i < instane.itemList.Count; i++)
             {
-                if (database.itemList[i].itemGrade == (ITemGrade)3)
+                if (instane.itemList[i].itemGrade == (ITemGrade)3)
                 {
                     table.Add(i);
                 }
             }
             int tableindex = Random.Range(0, table.Count);
-            Instantiate(database.itemList[(int)table[tableindex]].itemPrefab, monsterTransform.position, database.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
+            Instantiate(instane.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instane.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
 
         }
         else if (firstrage < 10)
         {
             ArrayList table = new ArrayList();
-            for (int i = 0; i < database.itemList.Count; i++)
+            for (int i = 0; i < instane.itemList.Count; i++)
             {
-                if (database.itemList[i].itemGrade == (ITemGrade)2)
+                if (instane.itemList[i].itemGrade == (ITemGrade)2)
                 {
                     table.Add(i);
                 }
             }
             int tableindex = Random.Range(0, table.Count);
-            Instantiate(database.itemList[(int)table[tableindex]].itemPrefab, monsterTransform.position, database.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
+            Instantiate(instane.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instane.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
         }
     }
 }

@@ -60,6 +60,7 @@ public class JesterSkill : MonoBehaviour
                 }
                 else
                 {
+                    return;
                     State = SkillState.RUN;
                 }
                 break;

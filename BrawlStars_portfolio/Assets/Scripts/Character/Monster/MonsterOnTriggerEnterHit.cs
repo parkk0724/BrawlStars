@@ -6,7 +6,12 @@ public class MonsterOnTriggerEnterHit : MonoBehaviour
 {
     float m_fCurHitDelay = 0.0f;
     float m_fMaxHitDelay = 1.0f;
+    Monster m_monster = null;
 
+    private void Awake()
+    {
+        m_monster = this.GetComponentInParent<Monster>();
+    }
     private void FixedUpdate()
     {
         m_fCurHitDelay += Time.deltaTime;
@@ -19,7 +24,7 @@ public class MonsterOnTriggerEnterHit : MonoBehaviour
     {
         if (other.tag == "Player" && m_fCurHitDelay >= m_fMaxHitDelay)
         {
-            other.GetComponent<Character>().Hit(10, Color.red);
+            other.GetComponent<Character>().Hit(m_monster.GetATK(), Color.red);
             m_fCurHitDelay = 0.0f;
         }
     }

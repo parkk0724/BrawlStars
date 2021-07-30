@@ -11,11 +11,13 @@ public class ChickenMonster : Monster
     Vector3 m_vDestination;
     protected override void Start()
     {
+        
+
         base.Start();
 
         m_nMaxHP = 100;
         m_nHP = m_nMaxHP;
-        m_nATK = 10;
+        m_nATK = 7;
         m_nDEF = 5;
         m_fAttackSpeed = 1.0f;
         m_fRange = 10.0f;

@@ -21,7 +21,7 @@ public class BoxMan : Hero
         m_BoxManWeapon.SetRange(m_fRange = 10.0f);
         m_BoxManWeapon.OnFeverUp = FeverUp;
         m_BoxManWeapon.SetATK(m_nATK);
-        m_fMaxMouseButton = 0.2f;
+        m_fMaxMouseButton = 0.3f;
         m_fAttackStamina = 1.0f;
     }
 
@@ -71,30 +71,13 @@ public class BoxMan : Hero
     {
         if (Input.GetMouseButton(0))
         {
-            m_fCurMouseButton += Time.deltaTime;
-            if (m_fCurMouseButton > m_fMaxMouseButton)
-            {
-                if (!m_objDirBasicAttack.activeSelf)
-                {
-                    m_objDirBasicAttack.SetActive(true);
-                    m_tfResultTarget = null;
-                }
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
-                {
-                    Vector3 look = hit.point;
-                    look.y = this.transform.position.y;
-                    this.transform.LookAt(look);
-                }
-            }
+            CheckPressAttack(m_objDirBasicAttack);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            m_AttackState = AttackState.NONE;
-            m_objDirBasicAttack.SetActive(false);
-            m_fCurMouseButton = 0.0f;
+            CheckUpAttack(m_objDirBasicAttack);
+
             if (m_fStamina > m_fAttackStamina && this.transform.position.y < 0.1f)
             {
                 m_Animator.SetTrigger("tBAttack");
@@ -107,29 +90,12 @@ public class BoxMan : Hero
     {
         if (Input.GetMouseButton(1))
         {
-            m_fCurMouseButton += Time.deltaTime;
-            if (m_fCurMouseButton > m_fMaxMouseButton)
-            {
-                if (!m_objDirSkillAttack.activeSelf)
-                {
-                    m_objDirSkillAttack.SetActive(true);
-                    m_tfResultTarget = null;
-                }
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
-                {
-                    Vector3 look = hit.point;
-                    look.y = this.transform.position.y;
-                    this.transform.LookAt(look);
-                }
-            }
+            CheckPressAttack(m_objDirSkillAttack);
         }
         if (Input.GetMouseButtonUp(1))
         {
-            m_AttackState = AttackState.NONE;
-            m_objDirSkillAttack.SetActive(false);
-            m_fCurMouseButton = 0.0f;
+            CheckUpAttack(m_objDirSkillAttack);
+
             if (m_fFever >= m_fMaxFever && this.transform.position.y < 1.0f)
             {
                 m_Animator.SetTrigger("tSAttack");
@@ -140,5 +106,33 @@ public class BoxMan : Hero
     public void SetRotStart(bool b)
     {
         m_bRotStart = b;
+    }
+
+    private void CheckPressAttack(GameObject objDir)
+    {
+        m_fCurMouseButton += Time.deltaTime;
+        if (m_fCurMouseButton > m_fMaxMouseButton)
+        {
+            if (!objDir.activeSelf)
+            {
+                objDir.SetActive(true);
+                m_tfResultTarget = null;
+            }
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
+            {
+                Vector3 look = hit.point;
+                look.y = this.transform.position.y;
+                this.transform.LookAt(look);
+            }
+        }
+    }
+
+    private void CheckUpAttack(GameObject objDir)
+    {
+        m_AttackState = AttackState.NONE;
+        objDir.SetActive(false);
+        m_fCurMouseButton = 0.0f;
     }
 }

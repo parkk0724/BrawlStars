@@ -18,13 +18,13 @@ public class Turret : MonoBehaviour
     void Start()
     {
         TurretBulletPrefab = Resources.Load<GameObject>("Prefabs/Turret/EmpTurretBullet");
-
-        Transform[] childrens = GetComponentsInChildren<Transform>();
-        
-        foreach (Transform tf in childrens)
-        {
-            if (tf.name == "BulletPos") tBulletPos = tf;
-        }
+        tBulletPos = transform.Find("Turret/BulletPos");
+        //Transform[] childrens = GetComponentsInChildren<Transform>();
+        //
+        //foreach (Transform tf in childrens)
+        //{
+        //    if (tf.name == "BulletPos") tBulletPos = tf;
+        //}
 
         InvokeRepeating("SearchEnemy", 0f, 0.5f);
     }

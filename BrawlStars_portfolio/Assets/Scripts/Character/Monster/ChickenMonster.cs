@@ -151,9 +151,15 @@ public class ChickenMonster : Monster
         yield return null;
     }
 
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.color = Color.red;
-        //    Gizmos.DrawSphere(m_vDestination, 1.0f);
-        //}
+    public override void Hit(int damage, Color c)
+    {
+        base.Hit(damage, c);
+        m_NavMeshAgent.velocity = Vector3.zero;
+    }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawSphere(m_vDestination, 1.0f);
+    //}
 }

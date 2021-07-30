@@ -101,7 +101,7 @@ MonoBehaviour:
     use: 0
     itemGrade: 3
     itemName: HpPotion
-    itemCount: 50
+    itemCount: 0
     itemPrefab: {fileID: 0}
 --- !u!135 &98705785273947125
 SphereCollider:

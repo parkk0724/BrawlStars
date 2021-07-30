@@ -101,7 +101,7 @@ MonoBehaviour:
     use: 1
     itemGrade: 3
     itemName: StaminaPotion
-    itemCount: 2
+    itemCount: 0
     itemPrefab: {fileID: 0}
 --- !u!135 &9180815054370794565
 SphereCollider:

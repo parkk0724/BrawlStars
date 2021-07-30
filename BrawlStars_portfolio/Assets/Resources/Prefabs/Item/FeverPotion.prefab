@@ -101,7 +101,7 @@ MonoBehaviour:
     use: 2
     itemGrade: 3
     itemName: FeverPotion
-    itemCount: 50
+    itemCount: 0
     itemPrefab: {fileID: 0}
 --- !u!135 &9117227011503717047
 SphereCollider:

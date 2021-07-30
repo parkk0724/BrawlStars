@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropItem : MonoBehaviour 
+public class DropItem : MonoBehaviour
 {
     public Item item;
     public void setItem(Item _item)
@@ -25,6 +25,7 @@ public class DropItem : MonoBehaviour
     Coroutine item_updown;
     void Start()
     {
+        
         item_updown = StartCoroutine(ItemUpDown());
     }
     IEnumerator ItemUpDown()

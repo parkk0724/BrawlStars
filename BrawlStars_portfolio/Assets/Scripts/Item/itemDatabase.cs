@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class itemDatabase : MonoBehaviour {
 
-    static public itemDatabase instane;
+    static private itemDatabase instane;
     private void Awake()
     {
         if(instane != null)
@@ -19,8 +19,10 @@ public class itemDatabase : MonoBehaviour {
     }
     public List<Item> itemList = new List<Item>();
     GameObject[] monster;
+    int itemDorp_Nomal = 1;
+    int itemDorp_Boss = 5;
 
-    bool active = false;
+
     void Start()
     {
         itemList.Add(new Item(ITemType.Potion, USE.HP, ITemGrade.D, "HpPotion", 50, Resources.Load<GameObject>("Prefabs/Item/HpPotion")));
@@ -46,23 +48,23 @@ public class itemDatabase : MonoBehaviour {
                     {
                         Transform monsterTransform;
                         monsterTransform = monster[i].transform;
-                        ItemDrop(monsterTransform, 1);
+                        ItemDrop(monsterTransform, itemDorp_Nomal);
                     }
                 }
             }
         }
     }
 
-    public void ItemDrop(Transform monsterTansform, int monsterCount)
+    public void ItemDrop(Transform monsterTansform, int _itemCount)
     {
-        for (int z = 0; z < monsterCount; z++)
+        for (int z = 0; z < _itemCount; z++)
         {
             int firstrage = Random.Range(0, 10);
-            if (firstrage < 3)
+            if (firstrage < 4)
             {
                 return;
             }
-            else if (firstrage < 6)
+            else if (firstrage < 9)
             {
                 ArrayList table = new ArrayList();
                 for (int i = 0; i < instane.itemList.Count; i++)
@@ -73,9 +75,15 @@ public class itemDatabase : MonoBehaviour {
                     }
                 }
                 int tableindex = Random.Range(0, table.Count);
-                Instantiate(instane.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instane.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
-
+                GameObject obj = Instantiate(instane.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instane.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
+                obj.GetComponent<DropItem>().item.itemtype = instane.itemList[(int)table[tableindex]].itemtype;
+                obj.GetComponent<DropItem>().item.itemName = instane.itemList[(int)table[tableindex]].itemName;
+                obj.GetComponent<DropItem>().item.itemGrade = instane.itemList[(int)table[tableindex]].itemGrade;
+                obj.GetComponent<DropItem>().item.itemCount = instane.itemList[(int)table[tableindex]].itemCount;
+                obj.GetComponent<DropItem>().item.use = instane.itemList[(int)table[tableindex]].use;
             }
+
+
             else if (firstrage < 10)
             {
                 ArrayList table = new ArrayList();
@@ -87,7 +95,12 @@ public class itemDatabase : MonoBehaviour {
                     }
                 }
                 int tableindex = Random.Range(0, table.Count);
-                Instantiate(instane.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instane.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
+                GameObject obj = Instantiate(instane.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instane.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
+                obj.GetComponent<DropItem>().item.itemtype = instane.itemList[(int)table[tableindex]].itemtype;
+                obj.GetComponent<DropItem>().item.itemName = instane.itemList[(int)table[tableindex]].itemName;
+                obj.GetComponent<DropItem>().item.itemGrade = instane.itemList[(int)table[tableindex]].itemGrade;
+                obj.GetComponent<DropItem>().item.itemCount = instane.itemList[(int)table[tableindex]].itemCount;
+                obj.GetComponent<DropItem>().item.use = instane.itemList[(int)table[tableindex]].use;
             }
         } 
     }

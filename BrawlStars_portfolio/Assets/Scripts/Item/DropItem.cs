@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropItem : MonoBehaviour // 셋 아이템
+public class DropItem : MonoBehaviour 
 {
     public Item item;
     public void setItem(Item _item)

@@ -6,6 +6,7 @@ public class Bear : Hero
 {
     public Animator myAnimator;
     public Weapon myWeapon;
+    float m_fAttackStamina = 0.0f;
 
     protected override void Start()
     {
@@ -13,14 +14,17 @@ public class Bear : Hero
         myWeapon = GetComponentInChildren<Weapon>();
         myWeapon.SetRange(m_fRange = 10.0f);
         myWeapon.SetATK(m_nATK);
+        m_fAttackStamina = 1.0f;
     }
 
     public override void Attack()
     {
-        if (Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(0) && m_fStamina > m_fAttackStamina) 
         { 
            myAnimator.SetTrigger("tBAttack");
-          //myWeapon.Shoot();
+           m_fStamina -= m_fAttackStamina;
+            m_bRotStart = true;
+            //myWeapon.Shoot();
         }
         if (Input.GetMouseButtonDown(1)) { } //myWeapon.SkillShoot();
     }

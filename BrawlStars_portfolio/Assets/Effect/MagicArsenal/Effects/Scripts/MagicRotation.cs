@@ -25,6 +25,8 @@ namespace MagicArsenal
                 transform.Rotate(rotateVector * Time.deltaTime);
             if (rotateSpace == spaceEnum.World)
                 transform.Rotate(rotateVector * Time.deltaTime, Space.World);
+
+            Destroy(gameObject, 1f);
         }
     }
 }

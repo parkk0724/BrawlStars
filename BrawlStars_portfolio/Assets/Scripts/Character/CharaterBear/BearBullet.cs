@@ -36,9 +36,9 @@ public class BearBullet : MonoBehaviour
             Debug.Log("몬스터 맞춤");
             this.transform.position = other.transform.position;
             GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
+            other.GetComponent<Monster>().Hit(damage, Color.red);
             Destroy(obj, 1.0f);
             SearchTarget();
-            //other.GetComponent<Monster>().Hit(damage, Color.red);
         }
     }
     IEnumerator DestoryBullet()

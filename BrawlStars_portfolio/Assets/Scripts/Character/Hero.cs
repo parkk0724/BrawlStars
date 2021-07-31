@@ -384,7 +384,6 @@ public class Hero : Character
 
             if (angle - delta < 0.0f)
             {
-                Debug.Log("angle - delta : " + (angle - delta).ToString() + "   angle : " + angle);
                 delta = angle;
             }
 

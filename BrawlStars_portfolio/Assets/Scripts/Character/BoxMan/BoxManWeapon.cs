@@ -12,6 +12,7 @@ public class BoxManWeapon : MonoBehaviour
     float m_fRange = 0.0f;
     float m_fATK = 0.0f;
     public UnityAction OnFeverUp = null;
+    public UnityAction OnStaminaUp = null;
     public UnityAction OnRotStartFalse = null;
     public void SetATK(float f) { m_fATK = f; }
     public void SetRange(float f) { m_fRange = f; }
@@ -43,6 +44,7 @@ public class BoxManWeapon : MonoBehaviour
         bullet.SetDistance(m_fRange - Vector3.Distance(this.transform.position, m_tfHero.position));
         bullet.SetPosParent(m_tfHero);
         bullet.OnFeverUp = OnFeverUp;
+        bullet.OnStaminaUp = OnStaminaUp;
         bullet.SetDamage(m_fATK);
         if(isSkill) bullet.OnSkill();
 

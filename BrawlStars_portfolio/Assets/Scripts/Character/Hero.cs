@@ -381,11 +381,10 @@ public class Hero : Character
             float angle = 180.0f * r / Mathf.PI; //this
             float r2 = Vector3.Dot(Bot, this.transform.right);
             if (r2 < 0.0f) rotDir = -1.0f;
-            
+
             if (angle - delta < 0.0f)
             {
                 delta = angle;
-                //m_bRotStart = false;
             }
 
             this.transform.Rotate(Vector3.up, delta * rotDir);

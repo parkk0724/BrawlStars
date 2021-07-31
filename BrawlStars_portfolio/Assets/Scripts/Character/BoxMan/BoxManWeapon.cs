@@ -12,14 +12,16 @@ public class BoxManWeapon : MonoBehaviour
     float m_fRange = 0.0f;
     float m_fATK = 0.0f;
     public UnityAction OnFeverUp = null;
+    public UnityAction OnChangeIdle = null;
     public void SetATK(float f) { m_fATK = f; }
     public void SetRange(float f) { m_fRange = f; }
     void Start()
     {
-        m_Animator = this.GetComponent<Animator>();
+        m_Animator = GetComponent<Animator>();
         this.GetComponentInParent<Animation_Event>().OnShoot = Shoot;
         this.GetComponentInParent<Animation_Event>().OnSkillShoot = SkillShoot;
         m_tfHero = GetComponentInParent<BoxMan>().transform;
+
     }
     void Shoot()
     {
@@ -44,6 +46,7 @@ public class BoxManWeapon : MonoBehaviour
         bullet.SetDamage(m_fATK);
         if(isSkill) bullet.OnSkill();
 
-        GetComponentInParent<BoxMan>().SetRotStart(false);
+        OnChangeIdle?.Invoke();
+        //GetComponentInParent<BoxMan>().SetRotStart(false);
     }
 }

@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class BoxMan : Hero
 {
-    enum AttackState { NONE, BASIC, SKILL };
+    enum AttackState { IDLE, BASIC, SKILL, NONE };
     // Start is called before the first frame update
-    AttackState m_AttackState = AttackState.NONE;
+    AttackState m_AttackState = AttackState.IDLE;
     BoxManWeapon m_BoxManWeapon;
     [SerializeField] GameObject m_objDirBasicAttack = null;
     [SerializeField] GameObject m_objDirSkillAttack = null;
     [SerializeField] float m_fMaxMouseButton = 0.0f;
     float m_fCurMouseButton = 0.0f;
     float m_fAttackStamina = 0.0f;
-    
+
+    private void Awake()
+    {
+        m_BoxManWeapon = GetComponentInChildren<BoxManWeapon>();
+
+        m_BoxManWeapon.OnChangeIdle = () => { m_AttackState = AttackState.IDLE; SetRotStart(false); };
+    }
     protected override void Start()
     {
         base.Start();
-        m_BoxManWeapon = GetComponentInChildren<BoxManWeapon>();
-        m_BoxManWeapon.SetRange(m_fRange = 10.0f);
+
+        m_BoxManWeapon.SetRange(m_fRange);
         m_BoxManWeapon.OnFeverUp = FeverUp;
         m_BoxManWeapon.SetATK(m_nATK);
         m_fMaxMouseButton = 0.3f;
@@ -45,7 +51,7 @@ public class BoxMan : Hero
     {
         switch (m_AttackState)
         {
-            case AttackState.NONE:
+            case AttackState.IDLE:
                 if (Input.GetMouseButtonDown(0))
                 {
                     m_AttackState = AttackState.BASIC;
@@ -65,6 +71,8 @@ public class BoxMan : Hero
             case AttackState.SKILL:
                 SkillAttack();
                 break;
+            case AttackState.NONE:
+                break;
         }
     }
     void BasicAttack()
@@ -83,6 +91,10 @@ public class BoxMan : Hero
                 m_Animator.SetTrigger("tBAttack");
                 m_fStamina -= m_fAttackStamina;
             }
+            else
+            {
+                m_AttackState = AttackState.IDLE;
+            }
         }
     }
 
@@ -100,6 +112,10 @@ public class BoxMan : Hero
             {
                 m_Animator.SetTrigger("tSAttack");
                 m_fFever = 0.0f;           
+            }
+            else
+            {
+                m_AttackState = AttackState.IDLE;
             }
         }
     }

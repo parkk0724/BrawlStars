@@ -12,7 +12,7 @@ public class BoxManWeapon : MonoBehaviour
     float m_fRange = 0.0f;
     float m_fATK = 0.0f;
     public UnityAction OnFeverUp = null;
-    public UnityAction OnChangeIdle = null;
+    public UnityAction OnRotStartFalse = null;
     public void SetATK(float f) { m_fATK = f; }
     public void SetRange(float f) { m_fRange = f; }
     void Start()
@@ -46,7 +46,6 @@ public class BoxManWeapon : MonoBehaviour
         bullet.SetDamage(m_fATK);
         if(isSkill) bullet.OnSkill();
 
-        OnChangeIdle?.Invoke();
-        //GetComponentInParent<BoxMan>().SetRotStart(false);
+        OnRotStartFalse?.Invoke();
     }
 }

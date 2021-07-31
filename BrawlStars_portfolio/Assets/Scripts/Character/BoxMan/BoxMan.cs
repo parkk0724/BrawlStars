@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoxMan : Hero
 {
-    enum AttackState { IDLE, BASIC, SKILL, NONE };
+    enum AttackState { IDLE, BASIC, SKILL };
     // Start is called before the first frame update
     AttackState m_AttackState = AttackState.IDLE;
     BoxManWeapon m_BoxManWeapon;
@@ -18,7 +18,7 @@ public class BoxMan : Hero
     {
         m_BoxManWeapon = GetComponentInChildren<BoxManWeapon>();
 
-        m_BoxManWeapon.OnChangeIdle = () => { m_AttackState = AttackState.IDLE; SetRotStart(false); };
+        m_BoxManWeapon.OnRotStartFalse = () => { SetRotStart(false); };
     }
     protected override void Start()
     {
@@ -55,14 +55,10 @@ public class BoxMan : Hero
                 if (Input.GetMouseButtonDown(0))
                 {
                     m_AttackState = AttackState.BASIC;
-                    SearchTarget();
-                    m_bRotStart = true;
                 }
                 else if (Input.GetMouseButtonDown(1))
                 {
                     m_AttackState = AttackState.SKILL;
-                    SearchTarget();
-                    m_bRotStart = true;
                 }
                 break;
             case AttackState.BASIC:
@@ -70,8 +66,6 @@ public class BoxMan : Hero
                 break;
             case AttackState.SKILL:
                 SkillAttack();
-                break;
-            case AttackState.NONE:
                 break;
         }
     }
@@ -84,17 +78,19 @@ public class BoxMan : Hero
 
         if (Input.GetMouseButtonUp(0))
         {
-            CheckUpAttack(m_objDirBasicAttack);
-
-            if (m_fStamina > m_fAttackStamina && this.transform.position.y < 0.1f)
+            if (!m_bRotStart && m_fStamina > m_fAttackStamina && this.transform.position.y < 0.1f)
             {
                 m_Animator.SetTrigger("tBAttack");
                 m_fStamina -= m_fAttackStamina;
+                m_bRotStart = true;
+                if (m_fCurMouseButton < m_fMaxMouseButton) SearchTarget();
             }
             else
             {
                 m_AttackState = AttackState.IDLE;
             }
+
+            CheckUpAttack(m_objDirBasicAttack);
         }
     }
 
@@ -106,17 +102,19 @@ public class BoxMan : Hero
         }
         if (Input.GetMouseButtonUp(1))
         {
-            CheckUpAttack(m_objDirSkillAttack);
-
-            if (m_fFever >= m_fMaxFever && this.transform.position.y < 1.0f)
+            if (!m_bRotStart && m_fFever >= m_fMaxFever && this.transform.position.y < 1.0f)
             {
                 m_Animator.SetTrigger("tSAttack");
-                m_fFever = 0.0f;           
+                m_fFever = 0.0f;
+                m_bRotStart = true;
+                if(m_fCurMouseButton < m_fMaxMouseButton) SearchTarget();
             }
             else
             {
                 m_AttackState = AttackState.IDLE;
             }
+
+            CheckUpAttack(m_objDirSkillAttack);
         }
     }
     public void SetRotStart(bool b)
@@ -147,7 +145,7 @@ public class BoxMan : Hero
 
     private void CheckUpAttack(GameObject objDir)
     {
-        m_AttackState = AttackState.NONE;
+        m_AttackState = AttackState.IDLE;
         objDir.SetActive(false);
         m_fCurMouseButton = 0.0f;
     }

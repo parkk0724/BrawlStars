@@ -20,7 +20,7 @@ public class ChickenMonster : Monster
         m_nATK = 7;
         m_nDEF = 5;
         m_fAttackSpeed = 1.0f;
-        m_fRange = 10.0f;
+        m_fRange = 5.0f;
         m_fMaxIdleTime = 5.0f;
         m_fRandomMoveRange = 10.0f;
     }

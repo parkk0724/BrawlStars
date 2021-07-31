@@ -26,7 +26,6 @@ public class BoxMan : Hero
 
         m_BoxManWeapon.SetRange(m_fRange);
         m_BoxManWeapon.OnFeverUp = FeverUp;
-        m_BoxManWeapon.OnStaminaUp = OnStaminaUp;
         m_BoxManWeapon.SetATK(m_nATK);
         m_fMaxMouseButton = 0.3f;
         m_fAttackStamina = 1.0f;
@@ -149,11 +148,5 @@ public class BoxMan : Hero
         m_AttackState = AttackState.IDLE;
         objDir.SetActive(false);
         m_fCurMouseButton = 0.0f;
-    }
-
-    private void OnStaminaUp()
-    {
-        m_fStamina += m_fAttackSpeed / 3;
-        if (m_fStamina > m_fMaxStamina) m_fStamina = m_fMaxStamina;
     }
 }

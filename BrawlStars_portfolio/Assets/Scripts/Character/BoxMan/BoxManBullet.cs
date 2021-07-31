@@ -15,7 +15,6 @@ public class BoxManBullet : MonoBehaviour
     Transform m_tfHero = null;
     CapsuleCollider m_Collider;
     public UnityAction OnFeverUp = null;
-    public UnityAction OnStaminaUp = null;
     float m_fMoveSpeed = 0.0f;
     float m_fRotSpeed = 0.0f;
     float m_fDistance = 0.0f;
@@ -88,11 +87,7 @@ public class BoxManBullet : MonoBehaviour
 
             if (m_bTurn)
             {
-                if (m_fSkillStay >= m_fSkillMaxStay)
-                {
-                    Destroy(this.gameObject);
-                    OnStaminaUp?.Invoke();
-                }
+                if (m_fSkillStay >= m_fSkillMaxStay) Destroy(this.gameObject);
             }
             else
             {

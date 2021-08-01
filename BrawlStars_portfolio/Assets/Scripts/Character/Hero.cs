@@ -237,23 +237,27 @@ public class Hero : Character
                 m_fCurBodyAttack = 0.0f;
             }
         }
-        if (other.tag == "Jump")
+        if (other.tag == "Jump" )
         {
-            m_Jump_curDelay += Time.deltaTime;
-            if (m_Jump_curDelay > m_Jump_maxDelay)
-            {
-                if (Jump1 != null) StopCoroutine(Jump1);
-                Jump1 = StartCoroutine(Jump(Jump_Destination_Pos1));
-            }
+          
+           m_Jump_curDelay += Time.deltaTime;
+           if (m_Jump_curDelay > m_Jump_maxDelay)
+           {
+               if (Jump1 != null) StopCoroutine(Jump1);
+               Jump1 = StartCoroutine(Jump(Jump_Destination_Pos1));
+           }
+
         }
         if (other.tag == "Jump2")
         {
-            m_Jump_curDelay += Time.deltaTime;
-            if (m_Jump_curDelay > m_Jump_maxDelay)
-            {
-                if (Jump2 != null) StopCoroutine(Jump2);
-                Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
-            }
+
+           m_Jump_curDelay += Time.deltaTime;
+           if (m_Jump_curDelay > m_Jump_maxDelay)
+           {
+               if (Jump2 != null) StopCoroutine(Jump2);
+               Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
+           }
+
         }
     }
 

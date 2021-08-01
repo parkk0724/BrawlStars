@@ -14,15 +14,18 @@ public class Jester : Hero
     public GameObject m_objDirSkillAttack = null;
     public GameObject m_objtsBoom = null;
     public GameObject m_objJesterSkill = null;
+    public GameObject m_skILL_Range = null;
     UnityEngine.Coroutine skill = null;
     JesterBullet jesterbullet;
     JesterWeapon Jweapon;
     float m_fAttackStamina = 0.0f;
+    public LayerMask myMask = 0;
+   
     //UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
+        
         m_fAttackStamina = 1.0f;
-
         base.Start();
 
     }
@@ -60,11 +63,6 @@ public class Jester : Hero
             if (m_fCurMouseButton > m_fMaxMouseButton)
             {
                 m_tfResultTarget = null;
-                //if (!m_objDirBasicAttack.activeSelf)
-                //{
-                //    m_objDirBasicAttack.SetActive(true);
-                //    
-                //}
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
@@ -77,7 +75,6 @@ public class Jester : Hero
         if (Input.GetMouseButtonUp(0))
         {
             m_AttackState = AttackState.NONE;
-            //m_objDirBasicAttack.SetActive(false);
             m_fCurMouseButton = 0.0f;
             m_Animator.SetTrigger("tBAttack");
             if (m_fStamina > m_fAttackStamina)
@@ -191,15 +188,18 @@ public class Jester : Hero
                 m_tfResultTarget = null;
                 if (!m_objDirSkillAttack.activeSelf)
                 {
+                    m_skILL_Range.SetActive(true);
                     m_objDirSkillAttack.SetActive(true);
                   
                 }
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 1000.0f, m_lmPicking_Mask))
+                if (Physics.Raycast(ray, out hit, 1000.0f, myMask))
                 {
-                    m_objDirSkillAttack.transform.position = new Vector3(hit.point.x, 4, hit.point.z);
-                    this.transform.LookAt(hit.point);
+                   
+                    m_objDirSkillAttack.transform.position = new Vector3(hit.point.x, 1, hit.point.z);
+                    Vector3 _point = new Vector3(hit.point.x, 0, hit.point.z);
+                    this.transform.LookAt(_point);
                 }
             }
         }
@@ -207,6 +207,7 @@ public class Jester : Hero
         {
             if (m_objDirSkillAttack.activeSelf)
             {
+                m_skILL_Range.SetActive(false);
                 m_objtsBoom.gameObject.transform.position = m_objDirSkillAttack.transform.position;
                 Vector3 newPos = new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1,1));
                 Vector3 newPos_1 = new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1, 1));

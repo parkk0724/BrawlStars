@@ -38,15 +38,22 @@ public class Hero : Character
     public float m_fTargetRange = 0f;    
     public LayerMask m_lmEnemyLayer = 0;
 
+    [Header("Jump")]
     public float m_Jump_maxDelay = 0.0f;
     float m_Jump_curDelay = 0.0f;
-
     Transform Jump_Destination_Pos1;
     Transform Jump_Destination_Pos2;
     Coroutine Jump_Delay;
     Coroutine Jump1;
     Coroutine Jump2;
 
+    [Header("RecoveryItem")]
+    public GameObject m_objHp;
+    public GameObject m_objStamina;
+    public GameObject m_objFever;
+    bool[] b_active = { false,false,false };
+    
+    
 
     public List<Item> items = new List<Item>();
     public float GetFever() { return m_fFever; }
@@ -101,7 +108,24 @@ public class Hero : Character
             Move();
             Attack();
         }
-
+        if (b_active[0])
+        {
+            StopCoroutine(RecoverHP());
+            StartCoroutine(RecoverHP());
+        }
+            
+        if (b_active[1])
+        {
+            StopCoroutine(RecoverHP());
+            StartCoroutine(RecoverST());
+        }
+            
+        if (b_active[2])
+        {
+            StopCoroutine(RecoverHP());
+            StartCoroutine(RecoverFV());
+        }
+            
         SearchTargetEffect();
         TargetEffect();
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
@@ -197,16 +221,19 @@ public class Hero : Character
                     {
                         case USE.HP:
                             m_nHP += dropitem.GetItem().itemCount;
+                            b_active[0] = true;
                             if (m_nHP > m_nMaxHP)
                                 m_nHP = m_nMaxHP;
                             break;
                         case USE.STAMINA:
                             m_fStamina += dropitem.GetItem().itemCount;
+                            b_active[1] = true;
                             if (m_fStamina > m_fMaxStamina)
                                 m_fStamina = m_fMaxStamina;
                             break;
                         case USE.FEVER:
                             m_fFever += dropitem.GetItem().itemCount;
+                            b_active[2] = true;
                             if (m_fFever > m_fMaxFever)
                                 m_fFever = m_fMaxFever;
                             break;
@@ -473,5 +500,29 @@ public class Hero : Character
         this.gameObject.layer = 9;
         yield return new WaitForSeconds(time);
         this.gameObject.layer = 7;
+    }
+   IEnumerator RecoverHP()
+    {
+        m_objHp.gameObject.transform.position = this.transform.position;
+        m_objHp.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        m_objHp.gameObject.SetActive(false);
+        b_active[0] = false;
+    }
+    IEnumerator RecoverST()
+    {
+        m_objStamina.gameObject.transform.position = this.transform.position;
+        m_objStamina.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        m_objStamina.gameObject.SetActive(false);
+        b_active[1] = false;
+    }
+    IEnumerator RecoverFV()
+    {
+        m_objFever.gameObject.transform.position = this.transform.position;
+        m_objFever.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        m_objFever.gameObject.SetActive(false);
+        b_active[2] = false;
     }
 }

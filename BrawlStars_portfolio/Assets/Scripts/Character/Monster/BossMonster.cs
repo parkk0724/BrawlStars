@@ -374,10 +374,9 @@ public class BossMonster : Monster
     {
         Instantiate(m_Skill2, this.transform.position, Quaternion.identity);
         Collider[] player = Physics.OverlapSphere(this.transform.position, m_fSkill2_AttackRange);
-
         foreach (Collider Player in player)
         {
-            if (Player.tag == "Player")
+            if (Player.tag == "Player" )
             {
                 Player.GetComponent<Character>().Hit(15, Color.red);
             }

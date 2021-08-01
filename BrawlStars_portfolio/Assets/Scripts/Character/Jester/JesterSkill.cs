@@ -40,6 +40,7 @@ public class JesterSkill : MonoBehaviour
     //
     void Update()
     {
+        DestroyTime += Time.deltaTime;
         SearchTarget();
         Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
         rigid.velocity = Vector3.zero;
@@ -48,7 +49,7 @@ public class JesterSkill : MonoBehaviour
     }
     void chageSate()
     {
-        DestroyTime += Time.deltaTime;
+       
         switch (State)
         {
             case SkillState.CREATE:

@@ -49,7 +49,7 @@ public class JesterWeapon : MonoBehaviour
     IEnumerator Fire()
     {
         Shooteffect.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         Shooteffect.gameObject.SetActive(false);
     }
     void BullutCaseInit(float time)

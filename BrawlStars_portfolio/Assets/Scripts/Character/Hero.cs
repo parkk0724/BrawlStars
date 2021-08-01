@@ -51,7 +51,8 @@ public class Hero : Character
     public GameObject m_objHp;
     public GameObject m_objStamina;
     public GameObject m_objFever;
-    bool[] b_active = { false,false,false };
+    public GameObject m_objInvicible;
+    bool[] b_active = { false,false,false,false };
     
     
 
@@ -125,7 +126,12 @@ public class Hero : Character
             StopCoroutine(RecoverHP());
             StartCoroutine(RecoverFV());
         }
-            
+        if (b_active[3])
+        {
+            StopCoroutine(Invincible(5f));
+            StartCoroutine(Invincible(5f));
+        }
+
         SearchTargetEffect();
         TargetEffect();
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
@@ -241,7 +247,8 @@ public class Hero : Character
 
                             break;
                         case USE.INVINCIBLE:
-                            StartCoroutine(Invincible(5f));
+                            b_active[3] = true;
+                            
                             break;
                     }
                 }
@@ -497,9 +504,13 @@ public class Hero : Character
     }
     IEnumerator Invincible(float time)
     {
+        m_objInvicible.gameObject.transform.position = this.transform.position;
+        m_objInvicible.gameObject.SetActive(true);
         this.gameObject.layer = 9;
         yield return new WaitForSeconds(time);
         this.gameObject.layer = 7;
+        m_objInvicible.gameObject.SetActive(false);
+        b_active[3] = false;
     }
    IEnumerator RecoverHP()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BearBullet : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BearBullet : MonoBehaviour
     public float curTime = 0.0f;
     public float BulletSpeed = 0.5f;
     public float BulletLiveMaxTime = 2.0f;
+    public UnityAction OnFeverUp = null;
     public GameObject HitEffect;
     Vector3 TargetDirVector; 
     Coroutine Temp;
@@ -15,8 +17,11 @@ public class BearBullet : MonoBehaviour
     private void Start()
     {
         StartCoroutine("DestoryBullet");
+        /*
         Rigidbody ribody = GetComponent<Rigidbody>();
-        //ribody.velocity = this.transform.forward * BulletSpeed;
+        ribody.velocity = this.transform.forward * BulletSpeed;
+        */
+        // OnFeverUp = GetComponent<>
         TargetDirVector = this.transform.forward * BulletSpeed * Time.deltaTime;
     }
 
@@ -35,8 +40,8 @@ public class BearBullet : MonoBehaviour
         { 
             Debug.Log("∏ÛΩ∫≈Õ ∏¬√„");
             this.transform.position = other.transform.position;
-            GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
-            other.GetComponent<Monster>().Hit(damage, Color.red);
+            GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation); // ¿Ã∆Â∆Æ ª˝º∫
+            other.GetComponent<Monster>()?.Hit(damage, Color.red);
             Destroy(obj, 1.0f);
             SearchTarget();
         }

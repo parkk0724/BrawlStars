@@ -209,8 +209,10 @@ public class Jester : Hero
             {
                 m_skILL_Range.SetActive(false);
                 m_objtsBoom.gameObject.transform.position = m_objDirSkillAttack.transform.position;
-                Vector3 newPos = new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1,1));
-                Vector3 newPos_1 = new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1, 1));
+                Vector3 newPos = 
+                    new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1,1));
+                Vector3 newPos_1 =
+                    new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1, 1));
                 if (skill != null) StopCoroutine(skill);
                 skill = StartCoroutine(Effect());
                 Instantiate(m_objJesterSkill, newPos, Quaternion.identity);

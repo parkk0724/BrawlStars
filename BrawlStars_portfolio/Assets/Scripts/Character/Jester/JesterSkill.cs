@@ -12,7 +12,7 @@ public class JesterSkill : MonoBehaviour
     Renderer[] myRender;
     enum SkillState
     {
-        CREATE, IDE, RUN, DiZZY ,ATTACK, DESTROY ,Death
+        CREATE, IDLE, RUN, PATROL, ATTACK, DESTROY ,Death , DiZZY
     }
     SkillState State = SkillState.CREATE;
     public GameObject m_objSkillEffect;
@@ -32,7 +32,7 @@ public class JesterSkill : MonoBehaviour
         myRender = GetComponentsInChildren<Renderer>();
         Animationevent = () => StartCoroutine(skilShot());
         anim = GetComponent<Animator>();
-        State = SkillState.IDE;
+        State = SkillState.IDLE;
         nav = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
     }
@@ -47,6 +47,48 @@ public class JesterSkill : MonoBehaviour
         rigid.angularVelocity = Vector3.zero;
         chageSate();
     }
+    void ChangeState(SkillState s)
+    {
+        if (State == s) return;
+        State = s;
+        switch (State)
+        {
+            case SkillState.CREATE:
+                break;
+            case SkillState.IDLE:
+                break;
+            case SkillState.PATROL:
+                break;
+            case SkillState.ATTACK:
+                break;
+            case SkillState.DiZZY:
+                break;
+            case SkillState.DESTROY:
+                break;
+            case SkillState.Death:
+                break;
+        }
+    }
+    void StateProcess()
+    {
+        switch (State)
+        {
+            case SkillState.CREATE:
+                break;
+            case SkillState.IDLE:
+                break;
+            case SkillState.PATROL:
+                break;
+            case SkillState.ATTACK:
+                break;
+            case SkillState.DiZZY:
+                break;
+            case SkillState.DESTROY:
+                break;
+            case SkillState.Death:
+                break;
+        }
+    }
     void chageSate()
     {
        
@@ -54,7 +96,7 @@ public class JesterSkill : MonoBehaviour
         {
             case SkillState.CREATE:
                 break;
-            case SkillState.IDE:
+            case SkillState.IDLE:
                 if (m_tfResultTarget != null)
                 {
                     State = SkillState.RUN;

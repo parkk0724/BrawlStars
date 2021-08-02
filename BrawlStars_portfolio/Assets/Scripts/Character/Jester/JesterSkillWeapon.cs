@@ -18,7 +18,10 @@ public class JesterSkillWeapon : MonoBehaviour
     {
 
         if (jesterskill.Attackcollider.enabled)
+        {
             effect.gameObject.SetActive(true);
+            
+        }
         else
         {
             effect.gameObject.SetActive(false);
@@ -30,7 +33,10 @@ public class JesterSkillWeapon : MonoBehaviour
         if(other.GetComponent<Monster>())
         {
             other.GetComponent<Monster>().Hit((int)damage, Color.red);
-           
+            if(effect.activeSelf)
+            {
+                effect.transform.position = other.transform.position;
+            }
         }
     }
     private void OnTriggerStay(Collider other)

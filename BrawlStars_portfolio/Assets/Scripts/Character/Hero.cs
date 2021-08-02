@@ -55,7 +55,12 @@ public class Hero : Character
     public GameObject m_objStamina;
     public GameObject m_objFever;
     public GameObject m_objInvicible;
+    Coroutine Hp;
+    Coroutine St;
+    Coroutine Fe;
+    Coroutine Invi;
     bool[] b_active = { false,false,false,false };
+    float m_fCurtime;
     
     
 
@@ -105,9 +110,10 @@ public class Hero : Character
     // Update is called once per frame
     protected virtual void Update()
     {
+       
         //if (m_Start == Start_State.START)
         //{
-            if (!m_bDie)
+        if (!m_bDie)
             {
                 m_fCurBodyAttack += Time.deltaTime;
                 RecoveryStamina();
@@ -116,25 +122,25 @@ public class Hero : Character
             }
             if (b_active[0])
             {
-                StopCoroutine(RecoverHP());
-                StartCoroutine(RecoverHP());
+                if (Hp != null) StopCoroutine(Hp);
+                Hp =StartCoroutine(RecoverHP());
             }
-
+            
             if (b_active[1])
             {
-                StopCoroutine(RecoverHP());
-                StartCoroutine(RecoverST());
+                if(St != null) StopCoroutine(St);
+                St= StartCoroutine(RecoverST());
             }
 
             if (b_active[2])
             {
-                StopCoroutine(RecoverHP());
-                StartCoroutine(RecoverFV());
+                if (Fe != null) StopCoroutine(Fe);
+                Fe = StartCoroutine(RecoverFV());
             }
             if (b_active[3])
             {
-                StopCoroutine(Invincible(5f));
-                StartCoroutine(Invincible(5f));
+                if(Invi != null) StopCoroutine(Invi);
+                Invi= StartCoroutine(Invincible(5f));
             }
 
             SearchTargetEffect();
@@ -233,18 +239,33 @@ public class Hero : Character
                     {
                         case USE.HP:
                             m_nHP += dropitem.GetItem().itemCount;
-                            b_active[0] = true;
+                            if (b_active[0] && m_objHp.activeSelf)
+                            {
+                                b_active[0] = false;
+                                m_objHp.gameObject.SetActive(false);
+                            }
+                             b_active[0] = true;
                             if (m_nHP > m_nMaxHP)
                                 m_nHP = m_nMaxHP;
                             break;
                         case USE.STAMINA:
                             m_fStamina += dropitem.GetItem().itemCount;
+                            if (b_active[1] && m_objStamina.activeSelf)
+                            {
+                                b_active[1] = false;
+                                m_objStamina.gameObject.SetActive(false);
+                            }
                             b_active[1] = true;
                             if (m_fStamina > m_fMaxStamina)
                                 m_fStamina = m_fMaxStamina;
                             break;
                         case USE.FEVER:
                             m_fFever += dropitem.GetItem().itemCount;
+                            if (b_active[2] && m_objFever.activeSelf)
+                            {
+                                b_active[2] = false;
+                                m_objFever.gameObject.SetActive(false);
+                            }
                             b_active[2] = true;
                             if (m_fFever > m_fMaxFever)
                                 m_fFever = m_fMaxFever;
@@ -253,6 +274,11 @@ public class Hero : Character
 
                             break;
                         case USE.INVINCIBLE:
+                            if (b_active[3] && m_objInvicible.activeSelf)
+                            {
+                                b_active[3] = false;
+                                m_objInvicible.gameObject.SetActive(false);
+                            }
                             b_active[3] = true;
                             
                             break;
@@ -520,11 +546,13 @@ public class Hero : Character
     }
    IEnumerator RecoverHP()
     {
+
         m_objHp.gameObject.transform.position = this.transform.position;
         m_objHp.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         m_objHp.gameObject.SetActive(false);
         b_active[0] = false;
+        
     }
     IEnumerator RecoverST()
     {
@@ -542,4 +570,5 @@ public class Hero : Character
         m_objFever.gameObject.SetActive(false);
         b_active[2] = false;
     }
+
 }

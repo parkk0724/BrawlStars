@@ -5,6 +5,7 @@ using UnityEngine;
 public class DropItem : MonoBehaviour
 {
     public Item item;
+    public bool check = false;
     public void setItem(Item _item)
     {
         item.itemtype = _item.itemtype;
@@ -49,5 +50,20 @@ public class DropItem : MonoBehaviour
             yield return null;
         }
 
+    }
+    public bool Check()
+    {
+        return check;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            check = true;
+        }
+        else
+        {
+            check = false;
+        }
     }
 }

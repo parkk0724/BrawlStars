@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MeinMenu : MonoBehaviour
 {
+    public GameObject Selected_Effect;
+
     GameObject Soldier;
     GameObject BoxMan;
     GameObject Bear;
-    GameObject Jester;
-
+    GameObject Jester;       
     private void Start()
     {
         Soldier = GameObject.Find("Soldier_Select");
@@ -37,21 +38,33 @@ public class MeinMenu : MonoBehaviour
 
     public void Soldier_Select()
     {
-        Soldier.GetComponent<Animator>().SetTrigger("tSelect");
+        Soldier.GetComponent<Animator>().SetBool("bSelect", true);
+        BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
+        Bear.GetComponent<Animator>().SetBool("bSelect", false);
+        Jester.GetComponent<Animator>().SetBool("bSelect", false);
     }
 
     public void BoxMan_Select()
     {
-        BoxMan.GetComponent<Animator>().SetTrigger("tSelect");
+        Soldier.GetComponent<Animator>().SetBool("bSelect", false);
+        BoxMan.GetComponent<Animator>().SetBool("bSelect", true);
+        Bear.GetComponent<Animator>().SetBool("bSelect", false);
+        Jester.GetComponent<Animator>().SetBool("bSelect", false);
     }
 
     public void Bear_Select()
     {
-        Bear.GetComponent<Animator>().SetTrigger("tSelect");
+        Soldier.GetComponent<Animator>().SetBool("bSelect", false);
+        BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
+        Bear.GetComponent<Animator>().SetBool("bSelect", true);
+        Jester.GetComponent<Animator>().SetBool("bSelect", false);
     }
 
     public void Jester_Select()
     {
-        Jester.GetComponent<Animator>().SetTrigger("tSelect");
+        Soldier.GetComponent<Animator>().SetBool("bSelect", false);
+        BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
+        Bear.GetComponent<Animator>().SetBool("bSelect", false);
+        Jester.GetComponent<Animator>().SetBool("bSelect", true);
     }
 }

@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class CharacterSelect : MonoBehaviour
 {
-    GameObject Soldier;
-    GameObject BoxMan;
-    GameObject Bear;
-    GameObject Jester;
+    public GameObject Selected_Effect;
+
+    GameObject Selected_Character = null;    
+    GameObject[] Characters;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        Soldier = GameObject.Find("Soldier_Select");
-        BoxMan = GameObject.Find("BoxMan_Select");
-        Bear = GameObject.Find("Bear_Select");
-        Jester = GameObject.Find("Jester_Select");
+        Characters[0] = GameObject.Find("Soldier_Select");
+        Characters[1] = GameObject.Find("BoxMan_Select");
+        Characters[2] = GameObject.Find("Bear_Select");
+        Characters[3] = GameObject.Find("Jester_Select");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Selected();
     }
 
-    private void Selected()
-    {
-        
+    private void Selected(GameObject obj)
+    {        
+        Instantiate(Selected_Effect, obj.transform.position, Quaternion.identity);
     }
 }

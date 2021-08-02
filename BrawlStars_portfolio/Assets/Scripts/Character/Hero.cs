@@ -140,7 +140,7 @@ public class Hero : Character
             if (b_active[3])
             {
                 if(Invi != null) StopCoroutine(Invi);
-                Invi= StartCoroutine(Invincible(5f));
+                Invi= StartCoroutine(Invincible());
             }
 
             SearchTargetEffect();
@@ -534,12 +534,12 @@ public class Hero : Character
     {
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }
-    IEnumerator Invincible(float time)
+    IEnumerator Invincible()
     {
         m_objInvicible.gameObject.transform.position = this.transform.position;
         m_objInvicible.gameObject.SetActive(true);
         this.gameObject.layer = 9;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(4f);
         this.gameObject.layer = 7;
         m_objInvicible.gameObject.SetActive(false);
         b_active[3] = false;

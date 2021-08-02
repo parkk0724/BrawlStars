@@ -105,8 +105,8 @@ public class Hero : Character
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (m_Start == Start_State.START)
-        {
+        //if (m_Start == Start_State.START)
+        //{
             if (!m_bDie)
             {
                 m_fCurBodyAttack += Time.deltaTime;
@@ -146,7 +146,7 @@ public class Hero : Character
             }
             if (m_bRotStart) LookEnemy();
             if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
-        }
+        //}
     }
     #region Hero Move
     public override void Move()

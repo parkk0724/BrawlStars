@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class BossMonster : Monster
 {
+    protected enum PhaseState{ NONE, ANGRY, FEVER }
+    PhaseState m_phase = PhaseState.NONE;
+
     public Material m_mHeader = null;
     public Material m_mBody = null;
-    public GameObject m_objBullet = null;
-    public GameObject m_Skill2 = null;
+    public GameObject m_Skill_2 = null;
+    public GameObject m_objBullet = null;    
     public GameObject m_objBasicAttackPos = null;
-    public Transform[] m_FirePos = null;
+    public Transform[] m_FirePos = null;    
+    public float m_RotToTarget_Speed = 5.0f;
 
     bool[] m_bPhase = new bool[2] { false, false };
     float m_fCurTime = 0.0f;
@@ -19,9 +23,10 @@ public class BossMonster : Monster
     float m_fSkill1_AttackRange = 0.0f;
     float m_fSkill2_AttackRange = 0.0f;
 
-    GameObject Dark_Effect;
+    GameObject Dark_Effect;    
 
     Coroutine die = null;
+    Coroutine rot = null;
     protected override void Start()
     {
         base.Start();
@@ -45,7 +50,7 @@ public class BossMonster : Monster
         Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
         ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
-        Dark_Effect.SetActive(false);
+        Dark_Effect.SetActive(false);        
     }
 
     // Update is called once per frame
@@ -214,8 +219,9 @@ public class BossMonster : Monster
         //    ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
         //    ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
         //}
-        if (m_nHP <= m_nMaxHP / 2 && !m_bPhase[0]) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 첫 페이즈가 바뀔때)
+        if (m_nHP <= m_nMaxHP / 2 && m_phase == PhaseState.NONE) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 첫 페이즈가 바뀔때)
         {
+            m_phase = PhaseState.ANGRY;
             m_Animator.SetTrigger("tPowerUp");
             ColorChange(m_mHeader, 1.0f, 0.5f, 0.5f);
             ColorChange(m_mBody, 1.0f, 0.5f, 0.5f);
@@ -225,8 +231,9 @@ public class BossMonster : Monster
             m_fMaxIdleTime = 0.5f;
             // 여기서 상태값 조절
         }
-        else if (m_nHP <= m_nMaxHP / 4 && !m_bPhase[1]) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 두번째 페이즈가 바뀔때)
+        else if (m_nHP <= m_nMaxHP / 4 && m_phase == PhaseState.ANGRY) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 두번째 페이즈가 바뀔때)
         {
+            m_phase = PhaseState.FEVER;
             m_Animator.SetTrigger("tPowerUp");
             ColorChange(m_mHeader, 1.0f, 0.0f, 0.0f);
             ColorChange(m_mBody, 1.0f, 0.0f, 0.0f);
@@ -238,87 +245,94 @@ public class BossMonster : Monster
     public override void Attack()
     {
         int rnd = Random.Range(1, 100);
-        if (m_bPhase[1])
+
+        switch(m_phase)
         {
-            if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
-            {
-                if (rnd <= 70)
-                    BasicAttack();
-                else
-                    ChangeState(State.IDLE);
-            }
-            else if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fSkill2_AttackRange)
-            {
-                if (rnd <= 90)
+            case PhaseState.FEVER :
                 {
-                    if (rnd < 20)
+                    if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
                     {
-                        Debug.Log("skill1");
-                        SkillAttack1();
+                        if (rnd <= 70)
+                            BasicAttack();
+                        else
+                            ChangeState(State.IDLE);
+                    }
+                    else if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fSkill2_AttackRange)
+                    {
+                        if (rnd <= 90)
+                        {
+                            if (rnd < 20)
+                            {
+                                Debug.Log("skill1");
+                                SkillAttack1();
+                            }
+                            else
+                            {
+                                Debug.Log("Move");
+                                ChangeState(State.MOVE);
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("skill2");
+                            SkillAttack2();
+                        }
+                    }
+                    else if (Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange)
+                    {
+                        if (rnd <= 20)
+                        {
+                            //Debug.Log("skill2");
+                            SkillAttack2();
+                        }
+                        else if (rnd > 20 && rnd < 40)
+                        {
+                            //Debug.Log("skill1");
+                            SkillAttack1();
+                        }
+                        else
+                        {
+                            //Debug.Log("Idle");
+                            ChangeState(State.IDLE);
+                        }
                     }
                     else
                     {
-                        Debug.Log("Move");
                         ChangeState(State.MOVE);
                     }
                 }
-                else
+                break;
+            case PhaseState.ANGRY:
                 {
-                    Debug.Log("skill2");
-                    SkillAttack2();
+                    if (Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
+                    {
+                        if (rnd < 70)
+                        {
+                            BasicAttack();
+                        }
+                        else
+                        {
+                            ChangeState(State.IDLE);
+                        }
+                    }
+                    else if (Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
+                    {
+                        if (rnd < 70)
+                        {
+                            SkillAttack1();
+                        }
+                        else
+                        {
+                            ChangeState(State.MOVE);
+                        }
+                    }
                 }
-            }
-            else if (Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill2_AttackRange)
-            {
-                if (rnd <= 20)
-                {
-                    //Debug.Log("skill2");
-                    SkillAttack2();
-                }
-                else if (rnd > 20 && rnd < 40)
-                {
-                    //Debug.Log("skill1");
-                    SkillAttack1();
-                }
-                else
-                {
-                    //Debug.Log("Idle");
-                    ChangeState(State.IDLE);
-                }
-            }
-            else
-            {
-                ChangeState(State.MOVE);
-            }
-        }
-        else if (m_bPhase[0])
-        {
-            if (Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
-            {
-                if(rnd < 70)
+                break;
+            case PhaseState.NONE:
                 {
                     BasicAttack();
                 }
-                else
-                {
-                    ChangeState(State.IDLE);
-                }
-            }
-            else if (Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fBasicAttackRange && Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
-            {
-                if (rnd < 70)
-                {
-                    SkillAttack1();
-                }
-                else
-                {
-                    ChangeState(State.MOVE);
-                }
-            }
-        }
-        else
-        {
-            BasicAttack();
+                break;
         }
     }
 
@@ -326,8 +340,10 @@ public class BossMonster : Monster
     {
         if(Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)
         {
-          this.transform.LookAt(m_tfTarget);
-          m_Animator.SetTrigger("tBAttack");
+            //if (rot != null) StopCoroutine(rot); // 부드럽게 로테이션 돌리려고 slerp사용 했는데 버그 약간 있어서 잠시 주석
+            //rot = StartCoroutine(LookAtTarget(m_tfTarget));
+            this.transform.LookAt(m_tfTarget);
+            m_Animator.SetTrigger("tBAttack");
         }
         else
         {
@@ -338,8 +354,10 @@ public class BossMonster : Monster
     {
         if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
         {
-          this.transform.LookAt(m_tfTarget);
-          m_Animator.SetTrigger("tSkillAttack1");
+            //if (rot != null) StopCoroutine(rot);
+            //rot = StartCoroutine(LookAtTarget(m_tfTarget));
+            this.transform.LookAt(m_tfTarget);
+            m_Animator.SetTrigger("tSkillAttack1");
         }
         else
         {
@@ -348,6 +366,8 @@ public class BossMonster : Monster
     }
     void SkillAttack2()
     {
+        //if (rot != null) StopCoroutine(rot);
+        //rot = StartCoroutine(LookAtTarget(m_tfTarget));
         this.transform.LookAt(m_tfTarget);
         m_Animator.SetTrigger("tSkillAttack2");           
     }
@@ -372,7 +392,7 @@ public class BossMonster : Monster
 
     void BossMon_Skill2()
     {
-        Instantiate(m_Skill2, this.transform.position, Quaternion.identity);
+        Instantiate(m_Skill_2, this.transform.position, Quaternion.identity);
         Collider[] player = Physics.OverlapSphere(this.transform.position, m_fSkill2_AttackRange);
         foreach (Collider Player in player)
         {
@@ -400,5 +420,37 @@ public class BossMonster : Monster
         Vector3 pos = m_tfTarget.position; // 점프대에서 점프하면 y값이 변화하여 navMesh에서 인식을 못함
         pos.y = 0;
         m_NavMeshAgent.SetDestination(pos); // 플레이어 계속 따라다니게
+    }
+
+    IEnumerator LookAtTarget(Transform target)
+    {
+        Vector3 targetRot = this.transform.rotation.eulerAngles;
+        Vector3 Rot = targetRot;
+        float d1 = Vector3.Dot(this.transform.forward, (target.position - this.transform.position).normalized);
+        float r = Mathf.Acos(d1);
+        float e = 180.0f * (r / Mathf.PI);
+        float d2 = Vector3.Dot(this.transform.right, (target.position - this.transform.position).normalized);
+
+        if (d2 < 0.0f)
+            e = -e;
+
+        while (e > 0.0f)
+        {
+            float delta = e * 10.0f * Time.deltaTime;           
+
+            if (e - delta < 0.0f)
+            {
+                delta = e;
+            }
+            targetRot.y += delta;
+            e -= delta;
+
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(targetRot), m_RotToTarget_Speed * Time.deltaTime);
+
+            yield return null;
+        }
+        Rot.y += e;
+        this.transform.rotation = Quaternion.Euler(Rot);
+        rot = null;
     }
 }

@@ -14,7 +14,8 @@ public class BossMonsterBullet : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            other.GetComponent<Character>().Hit(10, Color.red);
+            if(other.GetComponent<Hero>())
+            other.GetComponent<Hero>().Hit(10, Color.red);
         }
 
         if(other.tag == "Wall")

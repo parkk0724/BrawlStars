@@ -26,7 +26,7 @@ public class IncivibleEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Jump"))
         {
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
         }
     }
     private void OnTriggerExit(Collider other)

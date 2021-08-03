@@ -58,7 +58,6 @@ public class Hero : Character
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
-    Coroutine Invi;
     bool[] b_active = { false,false,false,false };
     float m_fCurtime;
     
@@ -110,7 +109,7 @@ public class Hero : Character
     // Update is called once per frame
     protected virtual void Update()
     {
-       
+
         //if (m_Start == Start_State.START)
         //{
         if (!m_bDie)
@@ -124,25 +123,18 @@ public class Hero : Character
             {
                 if (Hp != null) StopCoroutine(Hp);
                 Hp =StartCoroutine(RecoverHP());
-            }
-            
+            }            
             if (b_active[1])
             {
                 if(St != null) StopCoroutine(St);
                 St= StartCoroutine(RecoverST());
             }
-
             if (b_active[2])
             {
                 if (Fe != null) StopCoroutine(Fe);
                 Fe = StartCoroutine(RecoverFV());
             }
-            if (b_active[3])
-            {
-                if(Invi != null) StopCoroutine(Invi);
-                Invi= StartCoroutine(Invincible());
-            }
-
+            invicibleitem();
             SearchTargetEffect();
             TargetEffect();
             if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
@@ -274,11 +266,13 @@ public class Hero : Character
 
                             break;
                         case USE.INVINCIBLE:
-                            if (b_active[3] && m_objInvicible.activeSelf)
+                            if(b_active[3])
                             {
                                 b_active[3] = false;
+                                m_fCurtime = 0;
                                 m_objInvicible.gameObject.SetActive(false);
                             }
+                            
                             b_active[3] = true;
                             
                             break;
@@ -384,19 +378,25 @@ public class Hero : Character
         }
     }
 
+
     void RotaeProcess(Vector3 m_objPlayerDir, float delta, float movedir, Vector3 dir) //로테이션
     {
         float dot = Vector3.Dot(m_objPlayerDir, this.transform.forward);
+        float dot1 = Vector3.Dot(dir, this.transform.forward);
+        float rdelta = m_fRotate_Speed * Time.deltaTime;
+        float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
         if (dot == 1.0f)
         {
             //this.transform.Translate(this.transform.forward * delta, Space.World);
         }
+        else if (dot == -1.0f)
+        {
+            Debug.Log(dot);
+            this.transform.Rotate(-Vector3.up * movedir * rdelta, Space.World);
+        }
         else
         {
-            float dot1 = Vector3.Dot(dir, this.transform.forward);
-            float rdelta = m_fRotate_Speed * Time.deltaTime;
-            float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
+            Debug.Log(dot);
             if (eurler - rdelta < 0.0f)
                 rdelta = eurler;
 
@@ -410,9 +410,9 @@ public class Hero : Character
                 //this.transform.Translate(m_objPlayerDir * delta, Space.World);
                 this.transform.Rotate(Vector3.up * movedir * rdelta, Space.World);
             }
-            if (Vector3.Dot(m_objPlayerDir, this.transform.forward) >= 0.95f && (Vector3.Dot(m_objPlayerDir, this.transform.forward) <= 1.05f)) //솔져 자꾸 방향틀면 각도 제대로 못잡는 문제때문에 오차 예외처리 한것
-                this.transform.forward = m_objPlayerDir;
         }
+        if (Vector3.Dot(m_objPlayerDir, this.transform.forward) >= 0.96f && Vector3.Dot(m_objPlayerDir, this.transform.forward) <= 1.04f) //솔져 자꾸 방향틀면 각도 제대로 못잡는 문제때문에 오차 예외처리 한것
+            this.transform.forward = m_objPlayerDir;
     }
     #region SearchTarget
     protected void SearchTarget()
@@ -544,7 +544,28 @@ public class Hero : Character
         yield return new WaitForSeconds(4f);
         this.gameObject.layer = 7;
         m_objInvicible.gameObject.SetActive(false);
-        b_active[3] = false;
+        //b_active[3] = false;
+    }
+    void invicibleitem()
+    {
+        
+        if (b_active[3])
+        {
+            m_fCurtime += Time.deltaTime;
+            m_objInvicible.gameObject.transform.position = this.transform.position;
+            m_objInvicible.gameObject.SetActive(true);
+            this.gameObject.layer = 9;
+            if(m_fCurtime > 3)
+            {
+                b_active[3] = false;
+                m_fCurtime = 0;
+            }
+        }
+        else
+        {
+            this.gameObject.layer = 7;
+            m_objInvicible.gameObject.SetActive(false);
+        }
     }
    IEnumerator RecoverHP()
     {

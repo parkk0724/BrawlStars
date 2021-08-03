@@ -91,15 +91,12 @@ public class BearBullet : MonoBehaviour
 
         if (ResultTarget != null)
         {
-            Debug.Log(ResultTarget.position);
             // 검출된 콜라이더를 향해 방향 잡고
             Vector3 dir = ResultTarget.position - this.transform.position;
             dir.y = ResultTarget.position.y / 2.0f;
             dir.Normalize();
 
             TargetDirVector = dir * BulletSpeed * Time.deltaTime ;
-
-            Debug.Log("Search End");
         }
     }
 }

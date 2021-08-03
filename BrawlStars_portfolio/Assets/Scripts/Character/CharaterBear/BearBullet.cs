@@ -40,6 +40,7 @@ public class BearBullet : MonoBehaviour
         { 
             Debug.Log("몬스터 맞춤");
             this.transform.position = other.transform.position;
+            OnFeverUp();
             GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation); // 이펙트 생성
             other.GetComponent<Monster>()?.Hit(damage, Color.red);
             Destroy(obj, 1.0f);

@@ -33,6 +33,7 @@ public class Weapon : MonoBehaviour
 
     public void SkillShoot()
     {
+        //  ------------------------ ≈Õ∑øº“»Ø ------------------------------
         //myAnimator.SetTrigger("tBAttack");
         GetComponentInParent<Bear>().SetRotStart(false);
     }

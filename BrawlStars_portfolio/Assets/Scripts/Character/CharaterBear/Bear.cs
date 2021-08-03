@@ -26,11 +26,13 @@ public class Bear : Hero
             m_bRotStart = true;
             //myWeapon.Shoot();
         }
-        if (Input.GetMouseButtonDown(1)) 
+        if (Input.GetMouseButtonDown(1) && m_fFever >= m_fMaxFever)
         {
             myAnimator.SetTrigger("tSAttack");
+            m_fFever = 0;
             //myWeapon.SkillShoot();
         }
+        
     }
 
     public void SetRotStart(bool b)

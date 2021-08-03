@@ -9,10 +9,12 @@ public class BearAnimationEvent : MonoBehaviour
 
     private void Shoot()
     {
+        // weapon.cs: OnShoot에 함수 넣어줌
         OnShoot?.Invoke();
     }
-    private void SkillShoot()
+    private void SkillShoot() 
     {
+        // weapon.cs: OnSkillShoot에 함수 넣어줌
         OnSkillShoot?.Invoke();
     }
 }

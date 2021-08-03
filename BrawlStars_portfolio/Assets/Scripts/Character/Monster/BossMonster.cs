@@ -398,7 +398,10 @@ public class BossMonster : Monster
         {
             if (Player.tag == "Player" && Player.gameObject.layer == 7)
             {
-                Player.GetComponent<Hero>().Hit(15, Color.red);
+                if(Player.GetComponent<Hero>())
+                {
+                    Player.GetComponent<Hero>().Hit(15, Color.red);
+                }
             }
         }
     }

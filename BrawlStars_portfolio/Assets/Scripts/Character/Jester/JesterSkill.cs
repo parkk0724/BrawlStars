@@ -233,5 +233,10 @@ public class JesterSkill : MonoBehaviour
         if (thisgob > thisgob_2)
             State = SkillState.Death;
     }
+
+    void SkillEffectFollow()
+    {
+
+    }
 }
 

@@ -266,15 +266,14 @@ public class Hero : Character
 
                             break;
                         case USE.INVINCIBLE:
+                            
                             if(b_active[3])
                             {
                                 b_active[3] = false;
                                 m_fCurtime = 0;
                                 m_objInvicible.gameObject.SetActive(false);
                             }
-                            
                             b_active[3] = true;
-                            
                             break;
                     }
                 }
@@ -536,26 +535,16 @@ public class Hero : Character
     {
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }
-    IEnumerator Invincible()
-    {
-        m_objInvicible.gameObject.transform.position = this.transform.position;
-        m_objInvicible.gameObject.SetActive(true);
-        this.gameObject.layer = 9;
-        yield return new WaitForSeconds(4f);
-        this.gameObject.layer = 7;
-        m_objInvicible.gameObject.SetActive(false);
-        //b_active[3] = false;
-    }
+
     void invicibleitem()
     {
-        
         if (b_active[3])
         {
             m_fCurtime += Time.deltaTime;
             m_objInvicible.gameObject.transform.position = this.transform.position;
             m_objInvicible.gameObject.SetActive(true);
             this.gameObject.layer = 9;
-            if(m_fCurtime > 3)
+            if(m_fCurtime > 6)
             {
                 b_active[3] = false;
                 m_fCurtime = 0;

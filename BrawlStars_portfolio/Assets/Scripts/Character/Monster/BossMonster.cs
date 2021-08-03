@@ -396,9 +396,9 @@ public class BossMonster : Monster
         Collider[] player = Physics.OverlapSphere(this.transform.position, m_fSkill2_AttackRange);
         foreach (Collider Player in player)
         {
-            if (Player.tag == "Player" )
+            if (Player.tag == "Player" && Player.gameObject.layer == 7)
             {
-                Player.GetComponent<Character>().Hit(15, Color.red);
+                Player.GetComponent<Hero>().Hit(15, Color.red);
             }
         }
     }

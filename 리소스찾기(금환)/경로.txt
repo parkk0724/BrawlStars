@@ -1,0 +1,57 @@
+
+- 맞았을 떄 이펙트 (몬스터) -
+1. Assets/Effect/JMO Assets/Cartoon FX/CFX2 Prefabs/Blood/CFX2_Blood
+
+- 죽었을 때 (몬스터) -
+1. Assets/Effect/JMO Assets/Cartoon FX/CFX2 Prefabs/Skull&Ghosts Effects/CFX2_Soul
+
+- 포탈 -
+1. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Magic Dark/CFX3_DarkMagicAura_B_Runic
+2. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Fire/CFX3_Fire_Shield1
+fireShield라는 프리팹이용해서 만들어봄
+3. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Ice/CFX3_Ice_Shiled
+비슷한게 있었음;;
+4. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Magic Misc/CFX3_Vortex_Ground
+5. Assets/Effect/MagicArsenal/Effects/Prefabs/Aura/AuraRing/AuraRingArcane
+사진첨부는 글자되어있는 메테리얼 다른걸로 바꿈
+
+- 점프대 -
+1. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Magic Misc/CFX3_VortexTornado
+2. Assets/Effect/JMO Assets/Cartoon FX/CFX Prefabs/Misc/Tornado Variants/CFX3_Tornado_Big
+점프할때만 이펙트 효과 주면 어떨까 생각
+3. Assets/Effect/NeatWolf/Bundle03-MagicSpells/_Casts/Cast02_wind
+4. Assets/Effect/NeatWolf/Bundle03-MagicSpells/_Pillars/Pillar01_wind
+5. Assets/Effect/NeatWolf/Bundle03-MagicSpells/_Projectiles/Proj01_wind
+
+- 부활 -
+1. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Magic Misc/CFX3_MagicAura_B_Runic
+2. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Magic Misc/CFX3_MagicAura_A
+3. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Light/CFX3_ResurrectionLight_Circle
+4. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Nature/CFX3_Shield_Leaves
+5. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Light/CFX3_SkyRaysSkewed_Loop
+6. Assets/Effect/NeatWolf/Bundle03-MagicSpells/_Hits/Hit01_life
+
+- 부활 위치 -
+1. Assets/Effect/JMO Assets/Cartoon FX/CFX3 Prefabs/Magic Misc/CFX3_MagicAura_C
+2. Assets/Effect/MagicArsenal/Effects/Prefabs/Aura/AuraRing/AuraRingLight
+3. Assets/Effect/NeatWolf/Bundle03-MagicSpells/_Circles/Circle01_buff
+4. Assets/Effect/NeatWolf/Bundle03-MagicSpells/_Circles/Circle01_heal
+
+- 승리 -
+1. Assets/Effect/NeatWolf/Bundle03-MagicSpells/_Projectiles/Proj01_prismatic
+좀 더 만지면 괜찮을수도..
+
+- 패배 -
+1. Assets/Effect/JMO Assets/Cartoon FX/CFX2 Prefabs/Rain/CFX2_Rain
+
+- 피버게이지 -
+1. 프리팹이 없어서 씬에서 프리팹으로 가져와야 될듯
+2. ;;
+3. 현재
+
+- 체력게이지 -
+1. 프리팹이 없어서 씬에서 프리팹으로 가져와야 될듯
+2. ;;
+3. 현재
+
+※ 캐릭터 UI 무료에셋 하나 사진 첨부

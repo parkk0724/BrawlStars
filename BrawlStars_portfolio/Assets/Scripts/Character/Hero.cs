@@ -384,19 +384,28 @@ public class Hero : Character
         }
     }
 
+
     void RotaeProcess(Vector3 m_objPlayerDir, float delta, float movedir, Vector3 dir) //로테이션
     {
+        if (Vector3.Dot(m_objPlayerDir, this.transform.forward) >= 0.97f && (Vector3.Dot(m_objPlayerDir, this.transform.forward) <= 1.03f)) //솔져 자꾸 방향틀면 각도 제대로 못잡는 문제때문에 오차 예외처리 한것
+            this.transform.forward = m_objPlayerDir;
+
         float dot = Vector3.Dot(m_objPlayerDir, this.transform.forward);
+        float dot1 = Vector3.Dot(dir, this.transform.forward);
+        float rdelta = m_fRotate_Speed * Time.deltaTime;
+        float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
         if (dot == 1.0f)
         {
             //this.transform.Translate(this.transform.forward * delta, Space.World);
         }
+        else if (dot == -1.0f)
+        {
+            Debug.Log(dot);
+            this.transform.Rotate(-Vector3.up * movedir * rdelta, Space.World);
+        }
         else
         {
-            float dot1 = Vector3.Dot(dir, this.transform.forward);
-            float rdelta = m_fRotate_Speed * Time.deltaTime;
-            float eurler = 180.0f * (Mathf.Acos(dot) / Mathf.PI);
-
+            Debug.Log(dot);
             if (eurler - rdelta < 0.0f)
                 rdelta = eurler;
 
@@ -409,9 +418,7 @@ public class Hero : Character
             {
                 //this.transform.Translate(m_objPlayerDir * delta, Space.World);
                 this.transform.Rotate(Vector3.up * movedir * rdelta, Space.World);
-            }
-            if (Vector3.Dot(m_objPlayerDir, this.transform.forward) >= 0.95f && (Vector3.Dot(m_objPlayerDir, this.transform.forward) <= 1.05f)) //솔져 자꾸 방향틀면 각도 제대로 못잡는 문제때문에 오차 예외처리 한것
-                this.transform.forward = m_objPlayerDir;
+            }           
         }
     }
     #region SearchTarget

@@ -11,7 +11,8 @@ public class Main_Camera_Moving : MonoBehaviour
     public bool startmove = true;
     Coroutine cameramove = null;
 
-    float dist = 0.0f;
+    float forwarddist = 0.0f;
+    float backwarddist = 0.0f;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // 캐릭바꿀때마다 변경해야되서 알아서 찾아서 넣어주게 함. -금환
@@ -21,24 +22,23 @@ public class Main_Camera_Moving : MonoBehaviour
         {
             this.transform.position = playercamera.transform.position;
         }
-        dist = Mathf.Abs(player.transform.position.z - playercamera.transform.position.z);
+        forwarddist = Mathf.Abs(player.transform.position.z - playercamera.transform.position.z) + 4.5f;
+        backwarddist = forwarddist + 5.0f;
     }
     void Update()
     {
         Vector3 pos = this.transform.position;
-        pos.z = player.transform.position.z - dist;
+
+        if (Vector3.Dot(Vector3.forward, player.transform.forward) > -0.2f)
+            pos.z = player.transform.position.z - forwarddist;
+        else 
+            pos.z = player.transform.position.z - backwarddist;
+
+        pos.z = Mathf.Clamp(pos.z, -11.0f, 5.0f);
 
         if (cameramove == null)
-        {
-           // if (Vector3.Dot(this.transform.forward, player.transform.forward) == -1)
-           // {
-           //     pos.z = pos.z - 5.0f;
-           //     this.transform.position = Vector3.Lerp(this.transform.position, pos, 1.0f * Time.deltaTime);
-           // }
-           // else
-           // {
-                this.transform.position = Vector3.Lerp(this.transform.position, pos, 3.0f * Time.deltaTime);
-           // }
+        {          
+            this.transform.position = Vector3.Lerp(this.transform.position, pos, 3.0f * Time.deltaTime);
         }
     }
 

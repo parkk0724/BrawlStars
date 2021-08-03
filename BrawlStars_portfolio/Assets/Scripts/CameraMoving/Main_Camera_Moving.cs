@@ -22,19 +22,19 @@ public class Main_Camera_Moving : MonoBehaviour
         {
             this.transform.position = playercamera.transform.position;
         }
-        forwarddist = Mathf.Abs(player.transform.position.z - playercamera.transform.position.z) + 4.5f;
-        backwarddist = forwarddist + 5.0f;
+        forwarddist = Mathf.Abs(player.transform.position.z - playercamera.transform.position.z) + 2.0f;
+        backwarddist = forwarddist + 4.5f;
     }
     void Update()
     {
         Vector3 pos = this.transform.position;
 
-        if (Vector3.Dot(Vector3.forward, player.transform.forward) > -0.2f)
-            pos.z = player.transform.position.z - forwarddist;
-        else 
+        if (Vector3.Dot(Vector3.forward, player.transform.forward) >= -0.2f)
+            pos.z = player.transform.position.z - forwarddist;        
+        else
             pos.z = player.transform.position.z - backwarddist;
 
-        pos.z = Mathf.Clamp(pos.z, -11.0f, 5.0f);
+        pos.z = Mathf.Clamp(pos.z, -9.0f, 6.0f);
 
         if (cameramove == null)
         {          

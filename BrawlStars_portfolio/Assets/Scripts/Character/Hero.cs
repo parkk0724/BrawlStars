@@ -164,50 +164,50 @@ public class Hero : Character
             {
                 TransformHero(m_objPlayerDir.transform.forward, delta);
                 if (!m_bRotStart)
-                    RotaeProcess(m_objPlayerDir.transform.forward, delta, 1.0f, m_objPlayerDir.transform.right);
+                    RotaeProcess(m_objPlayerDir.transform.forward, delta, 1.0f, m_objPlayerDir.transform.right, 1.0f);
             }
             else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
             {
                 TransformHero(-m_objPlayerDir.transform.forward, delta);
                 if (!m_bRotStart)
-                    RotaeProcess(-m_objPlayerDir.transform.forward, delta, -1.0f, m_objPlayerDir.transform.right);
+                    RotaeProcess(-m_objPlayerDir.transform.forward, delta, -1.0f, m_objPlayerDir.transform.right, 1.0f);
             }
             else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
             {
                 TransformHero(-m_objPlayerDir.transform.right, delta);
                 if (!m_bRotStart)
-                    RotaeProcess(-m_objPlayerDir.transform.right, delta, 1.0f, m_objPlayerDir.transform.forward);
+                    RotaeProcess(-m_objPlayerDir.transform.right, delta, 1.0f, m_objPlayerDir.transform.forward, 1.0f);
             }
             else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
             {
                 TransformHero(m_objPlayerDir.transform.right, delta);
                 if (!m_bRotStart)
-                    RotaeProcess(m_objPlayerDir.transform.right, delta, 1.0f, -m_objPlayerDir.transform.forward);
+                    RotaeProcess(m_objPlayerDir.transform.right, delta, 1.0f, -m_objPlayerDir.transform.forward, -1.0f);
             }
 
             else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
             {
                 TransformHero(((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized), delta);
                 if (!m_bRotStart)
-                    RotaeProcess((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
+                    RotaeProcess((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, 1.0f);
             }
             else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
             {
                 TransformHero(((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized), delta);
                 if (!m_bRotStart)
-                    RotaeProcess((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, 1.0f, (-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
+                    RotaeProcess((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, 1.0f, (-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, 1.0f);
             }
             else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
             {
                 TransformHero(((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized), delta);
                 if (!m_bRotStart)
-                    RotaeProcess((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized);
+                    RotaeProcess((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, delta, 1.0f, (m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized, 1.0f);
             }
             else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
             {
                 TransformHero((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta);
                 if (!m_bRotStart)
-                    RotaeProcess((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, -1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
+                    RotaeProcess((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, delta, -1.0f, (m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized, 1.0f);
             }
 
             else
@@ -385,7 +385,13 @@ public class Hero : Character
     }
 
 
-    void RotaeProcess(Vector3 m_objPlayerDir, float delta, float movedir, Vector3 dir) //로테이션
+    void RotateLR(Vector3 m_objPlayerDir)
+    {
+        float dot = Vector3.Dot(m_objPlayerDir, this.transform.forward);
+
+    }
+
+    void RotaeProcess(Vector3 m_objPlayerDir, float delta, float movedir, Vector3 dir, float dir2) //로테이션
     {
         float dot = Vector3.Dot(m_objPlayerDir, this.transform.forward);
         float dot1 = Vector3.Dot(dir, this.transform.forward);
@@ -395,14 +401,12 @@ public class Hero : Character
         {
             //this.transform.Translate(this.transform.forward * delta, Space.World);
         }
-        else if (dot == -1.0f)
+        else if (dot >= -1.04f && dot <= -0.96f)
         {
-            Debug.Log(dot);
-            this.transform.Rotate(-Vector3.up * movedir * rdelta, Space.World);
+            this.transform.Rotate(-Vector3.up * dir2 * movedir * rdelta, Space.World);
         }
         else
         {
-            Debug.Log(dot);
             if (eurler - rdelta < 0.0f)
                 rdelta = eurler;
 

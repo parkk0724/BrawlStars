@@ -29,7 +29,7 @@ public class Main_Camera_Moving : MonoBehaviour
     {
         Vector3 pos = this.transform.position;
 
-        if (Vector3.Dot(Vector3.forward, player.transform.forward) >= -0.2f)
+        if (Vector3.Dot(Vector3.forward, player.transform.forward) > -0.2f)
             pos.z = player.transform.position.z - forwarddist;
         else 
             pos.z = player.transform.position.z - backwarddist;

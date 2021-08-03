@@ -387,9 +387,6 @@ public class Hero : Character
 
     void RotaeProcess(Vector3 m_objPlayerDir, float delta, float movedir, Vector3 dir) //로테이션
     {
-        if (Vector3.Dot(m_objPlayerDir, this.transform.forward) >= 0.97f && (Vector3.Dot(m_objPlayerDir, this.transform.forward) <= 1.03f)) //솔져 자꾸 방향틀면 각도 제대로 못잡는 문제때문에 오차 예외처리 한것
-            this.transform.forward = m_objPlayerDir;
-
         float dot = Vector3.Dot(m_objPlayerDir, this.transform.forward);
         float dot1 = Vector3.Dot(dir, this.transform.forward);
         float rdelta = m_fRotate_Speed * Time.deltaTime;
@@ -418,8 +415,10 @@ public class Hero : Character
             {
                 //this.transform.Translate(m_objPlayerDir * delta, Space.World);
                 this.transform.Rotate(Vector3.up * movedir * rdelta, Space.World);
-            }           
+            }
         }
+        if (Vector3.Dot(m_objPlayerDir, this.transform.forward) >= 0.96f && Vector3.Dot(m_objPlayerDir, this.transform.forward) <= 1.04f) //솔져 자꾸 방향틀면 각도 제대로 못잡는 문제때문에 오차 예외처리 한것
+            this.transform.forward = m_objPlayerDir;
     }
     #region SearchTarget
     protected void SearchTarget()

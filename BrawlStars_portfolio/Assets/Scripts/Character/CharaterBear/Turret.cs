@@ -17,7 +17,7 @@ public class Turret : MonoBehaviour
 
     void Start()
     {
-        TurretBulletPrefab = Resources.Load<GameObject>("Prefabs/Turret/TurretBullet_fire");
+        TurretBulletPrefab = Resources.Load<GameObject>("Prefabs/Turret/TurretBoolet_ToonMagic_small");
         tBulletPos = transform.Find("TurretBulletPos");
         //Transform[] childrens = GetComponentsInChildren<Transform>();
         //

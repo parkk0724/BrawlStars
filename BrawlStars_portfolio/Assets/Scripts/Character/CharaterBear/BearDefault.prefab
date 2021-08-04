@@ -491,6 +491,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   m_Jump_maxDelay: 0
+  m_objHp: {fileID: 0}
+  m_objStamina: {fileID: 0}
+  m_objFever: {fileID: 0}
+  m_objInvicible: {fileID: 0}
+  items: []
   myAnimator: {fileID: 0}
   myWeapon: {fileID: 0}
 --- !u!1 &909545961797152503
@@ -1662,7 +1667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletPos: {fileID: 0}
   Bullet: {fileID: 0}
+  TurretPrefab: {fileID: 0}
   myAnimator: {fileID: 0}
+  bearbullet: {fileID: 0}
 --- !u!1001 &139002225725966866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1886,15 +1893,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2440554163675463382, guid: b0cf09459dcaf3846b1b5246aa30a901, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.038329042
+      value: 0.101
       objectReference: {fileID: 0}
     - target: {fileID: 2440554163675463382, guid: b0cf09459dcaf3846b1b5246aa30a901, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.046309806
+      value: -0.032
       objectReference: {fileID: 0}
     - target: {fileID: 2440554163675463382, guid: b0cf09459dcaf3846b1b5246aa30a901, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0038648061
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 2440554163675463382, guid: b0cf09459dcaf3846b1b5246aa30a901, type: 3}
       propertyPath: m_LocalRotation.w

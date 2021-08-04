@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-        TurretPrefab = Resources.Load("Prefabs/Turret/Turret.prefab") as GameObject;
+        TurretPrefab = Resources.Load("Prefabs/Turret/Turret") as GameObject;
         myAnimator = GetComponentInParent<Animator>();
         bear = GetComponentInParent<Bear>();
         this.GetComponentInParent<BearAnimationEvent>().OnShoot = Shoot;
@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour
         //  ------------------------ ≈Õ∑øº“»Ø ------------------------------
         //myAnimator.SetTrigger("tBAttack");
         GetComponentInParent<Bear>().SetRotStart(false);
-        GameObject GmaeObj = Instantiate(TurretPrefab, this.transform.position + this.transform.forward, this.transform.rotation);
+        Instantiate(TurretPrefab, this.transform.position + this.transform.forward, this.transform.rotation);
     }
 
     public void SetRange(float f) { fRange = f; }

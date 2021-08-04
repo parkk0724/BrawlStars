@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4744b38753a09d4facdd091049ec397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Character: {fileID: 0}
+  m_Hero: {fileID: 0}
   m_tFeverGauge: {fileID: 9031164397092183419}
   m_imgSkull: {fileID: 9031164397470947620}
   m_imgFullGauge: {fileID: 9031164397392928753}
@@ -214,7 +214,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6797484902067796258, guid: d21244172a04db244ac41be28571cebf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d21244172a04db244ac41be28571cebf, type: 3}
 --- !u!224 &9031164397637529367 stripped
 RectTransform:

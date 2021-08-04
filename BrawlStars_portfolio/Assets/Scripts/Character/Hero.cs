@@ -432,6 +432,11 @@ public class Hero : Character
             for (int i = 0; i < EnemyCollider.Length; i++)
             {
                 float Dist = Vector3.Distance(this.transform.position, EnemyCollider[i].transform.position);
+                if (EnemyCollider[i].GetComponent<BossMonster>())
+                {
+                    shorTarget = EnemyCollider[i].transform;
+                    break;
+                }
                 if (Shortdist > Dist)
                 {
                     Shortdist = Dist;
@@ -481,6 +486,11 @@ public class Hero : Character
             for (int i = 0; i < EnemyCollider.Length; i++)
             {
                 float Dist = Vector3.Distance(this.transform.position, EnemyCollider[i].transform.position);
+                if (EnemyCollider[i].GetComponent<BossMonster>())
+                {
+                    shorTarget = EnemyCollider[i].transform;
+                    break;
+                }
                 if (Shortdist > Dist)
                 {
                     Shortdist = Dist;

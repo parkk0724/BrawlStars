@@ -4,15 +4,32 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PortalControl : MonoBehaviour
 {
-    public GameManager m_GameManager;
     public ParticleSystem m_ptsPortalIn;
     public ParticleSystem m_ptsPortalOut;
+    private ParticleSystem[] m_ptsPortalEffect;
     public Image m_BarImage;
     public Transform[] m_tfPortals;
 
     float m_fCurTime = 0.0f;
-    float m_fMaxTime = 1.0f;
+    float m_fMaxTime = 0.7f;
     bool m_bPortalOn = false;
+    bool m_bPortalEffectOn = false;
+    private void Awake()
+    {
+        m_ptsPortalEffect = this.GetComponentsInChildren<ParticleSystem>();
+    }
+
+    private void Update()
+    {
+        if (!m_bPortalEffectOn && GameManager.instance.GetCurDelayPortal() >= GameManager.instance.GetMaxDelayPortal())
+        {
+            PlayPortalEffect();
+        }
+        else if (m_bPortalEffectOn && GameManager.instance.GetCurDelayPortal() < GameManager.instance.GetMaxDelayPortal())
+        {
+            StopPortalEffect();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -26,9 +43,9 @@ public class PortalControl : MonoBehaviour
         
         if (other.tag == "Player")
         {
-            if (m_GameManager.GetCurDelayPortal() >= m_GameManager.GetMaxDelayPortal())
+            if (GameManager.instance.GetCurDelayPortal() >= GameManager.instance.GetMaxDelayPortal())
             {
-                if(m_bPortalOn)
+                if (m_bPortalOn)
                 {
                     if (m_fCurTime >= m_fMaxTime)
                     {
@@ -71,13 +88,25 @@ public class PortalControl : MonoBehaviour
         m_ptsPortalOut.Play();
         yield return new WaitForSeconds(1);
         other.gameObject.SetActive(true);
-        m_GameManager.SetCurDelayPortal(0.0f);
+        GameManager.instance.SetCurDelayPortal(0.0f);
         m_bPortalOn = false;
+        StopPortalEffect();
     }
 
     private void ResetCurTime()
     {
         m_fCurTime = 0.0f;
         m_BarImage.fillAmount = m_fCurTime / m_fMaxTime;
+    }
+
+    private void PlayPortalEffect()
+    {
+        foreach (ParticleSystem pts in m_ptsPortalEffect) pts.Play();
+        m_bPortalEffectOn = true;
+    }
+    private void StopPortalEffect()
+    {
+        foreach (ParticleSystem pts in m_ptsPortalEffect) pts.Stop();
+        m_bPortalEffectOn = false;
     }
 }

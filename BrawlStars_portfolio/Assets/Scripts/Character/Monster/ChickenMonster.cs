@@ -117,7 +117,7 @@ public class ChickenMonster : Monster
         {
             ChangeState(State.MOVE);
         }
-        else if (Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
+        else if (m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
         {
             ChangeState(State.ATTACK);
         }
@@ -125,11 +125,11 @@ public class ChickenMonster : Monster
 
     public override void Move()
     {
-        if(Vector3.Distance(this.transform.position, m_vDestination) < 1.5f)
+        if (Vector3.Distance(this.transform.position, m_vDestination) < 1.5f)
         {
             ChangeState(State.IDLE);
         }
-        else if (Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
+        else if (m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
         {
             ChangeState(State.ATTACK);
         }

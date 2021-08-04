@@ -5,6 +5,21 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    static private GameManager _instance;
+    static public GameManager instance
+    { 
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject obj = new GameObject("GameManager");
+                _instance = obj.AddComponent<GameManager>();
+            }
+
+            return _instance;
+        }
+    }
+
     float m_fCurDelayPortal;
     [SerializeField]float m_fMaxDelayPortal = 10.0f;
     void Start()

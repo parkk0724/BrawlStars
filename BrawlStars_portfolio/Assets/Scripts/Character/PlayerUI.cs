@@ -8,8 +8,10 @@ public class PlayerUI : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Hero m_Hero = null;
     [SerializeField] TMPro.TMP_Text m_tFeverGauge = null;
-    [SerializeField] Image m_imgSkull = null;
+    [SerializeField] Image m_FeverGuage = null;
     [SerializeField] Image m_imgFullGauge = null;
+    [SerializeField] Slider m_HP = null;
+    [SerializeField] Slider m_ST = null;
     void Start()
     {
         m_Hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
@@ -19,26 +21,33 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         UpdateFeverGauge();
+        Update_HP_Gauge();
     }
 
     void UpdateFeverGauge()
     {
 
         float feverGauge = m_Hero.GetFever() / m_Hero.GetMaxFever();
-        m_imgSkull.fillAmount = feverGauge;
+        m_FeverGuage.fillAmount = feverGauge;
 
-        Color c = m_imgSkull.color;
-        c.a = 0.5f;
-        if (feverGauge <= 0) 
-        {
-            if (m_imgFullGauge.gameObject.activeSelf) m_imgFullGauge.gameObject.SetActive(false);
-        }
-        else if (feverGauge >= 1)
-        {
-            if (!m_imgFullGauge.gameObject.activeSelf) m_imgFullGauge.gameObject.SetActive(true);
-            c.a = 1.0f;
-        }
-        m_imgSkull.color = c;
+       //Color c = m_FeverGuage.color;
+       //c.a = 0.5f;
+       //if (feverGauge <= 0) 
+       //{
+       //    if (m_imgFullGauge.gameObject.activeSelf) m_imgFullGauge.gameObject.SetActive(false);
+       //}
+       //else if (feverGauge >= 1)
+       //{
+       //    if (!m_imgFullGauge.gameObject.activeSelf) m_imgFullGauge.gameObject.SetActive(true);
+       //    c.a = 1.0f;
+       //}
+       //m_FeverGuage.color = c;
+    }
+
+    void Update_HP_Gauge()
+    {
+        float HP_Guage = m_Hero.GetHp() / m_Hero.GetMaxHp();
+        m_HP.value = HP_Guage;
     }
 
     void UpdateText()

@@ -117,8 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Hero: {fileID: 0}
   m_tFeverGauge: {fileID: 9031164397092183419}
-  m_imgSkull: {fileID: 9031164397470947620}
+  m_FeverGuage: {fileID: 0}
   m_imgFullGauge: {fileID: 9031164397392928753}
+  m_HP: {fileID: 0}
+  m_ST: {fileID: 0}
 --- !u!1001 &2522192449179358770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,6 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9031164399000485864}
     m_Modifications:
+    - target: {fileID: 6797484901269539266, guid: d21244172a04db244ac41be28571cebf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6797484902067796260, guid: d21244172a04db244ac41be28571cebf, type: 3}
       propertyPath: m_Name
       value: SkillGauge
@@ -222,17 +228,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6797484902067796261, guid: d21244172a04db244ac41be28571cebf, type: 3}
   m_PrefabInstance: {fileID: 2522192449179358770}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9031164397470947620 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6797484901230382870, guid: d21244172a04db244ac41be28571cebf, type: 3}
-  m_PrefabInstance: {fileID: 2522192449179358770}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9031164397392928753 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6797484901269539267, guid: d21244172a04db244ac41be28571cebf, type: 3}

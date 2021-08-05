@@ -14,6 +14,7 @@ TagManager:
   - Jump
   - Jump2
   - Bullet
+  - BossBullet
   layers:
   - Default
   - TransparentFX

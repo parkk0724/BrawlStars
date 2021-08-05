@@ -241,6 +241,10 @@ public class JesterSkill : MonoBehaviour
                                 State = SkillState.PATROL;
                             }
                         }
+                        else
+                        {
+                            State = SkillState.RUN;
+                        }
                     }
                     if (DestroyTime > DeathTime)
                     {

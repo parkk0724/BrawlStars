@@ -13,6 +13,7 @@ public class JumpEffect : MonoBehaviour
     float curtime;
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         curtime = 0;
         //particle = GetComponentInChildren<ParticleSystem>();
         //DestinationParticle = GetComponentInChildren<ParticleSystem>();

@@ -22,7 +22,7 @@ public class JumpEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+       
 
         if (DestinationParticle.gameObject.activeSelf)
         {
@@ -33,21 +33,24 @@ public class JumpEffect : MonoBehaviour
                 curtime = 0;
             }
         }
-        
-        if (player.GetComponent<Hero>())
+        if(player.activeSelf)
         {
-            if (!player.GetComponent<Hero>().GetJump())
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player.GetComponent<Hero>())
             {
-                this.transform.position = player.transform.position;
-                particle.gameObject.SetActive(true);
-                jumpdelay += Time.deltaTime;
-            }
-            else if (player.GetComponent<Hero>().GetJump())
-            {
-                particle.gameObject.SetActive(false);
-               
-                //DestinationParticle.gameObject.SetActive(true);
-                //particle.Stop();
+                if (!player.GetComponent<Hero>().GetJump())
+                {
+                    this.transform.position = player.transform.position;
+                    particle.gameObject.SetActive(true);
+                    jumpdelay += Time.deltaTime;
+                }
+                else if (player.GetComponent<Hero>().GetJump())
+                {
+                    particle.gameObject.SetActive(false);
+
+                    //DestinationParticle.gameObject.SetActive(true);
+                    //particle.Stop();
+                }
             }
         }
     }

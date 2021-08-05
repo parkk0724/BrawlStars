@@ -72,12 +72,12 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.ATTACK:
                 {
-                    Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
-                    if (DistRange > Dist)
-                    {
-                        State = SkillState.ATTACK;
-                    }
-                    else if (DistRange <= Dist)
+                    //Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+                    //if (DistRange > Dist)
+                    //{
+                    //    State = SkillState.ATTACK;
+                    //}
+                    if (DistRange <= Dist)
                     {
                         ChangeState(SkillState.IDLE);
                     }
@@ -141,25 +141,21 @@ public class JesterSkill : MonoBehaviour
                 break;
 
             case SkillState.ATTACK:
-                if(m_tfResultTarget != null)
+                if (m_tfResultTarget == null)
+                {
+                    ChangeState(SkillState.IDLE);
+                }
+                if (m_tfResultTarget != null)
                 {
                     Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
-                }
-                if ( DistRange > Dist)
-                {
-                    if(m_tfResultTarget == null)
+                    if (DistRange > Dist)
                     {
-                        ChangeState(SkillState.IDLE);
+                        Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
+                        this.transform.LookAt(resultYtarget);
+                        anim.SetBool("bMove", false);
+                        anim.SetTrigger("tBAttack");
+                        nav.speed = 2;
                     }
-                    Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
-                    this.transform.LookAt(resultYtarget);
-                    anim.SetBool("bMove", false);
-                    anim.SetTrigger("tBAttack");
-                    nav.speed = 2;
-                }
-                else
-                {
-                    ChangeState(SkillState.RUN);
                 }
                 if (DestroyTime > DeathTime)
                 {
@@ -326,6 +322,7 @@ public class JesterSkill : MonoBehaviour
     }
     IEnumerator Dizzy()
     {
+        nav.speed = 0;
         Vector3 thisScale = new Vector3(2f, 2f, 2f);
         float thisgob = this.transform.localScale.x * this.transform.localScale.y * this.transform.localScale.z;
         float thisgob_2 = thisScale.x * thisScale.y * thisScale.z;

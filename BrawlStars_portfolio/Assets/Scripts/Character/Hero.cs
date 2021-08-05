@@ -23,11 +23,13 @@ public class Hero : Character
     public float m_fRotate_Speed = 0.0f;
     public float m_fJump_Height = 0.0f;
     public float m_fJump_Speed = 0.0f;
-    public ParticleSystem m_ptsRevival;
     public GameObject m_objPlayerDir;
     public GameObject m_objCharacter;
-    public GameObject m_objUIDie;
-    public Text m_tDie;
+
+    private GameObject m_objUIDie;
+    private TMPro.TMP_Text m_tDie;
+    private ParticleSystem m_ptsRevival;
+    private BoxCollider m_boxCollider;
 
     [Header("Target")]
     public float m_fTargetRotSpeed = 10.0f;
@@ -81,15 +83,28 @@ public class Hero : Character
             if (m_fStamina > m_fMaxStamina) m_fStamina = m_fMaxStamina;
         }
     }
+
+    protected virtual void Awake()
+    {
+        GameObject revivalEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/RevivalEffect"), transform.parent);
+        revivalEffect.SetActive(false);
+        m_ptsRevival = revivalEffect.GetComponent<ParticleSystem>();
+
+        m_boxCollider = GetComponent<BoxCollider>();
+    }
     protected virtual void Start()
     {
+        m_objUIDie = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIDie"), GameObject.Find("UI").transform);
+        m_objUIDie.SetActive(false);
+        m_tDie = m_objUIDie.GetComponentInChildren<TMPro.TMP_Text>();
+
         Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
         Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;
         m_bMoveStart = true;
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
         m_vOriginRot = this.transform.rotation.eulerAngles;
-        m_nMaxHP = 1000;
+        m_nMaxHP = 100;
         m_nHP = m_nMaxHP;   // Current Hp
         m_fMaxStamina = 3.0f;
         m_fStamina = m_fMaxStamina;
@@ -113,21 +128,21 @@ public class Hero : Character
         //if (m_Start == Start_State.START)
         //{
         if (!m_bDie)
-            {
-                m_fCurBodyAttack += Time.deltaTime;
-                RecoveryStamina();
-                Move();
-                Attack();
-            }
+        {
+            m_fCurBodyAttack += Time.deltaTime;
+            RecoveryStamina();
+            Move();
+            Attack();
+
             if (b_active[0])
             {
                 if (Hp != null) StopCoroutine(Hp);
-                Hp =StartCoroutine(RecoverHP());
-            }            
+                Hp = StartCoroutine(RecoverHP());
+            }
             if (b_active[1])
             {
-                if(St != null) StopCoroutine(St);
-                St= StartCoroutine(RecoverST());
+                if (St != null) StopCoroutine(St);
+                St = StartCoroutine(RecoverST());
             }
             if (b_active[2])
             {
@@ -143,7 +158,8 @@ public class Hero : Character
                 m_bRotStart = true;
             }
             if (m_bRotStart) LookEnemy();
-            if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
+            if (m_nHP <= 0) StartCoroutine(Die());
+        }
         //}
     }
     #region Hero Move
@@ -332,6 +348,7 @@ public class Hero : Character
         m_bDie = true;
         m_Animator.SetTrigger("tDie");
         m_Animator.SetBool("bDie", m_bDie);
+        m_boxCollider.enabled = false;
         yield return new WaitForSeconds(2);
 
         int count = 3;
@@ -341,6 +358,7 @@ public class Hero : Character
 
         while (count > 0)
         {
+            Debug.Log(count);
             m_tDie.text = count.ToString();
             yield return new WaitForSeconds(1);
             count--;
@@ -351,21 +369,25 @@ public class Hero : Character
     }
     public void Revival()
     {
+        Debug.Log("Revival");
         StartCoroutine(RevivalEffect());
         this.transform.position = m_vOriginPos;
         this.transform.rotation = Quaternion.Euler(m_vOriginRot);
-        m_nHP = m_nMaxHP;
-
-
-        m_objCharacter.SetActive(true);
-        m_bDie = false;
-        m_Animator.SetBool("bDie", m_bDie);
     }
     IEnumerator RevivalEffect()
     {
         m_ptsRevival.gameObject.SetActive(true);
         m_ptsRevival.Play();
         yield return new WaitForSeconds(3);
+
+        m_nHP = m_nMaxHP;
+
+        m_boxCollider.enabled = true;
+        m_objCharacter.SetActive(true);
+        m_bDie = false;
+        m_Animator.SetBool("bDie", m_bDie);
+
+        yield return new WaitForSeconds(m_ptsRevival.main.duration);
         m_ptsRevival.gameObject.SetActive(false);
     }
     void TransformHero(Vector3 m_objPlayerDir, float delta) // ¿òÁ÷ÀÓ

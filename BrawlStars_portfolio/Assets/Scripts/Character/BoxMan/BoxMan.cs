@@ -14,8 +14,10 @@ public class BoxMan : Hero
     float m_fCurMouseButton = 0.0f;
     float m_fAttackStamina = 0.0f;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         m_BoxManWeapon = GetComponentInChildren<BoxManWeapon>();
 
         m_BoxManWeapon.OnRotStartFalse = () => { SetRotStart(false); };
@@ -40,13 +42,13 @@ public class BoxMan : Hero
             RecoveryStamina();
             Move();
             Attack();
+
+            SearchTargetEffect();
+            TargetEffect();
+
+            if (m_bRotStart) LookEnemy();
+            if (m_nHP <= 0) StartCoroutine(Die());
         }
-
-        SearchTargetEffect();
-        TargetEffect();
-
-        if (m_bRotStart) LookEnemy();
-        if (!m_bDie && m_nHP <= 0) StartCoroutine(Die());
     }
     public override void Attack()
     {

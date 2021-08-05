@@ -8,6 +8,7 @@ public class ChickenMonster : Monster
     float m_fCurTime = 0.0f;
     float m_fMaxIdleTime = 0.0f;
     float m_fRandomMoveRange = 0.0f;
+    float m_fRunSpeed = 0.0f;
     Vector3 m_vDestination;
     protected override void Start()
     {
@@ -23,6 +24,7 @@ public class ChickenMonster : Monster
         m_fRange = 5.0f;
         m_fMaxIdleTime = 5.0f;
         m_fRandomMoveRange = 10.0f;
+        m_fRunSpeed = 4.0f;
     }
 
     private void Update()
@@ -67,7 +69,7 @@ public class ChickenMonster : Monster
                 break;
             case State.ATTACK:
                 m_Animator.SetTrigger("tRun");
-                m_NavMeshAgent.speed *= 4;
+                m_NavMeshAgent.speed *= m_fRunSpeed;
                 m_NavMeshAgent.SetDestination(m_tfTarget.position);
                 break;
             case State.DEAD:
@@ -137,12 +139,22 @@ public class ChickenMonster : Monster
 
     public override void Attack()
     {
-        m_NavMeshAgent.SetDestination(m_tfTarget.position);
-
-        if (Vector3.Distance(this.transform.position, m_tfTarget.position) < 1.5f)
+        if (!m_tfTarget.gameObject.activeSelf)
         {
-            transform.LookAt(m_tfTarget);
+            ChangeState(State.IDLE);
+            m_Animator.SetTrigger("tIdle");
+            m_NavMeshAgent.speed /= m_fRunSpeed;
         }
+        else
+        {
+            m_NavMeshAgent.SetDestination(m_tfTarget.position);
+
+            if (Vector3.Distance(this.transform.position, m_tfTarget.position) < 1.5f)
+            {
+                transform.LookAt(m_tfTarget);
+            }
+        }
+        
     }
 
     public override IEnumerator Die()
@@ -156,10 +168,4 @@ public class ChickenMonster : Monster
         base.Hit(damage, c);
         m_NavMeshAgent.velocity = Vector3.zero;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawSphere(m_vDestination, 1.0f);
-    //}
 }

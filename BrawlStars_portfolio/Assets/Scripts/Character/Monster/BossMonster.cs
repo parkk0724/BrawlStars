@@ -31,7 +31,7 @@ public class BossMonster : Monster
     {
         base.Start();
 
-        m_nMaxHP = 100;
+        m_nMaxHP = 2500;
         m_nHP = m_nMaxHP;
         m_nATK = 20;
         m_nDEF = 5;

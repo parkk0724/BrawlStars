@@ -15,7 +15,7 @@ public class Monster : Character
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
         m_vOriginRot = this.transform.rotation.eulerAngles;
-        m_nMaxHP = 2500;
+        m_nMaxHP = 100;
         m_nHP = m_nMaxHP;   // Current Hp
         m_nATK = 10;
         m_nDEF = 5;

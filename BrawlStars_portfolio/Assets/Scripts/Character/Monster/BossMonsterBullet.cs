@@ -20,7 +20,6 @@ public class BossMonsterBullet : MonoBehaviour
 
         if(other.tag == "Wall")
         {
-            Debug.Log("Wall");
             Destroy(this.gameObject);
         }
     }

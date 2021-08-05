@@ -82,9 +82,9 @@ public class BoxManBullet : MonoBehaviour
                 else Destroy(this.gameObject);
             }
         }
-        else if (other.tag == "Obstacle" || other.tag == "Wall" || other.tag == "Player")
+        else if (other.tag == "Obstacle" || other.tag == "Wall")
         {
-            if (other.tag != "Player") CreateHitEffect(false, other.transform);
+            CreateHitEffect(false, other.transform);
 
             if (m_bTurn)
             {
@@ -100,7 +100,14 @@ public class BoxManBullet : MonoBehaviour
                 if (m_bSkill) m_fSkillStay = 0.0f;
             }
         }
-
+        else if(m_bTurn && other.tag == "Player")
+        {
+            if (m_fSkillStay >= m_fSkillMaxStay)
+            {
+                Destroy(this.gameObject);
+                OnStaminaUp?.Invoke();
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)

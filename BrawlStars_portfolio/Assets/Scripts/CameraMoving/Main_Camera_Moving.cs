@@ -8,9 +8,6 @@ public class Main_Camera_Moving : MonoBehaviour
     public GameObject player;
     public GameObject Boss;
 
-    public GameObject StartSound;
-    public GameObject PlayingSound;
-
     public float speed = 0.0f;
     public bool startmove = true;
     Coroutine cameramove = null;
@@ -20,12 +17,6 @@ public class Main_Camera_Moving : MonoBehaviour
 
     Hero m_myHero;
     BossMonster m_Boss;
-
-    private void Awake()
-    {
-        StartSound.SetActive(false);
-        PlayingSound.SetActive(false);
-    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // 캐릭바꿀때마다 변경해야되서 알아서 찾아서 넣어주게 함. -금환
@@ -60,8 +51,6 @@ public class Main_Camera_Moving : MonoBehaviour
 
     IEnumerator StartCameraMoving()
     {
-        StartSound.SetActive(true);
-
         Vector3 dir = playercamera.transform.position - this.transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
@@ -82,7 +71,5 @@ public class Main_Camera_Moving : MonoBehaviour
 
         m_myHero.m_Start = Hero.Start_State.START;
         m_Boss.m_Start = BossMonster.Start_State.START;
-
-        PlayingSound.SetActive(true);
     }
 }

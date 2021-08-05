@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MeinMenu : MonoBehaviour
 {
     public GameObject Selected_Effect;
-    public GameObject click;
 
     GameObject Soldier;
     GameObject BoxMan;
@@ -14,7 +13,6 @@ public class MeinMenu : MonoBehaviour
     GameObject Jester;       
     private void Start()
     {
-        click.SetActive(false);
         Soldier = GameObject.Find("Soldier_Select");
         BoxMan = GameObject.Find("BoxMan_Select");
         Bear = GameObject.Find("Bear_Select");
@@ -22,12 +20,10 @@ public class MeinMenu : MonoBehaviour
     }
     public void OnClick_CharacterSelect()
     {
-        click.SetActive(true);
         SceneManager.LoadScene("CharacterSelect");
     }
     public void OnClick_Quit()
     {
-        click.SetActive(true);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 # else
@@ -37,8 +33,6 @@ public class MeinMenu : MonoBehaviour
 
     public void OnClick_Start()
     {
-        click.SetActive(true);
-        //ClickSound.Play();
         SceneManager.LoadScene("Browl_Stars");
     }
 

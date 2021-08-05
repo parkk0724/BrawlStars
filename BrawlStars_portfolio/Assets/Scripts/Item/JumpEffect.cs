@@ -11,14 +11,12 @@ public class JumpEffect : MonoBehaviour
     public ParticleSystem particle;
     public ParticleSystem DestinationParticle;
     float curtime;
+    float jumpdelay;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         curtime = 0;
-        //particle = GetComponentInChildren<ParticleSystem>();
-        //DestinationParticle = GetComponentInChildren<ParticleSystem>();
-        //particle = GetComponent<ParticleSystem>();
-        //pos = this.transform.position;
+
     }
 
     // Update is called once per frame
@@ -42,11 +40,12 @@ public class JumpEffect : MonoBehaviour
             {
                 this.transform.position = player.transform.position;
                 particle.gameObject.SetActive(true);
-                
+                jumpdelay += Time.deltaTime;
             }
             else if (player.GetComponent<Hero>().GetJump())
             {
                 particle.gameObject.SetActive(false);
+               
                 //DestinationParticle.gameObject.SetActive(true);
                 //particle.Stop();
             }
@@ -63,10 +62,22 @@ public class JumpEffect : MonoBehaviour
                 {
                     if (other.gameObject.CompareTag("Ground"))
                     {
-                        DestinationParticle.gameObject.SetActive(true);
+                        if (Jumpdelaytime())
+                        {
+                            DestinationParticle.gameObject.SetActive(true);
+                            jumpdelay = 0;
+                        }
                     }
                 }
             }
         }
+    }
+    bool Jumpdelaytime()
+    {
+        if(jumpdelay > 0.3f)
+        {
+            return true;
+        }
+        return false;
     }
 }

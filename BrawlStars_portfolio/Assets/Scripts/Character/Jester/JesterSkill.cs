@@ -45,8 +45,8 @@ public class JesterSkill : MonoBehaviour
         //Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
-        chageSate();
-        //StateProcess();
+        //chageSate();
+        StateProcess();
     }
     void ChangeState(SkillState s)
     {
@@ -141,9 +141,16 @@ public class JesterSkill : MonoBehaviour
                 break;
 
             case SkillState.ATTACK:
-                Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
-                if (m_tfResultTarget != null && DistRange > Dist)
+                if(m_tfResultTarget != null)
                 {
+                    Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+                }
+                if ( DistRange > Dist)
+                {
+                    if(m_tfResultTarget == null)
+                    {
+                        ChangeState(SkillState.IDLE);
+                    }
                     Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
                     this.transform.LookAt(resultYtarget);
                     anim.SetBool("bMove", false);

@@ -83,4 +83,14 @@ public class Animation_Event : MonoBehaviour
     {
         basicAttack?.Invoke();
     }
+
+    private void Sound_SetActive_True(GameObject sound)
+    {
+        sound.SetActive(true);
+    }
+
+    private void Sound_SetActive_False(GameObject sound)
+    {
+        sound.SetActive(false);
+    }
 }

@@ -8,7 +8,6 @@ public class JumpEffect : MonoBehaviour
     // Start is called before the first frame update
     Vector3 pos;
     GameObject player;
-    Hero hero;
     ParticleSystem particle;
     void Start()
     {

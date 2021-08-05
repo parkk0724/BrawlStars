@@ -8,10 +8,14 @@ public class JumpEffect : MonoBehaviour
     // Start is called before the first frame update
     Vector3 pos;
     GameObject player;
-    ParticleSystem particle;
+    public ParticleSystem particle;
+    public ParticleSystem DestinationParticle;
+    float curtime;
     void Start()
     {
-        particle = GetComponentInChildren<ParticleSystem>();
+        curtime = 0;
+        //particle = GetComponentInChildren<ParticleSystem>();
+        //DestinationParticle = GetComponentInChildren<ParticleSystem>();
         //particle = GetComponent<ParticleSystem>();
         //pos = this.transform.position;
     }
@@ -19,8 +23,18 @@ public class JumpEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         player = GameObject.FindGameObjectWithTag("Player");
+
+        if (DestinationParticle.gameObject.activeSelf)
+        {
+            curtime += Time.deltaTime;
+            if(curtime >1)
+            {
+                DestinationParticle.gameObject.SetActive(false);
+                curtime = 0;
+            }
+        }
+        
         if (player.GetComponent<Hero>())
         {
             if (!player.GetComponent<Hero>().GetJump())
@@ -32,7 +46,25 @@ public class JumpEffect : MonoBehaviour
             else if (player.GetComponent<Hero>().GetJump())
             {
                 particle.gameObject.SetActive(false);
+                //DestinationParticle.gameObject.SetActive(true);
                 //particle.Stop();
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(player.GetComponent<Hero>())
+        {
+            if (!player.GetComponent<Hero>().GetJump())
+            {
+                if (particle.gameObject.activeSelf)
+                {
+                    if (other.gameObject.CompareTag("Ground"))
+                    {
+                        DestinationParticle.gameObject.SetActive(true);
+                    }
+                }
             }
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Soldier : Hero
 {
     public LayerMask pickingmask;
-    public GameObject bazooka_Basic_bullet;
+    public GameObject bazooka_Basic_bullet;    
     public GameObject bazooka_Skill_bullet1;
     public GameObject bazooka_Skill_bullet2;
     public GameObject bazooka_Skill_bullet3;
@@ -14,6 +14,7 @@ public class Soldier : Hero
     public Transform bazooka_bullet_pos;
 
     GameObject Bullet;
+    GameObject Fire_Sound;
 
     public float Jump_Speed = 0.0f;
     public float Jump_Height = 0.0f;
@@ -24,6 +25,7 @@ public class Soldier : Hero
         base.Start();
         this.GetComponentInChildren<Animation_Event>().bazooka_basic_fire = Basic_Fire;
         this.GetComponentInChildren<Animation_Event>().bazooka_skill_fire = Skill_Fire;
+        Fire_Sound = GameObject.Find("BazookaFire");
     }
     public override void Attack()
     {
@@ -58,6 +60,7 @@ public class Soldier : Hero
     private void Basic_Fire()
     {
         Bazooka_Bullet_Initiate(bazooka_Basic_bullet);
+        Fire_Sound.GetComponent<AudioSource>().Play();
         BazookaBullet basic_bullet = Bullet.GetComponent<BazookaBullet>();
         basic_bullet.Fever_up = FeverUp;
     }

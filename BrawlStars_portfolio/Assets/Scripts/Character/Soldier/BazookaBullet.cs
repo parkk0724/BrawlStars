@@ -8,6 +8,7 @@ public class BazookaBullet : MonoBehaviour
     public UnityAction Fever_up = null;
 
     public GameObject explosion_effect;
+    public GameObject Explosion_Sound;
     public float speed = 5.0f;
     public float range = 7.0f;
     public float height = 3.0f;
@@ -82,6 +83,8 @@ public class BazookaBullet : MonoBehaviour
         if (other.tag == "Ground" || other.tag == "Wall" || other.tag == "Player")
         {           
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
+            Explosion_Sound = GameObject.Find("BazookaExplosion");
+            Explosion_Sound.GetComponent<AudioSource>().Play();
             for (int i = 0; i < colls.Length; i++)
             {
                 if (colls[i].tag == "Monster")

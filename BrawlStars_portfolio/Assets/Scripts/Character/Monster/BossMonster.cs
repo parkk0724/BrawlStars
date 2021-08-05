@@ -26,12 +26,17 @@ public class BossMonster : Monster
     float m_fSkill2_AttackRange = 0.0f;
 
     GameObject Dark_Effect;    
+    GameObject PhaseSound;
+    Main_Camera_Moving main = null;
 
     Coroutine die = null;
     Coroutine rot = null;
     private void Awake()
     {
+        PhaseSound = GameObject.Find("Playing(angry)");
+        PhaseSound.SetActive(false);
         m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/BossMonster"), transform);
+        main = GameObject.Find("StartCamerPosition").GetComponent<Main_Camera_Moving>();
     }
     protected override void Start()
     {
@@ -53,7 +58,7 @@ public class BossMonster : Monster
         this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
         this.GetComponentInChildren<Animation_Event>().skill_attack2 = BossMon_Skill2;
         this.GetComponentInChildren<Animation_Event>().basicAttack = OnBasicAttack;
-        Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");
+        Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");        
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
         ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
         Dark_Effect.SetActive(false);        
@@ -230,6 +235,9 @@ public class BossMonster : Monster
         //}
         if (m_nHP <= m_nMaxHP / 2 && m_phase == PhaseState.NONE) // HP가 절반 이하이고 1페이즈에 들어가지 않았을경우 (처음 첫 페이즈가 바뀔때)
         {
+            Main_Camera_Moving main = GameObject.Find("StartCamerPosition").GetComponent<Main_Camera_Moving>();
+            StartCoroutine(Sound_FadeOut());
+
             m_phase = PhaseState.ANGRY;
             m_Animator.SetTrigger("tPowerUp");
             ColorChange(m_mHeader, 1.0f, 0.5f, 0.5f);
@@ -250,6 +258,27 @@ public class BossMonster : Monster
 
             m_fMaxIdleTime = 0.1f;
         }
+    }
+
+    IEnumerator Sound_FadeOut()
+    {
+        float volume = main.PlayingSound.GetComponent<AudioSource>().volume;
+        while (volume > 0.0f)
+        {
+            float delta = 1.0f * Time.deltaTime;
+
+            if (volume - delta < 0.0f)
+            {
+                delta = volume;
+            }
+
+            volume -= delta;
+            main.PlayingSound.GetComponent<AudioSource>().volume = volume;
+            yield return null;
+        }
+        main.PlayingSound.SetActive(false);
+        yield return new WaitForSeconds(1.0f);
+        PhaseSound.SetActive(true);
     }
     public override void Attack()
     {

@@ -10,10 +10,13 @@ public class ChickenMonster : Monster
     float m_fRandomMoveRange = 0.0f;
     float m_fRunSpeed = 0.0f;
     Vector3 m_vDestination;
+
+    private void Awake()
+    {
+        m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/Monster"), transform);
+    }
     protected override void Start()
     {
-        
-
         base.Start();
 
         m_nMaxHP = 100;
@@ -139,7 +142,7 @@ public class ChickenMonster : Monster
 
     public override void Attack()
     {
-        if (!m_tfTarget.gameObject.activeSelf)
+        if (!m_tfTarget.gameObject.activeSelf || Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fRange)
         {
             ChangeState(State.IDLE);
             m_Animator.SetTrigger("tIdle");

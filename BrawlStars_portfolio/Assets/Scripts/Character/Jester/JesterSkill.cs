@@ -26,9 +26,10 @@ public class JesterSkill : MonoBehaviour
     public LayerMask m_lmEnemyLayer = 0;
     public float f_Range = 5f;
     public UnityAction Animationevent = null;
+    float Curtime;
     void Start()
     {
-
+        Curtime = 0;
         myRender = GetComponentsInChildren<Renderer>();
         Animationevent = () => StartCoroutine(skilShot());
         anim = GetComponent<Animator>();
@@ -45,8 +46,8 @@ public class JesterSkill : MonoBehaviour
         //Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
-        //chageSate();
-        StateProcess();
+        chageSate();
+        //StateProcess();
     }
     void ChangeState(SkillState s)
     {
@@ -189,6 +190,17 @@ public class JesterSkill : MonoBehaviour
                 }
                 else
                 {
+                    
+                    RandomPatrol();
+                }
+                break;
+            case SkillState.PATROL:
+                if (m_tfResultTarget != null)
+                {
+                    State = SkillState.RUN;
+                }
+                else
+                {
                     RandomPatrol();
                 }
                 break;
@@ -210,18 +222,25 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.ATTACK:
                 {
-                    Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
-                    Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
-                    if (DistRange > Dist)
+                    if (m_tfResultTarget == null)
                     {
-                        this.transform.LookAt(resultYtarget);
-                        anim.SetBool("bMove", false);
-                        anim.SetTrigger("tBAttack");
-                        nav.speed = 2;
+                        State = SkillState.PATROL;
                     }
-                    else if (DistRange <= Dist)
+                    if (m_tfResultTarget != null)  
                     {
-                        State = SkillState.RUN;
+                        Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+                        if (DistRange > Dist)
+                        {
+                            Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
+                            this.transform.LookAt(resultYtarget);
+                            anim.SetBool("bMove", false);
+                            anim.SetTrigger("tBAttack");
+                            nav.speed = 2;
+                            if(m_tfResultTarget == null)
+                            {
+                                State = SkillState.PATROL;
+                            }
+                        }
                     }
                     if (DestroyTime > DeathTime)
                     {
@@ -247,19 +266,22 @@ public class JesterSkill : MonoBehaviour
     }
     void RandomPatrol()
     {
+        Curtime += Time.deltaTime;
         Vector3 OriginPos = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-        
-        for (int i = 0; i < 10; i++)
+        float xpos = Random.Range(-10, 10);
+        float zpos = Random.Range(-10, 10);
+        Vector3 posPlus = new Vector3(this.transform.position.x + xpos, this.transform.position.y, this.transform.position.z + zpos);
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(posPlus, out hit, 1.0f, NavMesh.AllAreas)) // 랜덤한 위치가 NavMesh로 이동할 수 있는지 확인
         {
-            float xpos = Random.Range(-10, 10);
-            float zpos = Random.Range(-10, 10);
-            Vector3 posPlus = new Vector3(this.transform.position.x + xpos, this.transform.position.y, this.transform.position.z + zpos);
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(posPlus, out hit, 1.0f, NavMesh.AllAreas)) // 랜덤한 위치가 NavMesh로 이동할 수 있는지 확인
+            if (Curtime > 1)
             {
+                nav.speed = 3;
                 posPlus = hit.position; // 가능하면 그 위치값 내보냄
                 nav.SetDestination(posPlus);
-            }
+                Curtime = 0;
+                anim.SetBool("bMove", true);
+            } 
         }
     }
     void DeathAttack()

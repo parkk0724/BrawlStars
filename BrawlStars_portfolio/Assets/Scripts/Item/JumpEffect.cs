@@ -16,14 +16,10 @@ public class JumpEffect : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         curtime = 0;
-
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-       
-
         if (DestinationParticle.gameObject.activeSelf)
         {
             curtime += Time.deltaTime;

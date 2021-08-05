@@ -12,11 +12,11 @@ public class JesterSkill : MonoBehaviour
     Renderer[] myRender;
     enum SkillState
     {
-        CREATE, IDLE, RUN, PATROL, ATTACK, DESTROY ,Death , DiZZY
+        CREATE, IDLE, RUN, PATROL, ATTACK, DESTROY, Death, DiZZY
     }
     SkillState State = SkillState.CREATE;
     public GameObject m_objSkillEffect;
-    
+
     float Dist;
     float DestroyTime;
     public float DistRange;
@@ -26,9 +26,9 @@ public class JesterSkill : MonoBehaviour
     public LayerMask m_lmEnemyLayer = 0;
     public float f_Range = 5f;
     public UnityAction Animationevent = null;
-    // Start is called before the first frame update
     void Start()
     {
+
         myRender = GetComponentsInChildren<Renderer>();
         Animationevent = () => StartCoroutine(skilShot());
         anim = GetComponent<Animator>();
@@ -41,11 +41,12 @@ public class JesterSkill : MonoBehaviour
     void Update()
     {
         DestroyTime += Time.deltaTime;
-        SearchTarget();
-        Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+        SkillSearchTarget();
+        //Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
         chageSate();
+        //StateProcess();
     }
     void ChangeState(SkillState s)
     {
@@ -53,15 +54,37 @@ public class JesterSkill : MonoBehaviour
         State = s;
         switch (State)
         {
-            case SkillState.CREATE:
-                break;
             case SkillState.IDLE:
+                StartCoroutine(RandomRange(Random.Range(0, 2), SkillState.PATROL));
                 break;
             case SkillState.PATROL:
+                {
+                    anim.SetBool("bMove", true);
+                    RandomPatrol();
+                }
+                break;
+            case SkillState.RUN:
+                {
+                    nav.speed = 5;
+                    nav.SetDestination(m_tfResultTarget.position);
+                    anim.SetBool("bMove", true);
+                }
                 break;
             case SkillState.ATTACK:
+                {
+                    Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+                    if (DistRange > Dist)
+                    {
+                        State = SkillState.ATTACK;
+                    }
+                    else if (DistRange <= Dist)
+                    {
+                        ChangeState(SkillState.IDLE);
+                    }
+                }
                 break;
             case SkillState.DiZZY:
+                State = SkillState.DiZZY;
                 break;
             case SkillState.DESTROY:
                 break;
@@ -73,25 +96,85 @@ public class JesterSkill : MonoBehaviour
     {
         switch (State)
         {
-            case SkillState.CREATE:
-                break;
             case SkillState.IDLE:
+                if (m_tfResultTarget != null)
+                {
+                    ChangeState(SkillState.RUN);
+                }
+                else
+                {
+                    ChangeState(SkillState.PATROL);
+                }
+                if (DestroyTime > DeathTime)
+                {
+                    ChangeState(SkillState.DiZZY);
+                }
                 break;
             case SkillState.PATROL:
+                if (m_tfResultTarget != null)
+                {
+                    ChangeState(SkillState.RUN);
+                }
+                else
+                {
+                    ChangeState(SkillState.IDLE);
+                }
+                if (DestroyTime > DeathTime)
+                {
+                    ChangeState(SkillState.DiZZY);
+                }
                 break;
+            case SkillState.RUN:
+                Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+                if (m_tfResultTarget != null && DistRange > Dist)
+                {
+                    ChangeState(SkillState.ATTACK);
+                }
+                else
+                {
+                    ChangeState(SkillState.IDLE);
+                }
+                if (DestroyTime > DeathTime)
+                {
+                    ChangeState(SkillState.DiZZY);
+                }
+                break;
+
             case SkillState.ATTACK:
+                Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+                if (m_tfResultTarget != null && DistRange > Dist)
+                {
+                    Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
+                    this.transform.LookAt(resultYtarget);
+                    anim.SetBool("bMove", false);
+                    anim.SetTrigger("tBAttack");
+                    nav.speed = 2;
+                }
+                else
+                {
+                    ChangeState(SkillState.RUN);
+                }
+                if (DestroyTime > DeathTime)
+                {
+                    ChangeState(SkillState.DiZZY);
+                }
                 break;
             case SkillState.DiZZY:
-                break;
-            case SkillState.DESTROY:
+                StartCoroutine(Dizzy());
                 break;
             case SkillState.Death:
+                DeathAttack();
+                DestEffect();
+                State = SkillState.DESTROY;
+                break;
+            case SkillState.DESTROY:
+                Destroy(this.gameObject);
                 break;
         }
     }
     void chageSate()
     {
-       
+
         switch (State)
         {
             case SkillState.CREATE:
@@ -103,8 +186,7 @@ public class JesterSkill : MonoBehaviour
                 }
                 else
                 {
-                    return;
-                    State = SkillState.RUN;
+                    RandomPatrol();
                 }
                 break;
             case SkillState.RUN:
@@ -112,15 +194,20 @@ public class JesterSkill : MonoBehaviour
                     nav.speed = 5;
                     nav.SetDestination(m_tfResultTarget.position);
                     anim.SetBool("bMove", true);
-
+                    Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
                     if (DistRange > Dist)
                     {
                         State = SkillState.ATTACK;
+                    }
+                    else
+                    {
+                        State = SkillState.IDLE;
                     }
                 }
                 break;
             case SkillState.ATTACK:
                 {
+                    Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
                     Vector3 resultYtarget = new Vector3(m_tfResultTarget.position.x, this.transform.position.y, m_tfResultTarget.position.z);
                     if (DistRange > Dist)
                     {
@@ -155,6 +242,20 @@ public class JesterSkill : MonoBehaviour
                 break;
         }
     }
+    void RandomPatrol()
+    {
+        Vector3 OriginPos = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+        float xpos = Random.Range(-10, 10);
+        float zpos = Random.Range(-10, 10);
+        Vector3 posPlus = new Vector3(this.transform.position.x + xpos, this.transform.position.y, this.transform.position.z + zpos);
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(posPlus, out hit, 1.0f, NavMesh.AllAreas)) // 랜덤한 위치가 NavMesh로 이동할 수 있는지 확인
+        {
+            posPlus = hit.position; // 가능하면 그 위치값 내보냄
+            nav.SetDestination(posPlus);
+        }
+
+    }
     void DeathAttack()
     {
         GameObject[] monster = GameObject.FindGameObjectsWithTag("Monster");
@@ -174,7 +275,7 @@ public class JesterSkill : MonoBehaviour
     {
         GameObject obj = Instantiate(m_objSkillEffect, this.transform.position, this.transform.rotation);
     }
-    void SearchTarget()
+    void SkillSearchTarget()
     {
         float Shortdist = 15;
         Transform shorTarget = null;
@@ -193,7 +294,7 @@ public class JesterSkill : MonoBehaviour
         }
         m_tfResultTarget = shorTarget; // 최종값
     }
-    void onAnimationEv()
+    void onAnimationEv() //공격에니메이션
     {
         if (Animationevent != null)
             Animationevent();
@@ -204,7 +305,11 @@ public class JesterSkill : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Attackcollider.enabled = false;
     }
-
+    IEnumerator RandomRange(float time, SkillState s) //다음 상태로 넘김
+    {
+        yield return new WaitForSeconds(time);
+        ChangeState(s);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, f_Range);

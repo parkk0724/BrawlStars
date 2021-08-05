@@ -66,6 +66,7 @@ public class Hero : Character
     
 
     public List<Item> items = new List<Item>();
+    public bool GetJump() { return m_bMoveValid; }
     public float GetFever() { return m_fFever; }
     public float GetMaxFever() { return m_fMaxFever; }
     public virtual void FeverUp()

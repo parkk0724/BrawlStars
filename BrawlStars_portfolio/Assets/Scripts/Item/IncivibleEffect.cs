@@ -17,23 +17,9 @@ public class IncivibleEffect : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Bullet"))
+        if(other.gameObject.CompareTag("BossBullet"))
         {
-            Destroy(other.gameObject);
-        }
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Jump"))
-        {
-            //this.gameObject.SetActive(false);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Jump"))
-        {
-            //this.gameObject.SetActive(true);
+            other.gameObject.SetActive(false);
         }
     }
 }

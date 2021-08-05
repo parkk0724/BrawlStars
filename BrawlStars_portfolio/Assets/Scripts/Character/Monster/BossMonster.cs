@@ -29,6 +29,10 @@ public class BossMonster : Monster
 
     Coroutine die = null;
     Coroutine rot = null;
+    private void Awake()
+    {
+        m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/BossMonster"), transform);
+    }
     protected override void Start()
     {
         base.Start();

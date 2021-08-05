@@ -91,6 +91,7 @@ public class Hero : Character
         m_ptsRevival = revivalEffect.GetComponent<ParticleSystem>();
 
         m_boxCollider = GetComponent<BoxCollider>();
+        m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/Hero"),transform);
     }
     protected virtual void Start()
     {
@@ -349,6 +350,7 @@ public class Hero : Character
         m_Animator.SetTrigger("tDie");
         m_Animator.SetBool("bDie", m_bDie);
         m_boxCollider.enabled = false;
+
         yield return new WaitForSeconds(2);
 
         int count = 3;
@@ -530,7 +532,13 @@ public class Hero : Character
         }
         else
         {
-            m_objTargetEffect.gameObject.transform.position = m_tfEfResultTarget.transform.position;
+            
+            Vector3 pos = m_tfEfResultTarget.transform.position;
+            pos.y = 1.0f;
+            m_objTargetEffect.gameObject.transform.position = pos;
+
+            m_objTargetEffect.transform.localScale = m_tfEfResultTarget.localScale;
+
             m_objTargetEffect.Play();
         }
     }

@@ -6,6 +6,7 @@ public class Main_Camera_Moving : MonoBehaviour
 {
     public GameObject playercamera;
     public GameObject player;
+    public GameObject Boss;
 
     public float speed = 0.0f;
     public bool startmove = true;
@@ -13,9 +14,15 @@ public class Main_Camera_Moving : MonoBehaviour
 
     float forwarddist = 0.0f;
     float backwarddist = 0.0f;
+
+    Hero m_myHero;
+    BossMonster m_Boss;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // 캐릭바꿀때마다 변경해야되서 알아서 찾아서 넣어주게 함. -금환
+        m_myHero = player.GetComponent<Hero>();
+        m_Boss = Boss.GetComponent<BossMonster>();
+
         if (startmove == true)
             cameramove = StartCoroutine(StartCameraMoving());
         else
@@ -61,5 +68,8 @@ public class Main_Camera_Moving : MonoBehaviour
             yield return null;
         }
         cameramove = null;
+
+        m_myHero.m_Start = Hero.Start_State.START;
+        m_Boss.m_Start = BossMonster.Start_State.START;
     }
 }

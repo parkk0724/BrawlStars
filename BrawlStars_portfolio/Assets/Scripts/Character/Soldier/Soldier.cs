@@ -22,8 +22,8 @@ public class Soldier : Hero
     protected override void Start()
     {
         base.Start();
-        this.GetComponent<Animation_Event>().bazooka_basic_fire = Basic_Fire;
-        this.GetComponent<Animation_Event>().bazooka_skill_fire = Skill_Fire;
+        this.GetComponentInChildren<Animation_Event>().bazooka_basic_fire = Basic_Fire;
+        this.GetComponentInChildren<Animation_Event>().bazooka_skill_fire = Skill_Fire;
     }
     public override void Attack()
     {

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Hero : Character
 {
     public enum Start_State { NONE, START }
-    Start_State m_Start = Start_State.NONE;
+    public Start_State m_Start = Start_State.NONE;
 
     [Header("Status")]
     protected float m_fStamina;
@@ -125,42 +125,42 @@ public class Hero : Character
     protected virtual void Update()
     {
 
-        //if (m_Start == Start_State.START)
-        //{
-        if (!m_bDie)
+        if (m_Start == Start_State.START)
         {
-            m_fCurBodyAttack += Time.deltaTime;
-            RecoveryStamina();
-            Move();
-            Attack();
+            if (!m_bDie)
+            {
+                m_fCurBodyAttack += Time.deltaTime;
+                RecoveryStamina();
+                Move();
+                Attack();
 
-            if (b_active[0])
-            {
-                if (Hp != null) StopCoroutine(Hp);
-                Hp = StartCoroutine(RecoverHP());
+                if (b_active[0])
+                {
+                    if (Hp != null) StopCoroutine(Hp);
+                    Hp = StartCoroutine(RecoverHP());
+                }
+                if (b_active[1])
+                {
+                    if (St != null) StopCoroutine(St);
+                    St = StartCoroutine(RecoverST());
+                }
+                if (b_active[2])
+                {
+                    if (Fe != null) StopCoroutine(Fe);
+                    Fe = StartCoroutine(RecoverFV());
+                }
+                invicibleitem();
+                SearchTargetEffect();
+                TargetEffect();
+                if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+                {
+                    SearchTarget();
+                    m_bRotStart = true;
+                }
+                if (m_bRotStart) LookEnemy();
+                if (m_nHP <= 0) StartCoroutine(Die());
             }
-            if (b_active[1])
-            {
-                if (St != null) StopCoroutine(St);
-                St = StartCoroutine(RecoverST());
-            }
-            if (b_active[2])
-            {
-                if (Fe != null) StopCoroutine(Fe);
-                Fe = StartCoroutine(RecoverFV());
-            }
-            invicibleitem();
-            SearchTargetEffect();
-            TargetEffect();
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
-            {
-                SearchTarget();
-                m_bRotStart = true;
-            }
-            if (m_bRotStart) LookEnemy();
-            if (m_nHP <= 0) StartCoroutine(Die());
         }
-        //}
     }
     #region Hero Move
     public override void Move()

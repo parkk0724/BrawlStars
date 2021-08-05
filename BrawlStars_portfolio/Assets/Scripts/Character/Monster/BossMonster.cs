@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossMonster : Monster
 {
+    public enum Start_State { NONE, START }
+    public Start_State m_Start = Start_State.NONE;
     protected enum PhaseState{ NONE, ANGRY, FEVER }
     PhaseState m_phase = PhaseState.NONE;
 
@@ -56,17 +58,20 @@ public class BossMonster : Monster
     // Update is called once per frame
     void Update()
     {
-        if (m_nHP <= 0)
+        if (m_Start == Start_State.START)
         {
-            ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
-            ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
+            if (m_nHP <= 0)
+            {
+                ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
+                ColorChange(m_mBody, 1.0f, 1.0f, 1.0f);
 
-            ChangeState(State.DEAD);
-            Dark_Effect.SetActive(false);
+                ChangeState(State.DEAD);
+                Dark_Effect.SetActive(false);
+            }
+            m_fCurTime += Time.deltaTime;
+            ProgressState();
+            CheckPhase();
         }
-        m_fCurTime += Time.deltaTime;
-        ProgressState();
-        CheckPhase();
     }
 
     protected override void ChangeState(State state)

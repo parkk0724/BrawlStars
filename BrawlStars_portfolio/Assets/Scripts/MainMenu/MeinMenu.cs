@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MeinMenu : MonoBehaviour
 {
+    public GameObject MainSound;
+    public GameObject ClickSound;
+
     public GameObject Selected_Effect;
 
     GameObject Soldier;
@@ -13,6 +16,8 @@ public class MeinMenu : MonoBehaviour
     GameObject Jester;       
     private void Start()
     {
+        MainSound.SetActive(true);
+        ClickSound.SetActive(false);
         Soldier = GameObject.Find("Soldier_Select");
         BoxMan = GameObject.Find("BoxMan_Select");
         Bear = GameObject.Find("Bear_Select");
@@ -20,10 +25,12 @@ public class MeinMenu : MonoBehaviour
     }
     public void OnClick_CharacterSelect()
     {
+        ClickSound.SetActive(true);
         SceneManager.LoadScene("CharacterSelect");
     }
     public void OnClick_Quit()
     {
+        ClickSound.SetActive(true);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 # else
@@ -33,6 +40,7 @@ public class MeinMenu : MonoBehaviour
 
     public void OnClick_Start()
     {
+        ClickSound.SetActive(true);
         SceneManager.LoadScene("Browl_Stars");
     }
 

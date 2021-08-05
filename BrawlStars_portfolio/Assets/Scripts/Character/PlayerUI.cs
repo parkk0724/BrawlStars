@@ -48,7 +48,6 @@ public class PlayerUI : MonoBehaviour
     {
         float HP_Guage = m_Hero.GetHp() / m_Hero.GetMaxHp();
         m_HP.value = HP_Guage;
-        Debug.Log(HP_Guage);
     }
 
     void UpdateText()

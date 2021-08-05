@@ -7,11 +7,15 @@ public class PlayerUI : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Hero m_Hero = null;
+    [SerializeField] BossMonster m_Boss;
+
     [SerializeField] TMPro.TMP_Text m_tFeverGauge = null;
     [SerializeField] Image m_FeverGuage = null;
     [SerializeField] Image m_imgFullGauge = null;
+
     [SerializeField] Slider m_HP = null;
     [SerializeField] Slider m_ST = null;
+    [SerializeField] Slider m_BossHP = null;
     void Start()
     {
         m_Hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
@@ -22,6 +26,8 @@ public class PlayerUI : MonoBehaviour
     {
         UpdateFeverGauge();
         Update_HP_Gauge();
+        Update_ST_Gauge();
+        Update_BossHP_Gauge();
     }
 
     void UpdateFeverGauge()
@@ -48,6 +54,18 @@ public class PlayerUI : MonoBehaviour
     {
         float HP_Guage = m_Hero.GetHp() / m_Hero.GetMaxHp();
         m_HP.value = HP_Guage;
+    }
+
+    void Update_BossHP_Gauge()
+    {
+        float BossHP_Guage = m_Boss.GetHp() / m_Boss.GetMaxHp();
+        m_BossHP.value = BossHP_Guage;
+    }
+
+    void Update_ST_Gauge()
+    {
+        float ST_Guage = m_Hero.GetStamina() / m_Hero.GetMaxStamina();
+        m_ST.value = ST_Guage;
     }
 
     void UpdateText()

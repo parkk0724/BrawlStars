@@ -15,8 +15,8 @@ public abstract class Character : MonoBehaviour
     protected float m_fMoveSpeed;
     protected float m_fAttackSpeed;
     protected float m_fRange;
-    public int GetHp() { return m_nHP; }
-    public int GetMaxHp() { return m_nMaxHP; }
+    public float GetHp() { return m_nHP; }
+    public float GetMaxHp() { return m_nMaxHP; }
     public int GetATK() { return m_nATK; }
     public abstract void Move();
     public abstract IEnumerator Die();

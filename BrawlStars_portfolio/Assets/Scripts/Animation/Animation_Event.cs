@@ -6,6 +6,9 @@ using UnityEngine.Events;
 public delegate void BossMonsterFire(int n);
 public class Animation_Event : MonoBehaviour
 {
+    [Header("Sound")]
+    AudioSource WalkSound = null;
+
     [Header("Bazooka")]
     public UnityAction bazooka_basic_fire = null;
     public UnityAction bazooka_skill_fire = null;
@@ -27,13 +30,20 @@ public class Animation_Event : MonoBehaviour
     // Start is called before the first frame update
 
     Animator myAnimator;
+
+    private void Awake()
+    {
+        WalkSound = GameObject.Find("FootWalk").GetComponent<AudioSource>();
+    }
     private void Run_Effect_L()
     {
         GameObject fire_effect = Instantiate(run_effect, Lfoot_pos.position, Quaternion.identity);
+        WalkSound.Play();
     }
     private void Run_Effect_R()
     {
         GameObject fire_effect = Instantiate(run_effect, Rfoot_pos.position, Quaternion.identity);
+        WalkSound.Play();
     }
     private void Bazooka_Effect()
     {
@@ -89,7 +99,7 @@ public class Animation_Event : MonoBehaviour
         sound.SetActive(true);
     }
 
-    private void Sound_SetActive_False(GameObject sound)
+    static private void Sound_SetActive_False(GameObject sound)
     {
         sound.SetActive(false);
     }

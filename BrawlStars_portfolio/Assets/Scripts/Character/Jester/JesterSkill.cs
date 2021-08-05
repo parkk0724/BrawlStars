@@ -245,16 +245,19 @@ public class JesterSkill : MonoBehaviour
     void RandomPatrol()
     {
         Vector3 OriginPos = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-        float xpos = Random.Range(-10, 10);
-        float zpos = Random.Range(-10, 10);
-        Vector3 posPlus = new Vector3(this.transform.position.x + xpos, this.transform.position.y, this.transform.position.z + zpos);
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(posPlus, out hit, 1.0f, NavMesh.AllAreas)) // 랜덤한 위치가 NavMesh로 이동할 수 있는지 확인
+        
+        for (int i = 0; i < 10; i++)
         {
-            posPlus = hit.position; // 가능하면 그 위치값 내보냄
-            nav.SetDestination(posPlus);
+            float xpos = Random.Range(-10, 10);
+            float zpos = Random.Range(-10, 10);
+            Vector3 posPlus = new Vector3(this.transform.position.x + xpos, this.transform.position.y, this.transform.position.z + zpos);
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(posPlus, out hit, 1.0f, NavMesh.AllAreas)) // 랜덤한 위치가 NavMesh로 이동할 수 있는지 확인
+            {
+                posPlus = hit.position; // 가능하면 그 위치값 내보냄
+                nav.SetDestination(posPlus);
+            }
         }
-
     }
     void DeathAttack()
     {

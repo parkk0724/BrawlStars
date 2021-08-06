@@ -19,14 +19,16 @@ public class JesterSkill : MonoBehaviour
 
     float Dist;
     float DestroyTime;
-    public float DistRange;
-    public float DeathTime;
+    private float DistRange = 2f;
+    private float DeathTime = 10f;
     public float m_fTargetRange;
     public BoxCollider Attackcollider;
     public LayerMask m_lmEnemyLayer = 0;
     public float f_Range = 5f;
     public UnityAction Animationevent = null;
     float Curtime;
+    public float GetCurtime() { return DestroyTime; }
+    public float GetDeathtime() { return DeathTime; }
     void Start()
     {
         Curtime = 0;
@@ -184,17 +186,24 @@ public class JesterSkill : MonoBehaviour
             case SkillState.CREATE:
                 break;
             case SkillState.IDLE:
+                if (DestroyTime > DeathTime)
+                {
+                    State = SkillState.DiZZY;
+                }
                 if (m_tfResultTarget != null)
                 {
                     State = SkillState.RUN;
                 }
                 else
                 {
-                    
                     RandomPatrol();
                 }
                 break;
             case SkillState.PATROL:
+                if (DestroyTime > DeathTime)
+                {
+                    State = SkillState.DiZZY;
+                }
                 if (m_tfResultTarget != null)
                 {
                     State = SkillState.RUN;
@@ -206,10 +215,25 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.RUN:
                 {
-                    nav.speed = 5;
-                    nav.SetDestination(m_tfResultTarget.position);
-                    anim.SetBool("bMove", true);
-                    Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+                    if (m_tfResultTarget == null)
+                    {
+                        if (DestroyTime > DeathTime)
+                        {
+                            State = SkillState.DiZZY;
+                        }
+                        State = SkillState.PATROL;
+                    }
+                    else if (m_tfResultTarget != null)
+                    {
+                        if (DestroyTime > DeathTime)
+                        {
+                            State = SkillState.DiZZY;
+                        }
+                        nav.speed = 5;
+                        nav.SetDestination(m_tfResultTarget.position);
+                        anim.SetBool("bMove", true);
+                        Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
+                    }
                     if (DistRange > Dist)
                     {
                         State = SkillState.ATTACK;
@@ -222,11 +246,15 @@ public class JesterSkill : MonoBehaviour
                 break;
             case SkillState.ATTACK:
                 {
+                    if (DestroyTime > DeathTime)
+                    {
+                        State = SkillState.DiZZY;
+                    }
                     if (m_tfResultTarget == null)
                     {
                         State = SkillState.PATROL;
                     }
-                    if (m_tfResultTarget != null)  
+                    if (m_tfResultTarget != null)
                     {
                         Dist = Vector3.Distance(this.transform.position, m_tfResultTarget.position);
                         if (DistRange > Dist)
@@ -236,19 +264,19 @@ public class JesterSkill : MonoBehaviour
                             anim.SetBool("bMove", false);
                             anim.SetTrigger("tBAttack");
                             nav.speed = 2;
-                            if(m_tfResultTarget == null)
+                            if (m_tfResultTarget == null)
                             {
                                 State = SkillState.PATROL;
+                            }
+                            if (DestroyTime > DeathTime)
+                            {
+                                State = SkillState.DiZZY;
                             }
                         }
                         else
                         {
                             State = SkillState.RUN;
                         }
-                    }
-                    if (DestroyTime > DeathTime)
-                    {
-                        State = SkillState.DiZZY;
                     }
                 }
                 break;

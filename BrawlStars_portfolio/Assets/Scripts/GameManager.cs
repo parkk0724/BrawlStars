@@ -21,16 +21,20 @@ public class GameManager : MonoBehaviour
     }
 
     float m_fCurDelayPortal;
-    [SerializeField]float m_fMaxDelayPortal = 10.0f;
+    [SerializeField] float m_fMaxDelayPortal = 10.0f;
+
+    [SerializeField] public float m_fTime { get; private set; }
     void Start()
     {
         m_fCurDelayPortal = m_fMaxDelayPortal;
+        m_fTime = 300.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         m_fCurDelayPortal += Time.deltaTime;
+        m_fTime -= Time.deltaTime;
     }
 
     public float GetCurDelayPortal() { return m_fCurDelayPortal; }

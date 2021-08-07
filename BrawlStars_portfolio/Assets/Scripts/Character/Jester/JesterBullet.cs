@@ -24,7 +24,7 @@ public class JesterBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rigid.velocity = transform.forward * 30f;
+        rigid.velocity = transform.forward * 20f;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -33,9 +33,7 @@ public class JesterBullet : MonoBehaviour
 
             //Jester jester = GameObject.FindWithTag("Player").GetComponent<Jester>();
             GameObject obj = GameObject.Find("Jester");
-            Debug.Log(obj);
             Jester jester = obj.GetComponent<Jester>();
-            Debug.Log(jester);
             jester.FeverUp();
             if (other.GetComponent<Monster>())
             {

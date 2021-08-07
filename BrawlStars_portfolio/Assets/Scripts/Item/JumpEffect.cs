@@ -31,7 +31,6 @@ public class JumpEffect : MonoBehaviour
         }
         if(player.activeSelf)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
             if (player.GetComponent<Hero>())
             {
                 if (!player.GetComponent<Hero>().GetJump())

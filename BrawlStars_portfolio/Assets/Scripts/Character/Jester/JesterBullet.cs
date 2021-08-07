@@ -30,7 +30,12 @@ public class JesterBullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Monster"))
         {
-            Jester jester = GameObject.FindWithTag("Player").GetComponent<Jester>();
+
+            //Jester jester = GameObject.FindWithTag("Player").GetComponent<Jester>();
+            GameObject obj = GameObject.Find("Jester");
+            Debug.Log(obj);
+            Jester jester = obj.GetComponent<Jester>();
+            Debug.Log(jester);
             jester.FeverUp();
             if (other.GetComponent<Monster>())
             {

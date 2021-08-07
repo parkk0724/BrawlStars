@@ -27,16 +27,15 @@ public class JesterBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //rigid.velocity = transform.forward * 20f;
         Vector3 curPos = this.transform.position;
         Vector3 nextPos = curPos + this.transform.forward * Speed * Time.deltaTime;
-        //rigid.velocity = transform.forward * 20f;
         this.transform.position = nextPos;
         float dist = Vector3.Distance(Originpos, nextPos);
         if(dist > 10)
         {
             Destroy(gameObject);
         }
-        //transform.Translate(this.transform.forward * Speed * Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {

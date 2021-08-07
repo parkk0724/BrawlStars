@@ -292,7 +292,7 @@ public class JesterSkill : MonoBehaviour
                 break;
 
             case SkillState.DESTROY:
-                Destroy(this.gameObject);
+                Destroy(this.transform.parent.gameObject);
                 break;
         }
     }
@@ -377,32 +377,37 @@ public class JesterSkill : MonoBehaviour
     IEnumerator Dizzy()
     {
         nav.speed = 0;
-        Vector3 thisScale = new Vector3(2f, 2f, 2f);
+        Vector3 thisScale = new Vector3(2.4f, 1.2f, 2.4f);
         float thisgob = this.transform.localScale.x * this.transform.localScale.y * this.transform.localScale.z;
         float thisgob_2 = thisScale.x * thisScale.y * thisScale.z;
+        float Waittime = 0;
         this.transform.localScale += new Vector3(0.6f, 0.3f, 0.6f) * Time.deltaTime;
         this.transform.Rotate(0, 3f, 0);
         if (thisgob_2 > thisgob)
         {
-            //float Gobdelta = thisgob_2 - thisgob;
             anim.SetTrigger("Dizzy");
-            for (int i = 0; i < 5; i++)
+            Waittime = (thisgob_2 - thisgob) / thisgob_2;
+            if(Waittime <0.3f)
             {
-                myRender[0].material.color = Color.white;
-                myRender[1].material.color = Color.white;
-                yield return new WaitForSeconds(0.3f);
-                myRender[0].material.color = Color.red;
-                myRender[1].material.color = Color.red;
+                Waittime = 0.3f; //빠르게 돌려주기위해 for문 사용
+                for (int i = 0; i < 10; i++)
+                {
+                    myRender[0].material.color = Color.white;
+                    myRender[1].material.color = Color.white;
+                    yield return new WaitForSeconds(Waittime);
+                    myRender[0].material.color = Color.red;
+                    myRender[1].material.color = Color.red;
+                }
             }
+            
+            myRender[0].material.color = Color.white;
+            myRender[1].material.color = Color.white;
+            yield return new WaitForSeconds(Waittime);
+            myRender[0].material.color = Color.red;
+            myRender[1].material.color = Color.red;
         }
-
         if (thisgob > thisgob_2)
             State = SkillState.Death;
-    }
-
-    void SkillEffectFollow()
-    {
-
     }
 }
 

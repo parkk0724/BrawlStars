@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33689564697537136}
   - component: {fileID: 23519816570257050}
   - component: {fileID: 64642560721670318}
+  - component: {fileID: -1605885039767622207}
   m_Layer: 0
   m_Name: Grass02
   m_TagString: Untagged
@@ -90,9 +91,21 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352152825796216}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 23f601f0808e7bf4a82d73ac2f0b51a5, type: 3}
+--- !u!114 &-1605885039767622207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352152825796216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a1c8f89c0ca864c84ecb8ea20e1691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

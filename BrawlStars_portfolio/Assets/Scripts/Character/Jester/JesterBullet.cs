@@ -12,19 +12,31 @@ public class JesterBullet : MonoBehaviour
     private float m_fDamage = 0;
     public UnityAction Fever = null;
     public GameObject HitEffect = null;
+    float Speed = 20f;
+    Vector3 Originpos;
     void Start()
     {
         //hero = GetComponent<Hero>();
         Destroy(this.gameObject, 2f);
         rigid = GetComponent<Rigidbody>();
         jwaepon = FindObjectOfType<JesterWeapon>();
+        Originpos = this.transform.position;
     }
     public void SetDamage(float f) { m_fDamage = f; }
 
     // Update is called once per frame
     void Update()
     {
-        rigid.velocity = transform.forward * 20f;
+        Vector3 curPos = this.transform.position;
+        Vector3 nextPos = curPos + this.transform.forward * Speed * Time.deltaTime;
+        //rigid.velocity = transform.forward * 20f;
+        this.transform.position = nextPos;
+        float dist = Vector3.Distance(Originpos, nextPos);
+        if(dist > 10)
+        {
+            Destroy(gameObject);
+        }
+        //transform.Translate(this.transform.forward * Speed * Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {

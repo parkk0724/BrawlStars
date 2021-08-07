@@ -10,6 +10,7 @@ public class Main_Camera_Moving : MonoBehaviour
 
     public GameObject StartSound;
     public GameObject PlayingSound;
+    public GameObject PortalSound;
 
     public float speed = 0.0f;
     public bool startmove = true;
@@ -23,6 +24,7 @@ public class Main_Camera_Moving : MonoBehaviour
 
     private void Awake()
     {
+        PortalSound.SetActive(false);
         StartSound.SetActive(false);
         PlayingSound.SetActive(false);
     }
@@ -82,6 +84,9 @@ public class Main_Camera_Moving : MonoBehaviour
         cameramove = null;
 
         m_myHero.m_Start = Hero.Start_State.START;
-        m_Boss.m_Start = BossMonster.Start_State.START;        
+        m_Boss.m_Start = BossMonster.Start_State.START;
+
+        StartSound.SetActive(false);
+        PortalSound.SetActive(true);
     }
 }

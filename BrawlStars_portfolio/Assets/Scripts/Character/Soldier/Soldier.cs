@@ -42,8 +42,8 @@ public class Soldier : Hero
             SetRotStart(false);
         }
 
-        if (m_fFever >= m_fMaxFever)
-        {
+       if (m_fFever >= m_fMaxFever)
+       {
             if (Input.GetMouseButton(1))
             {
                 m_Animator.SetTrigger("tSAttack");
@@ -66,6 +66,7 @@ public class Soldier : Hero
     }
     private void Skill_Fire()
     {
+        Fire_Sound.GetComponent<AudioSource>().Play();
         StartCoroutine(Bazooka_SkillBullet_Initiate(0.5f));
     }
     void Bazooka_Bullet_Initiate(GameObject bullet)

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bazooka_SkillBullet : MonoBehaviour
 {
     public GameObject explosion_effect;
+    public GameObject StartSound;
+    public GameObject Explosion_Sound;
     public float bullet_up_speed;
     public float bullet_speed;
 
@@ -17,14 +19,22 @@ public class Bazooka_SkillBullet : MonoBehaviour
     Coroutine skillbulletdestination = null;
 
     float dist = 0.0f;
+
     void Start()
     {
+        StartSound = GameObject.Find("SkillBazooka");
+        StartSound.SetActive(false);
         SkillBullt_Destination = GameObject.Find("skillbullet_destination").transform;
         SkillBullt_Pos = GameObject.Find("skillbullet_pos").transform;
         skillbulletpos = StartCoroutine(Bazooka_SkillBullet_Pos(SkillBullt_Pos));
     }
    IEnumerator Bazooka_SkillBullet_Pos(Transform skillbullet_pos)
    {
+        if (StartSound.activeSelf)
+            StartSound.GetComponent<AudioSource>().Play();        
+        else
+            StartSound.SetActive(true);
+
         Vector3 dir = skillbullet_pos.position - this.transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
@@ -72,6 +82,8 @@ public class Bazooka_SkillBullet : MonoBehaviour
         if (other.tag == "Ground" || other.tag == "Wall" || other.tag == "Player")
         {
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
+            Explosion_Sound = GameObject.Find("BazookaExplosion");
+            Explosion_Sound.GetComponent<AudioSource>().Play();
 
             for (int i = 0; i < colls.Length; i++)
             {

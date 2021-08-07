@@ -45,6 +45,7 @@ public class Hero : Character
 
     [Header("Jump")]
     public float m_Jump_maxDelay = 0.0f;
+    public GameObject m_Jump_StartSound = null;
     float m_Jump_curDelay = 0.0f;
     Transform Jump_Destination_Pos1;
     Transform Jump_Destination_Pos2;
@@ -93,6 +94,7 @@ public class Hero : Character
 
         m_boxCollider = GetComponent<BoxCollider>();
         m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/Hero"),transform);
+        m_Jump_StartSound = GameObject.Find("JumpStart");
     }
     protected virtual void Start()
     {
@@ -101,7 +103,7 @@ public class Hero : Character
         m_tDie = m_objUIDie.GetComponentInChildren<TMPro.TMP_Text>();
 
         Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
-        Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;
+        Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;        
         m_bMoveStart = true;
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
@@ -120,7 +122,7 @@ public class Hero : Character
         m_fRange = 10.0f;
         m_fBodyAttackDelay = 1.0f;
         m_fCurBodyAttack = m_fBodyAttackDelay;
-        m_fJump_Height = 5.0f;
+        m_fJump_Height = 9.0f;
         m_fJump_Speed = 10.0f;
     }
     // Update is called once per frame
@@ -546,6 +548,8 @@ public class Hero : Character
     #endregion
     IEnumerator Jump(Transform destination)
     {
+        m_Jump_StartSound.GetComponent<AudioSource>().Play();
+
         m_bMoveValid = false;
         this.transform.LookAt(destination.position);
         Vector3 dir = destination.position - this.transform.position;

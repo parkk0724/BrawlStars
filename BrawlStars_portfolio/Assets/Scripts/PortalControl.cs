@@ -6,6 +6,7 @@ public class PortalControl : MonoBehaviour
 {
     public ParticleSystem m_ptsPortalIn;
     public ParticleSystem m_ptsPortalOut;
+    public GameObject m_PortalMoveSound;
     private ParticleSystem[] m_ptsPortalEffect;
     public Image m_BarImage;
     public Transform[] m_tfPortals;
@@ -79,6 +80,8 @@ public class PortalControl : MonoBehaviour
 
     IEnumerator MovePortal(Collider other, int index)
     {
+       m_PortalMoveSound.GetComponent<AudioSource>().Play();
+
         ResetCurTime();
         Vector3 pos = m_tfPortals[index].transform.position;
         other.transform.position = pos;

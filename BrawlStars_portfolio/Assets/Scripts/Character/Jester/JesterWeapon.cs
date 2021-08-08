@@ -11,6 +11,7 @@ public class JesterWeapon : MonoBehaviour
     public Transform m_tBulletPosCase;
     public GameObject m_objBulletCase;
     public ParticleSystem Shooteffect;
+    public ParticleSystem Shooteffect_1;
     public AudioSource ShotSound;
     //public ParticleSystem Shooteffect_2;
     public UnityAction onFever = null;
@@ -53,8 +54,10 @@ public class JesterWeapon : MonoBehaviour
     }
     IEnumerator Fire()
     {
+        Shooteffect_1.gameObject.SetActive(true);
         Shooteffect.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.35f);
+        Shooteffect_1.gameObject.SetActive(false);
         Shooteffect.gameObject.SetActive(false);
     }
     void BullutCaseInit(float time)

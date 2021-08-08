@@ -18,23 +18,21 @@ public class Bazooka_SkillBullet : MonoBehaviour
     Coroutine skillbulletpos = null;
     Coroutine skillbulletdestination = null;
 
+    SoundManager m_Sound;
+
     float dist = 0.0f;
 
     void Start()
     {
-        StartSound = GameObject.Find("SkillBazooka");
-        StartSound.SetActive(false);
+        m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
         SkillBullt_Destination = GameObject.Find("skillbullet_destination").transform;
         SkillBullt_Pos = GameObject.Find("skillbullet_pos").transform;
         skillbulletpos = StartCoroutine(Bazooka_SkillBullet_Pos(SkillBullt_Pos));
     }
    IEnumerator Bazooka_SkillBullet_Pos(Transform skillbullet_pos)
    {
-        if (StartSound.activeSelf)
-            StartSound.GetComponent<AudioSource>().Play();        
-        else
-            StartSound.SetActive(true);
-
+        m_Sound.PlaySound(m_Sound.SkillBazooka);
+        
         Vector3 dir = skillbullet_pos.position - this.transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
@@ -61,13 +59,16 @@ public class Bazooka_SkillBullet : MonoBehaviour
     }
 
     IEnumerator Bazooka_SkillBullet_Destination()
-    {                   
+    {
+        Vector3 dir = SkillBullt_Destination.position - this.transform.position;
+        dir.Normalize();
+
         while (dist < 20.0f)
         {
             float delta = bullet_speed * Time.deltaTime;
             dist += delta;
 
-            this.transform.Translate(this.transform.forward * delta, Space.World);
+            this.transform.Translate(dir * delta, Space.World);
 
             yield return null;
         }
@@ -82,8 +83,7 @@ public class Bazooka_SkillBullet : MonoBehaviour
         if (other.tag == "Ground" || other.tag == "Wall" || other.tag == "Player")
         {
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
-            Explosion_Sound = GameObject.Find("BazookaExplosion");
-            Explosion_Sound.GetComponent<AudioSource>().Play();
+            m_Sound.PlaySound(m_Sound.BazookaExplosion);
 
             for (int i = 0; i < colls.Length; i++)
             {

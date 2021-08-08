@@ -26,9 +26,10 @@ public class BazookaBullet : MonoBehaviour
 
     Coroutine bulletflying;
 
-    // Start is called before the first frame update
+    SoundManager m_Sound;
     void Start()
     {
+        m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
         collider_size = this.GetComponent<BoxCollider>();
         myRigid = this.GetComponent<Rigidbody>();
         bulletflying = StartCoroutine(BulletFlying());
@@ -83,8 +84,7 @@ public class BazookaBullet : MonoBehaviour
         if (other.tag == "Ground" || other.tag == "Wall" || other.tag == "Player")
         {           
             GameObject Explosion_Effect = Instantiate(explosion_effect, this.transform.position, Quaternion.identity);
-            Explosion_Sound = GameObject.Find("BazookaExplosion");
-            Explosion_Sound.GetComponent<AudioSource>().Play();
+            m_Sound.PlaySound(m_Sound.BazookaExplosion);
             for (int i = 0; i < colls.Length; i++)
             {
                 if (colls[i].tag == "Monster")

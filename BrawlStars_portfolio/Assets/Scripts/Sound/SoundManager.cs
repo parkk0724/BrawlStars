@@ -14,6 +14,13 @@ public class SoundManager : MonoBehaviour
 
     public GameObject FootWalk;
 
+    //Bazooka
+
+    public GameObject BazookaFire;
+    public GameObject BazookaExplosion;
+    public GameObject SkillBazooka;
+
+
     void Start()
     {
         PlayStart = GameObject.Find("Start");
@@ -22,6 +29,9 @@ public class SoundManager : MonoBehaviour
         PortalMove = GameObject.Find("PortalStart");
         JumpMove = GameObject.Find("JumpStart");
         Playing_Angry = GameObject.Find("Playing(angry)");
+        BazookaFire = GameObject.Find("BazookaFire");
+        BazookaExplosion = GameObject.Find("BazookaExplosion");
+        SkillBazooka = GameObject.Find("SkillBazooka");
     }
 
     public void PlaySound(GameObject obj)

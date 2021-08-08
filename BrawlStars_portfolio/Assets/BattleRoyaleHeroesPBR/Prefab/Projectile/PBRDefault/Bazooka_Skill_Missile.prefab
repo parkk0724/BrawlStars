@@ -111,8 +111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion_effect: {fileID: 1134129239631916, guid: f584363133a733a44ac08f9d15b2c9e3, type: 3}
-  bullet_up_speed: 10
-  bullet_speed: 60
+  StartSound: {fileID: 0}
+  Explosion_Sound: {fileID: 0}
+  bullet_up_speed: 40
+  bullet_speed: 100
 --- !u!96 &9070444310755349886
 TrailRenderer:
   serializedVersion: 2

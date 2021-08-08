@@ -42,15 +42,15 @@ public class Soldier : Hero
             SetRotStart(false);
         }
 
-       if (m_fFever >= m_fMaxFever)
-       {
+       //if (m_fFever >= m_fMaxFever)
+       //{
             if (Input.GetMouseButton(1))
             {
                 m_Animator.SetTrigger("tSAttack");
                 SetRotStart(false);
                 m_fFever = 0.0f;
             }
-        }
+        //}
         if (Input.GetMouseButtonUp(1))
         {
             SetRotStart(false);
@@ -79,7 +79,7 @@ public class Soldier : Hero
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet1);
         yield return new WaitForSeconds(t / 3.0f);
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet4);
-        yield return new WaitForSeconds(t);
+        yield return new WaitForSeconds(t / 3.0f);
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet2);
         yield return new WaitForSeconds(t / 3.0f);
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);

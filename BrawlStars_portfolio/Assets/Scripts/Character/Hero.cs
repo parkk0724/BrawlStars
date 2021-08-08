@@ -451,7 +451,7 @@ public class Hero : Character
     #region SearchTarget
     protected void SearchTarget()
     {
-        float Shortdist = 10;
+        float Shortdist = 8;
         Transform shorTarget = null;
         Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
         if (EnemyCollider.Length > 0)
@@ -505,7 +505,7 @@ public class Hero : Character
     #region SerchTargetEffect
     protected void SearchTargetEffect()
     {
-        float Shortdist = 10;
+        float Shortdist = 8;
         Transform shorTarget = null;
         Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
         if (EnemyCollider.Length > 0)
@@ -546,6 +546,7 @@ public class Hero : Character
         }
     }
     #endregion
+    
     IEnumerator Jump(Transform destination)
     {
         m_Jump_StartSound.GetComponent<AudioSource>().Play();
@@ -588,7 +589,7 @@ public class Hero : Character
     {
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }
-
+    #region ItemEffect
     void invicibleitem()
     {
         if (b_active[3])
@@ -635,5 +636,5 @@ public class Hero : Character
         m_objFever.gameObject.SetActive(false);
         b_active[2] = false;
     }
-
+    #endregion
 }

@@ -12,6 +12,7 @@ public class Soldier : Hero
     public GameObject bazooka_Skill_bullet3;
     public GameObject bazooka_Skill_bullet4;
     public Transform bazooka_bullet_pos;
+    public Transform bazooka_Skill_Destination;
 
     GameObject Bullet;
     GameObject Fire_Sound;
@@ -46,6 +47,7 @@ public class Soldier : Hero
        //{
             if (Input.GetMouseButton(1))
             {
+                bazooka_Skill_Destination = GameObject.Find("skillbullet_destination").transform;
                 m_Animator.SetTrigger("tSAttack");
                 SetRotStart(false);
                 m_fFever = 0.0f;

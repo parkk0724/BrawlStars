@@ -18,11 +18,13 @@ public class Bazooka_SkillBullet2 : MonoBehaviour
     Coroutine skillbulletpos = null;
     Coroutine skillbulletdestination = null;
 
+    Soldier m_Soldier;
     SoundManager m_Sound;
 
     float dist = 0.0f;
     void Start()
     {
+        m_Soldier = GameObject.Find("Soldier").GetComponent<Soldier>();
         m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
         SkillBullt_Destination = GameObject.Find("skillbullet_destination").transform;
         SkillBullt_Pos = GameObject.Find("skillbullet_pos2").transform;
@@ -53,13 +55,13 @@ public class Bazooka_SkillBullet2 : MonoBehaviour
         }
         skillbulletpos = null;
 
-        this.transform.LookAt(SkillBullt_Destination.position);
+        this.transform.LookAt(m_Soldier.bazooka_Skill_Destination.position);
         skillbulletdestination = StartCoroutine(Bazooka_SkillBullet_Destination());
     }
 
     IEnumerator Bazooka_SkillBullet_Destination()
     {
-        Vector3 dir = SkillBullt_Destination.position - this.transform.position;
+        Vector3 dir = m_Soldier.bazooka_Skill_Destination.position - this.transform.position;
         dir.Normalize();
 
         while (dist < 20.0f)

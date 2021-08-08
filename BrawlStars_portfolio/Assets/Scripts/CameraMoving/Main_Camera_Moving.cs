@@ -8,10 +8,6 @@ public class Main_Camera_Moving : MonoBehaviour
     public GameObject player;
     public GameObject Boss;
 
-    public GameObject StartSound;
-    public GameObject PlayingSound;
-    public GameObject PortalSound;
-
     public float speed = 0.0f;
     public bool startmove = true;
     Coroutine cameramove = null;
@@ -21,12 +17,11 @@ public class Main_Camera_Moving : MonoBehaviour
 
     Hero m_myHero;
     BossMonster m_Boss;
+    SoundManager m_Sound;
 
     private void Awake()
     {
-        PortalSound.SetActive(false);
-        StartSound.SetActive(false);
-        PlayingSound.SetActive(false);
+        m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
     }
     void Start()
     {
@@ -62,7 +57,7 @@ public class Main_Camera_Moving : MonoBehaviour
 
     IEnumerator StartCameraMoving()
     {
-        StartSound.SetActive(true);
+        m_Sound.PlaySound(m_Sound.PlayStart);
 
         Vector3 dir = playercamera.transform.position - this.transform.position;
         float dist = dir.magnitude;
@@ -74,7 +69,7 @@ public class Main_Camera_Moving : MonoBehaviour
             if (dist - delta < 0.0f)
             {
                 delta = dist;
-                PlayingSound.SetActive(true);
+                m_Sound.PlaySound(m_Sound.Playing);
             }
             dist -= delta;
             this.transform.Translate(dir * delta, Space.World);
@@ -86,7 +81,6 @@ public class Main_Camera_Moving : MonoBehaviour
         m_myHero.m_Start = Hero.Start_State.START;
         m_Boss.m_Start = BossMonster.Start_State.START;
 
-        StartSound.SetActive(false);
-        PortalSound.SetActive(true);
+        m_Sound.PlaySound(m_Sound.Portal);
     }
 }

@@ -26,15 +26,15 @@ public class BossMonster : Monster
     float m_fSkill2_AttackRange = 0.0f;
 
     GameObject Dark_Effect;    
-    GameObject PhaseSound;
     Main_Camera_Moving main = null;
 
     Coroutine die = null;
     Coroutine rot = null;
+
+    SoundManager m_Sound;
     private void Awake()
     {
-        PhaseSound = GameObject.Find("Playing(angry)");
-        PhaseSound.SetActive(false);
+        m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
         m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/BossMonster"), transform);
         main = GameObject.Find("StartCamerPosition").GetComponent<Main_Camera_Moving>();
     }
@@ -262,7 +262,7 @@ public class BossMonster : Monster
 
     IEnumerator Sound_FadeOut()
     {
-        float volume = main.PlayingSound.GetComponent<AudioSource>().volume;
+        float volume = m_Sound.Playing.GetComponent<AudioSource>().volume;
         while (volume > 0.0f)
         {
             float delta = 1.0f * Time.deltaTime;
@@ -273,12 +273,11 @@ public class BossMonster : Monster
             }
 
             volume -= delta;
-            main.PlayingSound.GetComponent<AudioSource>().volume = volume;
+            m_Sound.Playing.GetComponent<AudioSource>().volume = volume;
             yield return null;
         }
-        main.PlayingSound.SetActive(false);
         yield return new WaitForSeconds(1.0f);
-        PhaseSound.SetActive(true);
+        m_Sound.PlaySound(m_Sound.Playing_Angry);
     }
     public override void Attack()
     {

@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
         PortalMove = GameObject.Find("PortalStart");
         JumpMove = GameObject.Find("JumpStart");
         Playing_Angry = GameObject.Find("Playing(angry)");
+        FootWalk = GameObject.Find("FootWalk");
         BazookaFire = GameObject.Find("BazookaFire");
         BazookaExplosion = GameObject.Find("BazookaExplosion");
         SkillBazooka = GameObject.Find("SkillBazooka");

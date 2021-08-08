@@ -22,6 +22,7 @@ public class Main_Camera_Moving : MonoBehaviour
     private void Awake()
     {
         m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
+
     }
     void Start()
     {
@@ -81,6 +82,6 @@ public class Main_Camera_Moving : MonoBehaviour
         m_myHero.m_Start = Hero.Start_State.START;
         m_Boss.m_Start = BossMonster.Start_State.START;
 
-        m_Sound.PlaySound(m_Sound.Portal);
+        //m_Sound.PlaySound(m_Sound.Portal);
     }
 }

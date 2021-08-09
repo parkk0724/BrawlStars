@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 
 public class GameManager : MonoBehaviour
@@ -23,21 +24,33 @@ public class GameManager : MonoBehaviour
     float m_fCurDelayPortal;
     [SerializeField] float m_fMaxDelayPortal = 10.0f;
 
-    [SerializeField] public float m_fTime { get; private set; }
+    public float m_fTime { get; private set; }
+    public float m_fMaxTime { get; private set; }
     void Start()
     {
         m_fCurDelayPortal = m_fMaxDelayPortal;
-        m_fTime = 300.0f;
+        m_fMaxTime = 300.0f;
+        m_fTime = m_fMaxTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_fCurDelayPortal += Time.deltaTime;
-        m_fTime -= Time.deltaTime;
+        if(m_fTime > 0)
+        {
+            m_fCurDelayPortal += Time.deltaTime;
+            m_fTime -= Time.deltaTime;
+        }
+        else
+        {
+            LoadResultScene();  // ³Ê¹« ¾ÀÀÌ È®¹Ù²ñ;
+        }
+        
     }
 
     public float GetCurDelayPortal() { return m_fCurDelayPortal; }
     public void SetCurDelayPortal(float t) { m_fCurDelayPortal = t; }
     public float GetMaxDelayPortal() { return m_fMaxDelayPortal; }
+
+    public void LoadResultScene() { SceneManager.LoadScene("EndLogunity"); }
 }

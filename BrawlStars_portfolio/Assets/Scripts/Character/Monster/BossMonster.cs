@@ -77,9 +77,12 @@ public class BossMonster : Monster
                 ChangeState(State.DEAD);
                 Dark_Effect.SetActive(false);
             }
-            m_fCurTime += Time.deltaTime;
-            ProgressState();
-            CheckPhase();
+            else
+            {
+                m_fCurTime += Time.deltaTime;
+                ProgressState();
+                CheckPhase();
+            }
         }
     }
 

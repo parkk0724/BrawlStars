@@ -103,4 +103,9 @@ public class Animation_Event : MonoBehaviour
     {
         sound.SetActive(false);
     }
+
+    private void BossMonsterDie()
+    {
+        GameManager.instance.LoadResultScene();
+    }
 }

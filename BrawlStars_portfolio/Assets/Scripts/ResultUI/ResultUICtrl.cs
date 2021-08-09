@@ -18,7 +18,7 @@ public class ResultUICtrl : MonoBehaviour
     }
 
     void SetStars(float fTime)
-    {
+    {    
         // 비활성 오브젝트 출력
         objs = GetComponentsInChildren<Transform>(true);
 
@@ -28,13 +28,18 @@ public class ResultUICtrl : MonoBehaviour
             if (obj.name == "Star1") { objs[0] = obj; }
             else if (obj.name == "Star2") { objs[1] = obj; }
             else if (obj.name == "Star3") { objs[2] = obj; }
+            
+            if(obj.name == "TxtClearTimeNum") 
+            {
+                TimeTxt = obj.GetComponent<TextMeshProUGUI>();
+            }
         }
 
         
-        foreach (TextMeshProUGUI txt in GetComponentsInChildren<TextMeshProUGUI>(true))
-        {
-            if (txt.name == "TxtClearTimeNum") TimeTxt = txt;
-        }
+        //foreach (TextMeshProUGUI txt in GetComponentsInChildren<TextMeshProUGUI>(true))
+        //{
+        //    if (txt.name == "TxtClearTimeNum") TimeTxt = txt;
+        //}
 
         // ---------------------------------------- 점수처리(남은 클리어 타임) ------------------------------
         int nGrade = 0;

@@ -27,7 +27,7 @@ public class ChickenMonster : Monster
         m_fRange = 5.0f;
         m_fMaxIdleTime = 5.0f;
         m_fRandomMoveRange = 10.0f;
-        m_fRunSpeed = 4.0f;
+        m_fRunSpeed = 3.0f;
     }
 
     private void Update()

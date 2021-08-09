@@ -6,6 +6,8 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public enum Start_State { NONE, START }
+    public Start_State m_Start = Start_State.NONE;
     enum ESC_State { NONE, ESC };
     ESC_State m_ESC_state = ESC_State.NONE;
 
@@ -39,36 +41,39 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(m_ESC_state)
+        if (m_Start == Start_State.START)
         {
-            case ESC_State.NONE:
-                {
-                    if (Input.GetKeyDown(KeyCode.Escape))
+            switch (m_ESC_state)
+            {
+                case ESC_State.NONE:
                     {
-                        ESC_UI.Instance.Print_UI();
-                        m_ESC_state = ESC_State.ESC;
+                        if (Input.GetKeyDown(KeyCode.Escape))
+                        {
+                            ESC_UI.Instance.Print_UI();
+                            m_ESC_state = ESC_State.ESC;
+                        }
                     }
-                }
-                break;
-            case ESC_State.ESC:
-                {
-                    if (Input.GetKeyDown(KeyCode.Escape))
+                    break;
+                case ESC_State.ESC:
                     {
-                        ESC_UI.Instance.Exit_UI();
-                        m_ESC_state = ESC_State.NONE;
+                        if (Input.GetKeyDown(KeyCode.Escape))
+                        {
+                            ESC_UI.Instance.Exit_UI();
+                            m_ESC_state = ESC_State.NONE;
+                        }
                     }
-                }
-                break;
-        }       
+                    break;
+            }
 
-        if(m_fTime > 0)
-        {
-            m_fCurDelayPortal += Time.deltaTime;
-            m_fTime -= Time.deltaTime;
-        }
-        else
-        {
-            LoadResultScene();  // ³Ê¹« ¾ÀÀÌ È®¹Ù²ñ;
+            if (m_fTime > 0)
+            {
+                m_fCurDelayPortal += Time.deltaTime;
+                m_fTime -= Time.deltaTime;
+            }
+            else
+            {
+                LoadResultScene();  // ³Ê¹« ¾ÀÀÌ È®¹Ù²ñ;
+            }
         }
         
     }
@@ -78,4 +83,16 @@ public class GameManager : MonoBehaviour
     public float GetMaxDelayPortal() { return m_fMaxDelayPortal; }
 
     public void LoadResultScene() { SceneManager.LoadScene("EndLogunity"); }
+
+    public void ChangeState()
+    {
+        if (m_Start == Start_State.NONE)
+        {
+            m_Start = Start_State.START;
+        }
+        else
+        {
+            m_Start = Start_State.NONE;
+        }
+    }
 }

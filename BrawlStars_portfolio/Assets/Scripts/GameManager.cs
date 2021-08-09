@@ -6,6 +6,9 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    enum ESC_State { NONE, ESC };
+    ESC_State m_ESC_state = ESC_State.NONE;
+
     static private GameManager _instance;
     static public GameManager instance
     { 
@@ -36,6 +39,28 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch(m_ESC_state)
+        {
+            case ESC_State.NONE:
+                {
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        ESC_UI.Instance.Print_UI();
+                        m_ESC_state = ESC_State.ESC;
+                    }
+                }
+                break;
+            case ESC_State.ESC:
+                {
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        ESC_UI.Instance.Exit_UI();
+                        m_ESC_state = ESC_State.NONE;
+                    }
+                }
+                break;
+        }       
+
         if(m_fTime > 0)
         {
             m_fCurDelayPortal += Time.deltaTime;

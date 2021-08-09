@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Audio;
 
 public class BoxManWeapon : MonoBehaviour
 {
@@ -14,11 +15,20 @@ public class BoxManWeapon : MonoBehaviour
     public UnityAction OnFeverUp = null;
     public UnityAction OnStaminaUp = null;
     public UnityAction OnRotStartFalse = null;
+
+    [SerializeField] Dictionary<string, AudioClip> m_dirAudioClips = new Dictionary<string, AudioClip>();
+    AudioSource m_audioSource = null;
     public void SetATK(float f) { m_fATK = f; }
     public void SetRange(float f) { m_fRange = f; }
-    void Start()
+    private void Awake()
     {
         m_Animator = GetComponent<Animator>();
+        foreach (AudioClip clip in Resources.LoadAll<AudioClip>("Prefabs/Sound/BoxMan/BoxManWeapon")) m_dirAudioClips.Add(clip.name, clip);
+        m_audioSource = GetComponent<AudioSource>();
+    }
+    void Start()
+    {
+
         this.GetComponentInParent<Animation_Event>().OnShoot = Shoot;
         this.GetComponentInParent<Animation_Event>().OnSkillShoot = SkillShoot;
         m_tfHero = GetComponentInParent<BoxMan>().transform;
@@ -27,11 +37,17 @@ public class BoxManWeapon : MonoBehaviour
     void Shoot()
     {
         InitShoot(false);
+
+        m_audioSource.clip = m_dirAudioClips["BoxManBasic"];
+        m_audioSource.Play();
     }
 
     void SkillShoot()
     {
         InitShoot(true);
+
+        m_audioSource.clip = m_dirAudioClips["BoxManSkill"];
+        m_audioSource.Play();
     }
 
     void InitShoot(bool isSkill)

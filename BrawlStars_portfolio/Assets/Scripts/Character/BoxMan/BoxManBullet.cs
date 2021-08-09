@@ -29,15 +29,23 @@ public class BoxManBullet : MonoBehaviour
     bool m_bTurn = false;
     bool m_bSkill = false;
 
+    AudioSource m_audioSource = null;
+    Dictionary<string, AudioClip> m_audioClip = new Dictionary<string, AudioClip>();
+
     public void SetDamage(float f) { m_fDamage = f; }
     public void SetDistance(float f) { m_fDistance = f; }
     public void SetPosParent(Transform pos) { m_tfHero = pos; }
     public void OnSkill() { m_bSkill = true; }
-    
+
+    private void Awake()
+    {
+        foreach(AudioClip clip in Resources.LoadAll<AudioClip>("Prefabs/Sound/BoxMan")) { m_audioClip[clip.name] = clip; }
+    }
     void Start()
     {
         m_trailRenderer = this.GetComponent<TrailRenderer>();
         m_Collider = this.GetComponent<CapsuleCollider>();
+        m_audioSource = this.GetComponent<AudioSource>();
         m_fMoveSpeed = 10f;
         m_fRotSpeed = 1000f;
         m_fSkillSize = 5.0f;
@@ -76,6 +84,10 @@ public class BoxManBullet : MonoBehaviour
             OnFeverUp?.Invoke();
             other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
             CreateHitEffect(true, other.transform);
+
+            m_audioSource.clip = m_audioClip["HitMonster"];
+            m_audioSource.Play();
+
             if (!m_bSkill)
             {
                 if (!m_bTurn) m_bTurn = true;
@@ -85,6 +97,8 @@ public class BoxManBullet : MonoBehaviour
         else if (other.tag == "Obstacle" || other.tag == "Wall")
         {
             CreateHitEffect(false, other.transform);
+            m_audioSource.clip = m_audioClip["HitObstacle"];
+            m_audioSource.Play();
 
             if (m_bTurn)
             {
@@ -119,6 +133,8 @@ public class BoxManBullet : MonoBehaviour
                 OnFeverUp?.Invoke();
                 other.GetComponent<Monster>()?.Hit((int)m_fDamage, new Color(0, 0, 0, 1));
                 CreateHitEffect(true, other.transform);
+                m_audioSource.clip = m_audioClip["HitMonster"];
+                m_audioSource.Play();
             }
         }
         else if(other.tag == "Obstacle" || other.tag == "Wall")
@@ -126,6 +142,8 @@ public class BoxManBullet : MonoBehaviour
             if (m_fCurSkillAttack >= m_fSkillAttackDelay)
             {
                 CreateHitEffect(false, other.transform);
+                m_audioSource.clip = m_audioClip["HitObstacle"];
+                m_audioSource.Play();
             }
         }
     }

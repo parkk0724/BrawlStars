@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
     {
         PlayStart = GameObject.Find("Start");
         Playing = GameObject.Find("Playing");
-        Portal = GameObject.Find("Portal");
+        Portal = GameObject.Find("PortalSound");
         PortalMove = GameObject.Find("PortalStart");
         JumpMove = GameObject.Find("JumpStart");
         Playing_Angry = GameObject.Find("Playing(angry)");

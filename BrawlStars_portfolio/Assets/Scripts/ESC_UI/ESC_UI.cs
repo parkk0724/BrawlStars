@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ESC_UI : MonoBehaviour
 {
+    public GameObject BGM_Bar;
+    public GameObject SE_Bar;
+
     static private ESC_UI _Instance;
     static public ESC_UI Instance
     {
@@ -20,6 +24,13 @@ public class ESC_UI : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        BGM_Bar = GameObject.Find("BGM_Bar");
+        BGM_Bar.GetComponent<Slider>().value = 1.0f;
+        SE_Bar = GameObject.Find("SideSound_Bar");
+        SE_Bar.GetComponent<Slider>().value = 1.0f;
+    }
     public void Print_UI()
     {
         GameObject ESC_canvas = GameObject.Find("ESC_UI");

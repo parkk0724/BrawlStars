@@ -280,6 +280,7 @@ public class BossMonster : Monster
             yield return null;
         }
         yield return new WaitForSeconds(1.0f);
+        m_Sound.Playing.SetActive(false);
         m_Sound.PlaySound(m_Sound.Playing_Angry);
     }
     public override void Attack()

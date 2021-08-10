@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class SoundManager : MonoBehaviour
     public GameObject BazookaExplosion;
     public GameObject SkillBazooka;
 
-
+    GameObject BGM;
+    GameObject SoundEffect;
     void Start()
     {
         PlayStart = GameObject.Find("Start");
@@ -33,10 +35,23 @@ public class SoundManager : MonoBehaviour
         BazookaFire = GameObject.Find("BazookaFire");
         BazookaExplosion = GameObject.Find("BazookaExplosion");
         SkillBazooka = GameObject.Find("SkillBazooka");
+
+        BGM = GameObject.Find("BGM");
+        SoundEffect = GameObject.Find("SoundEffect");
+    }
+
+    private void Update()
+    {
+        BGM_VolumeUpdate();
     }
 
     public void PlaySound(GameObject obj)
     {
         obj.GetComponent<AudioSource>().Play();
-    }    
+    }
+    
+    private void BGM_VolumeUpdate()
+    {
+        BGM.GetComponentInChildren<AudioSource>().volume = ESC_UI.Instance.BGM_Bar.GetComponent<Slider>().value;
+    }
 }

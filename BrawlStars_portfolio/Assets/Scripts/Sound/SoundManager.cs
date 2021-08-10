@@ -43,6 +43,7 @@ public class SoundManager : MonoBehaviour
     private void Update()
     {
         BGM_VolumeUpdate();
+        SoundEffect_VolumeUpdate();
     }
 
     public void PlaySound(GameObject obj)
@@ -53,5 +54,16 @@ public class SoundManager : MonoBehaviour
     private void BGM_VolumeUpdate()
     {
         BGM.GetComponentInChildren<AudioSource>().volume = ESC_UI.Instance.BGM_Bar.GetComponent<Slider>().value;
+    }
+
+    private void SoundEffect_VolumeUpdate()
+    {
+        AudioSource[] SE;
+        SE = SoundEffect.GetComponentsInChildren<AudioSource>();
+
+        for (int i = 0; i < SE.Length; i++)
+        {
+            SE[i].volume = ESC_UI.Instance.SE_Bar.GetComponent<Slider>().value;
+        }
     }
 }

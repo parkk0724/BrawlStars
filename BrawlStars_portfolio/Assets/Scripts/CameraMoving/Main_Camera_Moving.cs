@@ -15,6 +15,9 @@ public class Main_Camera_Moving : MonoBehaviour
     float forwarddist = 0.0f;
     float backwarddist = 0.0f;
 
+    GameObject PlayerUI;
+    GameObject StartUI;
+
     GameManager m_myGameManager;
     Hero m_myHero;
     BossMonster m_Boss;
@@ -23,6 +26,8 @@ public class Main_Camera_Moving : MonoBehaviour
     private void Awake()
     {
         m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
+        PlayerUI = GameObject.Find("UI");
+        StartUI = GameObject.Find("StartText");
     }
     void Start()
     {
@@ -69,6 +74,7 @@ public class Main_Camera_Moving : MonoBehaviour
             float delta = speed * Time.deltaTime;
             if (dist - delta < 0.0f)
             {
+                StartCoroutine(StartText());
                 delta = dist;
                 m_Sound.PlaySound(m_Sound.Playing);
             }
@@ -79,10 +85,18 @@ public class Main_Camera_Moving : MonoBehaviour
         }
         cameramove = null;
 
-        m_myHero.m_Start = Hero.Start_State.START;
+        m_myHero.m_Start = Hero.Start_State.START; // 도착했을 때 히어로의 업데이트 돌 수 있도록 enum state 바꿈
         m_Boss.m_Start = BossMonster.Start_State.START;
         GameManager.instance.ChangeState();
 
         m_Sound.PlaySound(m_Sound.Portal);
+    }
+
+    IEnumerator StartText()
+    {
+        StartUI.GetComponent<Canvas>().enabled = true;
+        yield return new WaitForSeconds(2.0f);
+        StartUI.GetComponent<Canvas>().enabled = false;
+        PlayerUI.GetComponent<Canvas>().enabled = true;
     }
 }

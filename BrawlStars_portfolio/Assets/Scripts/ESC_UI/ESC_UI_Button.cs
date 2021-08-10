@@ -15,6 +15,7 @@ public class ESC_UI_Button : MonoBehaviour
 
     public void OnClick_Continue()
     {
+        Time.timeScale = 1.0f;
         ESC_UI.Instance.Exit_UI();
     }
 }

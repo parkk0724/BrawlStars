@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
                         {
                             ESC_UI.Instance.Print_UI();
                             m_ESC_state = ESC_State.ESC;
+                            Time.timeScale = 0.0f; // 업데이트 돌아가는 시간을 멈추는 코드 (단점, 코르틴, 등 시간에 구애받지 않는 함수는 적용 x)
                         }
                     }
                     break;
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
                         {
                             ESC_UI.Instance.Exit_UI();
                             m_ESC_state = ESC_State.NONE;
+                            Time.timeScale = 1.0f;
                         }
                     }
                     break;

@@ -11,6 +11,7 @@ public class Bush : MonoBehaviour
     private void Awake()
     {
         m_audioSource = GetComponent<AudioSource>();
+        m_audioSource.volume = 0.1f;
         m_audioSource.clip = Resources.Load<AudioClip>("Prefabs/Sound/Bush");
 
         m_meshRenderer = GetComponent<MeshRenderer>();

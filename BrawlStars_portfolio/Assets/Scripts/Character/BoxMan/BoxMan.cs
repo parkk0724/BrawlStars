@@ -42,7 +42,7 @@ public class BoxMan : Hero
             RecoveryStamina();
             Move();
             Attack();
-
+            invicibleitem();
             SearchTargetEffect();
             TargetEffect();
 

@@ -594,7 +594,7 @@ public class Hero : Character
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }
     #region ItemEffect
-    void invicibleitem()
+    virtual protected void invicibleitem()
     {
         if (b_active[3])
         {

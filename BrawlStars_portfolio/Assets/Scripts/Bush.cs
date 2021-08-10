@@ -6,21 +6,33 @@ public class Bush : MonoBehaviour
 {
     MeshRenderer m_meshRenderer;
 
+    AudioSource m_audioSource;
+
     private void Awake()
     {
+        m_audioSource = GetComponent<AudioSource>();
+        m_audioSource.clip = Resources.Load<AudioClip>("Prefabs/Sound/Bush");
+
         m_meshRenderer = GetComponent<MeshRenderer>();
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        m_meshRenderer.material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
-        m_meshRenderer.material.color = new Color(1, 1, 1, 0.2f);
+        if(other.CompareTag("Player") || other.CompareTag("Monster") || other.CompareTag("Bullet"))
+        {
+            m_audioSource.Play();
+            m_meshRenderer.material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+            m_meshRenderer.material.color = new Color(1, 1, 1, 0.2f);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        m_meshRenderer.material.shader = Shader.Find("Standard");
-        m_meshRenderer.material.color = new Color(1, 1, 1, 1);
+        if (other.CompareTag("Player") || other.CompareTag("Monster") || other.CompareTag("Bullet"))
+        {
+            m_meshRenderer.material.shader = Shader.Find("Standard");
+            m_meshRenderer.material.color = new Color(1, 1, 1, 1);
+        }
     }
 }

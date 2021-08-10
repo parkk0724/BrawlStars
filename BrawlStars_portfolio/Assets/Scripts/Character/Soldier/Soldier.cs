@@ -29,34 +29,41 @@ public class Soldier : Hero
         Fire_Sound = GameObject.Find("BazookaFire");
     }
     public override void Attack()
-    {
-        if (m_fStamina >= 1.0f)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                m_fStamina -= 1.0f; 
-                m_Animator.SetTrigger("tBAttack");
-            }
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            SetRotStart(false);
-        }
+    {       
+          if (m_fStamina >= 1.0f)
+          {
+              if (Input.GetMouseButtonDown(0))
+              {
+                  m_fStamina -= 1.0f;
+                  m_Animator.SetTrigger("tBAttack");
+              }
+          }
+          else
+          {
+              if (Input.GetMouseButtonDown(0))
+              {
+                  SetRotStart(false);
+              }
+          }
+          if (Input.GetMouseButtonUp(0))
+          {
+              SetRotStart(false);
+          }
 
-       if (m_fFever >= m_fMaxFever)
-       {
-            if (Input.GetMouseButton(1))
-            {
-                bazooka_Skill_Destination = GameObject.Find("skillbullet_destination").transform;
-                m_Animator.SetTrigger("tSAttack");
-                SetRotStart(false);
-                m_fFever = 0.0f;
-            }
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            SetRotStart(false);
-        }
+          if (m_fFever >= m_fMaxFever)
+          {
+              if (Input.GetMouseButton(1))
+              {
+                  bazooka_Skill_Destination = GameObject.Find("skillbullet_destination").transform;
+                  m_Animator.SetTrigger("tSAttack");
+                  SetRotStart(false);
+                  m_fFever = 0.0f;
+              }
+          }
+          if (Input.GetMouseButtonUp(1))
+          {
+              SetRotStart(false);
+          }        
     }
 
     private void Basic_Fire()

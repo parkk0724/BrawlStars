@@ -134,36 +134,39 @@ public class Hero : Character
         {
             if (!m_bDie)
             {
-                m_fCurBodyAttack += Time.deltaTime;
-                RecoveryStamina();
-                Move();
-                Attack();
+                if (Time.timeScale > 0.0f)
+                {
+                    m_fCurBodyAttack += Time.deltaTime;
+                    RecoveryStamina();
+                    Move();
+                    Attack();
 
-                if (b_active[0])
-                {
-                    if (Hp != null) StopCoroutine(Hp);
-                    Hp = StartCoroutine(RecoverHP());
+                    if (b_active[0])
+                    {
+                        if (Hp != null) StopCoroutine(Hp);
+                        Hp = StartCoroutine(RecoverHP());
+                    }
+                    if (b_active[1])
+                    {
+                        if (St != null) StopCoroutine(St);
+                        St = StartCoroutine(RecoverST());
+                    }
+                    if (b_active[2])
+                    {
+                        if (Fe != null) StopCoroutine(Fe);
+                        Fe = StartCoroutine(RecoverFV());
+                    }
+                    invicibleitem();
+                    SearchTargetEffect();
+                    TargetEffect();
+                    if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+                    {
+                        SearchTarget();
+                        m_bRotStart = true;
+                    }
+                    if (m_bRotStart) LookEnemy();
+                    if (m_nHP <= 0) StartCoroutine(Die());
                 }
-                if (b_active[1])
-                {
-                    if (St != null) StopCoroutine(St);
-                    St = StartCoroutine(RecoverST());
-                }
-                if (b_active[2])
-                {
-                    if (Fe != null) StopCoroutine(Fe);
-                    Fe = StartCoroutine(RecoverFV());
-                }
-                invicibleitem();
-                SearchTargetEffect();
-                TargetEffect();
-                if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
-                {
-                    SearchTarget();
-                    m_bRotStart = true;
-                }
-                if (m_bRotStart) LookEnemy();
-                if (m_nHP <= 0) StartCoroutine(Die());
             }
         }
     }

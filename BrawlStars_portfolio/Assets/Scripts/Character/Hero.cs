@@ -89,6 +89,7 @@ public class Hero : Character
     protected virtual void Awake()
     {
         GameObject revivalEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/RevivalEffect"), transform.parent);
+        GameObject JumpEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/JumpEffect"), transform.parent);
         revivalEffect.SetActive(false);
         m_ptsRevival = revivalEffect.GetComponent<ParticleSystem>();
 

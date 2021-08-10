@@ -30,11 +30,15 @@ public class JesterBullet : MonoBehaviour
     void Update()
     {
         //rigid.velocity = transform.forward * 20f;
+
         Vector3 curPos = this.transform.position;
         Vector3 nextPos = curPos + this.transform.forward * Speed * Time.deltaTime;
+
         this.transform.position = nextPos;
         float dist = Vector3.Distance(Originpos, nextPos);
         float dist_2 = Vector3.Distance(curPos, nextPos);
+
+
         RaycastHit hit;
         if(Physics.Raycast(curPos ,nextPos-curPos ,out hit ,dist_2 , layerMask_t))
         {
@@ -49,12 +53,16 @@ public class JesterBullet : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+
         if(Physics.Raycast(curPos ,nextPos-curPos ,out hit ,dist_2 , layerMask_o))
         {
             GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
             Destroy(obj.gameObject, 0.2f);
             Destroy(this.gameObject);
         }
+
+
         if(dist > 10)
         {
             Destroy(gameObject);

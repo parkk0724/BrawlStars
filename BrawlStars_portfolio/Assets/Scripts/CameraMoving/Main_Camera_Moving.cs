@@ -15,6 +15,7 @@ public class Main_Camera_Moving : MonoBehaviour
     float forwarddist = 0.0f;
     float backwarddist = 0.0f;
 
+    GameManager m_myGameManager;
     Hero m_myHero;
     BossMonster m_Boss;
     SoundManager m_Sound;
@@ -80,6 +81,7 @@ public class Main_Camera_Moving : MonoBehaviour
 
         m_myHero.m_Start = Hero.Start_State.START;
         m_Boss.m_Start = BossMonster.Start_State.START;
+        GameManager.instance.ChangeState();
 
         m_Sound.PlaySound(m_Sound.Portal);
     }

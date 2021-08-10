@@ -73,8 +73,7 @@ public class Main_Camera_Moving : MonoBehaviour
         {
             float delta = speed * Time.deltaTime;
             if (dist - delta < 0.0f)
-            {
-                StartCoroutine(StartText());
+            {                
                 delta = dist;
                 m_Sound.PlaySound(m_Sound.Playing);
             }
@@ -86,6 +85,7 @@ public class Main_Camera_Moving : MonoBehaviour
         cameramove = null;
 
         m_myHero.m_Start = Hero.Start_State.START; // 도착했을 때 히어로의 업데이트 돌 수 있도록 enum state 바꿈
+        StartCoroutine(StartText());
         m_Boss.m_Start = BossMonster.Start_State.START;
         GameManager.instance.ChangeState();
 

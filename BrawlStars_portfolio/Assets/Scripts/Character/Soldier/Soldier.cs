@@ -37,14 +37,7 @@ public class Soldier : Hero
                   m_fStamina -= 1.0f;
                   m_Animator.SetTrigger("tBAttack");
               }
-          }
-          else
-          {
-              if (Input.GetMouseButtonDown(0))
-              {
-                  SetRotStart(false);
-              }
-          }
+          }        
           if (Input.GetMouseButtonUp(0))
           {
               SetRotStart(false);
@@ -59,11 +52,11 @@ public class Soldier : Hero
                   SetRotStart(false);
                   m_fFever = 0.0f;
               }
-          }
-          if (Input.GetMouseButtonUp(1))
-          {
-              SetRotStart(false);
           }        
+         if (Input.GetMouseButtonUp(1))
+           {
+               SetRotStart(false);
+           }        
     }
 
     private void Basic_Fire()

@@ -102,11 +102,11 @@ public class GameManager : MonoBehaviour
     
     private void CursorVisivle()
     {
-        if (m_ESC_state == ESC_State.NONE)
-            Cursor.visible = false;
-        else
-            Cursor.visible = true;
+        //if (m_ESC_state == ESC_State.NONE)
+        //    Cursor.visible = false;
+        //else
+        //    Cursor.visible = true;
 
-        Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = CursorLockMode.Confined; //작업에 마우스 가 안잡혀서 잠깐 빼놓음
     }
 }

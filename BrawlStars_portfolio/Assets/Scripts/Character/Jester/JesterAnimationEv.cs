@@ -11,6 +11,7 @@ public class JesterAnimationEv : MonoBehaviour
     public UnityAction OnShot_2 = null;
     public UnityAction Anim_end = null;
     public UnityAction FireEffect = null;
+    public UnityAction FootEffect = null;
     public GameObject Effect;
     public Transform EffectPos;
     void Start()
@@ -52,5 +53,9 @@ public class JesterAnimationEv : MonoBehaviour
     {
         if (FireEffect != null)
             FireEffect();
+    }
+    void v_FootEffect()
+    {
+        FootEffect?.Invoke();
     }
 }

@@ -15,16 +15,16 @@ public class Jester : Hero
     public GameObject m_objtsBoom = null;
     public GameObject m_objJesterSkill = null;
     public GameObject m_skILL_Range = null;
+
+    [SerializeField] AudioSource m_AfootSound;
     UnityEngine.Coroutine skill = null;
-    JesterBullet jesterbullet;
-    JesterWeapon Jweapon;
     float m_fAttackStamina = 0.0f;
     public LayerMask myMask = 0;
    
     //UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
-
+        this.GetComponentInChildren<JesterAnimationEv>().FootEffect = FootSound;
         m_fAttackStamina = 1.0f;
         base.Start();
 
@@ -238,5 +238,9 @@ public class Jester : Hero
         GameObject obs = Instantiate(m_objtsBoom.gameObject, m_objDirSkillAttack.transform.position, m_objDirSkillAttack.transform.rotation);
         yield return new WaitForSeconds(2);
         Destroy(obs);
+    }
+    void FootSound()
+    {
+        m_AfootSound.Play();
     }
 }

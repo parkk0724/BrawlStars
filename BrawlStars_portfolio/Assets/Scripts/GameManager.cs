@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         m_fCurDelayPortal = m_fMaxDelayPortal;
-        m_fMaxTime = 300.0f;
+        m_fMaxTime = 10.0f;
         m_fTime = m_fMaxTime;
     }
 

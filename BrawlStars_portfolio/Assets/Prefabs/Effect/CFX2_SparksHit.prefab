@@ -4752,6 +4752,7 @@ GameObject:
   - component: {fileID: 19900002}
   - component: {fileID: 11400002}
   - component: {fileID: 5106891051701930856}
+  - component: {fileID: 6254150548847406366}
   m_Layer: 0
   m_Name: CFX2_SparksHit
   m_TagString: Untagged
@@ -9621,3 +9622,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6254150548847406366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7790031d5c1447243b6c9093eefdd376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -5,10 +5,6 @@ using UnityEngine.Events;
 
 public class JesterBullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    Rigidbody rigid;
-    JesterWeapon jwaepon;
-    //Hero hero;
     private float m_fDamage = 0;
     public UnityAction Fever = null;
     public GameObject HitEffect = null;
@@ -18,10 +14,7 @@ public class JesterBullet : MonoBehaviour
     public LayerMask layerMask_o = 0;
     void Start()
     {
-        //hero = GetComponent<Hero>();
         Destroy(this.gameObject, 2f);
-        rigid = GetComponent<Rigidbody>();
-        jwaepon = FindObjectOfType<JesterWeapon>();
         Originpos = this.transform.position;
     }
     public void SetDamage(float f) { m_fDamage = f; }
@@ -46,21 +39,18 @@ public class JesterBullet : MonoBehaviour
             {
                 GameObject player = GameObject.Find("Jester");
                 Jester jester = player.GetComponent<Jester>();
+
                 jester.FeverUp();
-                //jester.GetATK()/2,
-                hit.transform.gameObject.GetComponent<Monster>().Hit(100, Color.red);
-                GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
-                Destroy(obj.gameObject, 0.2f);
-                Destroy(this.gameObject);
+
+                hit.transform.gameObject.GetComponent<Monster>().Hit(jester.GetATK() / 2, Color.red);
+                initBullet();
             }
         }
 
 
         if(Physics.Raycast(curPos ,nextPos-curPos ,out hit ,dist_2 , layerMask_o))
         {
-            GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
-            Destroy(obj.gameObject, 0.2f);
-            Destroy(this.gameObject);
+            initBullet();
         }
 
 
@@ -68,6 +58,12 @@ public class JesterBullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    void initBullet()
+    {
+        GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
+        Destroy(obj.gameObject, 0.2f);
+        Destroy(this.gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {

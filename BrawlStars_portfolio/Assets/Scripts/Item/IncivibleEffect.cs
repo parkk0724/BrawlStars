@@ -7,6 +7,7 @@ public class IncivibleEffect : MonoBehaviour
     // Start is called before the first frame update 
     [SerializeField] ParticleSystem m_pProtectDir;
     [SerializeField] ParticleSystem m_pProtectBoom;
+    [SerializeField] AudioSource m_aShield;
     bool m_bParticleStart = false;
     void Start()
     {
@@ -37,13 +38,18 @@ public class IncivibleEffect : MonoBehaviour
             if(other.GetComponent<Monster>())
             {
                 initParticle();
-            }
+                            }
+        }
+        if(other.gameObject.name== "BasicAttackPos")
+        {
+            initParticle();
         }
        
     }
     void initParticle()
     {
         GameObject Dirparticel = Instantiate(m_pProtectDir.gameObject, this.transform.position, this.transform.rotation);
+        m_aShield.Play();
         Destroy(Dirparticel, 2f);
     }
 }

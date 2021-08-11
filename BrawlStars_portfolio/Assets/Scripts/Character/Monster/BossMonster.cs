@@ -461,6 +461,7 @@ public class BossMonster : Monster
     {
         yield return new WaitForSeconds(0.05f);
         m_objBasicAttackPos.SetActive(false);
+        
     }
 
     void FollowPlayer()

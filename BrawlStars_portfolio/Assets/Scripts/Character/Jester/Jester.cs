@@ -11,6 +11,7 @@ public class Jester : Hero
     AttackState m_AttackState = AttackState.NONE;
     public float m_fCurMouseButton = 0;
     public float m_fMaxMouseButton = 0;
+
     public GameObject m_objDirSkillAttack = null;
     public GameObject m_objtsBoom = null;
     public GameObject m_objJesterSkill = null;
@@ -54,13 +55,13 @@ public class Jester : Hero
     {
         if (Input.GetMouseButton(0))
         {
-            if (m_fStamina < m_fAttackStamina)
+            if (m_fStamina < m_fAttackStamina && !m_bRotStart)
             {
                 m_bRotStart = false;
                 m_AttackState = AttackState.NONE;
             }
             m_fCurMouseButton += Time.deltaTime;
-            if (m_fCurMouseButton > m_fMaxMouseButton)
+            if (m_fCurMouseButton > m_fMaxMouseButton )
             {
                 m_tfResultTarget = null;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

@@ -47,7 +47,8 @@ public class JesterBullet : MonoBehaviour
                 GameObject player = GameObject.Find("Jester");
                 Jester jester = player.GetComponent<Jester>();
                 jester.FeverUp();
-                hit.transform.gameObject.GetComponent<Monster>().Hit(jester.GetATK()/2, Color.red);
+                //jester.GetATK()/2,
+                hit.transform.gameObject.GetComponent<Monster>().Hit(100, Color.red);
                 GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
                 Destroy(obj.gameObject, 0.2f);
                 Destroy(this.gameObject);

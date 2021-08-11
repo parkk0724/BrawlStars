@@ -6,15 +6,15 @@ public class BossMonster : Monster
 {
     public enum Start_State { NONE, START }
     public Start_State m_Start = Start_State.NONE;
-    protected enum PhaseState{ NONE, ANGRY, FEVER }
+    protected enum PhaseState { NONE, ANGRY, FEVER }
     PhaseState m_phase = PhaseState.NONE;
 
     public Material m_mHeader = null;
     public Material m_mBody = null;
     public GameObject m_Skill_2 = null;
-    public GameObject m_objBullet = null;    
+    public GameObject m_objBullet = null;
     public GameObject m_objBasicAttackPos = null;
-    public Transform[] m_FirePos = null;    
+    public Transform[] m_FirePos = null;
     public float m_RotToTarget_Speed = 5.0f;
 
     bool[] m_bPhase = new bool[2] { false, false };
@@ -24,14 +24,15 @@ public class BossMonster : Monster
     float m_fBasicAttackRange = 0.0f;
     float m_fSkill1_AttackRange = 0.0f;
     float m_fSkill2_AttackRange = 0.0f;
-
-    GameObject Dark_Effect;    
+    bool m_bSkil2_active = false;
+    GameObject Dark_Effect;
     Main_Camera_Moving main = null;
 
     Coroutine die = null;
     Coroutine rot = null;
 
     SoundManager m_Sound;
+    public bool Getactive() { return m_bSkil2_active; }
     private void Awake()
     {
         m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
@@ -94,6 +95,7 @@ public class BossMonster : Monster
         switch (m_eState)
         {
             case State.IDLE:
+                m_bSkil2_active = false;
                 m_NavMeshAgent.SetDestination(this.transform.position);
                 m_Animator.SetBool("bMove", false);
                 m_fCurTime = 0.0f;
@@ -410,7 +412,8 @@ public class BossMonster : Monster
         //if (rot != null) StopCoroutine(rot);
         //rot = StartCoroutine(LookAtTarget(m_tfTarget));
         this.transform.LookAt(m_tfTarget);
-        m_Animator.SetTrigger("tSkillAttack2");           
+        m_Animator.SetTrigger("tSkillAttack2");
+        
     }
     void EndAttack()
     {
@@ -433,6 +436,7 @@ public class BossMonster : Monster
 
     void BossMon_Skill2()
     {
+        m_bSkil2_active = true;
         Instantiate(m_Skill_2, this.transform.position, Quaternion.identity);
         Collider[] player = Physics.OverlapSphere(this.transform.position, m_fSkill2_AttackRange);
         foreach (Collider Player in player)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4637280793391410869}
   - component: {fileID: 4637280793069409065}
   - component: {fileID: 9117227011503717047}
+  - component: {fileID: -4188643004000271108}
   m_Layer: 10
   m_Name: FeverPotion
   m_TagString: Item
@@ -103,6 +104,7 @@ MonoBehaviour:
     itemName: FeverPotion
     itemCount: 0
     itemPrefab: {fileID: 0}
+  check: 0
 --- !u!135 &9117227011503717047
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -116,6 +118,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.112664
   m_Center: {x: -0.00000047683716, y: 0, z: -0.0000001788139}
+--- !u!135 &-4188643004000271108
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4637280793393410165}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.1126642
+  m_Center: {x: -0.00000047683716, y: 0, z: -0.00000017881396}
 --- !u!1001 &4637280792298084165
 PrefabInstance:
   m_ObjectHideFlags: 0

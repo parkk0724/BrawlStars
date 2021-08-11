@@ -27,7 +27,6 @@ public class DropItem : MonoBehaviour
     void Start()
     {
         StartCoroutine(Jumpitem());
-        //item_updown = StartCoroutine(ItemUpDown());
     }
     IEnumerator ItemUpDown()
     {
@@ -73,19 +72,17 @@ public class DropItem : MonoBehaviour
         float xPos = Random.Range(-2, 2);
         float zPos = Random.Range(-2, 2);
 
-        Vector3 EndPos = new Vector3(StartPos.x + xPos, this.transform.position.y, StartPos.z + zPos);
-        Vector3 dir = EndPos - StartPos;
-
-        float Speed = 1f;
-        float delta = 0;
-
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
 
         Vector3 dir_2 = StartPos - player.position;
         dir_2.Normalize();
+
+        Vector3 EndPos = new Vector3(StartPos.x + xPos, this.transform.position.y, StartPos.z + zPos);
         Vector3 Endpos_2 = StartPos + dir_2 * 2;
 
         float dist = Vector3.Distance(this.transform.position, player.transform.position);
+        float Speed = 1f;
+        float delta = 0;
 
         if (dist > 4)
         {
@@ -123,7 +120,7 @@ public class DropItem : MonoBehaviour
                 yield return null;
             }
         }
-
-
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(ItemUpDown());
     }
 }

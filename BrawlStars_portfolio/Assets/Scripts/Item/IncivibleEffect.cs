@@ -19,10 +19,8 @@ public class IncivibleEffect : MonoBehaviour
         GameObject Boss = GameObject.Find("BossMonster");
         if (Boss.GetComponentInChildren<BossMonster>())
         {
-            Debug.Log("???");
             if (Boss.GetComponentInChildren<BossMonster>().Getactive())
             {
-                Debug.Log("!!!");
                 initParticle();
             }
         }
@@ -31,7 +29,7 @@ public class IncivibleEffect : MonoBehaviour
     {
         if(other.gameObject.CompareTag("BossBullet"))
         {
-            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
             initParticle();
         }
         if(other.gameObject.CompareTag("Monster") && !other.gameObject.GetComponent<BossMonster>())
@@ -46,5 +44,6 @@ public class IncivibleEffect : MonoBehaviour
     void initParticle()
     {
         GameObject Dirparticel = Instantiate(m_pProtectDir.gameObject, this.transform.position, this.transform.rotation);
+        Destroy(Dirparticel, 2f);
     }
 }

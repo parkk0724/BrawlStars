@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CursorVisivle(); 
+
         if (m_Start == Start_State.START)
         {
             switch (m_ESC_state)
@@ -96,5 +98,15 @@ public class GameManager : MonoBehaviour
         {
             m_Start = Start_State.NONE;
         }
+    }
+    
+    private void CursorVisivle()
+    {
+        if (m_ESC_state == ESC_State.NONE)
+            Cursor.visible = false;
+        else
+            Cursor.visible = true;
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }

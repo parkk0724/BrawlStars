@@ -41,8 +41,8 @@ public class JesterBullet : MonoBehaviour
                 Jester jester = player.GetComponent<Jester>();
 
                 jester.FeverUp();
-
-                hit.transform.gameObject.GetComponent<Monster>().Hit(jester.GetATK() / 2, Color.red);
+                //jester.GetATK() / 2,
+                hit.transform.gameObject.GetComponent<Monster>().Hit(50, Color.red);
                 initBullet();
             }
         }

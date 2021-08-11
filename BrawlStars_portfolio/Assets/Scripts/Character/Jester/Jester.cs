@@ -55,7 +55,7 @@ public class Jester : Hero
     {
         if (Input.GetMouseButton(0))
         {
-            if (m_fStamina < m_fAttackStamina && !m_bRotStart)
+            if (m_fStamina < m_fAttackStamina )
             {
                 m_bRotStart = false;
                 m_AttackState = AttackState.NONE;

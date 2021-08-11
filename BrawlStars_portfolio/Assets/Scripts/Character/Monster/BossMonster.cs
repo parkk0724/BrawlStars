@@ -57,7 +57,7 @@ public class BossMonster : Monster
         m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
         this.GetComponentInChildren<Animation_Event>().bossMonFire = BossMonFire;
-        this.GetComponentInChildren<Animation_Event>().skill_attack2 = BossMon_Skill2;
+        this.GetComponentInChildren<Animation_Event>().skill_attack2 =()=>StartCoroutine(BossMon_Skill2());
         this.GetComponentInChildren<Animation_Event>().basicAttack = OnBasicAttack;
         Dark_Effect = GameObject.Find("CFX3_DarkMagicAura_A");        
         ColorChange(m_mHeader, 1.0f, 1.0f, 1.0f);
@@ -95,7 +95,7 @@ public class BossMonster : Monster
         switch (m_eState)
         {
             case State.IDLE:
-                m_bSkil2_active = false;
+                
                 m_NavMeshAgent.SetDestination(this.transform.position);
                 m_Animator.SetBool("bMove", false);
                 m_fCurTime = 0.0f;
@@ -417,6 +417,7 @@ public class BossMonster : Monster
     }
     void EndAttack()
     {
+        
         ChangeState(State.IDLE);
     }
 
@@ -434,9 +435,8 @@ public class BossMonster : Monster
         Instantiate(m_objBullet, m_FirePos[n].position, m_FirePos[n].rotation);
     }
 
-    void BossMon_Skill2()
+    IEnumerator BossMon_Skill2()
     {
-        m_bSkil2_active = true;
         Instantiate(m_Skill_2, this.transform.position, Quaternion.identity);
         Collider[] player = Physics.OverlapSphere(this.transform.position, m_fSkill2_AttackRange);
         foreach (Collider Player in player)
@@ -449,6 +449,9 @@ public class BossMonster : Monster
                 }
             }
         }
+        m_bSkil2_active = true;
+        yield return null;
+        m_bSkil2_active = false;
     }
 
     void OnBasicAttack()

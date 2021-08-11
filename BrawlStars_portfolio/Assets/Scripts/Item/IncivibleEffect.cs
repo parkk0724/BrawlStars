@@ -8,12 +8,6 @@ public class IncivibleEffect : MonoBehaviour
     [SerializeField] ParticleSystem m_pProtectDir;
     [SerializeField] ParticleSystem m_pProtectBoom;
     [SerializeField] AudioSource m_aShield;
-    bool m_bParticleStart = false;
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +32,7 @@ public class IncivibleEffect : MonoBehaviour
             if(other.GetComponent<Monster>())
             {
                 initParticle();
-                            }
+            }
         }
         if(other.gameObject.name== "BasicAttackPos")
         {

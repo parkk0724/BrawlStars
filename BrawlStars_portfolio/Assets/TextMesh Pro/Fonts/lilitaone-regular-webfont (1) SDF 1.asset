@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: lilitaone-regular-webfont (1) SDF
+  m_Name: lilitaone-regular-webfont (1) SDF 1
   m_EditorClassIdentifier: 
-  hashCode: 702934025
+  hashCode: 990973464
   material: {fileID: 3234971828667358310}
-  materialHashCode: 1205288201
+  materialHashCode: -198342984
   m_Version: 1.1.0
   m_SourceFontFileGUID: 294915776b33d174db15acb8cfd2b35d
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 294915776b33d174db15acb8cfd2b35d, type: 3}
@@ -1197,7 +1197,7 @@ Material:
     - _ColorMask: 15
     - _CullMode: 0
     - _Diffuse: 0.5
-    - _FaceDilate: 0
+    - _FaceDilate: 1
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.05
@@ -1208,15 +1208,15 @@ Material:
     - _LightAngle: 3.1416
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
+    - _OutlineSoftness: 1
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 1
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 0.73125
-    - _ScaleRatioC: 0.73125
+    - _ScaleRatioA: 0.28235295
+    - _ScaleRatioB: 0
+    - _ScaleRatioC: 0
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0

@@ -106,6 +106,6 @@ public class Animation_Event : MonoBehaviour
 
     private void BossMonsterDie()
     {
-        GameManager.instance.LoadResultScene();
+        GameManager.instance.EndGame();
     }
 }

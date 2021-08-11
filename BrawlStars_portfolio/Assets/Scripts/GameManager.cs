@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     enum ESC_State { NONE, ESC };
     ESC_State m_ESC_state = ESC_State.NONE;
 
+    private bool m_bEnd = false;
+
     static private GameManager _instance;
     static public GameManager instance
     { 
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         m_fCurDelayPortal = m_fMaxDelayPortal;
-        m_fMaxTime = 10.0f;
+        m_fMaxTime = 300.0f;
         m_fTime = m_fMaxTime;
     }
 
@@ -76,7 +78,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                LoadResultScene();  // ³Ê¹« ¾ÀÀÌ È®¹Ù²ñ;
+                if(!m_bEnd) EndGame();
             }
         }
         
@@ -87,6 +89,18 @@ public class GameManager : MonoBehaviour
     public float GetMaxDelayPortal() { return m_fMaxDelayPortal; }
 
     public void LoadResultScene() { SceneManager.LoadScene("EndLogunity"); }
+
+    public void EndGame()
+    {
+        m_bEnd = true;
+        Instantiate(Resources.Load<GameObject>("Prefabs/UI/EndText"));
+        StartCoroutine(GameOver());
+    }
+    public IEnumerator GameOver() 
+    {
+        yield return new WaitForSeconds(3);
+        LoadResultScene();
+    }
 
     public void ChangeState()
     {

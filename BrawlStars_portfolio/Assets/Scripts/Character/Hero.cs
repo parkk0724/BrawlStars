@@ -90,9 +90,13 @@ public class Hero : Character
     {
         m_objTargetEffect = GameObject.Find("TargetIndicator").GetComponent<ParticleSystem>();
         m_objHp = GameObject.Find("HPPotionEffect");
+        m_objHp.SetActive(false);
         m_objStamina = GameObject.Find("STPotionEffect");
+        m_objStamina.SetActive(false);
         m_objFever = GameObject.Find("FVPotionEffect");
+        m_objFever.SetActive(false);
         m_objInvicible = GameObject.Find("IncivibleEffect");
+        m_objInvicible.SetActive(false);
         GameObject revivalEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/RevivalEffect"), transform.parent);
         GameObject JumpEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/JumpEffect"), transform.parent);
         revivalEffect.SetActive(false);

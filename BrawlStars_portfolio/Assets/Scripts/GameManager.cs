@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
     public enum Start_State { NONE, START }
     public Start_State m_Start = Start_State.NONE;
     enum ESC_State { NONE, ESC };
-    ESC_State m_ESC_state = ESC_State.NONE;
+    ESC_State m_ESC_state = ESC_State.NONE;      
 
     private bool m_bEnd = false;
 
+    private GameObject PlayerStartPos;
     private GameObject Soldier;
     private GameObject BoxMan;
     private GameObject Bear;
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        PlayerStartPos = GameObject.Find("PlayerStartPos");
+        CreatePlayer();
         Soldier = GameObject.Find("Soldier");
         BoxMan = GameObject.Find("BoxMan");
         Bear = GameObject.Find("BearDefault");
@@ -164,29 +167,32 @@ public class GameManager : MonoBehaviour
 
     private void CreatePlayer()
     {
-        if (DataManager.instance.select_character.index == 101)
-        {
-            BoxMan.SetActive(false);
-            Bear.SetActive(false);
-            Jester.SetActive(false);
-        }
-        else if (DataManager.instance.select_character.index == 102)
-        {
-            Soldier.SetActive(false);
-            Bear.SetActive(false);
-            Jester.SetActive(false);
-        }
-        else if (DataManager.instance.select_character.index == 103)
-        {
-            Soldier.SetActive(false);
-            BoxMan.SetActive(false);
-            Jester.SetActive(false);
-        }
-        else
-        {
-            Soldier.SetActive(false);
-            BoxMan.SetActive(false);
-            Bear.SetActive(false);
-        }
+        GameObject prefabs = Resources.Load<GameObject>(DataManager.instance.select_character.charPrefab);
+        GameObject Player = Instantiate(prefabs, PlayerStartPos.transform.position, PlayerStartPos.transform.rotation);
+
+        //if (DataManager.instance.select_character.index == 101)
+        //{
+        //    BoxMan.SetActive(false);
+        //    Bear.SetActive(false);
+        //    Jester.SetActive(false);
+        //}
+        //else if (DataManager.instance.select_character.index == 102)
+        //{
+        //    Soldier.SetActive(false);
+        //    Bear.SetActive(false);
+        //    Jester.SetActive(false);
+        //}
+        //else if (DataManager.instance.select_character.index == 103)
+        //{
+        //    Soldier.SetActive(false);
+        //    BoxMan.SetActive(false);
+        //    Jester.SetActive(false);
+        //}
+        //else
+        //{
+        //    Soldier.SetActive(false);
+        //    BoxMan.SetActive(false);
+        //    Bear.SetActive(false);
+        //}
     }
 }

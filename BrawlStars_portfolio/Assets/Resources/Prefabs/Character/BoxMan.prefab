@@ -1761,7 +1761,6 @@ MonoBehaviour:
   m_fRotate_Speed: 250
   m_fJump_Height: 7
   m_fJump_Speed: 0
-  m_objPlayerDir: {fileID: 0}
   m_objCharacter: {fileID: 1103757744695767658}
   m_fTargetRotSpeed: 1000
   m_objTargetEffect: {fileID: 0}
@@ -1776,10 +1775,10 @@ MonoBehaviour:
     m_Bits: 256
   m_Jump_maxDelay: 0
   m_Jump_StartSound: {fileID: 0}
-  m_objHp: {fileID: 0}
-  m_objStamina: {fileID: 0}
-  m_objFever: {fileID: 0}
-  m_objInvicible: {fileID: 0}
+  m_objHp: {fileID: 3445787385843252367, guid: 64418075bcd3ccf4eb1d7a388c7fbc7b, type: 3}
+  m_objStamina: {fileID: 2174841388310051998, guid: 1a423fb0861c5a34cb2bda7968d10f8c, type: 3}
+  m_objFever: {fileID: 5039942850610566560, guid: 41c2f04d003d57142becd597edb12df0, type: 3}
+  m_objInvicible: {fileID: 8539904587373690469, guid: c82b2f003435ddf419ad758d1151f017, type: 3}
   items: []
   m_objDirBasicAttack: {fileID: 2068740142501937109}
   m_objDirSkillAttack: {fileID: 4878837545480129230}

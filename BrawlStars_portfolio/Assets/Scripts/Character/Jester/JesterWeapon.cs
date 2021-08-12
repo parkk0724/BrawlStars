@@ -18,6 +18,7 @@ public class JesterWeapon : MonoBehaviour
     Animator anim;
     void Start()
     {
+        ShotSound = GetComponent<AudioSource>();
         anim = this.GetComponent<Animator>();
         this.GetComponentInParent<JesterAnimationEv>().OnShot_0 = Shoot_0;
         this.GetComponentInParent<JesterAnimationEv>().OnShot_1 = Shoot_1;

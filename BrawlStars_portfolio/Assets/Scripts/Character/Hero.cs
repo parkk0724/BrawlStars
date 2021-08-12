@@ -25,7 +25,7 @@ public class Hero : Character
     public float m_fJump_Speed = 0.0f;   
     public GameObject m_objCharacter;
 
-    private GameObject m_objPlayerDir;
+    protected GameObject m_objPlayerDir;
     private GameObject m_objUIDie;
     private TMPro.TMP_Text m_tDie;
     private ParticleSystem m_ptsRevival;

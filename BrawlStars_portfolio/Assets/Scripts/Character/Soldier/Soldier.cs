@@ -29,15 +29,19 @@ public class Soldier : Hero
         Fire_Sound = GameObject.Find("BazookaFire");
     }
     public override void Attack()
-    {       
-          if (m_fStamina >= 1.0f)
-          {
-              if (Input.GetMouseButtonDown(0))
-              {
-                  m_fStamina -= 1.0f;
-                  m_Animator.SetTrigger("tBAttack");
-              }
-          }        
+    {
+         if (m_fStamina >= 1.0f)
+         {
+             if (Input.GetMouseButtonDown(0))
+             {
+                 m_fStamina -= 1.0f;
+                 m_Animator.SetTrigger("tBAttack");
+             }
+             if (Input.GetKeyDown(KeyCode.Space))
+             {
+                 Roll();
+             }
+         }
           if (Input.GetMouseButtonUp(0))
           {
               SetRotStart(false);
@@ -90,6 +94,43 @@ public class Soldier : Hero
     public void SetRotStart(bool b)
     {
         m_bRotStart = b;
+    }
+
+    private void Roll()
+    {
+        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            this.transform.LookAt(m_objPlayerDir.transform.forward);
+        }
+        else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        {
+            this.transform.LookAt(-m_objPlayerDir.transform.forward);
+        }
+        else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            this.transform.LookAt(-m_objPlayerDir.transform.right);
+        }
+        else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        {
+            this.transform.LookAt(m_objPlayerDir.transform.right);
+        }
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            this.transform.LookAt((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized);
+        }
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        {
+            this.transform.LookAt((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
+        }
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
+        {
+            this.transform.LookAt((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized);
+        }
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
+        {
+            this.transform.LookAt((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
+        }
+        m_Animator.SetTrigger("tRoll");
     }
 
 }

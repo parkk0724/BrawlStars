@@ -10,6 +10,9 @@ public class MeinMenu : MonoBehaviour
 
     public GameObject Selected_Effect;
 
+    private bool selected_character = false;
+
+    GameObject Warnning;
     GameObject Soldier;
     GameObject BoxMan;
     GameObject Bear;
@@ -17,11 +20,11 @@ public class MeinMenu : MonoBehaviour
     private void Start()
     {
         MainSound.SetActive(true);
-        ClickSound.SetActive(false);
         Soldier = GameObject.Find("Soldier_Select");
         BoxMan = GameObject.Find("BoxMan_Select");
         Bear = GameObject.Find("Bear_Select");
         Jester = GameObject.Find("Jester_Select");
+        Warnning = GameObject.Find("Warn");
     }
     public void OnClick_CharacterSelect()
     {
@@ -40,12 +43,22 @@ public class MeinMenu : MonoBehaviour
 
     public void OnClick_Start()
     {
-        ClickSound.SetActive(true);
-        SceneManager.LoadScene("Browl_Stars");
+        ClickSound.GetComponent<AudioSource>().Play();
+
+        if (selected_character)
+            SceneManager.LoadScene("Browl_Stars");
+        else                    
+            Warnning.GetComponent<Canvas>().enabled = true;        
+    }
+    public void OnClick_Close()
+    {
+        ClickSound.GetComponent<AudioSource>().Play();
+        Warnning.GetComponent<Canvas>().enabled = false;
     }
 
     public void Soldier_Select()
     {
+        selected_character = true;
         DataManager.instance.select_character = DataManager.instance.Characters[101];
         Soldier.GetComponent<Animator>().SetBool("bSelect", true);
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
@@ -55,6 +68,7 @@ public class MeinMenu : MonoBehaviour
 
     public void BoxMan_Select()
     {
+        selected_character = true;
         DataManager.instance.select_character = DataManager.instance.Characters[102];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);
         BoxMan.GetComponent<Animator>().SetBool("bSelect", true);
@@ -64,6 +78,7 @@ public class MeinMenu : MonoBehaviour
 
     public void Bear_Select()
     {
+        selected_character = true;
         DataManager.instance.select_character = DataManager.instance.Characters[103];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
@@ -73,6 +88,7 @@ public class MeinMenu : MonoBehaviour
 
     public void Jester_Select()
     {
+        selected_character = true;
         DataManager.instance.select_character = DataManager.instance.Characters[104];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);

@@ -19,7 +19,7 @@ public class DataManager : MonoBehaviour
     {
         LoadTextData();
 
-        Instantiate(Resources.Load<GameObject>(Characters[1001].charPrefab), startPos.transform.position, startPos.transform.rotation);
+       GameObject obj =  Instantiate(Resources.Load<GameObject>(Characters[1001].charPrefab), startPos.transform.position, startPos.transform.rotation);
     }
 
     public Dictionary<int, Character> Characters = new Dictionary<int, Character>();

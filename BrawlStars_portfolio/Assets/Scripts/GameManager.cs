@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public enum Start_State { NONE, START }
     public Start_State m_Start = Start_State.NONE;
-    enum ESC_State { NONE, ESC };
-    ESC_State m_ESC_state = ESC_State.NONE;      
+    public enum ESC_State { NONE, ESC };
+    public ESC_State m_ESC_state = ESC_State.NONE;      
 
     private bool m_bEnd = false;
 

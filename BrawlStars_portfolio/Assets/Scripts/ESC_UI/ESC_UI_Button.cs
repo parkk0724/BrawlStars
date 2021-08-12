@@ -23,6 +23,7 @@ public class ESC_UI_Button : MonoBehaviour
     public void OnClick_Continue()
     {
         PlayClickSound();
+        GameManager.instance.m_ESC_state = GameManager.ESC_State.NONE;
         Time.timeScale = 1.0f;
         ESC_UI.Instance.Exit_UI();
     }

@@ -17,6 +17,7 @@ public class DataManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
         LoadTextData();
     }
 

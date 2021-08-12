@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
-
 public class GameManager : MonoBehaviour
 {
     public enum Start_State { NONE, START }

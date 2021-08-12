@@ -61,7 +61,6 @@ public class ResultUICtrl : MonoBehaviour
         for (int i = 0; i < nGrade; i++)         
         {
             arrObjs[i].gameObject.SetActive(true);
-            
         }
     }
 

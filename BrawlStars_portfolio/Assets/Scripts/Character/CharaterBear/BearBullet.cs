@@ -7,7 +7,7 @@ public class BearBullet : MonoBehaviour
 {
     public int damage = 20;
     public float curTime = 0.0f;
-    public float BulletSpeed = 0.5f;
+    public float BulletSpeed = 2f;
     public float BulletLiveMaxTime = 2.0f;
     public UnityAction OnFeverUp = null;
     public GameObject HitEffect;
@@ -22,13 +22,13 @@ public class BearBullet : MonoBehaviour
         ribody.velocity = this.transform.forward * BulletSpeed;
         */
         // OnFeverUp = GetComponent<>
-        TargetDirVector = this.transform.forward * BulletSpeed * Time.deltaTime;
+        TargetDirVector = this.transform.forward.normalized * BulletSpeed * Time.deltaTime;
     }
 
     private void Update()
     {
         this.transform.Translate(TargetDirVector, Space.World);
-        //Debug.Log(this.transform.position.y);
+        Debug.Log(TargetDirVector);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,10 +38,10 @@ public class BearBullet : MonoBehaviour
 
         if (other.gameObject.tag == "Monster")
         { 
-            Debug.Log("몬스터 맞춤");
             this.transform.position = other.transform.position;
             OnFeverUp();
             GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation); // 이펙트 생성
+            obj.transform.localScale *= 4;
             other.GetComponent<Monster>()?.Hit(damage, Color.red);
             Destroy(obj, 1.0f);
             SearchTarget();
@@ -93,10 +93,12 @@ public class BearBullet : MonoBehaviour
         {
             // 검출된 콜라이더를 향해 방향 잡고
             Vector3 dir = ResultTarget.position - this.transform.position;
-            dir.y = ResultTarget.position.y / 2.0f;
+            dir.y = 0;
             dir.Normalize();
 
-            TargetDirVector = dir * BulletSpeed * Time.deltaTime ;
+            Debug.Log("dir: " +dir);
+            dir.y = 0.3f;
+            TargetDirVector = (dir * BulletSpeed) * Time.deltaTime ;
         }
     }
 }

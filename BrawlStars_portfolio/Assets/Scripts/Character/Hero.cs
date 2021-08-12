@@ -22,10 +22,10 @@ public class Hero : Character
     public float m_fMove_Speed = 5.0f;
     public float m_fRotate_Speed = 0.0f;
     public float m_fJump_Height = 0.0f;
-    public float m_fJump_Speed = 0.0f;
-    public GameObject m_objPlayerDir;
+    public float m_fJump_Speed = 0.0f;   
     public GameObject m_objCharacter;
 
+    private GameObject m_objPlayerDir;
     private GameObject m_objUIDie;
     private TMPro.TMP_Text m_tDie;
     private ParticleSystem m_ptsRevival;
@@ -54,10 +54,10 @@ public class Hero : Character
     Coroutine Jump2;
 
     [Header("RecoveryItem")]
-    public GameObject m_objHp;
-    public GameObject m_objStamina;
-    public GameObject m_objFever;
-    public GameObject m_objInvicible;
+    private GameObject m_objHp;
+    private GameObject m_objStamina;
+    private GameObject m_objFever;
+    private GameObject m_objInvicible;
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
@@ -88,6 +88,11 @@ public class Hero : Character
 
     protected virtual void Awake()
     {
+        m_objTargetEffect = GameObject.Find("TargetIndicator").GetComponent<ParticleSystem>();
+        m_objHp = GameObject.Find("HPPotionEffect");
+        m_objStamina = GameObject.Find("STPotionEffect");
+        m_objFever = GameObject.Find("FVPotionEffect");
+        m_objInvicible = GameObject.Find("IncivibleEffect");
         GameObject revivalEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/RevivalEffect"), transform.parent);
         GameObject JumpEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/JumpEffect"), transform.parent);
         revivalEffect.SetActive(false);
@@ -99,6 +104,7 @@ public class Hero : Character
     }
     protected virtual void Start()
     {
+        m_objPlayerDir = GameObject.Find("PlayerDirection");
         m_objUIDie = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIDie"), GameObject.Find("UI").transform);
         m_objUIDie.SetActive(false);
         m_tDie = m_objUIDie.GetComponentInChildren<TMPro.TMP_Text>();

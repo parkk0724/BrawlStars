@@ -25,11 +25,11 @@ public class GameManager : MonoBehaviour
     { 
         get
         {
-            if (_instance == null)
-            {
-                GameObject obj = new GameObject("GameManager");
-                _instance = obj.AddComponent<GameManager>();
-            }
+           // if (_instance == null)
+           // {
+           //     GameObject obj = new GameObject("GameManager");
+           //     _instance = obj.AddComponent<GameManager>();
+           // }
 
             return _instance;
         }
@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
         PlayerStartPos = GameObject.Find("PlayerStartPos");
         CreatePlayer();
         Soldier = GameObject.Find("Soldier");
         BoxMan = GameObject.Find("BoxMan");
         Bear = GameObject.Find("BearDefault");
         Jester = GameObject.Find("Jester");
-
-        CreatePlayer();
     }
     void Start()
     {
@@ -169,6 +169,8 @@ public class GameManager : MonoBehaviour
     {
         GameObject prefabs = Resources.Load<GameObject>(DataManager.instance.select_character.charPrefab);
         GameObject Player = Instantiate(prefabs, PlayerStartPos.transform.position, PlayerStartPos.transform.rotation);
+
+        Player.transform.parent = GameObject.Find("Player").transform;
 
         //if (DataManager.instance.select_character.index == 101)
         //{

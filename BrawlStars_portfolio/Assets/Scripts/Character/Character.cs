@@ -30,6 +30,7 @@ public abstract class Character : MonoBehaviour
 
         if(DefDamage > 0)
         {
+            m_UITextDamage = GameObject.Find("TextDamage").GetComponent<UITextDamage>();
             m_UITextDamage.SetDamage(DefDamage, this.transform.position, c);
             m_nHP = m_nHP - DefDamage;      // 데미지 계산
             if(m_nHP > 0) m_Animator.SetTrigger("tHit");  // 히트모션

@@ -9,20 +9,26 @@ public class GameManager : MonoBehaviour
     public enum Start_State { NONE, START }
     public Start_State m_Start = Start_State.NONE;
     enum ESC_State { NONE, ESC };
-    ESC_State m_ESC_state = ESC_State.NONE;
+    ESC_State m_ESC_state = ESC_State.NONE;      
 
     private bool m_bEnd = false;
+
+    private GameObject PlayerStartPos;
+    private GameObject Soldier;
+    private GameObject BoxMan;
+    private GameObject Bear;
+    private GameObject Jester;
 
     static private GameManager _instance;
     static public GameManager instance
     { 
         get
         {
-            if (_instance == null)
-            {
-                GameObject obj = new GameObject("GameManager");
-                _instance = obj.AddComponent<GameManager>();
-            }
+           // if (_instance == null)
+           // {
+           //     GameObject obj = new GameObject("GameManager");
+           //     _instance = obj.AddComponent<GameManager>();
+           // }
 
             return _instance;
         }
@@ -33,6 +39,18 @@ public class GameManager : MonoBehaviour
 
     public float m_fTime { get; private set; }
     public float m_fMaxTime { get; private set; }
+
+    private void Awake()
+    {
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+        PlayerStartPos = GameObject.Find("PlayerStartPos");
+        CreatePlayer();
+        Soldier = GameObject.Find("Soldier");
+        BoxMan = GameObject.Find("BoxMan");
+        Bear = GameObject.Find("BearDefault");
+        Jester = GameObject.Find("Jester");
+    }
     void Start()
     {
         m_fCurDelayPortal = m_fMaxDelayPortal;
@@ -144,5 +162,38 @@ public class GameManager : MonoBehaviour
         //    Cursor.visible = true;
 
         //Cursor.lockState = CursorLockMode.Confined; //작업에 마우스 가 안잡혀서 잠깐 빼놓음
+    }
+
+    private void CreatePlayer()
+    {
+        GameObject prefabs = Resources.Load<GameObject>(DataManager.instance.select_character.charPrefab);
+        GameObject Player = Instantiate(prefabs, PlayerStartPos.transform.position, PlayerStartPos.transform.rotation);
+
+        Player.transform.parent = GameObject.Find("Player").transform;
+
+        //if (DataManager.instance.select_character.index == 101)
+        //{
+        //    BoxMan.SetActive(false);
+        //    Bear.SetActive(false);
+        //    Jester.SetActive(false);
+        //}
+        //else if (DataManager.instance.select_character.index == 102)
+        //{
+        //    Soldier.SetActive(false);
+        //    Bear.SetActive(false);
+        //    Jester.SetActive(false);
+        //}
+        //else if (DataManager.instance.select_character.index == 103)
+        //{
+        //    Soldier.SetActive(false);
+        //    BoxMan.SetActive(false);
+        //    Jester.SetActive(false);
+        //}
+        //else
+        //{
+        //    Soldier.SetActive(false);
+        //    BoxMan.SetActive(false);
+        //    Bear.SetActive(false);
+        //}
     }
 }

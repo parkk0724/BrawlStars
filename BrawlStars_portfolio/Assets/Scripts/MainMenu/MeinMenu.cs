@@ -46,6 +46,7 @@ public class MeinMenu : MonoBehaviour
 
     public void Soldier_Select()
     {
+        DataManager.instance.select_character = DataManager.instance.Characters[101];
         Soldier.GetComponent<Animator>().SetBool("bSelect", true);
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
         Bear.GetComponent<Animator>().SetBool("bSelect", false);
@@ -54,6 +55,7 @@ public class MeinMenu : MonoBehaviour
 
     public void BoxMan_Select()
     {
+        DataManager.instance.select_character = DataManager.instance.Characters[102];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);
         BoxMan.GetComponent<Animator>().SetBool("bSelect", true);
         Bear.GetComponent<Animator>().SetBool("bSelect", false);
@@ -62,6 +64,7 @@ public class MeinMenu : MonoBehaviour
 
     public void Bear_Select()
     {
+        DataManager.instance.select_character = DataManager.instance.Characters[103];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
         Bear.GetComponent<Animator>().SetBool("bSelect", true);
@@ -70,6 +73,7 @@ public class MeinMenu : MonoBehaviour
 
     public void Jester_Select()
     {
+        DataManager.instance.select_character = DataManager.instance.Characters[104];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
         Bear.GetComponent<Animator>().SetBool("bSelect", false);

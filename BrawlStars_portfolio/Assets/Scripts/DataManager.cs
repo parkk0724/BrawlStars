@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
+    static public DataManager instance;
     public struct Character
     {
         public int index;
@@ -11,15 +12,12 @@ public class DataManager : MonoBehaviour
         public string charPrefab;
     }
 
-    public GameObject startPos;
-
     [HideInInspector]
-    public GameObject select_characterl;
-    private void Update()
+    public Character select_character;
+    private void Awake()
     {
+        instance = this;
         LoadTextData();
-
-       GameObject obj =  Instantiate(Resources.Load<GameObject>(Characters[1001].charPrefab), startPos.transform.position, startPos.transform.rotation);
     }
 
     public Dictionary<int, Character> Characters = new Dictionary<int, Character>();
@@ -34,9 +32,13 @@ public class DataManager : MonoBehaviour
         {
             string[] data = row[i].Split('\t');
 
+            if (data.Length <= 1) continue;
+
             Character CharData = new Character();
 
-            CharData.index = int.Parse(data[0]);
+            int value = 0;
+            int.TryParse(data[0], out value);
+            CharData.index = value;
             CharData.name = data[1];
             CharData.charPrefab = data[2];
 

@@ -23,12 +23,15 @@ public class Bazooka_SkillBullet1 : MonoBehaviour
 
     float dist = 0.0f;
 
-    void Start()
+    private void Awake()
     {
-        m_Soldier = GameObject.Find("Soldier").GetComponent<Soldier>();
+        m_Soldier = GameObject.Find("Soldier(Clone)").GetComponent<Soldier>();
         m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
         SkillBullt_Destination = GameObject.Find("skillbullet_destination").transform;
         SkillBullt_Pos = GameObject.Find("skillbullet_pos1").transform;
+    }
+    private void Start()
+    {
         skillbulletpos = StartCoroutine(Bazooka_SkillBullet_Pos(SkillBullt_Pos));
     }
     IEnumerator Bazooka_SkillBullet_Pos(Transform skillbullet_pos)

@@ -1,0 +1,5 @@
+Key,ITemType,use,itemGrade,itemName,itemCount,itemPrefab
+1,Potion,HP,D,HpPotion,50,Prefabs/Item/HpPotion
+2,Potion,STAMINA,D,StaminaPotion,3,Prefabs/Item/StaminaPotion
+3,Potion,FEVER,D,FeverPotion,50,Prefabs/Item/FeverPotion
+4,Potion,INVINCIBLE,C,InviciblePotion,0,Prefabs/Item/InviciblePotion

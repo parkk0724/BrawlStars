@@ -18,8 +18,8 @@ public class ResultUICtrl : MonoBehaviour
     private void Start()
     {
         InitTrans();
-        SetStars(90f);     // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
-        SetClearTime(90f); // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
+        SetStars(GameManager.instance.m_fTime);     // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
+        SetClearTime(GameManager.instance.m_fTime); // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
     }
     private void Update()
     {

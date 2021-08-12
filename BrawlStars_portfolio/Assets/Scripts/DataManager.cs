@@ -14,8 +14,8 @@ public class DataManager : MonoBehaviour
     public GameObject startPos;
 
     [HideInInspector]
-    public GameObject select_character = null;
-    private void Awake()
+    public GameObject select_characterl;
+    private void Update()
     {
         LoadTextData();
 

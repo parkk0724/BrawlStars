@@ -1,0 +1,5 @@
+Index	Name	Prefabs
+101	Soldier	Prefabs/Character/Soldier
+102	BoxMan	Prefabs/Character/BoxMan
+103	Bear	Prefabs/Character/BearDefault
+104	Jester	Prefabs/Character/Jester

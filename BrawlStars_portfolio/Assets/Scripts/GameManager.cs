@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System;
 
 public class GameManager : MonoBehaviour
@@ -78,7 +79,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if(!m_bEnd) EndGame();
+                if(!m_bEnd) EndGame("Game Over");
             }
         }
         
@@ -88,18 +89,40 @@ public class GameManager : MonoBehaviour
     public void SetCurDelayPortal(float t) { m_fCurDelayPortal = t; }
     public float GetMaxDelayPortal() { return m_fMaxDelayPortal; }
 
-    public void LoadResultScene() { SceneManager.LoadScene("EndLogunity"); }
-
-    public void EndGame()
+    //public void LoadResultScene() { SceneManager.LoadScene("EndLogunity"); }
+    public void EndGame(string s)
     {
         m_bEnd = true;
-        Instantiate(Resources.Load<GameObject>("Prefabs/UI/EndText"));
-        StartCoroutine(GameOver());
+        ESC_UI.Instance.SE_Bar.GetComponent<Slider>().value = 0;
+        StartCoroutine(GameOver(s));
     }
-    public IEnumerator GameOver() 
+    public IEnumerator GameOver(string s)
     {
-        yield return new WaitForSeconds(3);
-        LoadResultScene();
+        GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/EndText"));
+        obj.GetComponentInChildren<TMPro.TMP_Text>().text = s;
+        Text t = obj.GetComponentInChildren<Text>();
+
+        Color c = new Color(1, 1, 1, 0);
+        t.color = c;
+        int flag = 1;
+
+        AsyncOperation async_operation = SceneManager.LoadSceneAsync("EndLogunity");
+        async_operation.allowSceneActivation = false;
+        while (!async_operation.isDone)
+        {
+            if(async_operation.progress >= 0.9f)
+            {
+                c.a += Time.deltaTime * flag;
+                t.color = c;
+                if (c.a >= 1 || c.a <= 0) flag *= -1;
+
+                if (Input.GetMouseButtonDown(0)) async_operation.allowSceneActivation = true;
+            }
+
+            yield return true;
+        }
+        
+        //LoadResultScene();
     }
 
     public void ChangeState()

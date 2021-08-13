@@ -1997,10 +1997,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1103757744695767668}
     m_Modifications:
+    - target: {fileID: 396424404, guid: 15db0cf0ee2cae64e9b1c4079040aadc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 396424405, guid: 15db0cf0ee2cae64e9b1c4079040aadc, type: 3}
       propertyPath: m_SizeDelta.x
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 396424406, guid: 15db0cf0ee2cae64e9b1c4079040aadc, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 396424406, guid: 15db0cf0ee2cae64e9b1c4079040aadc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dd5ab83baa480ea44b966d7ca90d09bc, type: 3}
     - target: {fileID: 2601794929483710134, guid: 15db0cf0ee2cae64e9b1c4079040aadc, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1

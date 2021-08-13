@@ -56,14 +56,14 @@ public class Jester : Hero
     }
     void BasicAttack()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)) // 스테미너가 없으면 Rotation은 자동 타겟팅된 로테이션은 False
         {
             if (m_fStamina < m_fAttackStamina )
             {
                 m_bRotStart = false;
                 m_AttackState = AttackState.NONE;
             }
-            m_fCurMouseButton += Time.deltaTime;
+            m_fCurMouseButton += Time.deltaTime; //시간값을 더해서 그 값이 넘어가면 타겟팅은 Null로 
             if (m_fCurMouseButton > m_fMaxMouseButton )
             {
                 m_tfResultTarget = null;
@@ -76,7 +76,7 @@ public class Jester : Hero
                 }
             }
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)) //마우스를 때면 공격모션으로
         {
             m_AttackState = AttackState.NONE;
             m_fCurMouseButton = 0.0f;
@@ -239,9 +239,9 @@ public class Jester : Hero
     }
     IEnumerator Effect()
     {
-        GameObject obs = Instantiate(m_objtsBoom.gameObject, m_objDirSkillAttack.transform.position, m_objDirSkillAttack.transform.rotation);
+        GameObject obj = Instantiate(m_objtsBoom.gameObject, m_objDirSkillAttack.transform.position, m_objDirSkillAttack.transform.rotation);
         yield return new WaitForSeconds(2);
-        Destroy(obs);
+        Destroy(obj);
     }
     void FootSound()
     {

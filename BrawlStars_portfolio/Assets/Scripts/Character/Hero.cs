@@ -270,8 +270,8 @@ public class Hero : Character
                     switch (dropitem.GetItem().use) 
                     {
                         case USE.HP:
-                            m_nHP += dropitem.GetItem().itemCount;
-                            if (b_active[0] && m_objHp.activeSelf)
+                            m_nHP += dropitem.GetItem().itemCount; //아이템 카운트 숫자값 받아와서 더해줌 
+                            if (b_active[0] && m_objHp.activeSelf) //Dropitem에서 받아옴
                             {
                                 b_active[0] = false;
                                 m_objHp.gameObject.SetActive(false);
@@ -483,17 +483,17 @@ public class Hero : Character
             this.transform.forward = m_objPlayerDir;
     }
     #region SearchTarget
-    protected void SearchTarget()
+    protected void SearchTarget() //타겟팅 될때만 업데이트 되도록 처리
     {
         float Shortdist = 7;
         Transform shorTarget = null;
-        Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
+        Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer); // 주변의 검출된 콜라이더 검출
         if (EnemyCollider.Length > 0)
         {
             for (int i = 0; i < EnemyCollider.Length; i++)
             {
                 float Dist = Vector3.Distance(this.transform.position, EnemyCollider[i].transform.position);
-                if (EnemyCollider[i].GetComponent<BossMonster>())
+                if (EnemyCollider[i].GetComponent<BossMonster>()) //예외처리 부분 보스몬스터에게 먼저 타겟팅 되도록 설정함
                 {
                     shorTarget = EnemyCollider[i].transform;
                     break;
@@ -513,17 +513,17 @@ public class Hero : Character
     {
         if (m_tfResultTarget == null)
         {
-            m_objTargetEffect.Stop();
+            m_objTargetEffect.Stop(); 
         }
         else
         {
             float rotDir = 1.0f;
             float delta = m_fTargetRotSpeed * Time.deltaTime;
-            Vector3 dir = m_tfResultTarget.position - this.transform.position;
+            Vector3 dir = m_tfResultTarget.position - this.transform.position; //내적 활용 해서 어느방향으로 돌껀지 결정
             Vector3 Bot = new Vector3(dir.x, 0, dir.z);
             Bot.Normalize();
             float r = Mathf.Acos(Vector3.Dot(Bot, this.transform.forward)); //라디안
-            float angle = 180.0f * r / Mathf.PI; //this
+            float angle = 180.0f * r / Mathf.PI; 
             float r2 = Vector3.Dot(Bot, this.transform.right);
             if (r2 < 0.0f) rotDir = -1.0f;
 
@@ -537,7 +537,7 @@ public class Hero : Character
     }
     #endregion
     #region SerchTargetEffect
-    protected void SearchTargetEffect()
+    protected void SearchTargetEffect() //업데이트 문에서 계속 몬스터를 체크해주면서 처리
     {
         float Shortdist = 7;
         Transform shorTarget = null;
@@ -563,7 +563,7 @@ public class Hero : Character
     }
    protected void TargetEffect()
     {
-        if (m_tfEfResultTarget == null)
+        if (m_tfEfResultTarget == null) //타겟이 null이면 이펙트가 스탑함
         {
             m_objTargetEffect.Stop();
         }
@@ -624,7 +624,7 @@ public class Hero : Character
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }
     #region ItemEffect
-    virtual protected void invicibleitem()
+    virtual protected void invicibleitem() //무적아이템이펙트  콜라이더 때문에 별도의 스크립트에서 나머지 이펙트 처리
     {
         if (b_active[3])
         {
@@ -644,7 +644,7 @@ public class Hero : Character
             m_objInvicible.gameObject.SetActive(false);
         }
     }
-   IEnumerator RecoverHP()
+   IEnumerator RecoverHP() //Hp회복 이펙트
     {
 
         m_objHp.gameObject.transform.position = this.transform.position;
@@ -654,7 +654,7 @@ public class Hero : Character
         b_active[0] = false;
         
     }
-    IEnumerator RecoverST()
+    IEnumerator RecoverST()//St회복 이펙트
     {
         m_objStamina.gameObject.transform.position = this.transform.position;
         m_objStamina.gameObject.SetActive(true);
@@ -662,7 +662,7 @@ public class Hero : Character
         m_objStamina.gameObject.SetActive(false);
         b_active[1] = false;
     }
-    IEnumerator RecoverFV()
+    IEnumerator RecoverFV()//Fv회복 이펙트
     {
         m_objFever.gameObject.transform.position = this.transform.position;
         m_objFever.gameObject.SetActive(true);

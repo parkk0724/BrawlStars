@@ -24,6 +24,12 @@ public class DropItem : MonoBehaviour
     }
     float dist = 0.0f;
     Coroutine item_updown;
+
+    private void Awake()
+    {
+        
+
+    }
     void Start()
     {
         StartCoroutine(Jumpitem());

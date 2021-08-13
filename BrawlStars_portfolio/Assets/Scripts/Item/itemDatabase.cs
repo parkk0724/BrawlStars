@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class itemDatabase : MonoBehaviour {
 
-    static private itemDatabase _instance;
-    static public itemDatabase instance
+    static public itemDatabase instance;
+    private void Awake()
     {
-        get
+
+        if (instance != null)
         {
-            if (_instance == null) //인스턴스가 널일때만
-            {
-                GameObject obj = new GameObject("itemDatabase"); //하이러키창의 크리에이트 엠티랑 같음
-                _instance = obj.AddComponent<itemDatabase>();
-            }
-
-            return _instance;
+            Destroy(this.gameObject);
         }
-
+        else
+        {
+            DontDestroyOnLoad(this.gameObject); ;
+            instance = this;
+        }
     }
     public List<Item> itemList = new List<Item>();
     GameObject[] monster;
@@ -74,40 +73,40 @@ public class itemDatabase : MonoBehaviour {
             else if (firstrage < 9)
             {
                 ArrayList table = new ArrayList();
-                for (int i = 0; i < _instance.itemList.Count; i++)
+                for (int i = 0; i < instance.itemList.Count; i++)
                 {
-                    if (_instance.itemList[i].itemGrade == (ITemGrade)3) // 등급비교
+                    if (instance.itemList[i].itemGrade == (ITemGrade)3) // 등급비교
                     {
                         table.Add(i); //테이블에 아이템의 인덱스값을 저장
                     }
                 }
                 int tableindex = Random.Range(0, table.Count); // 테이블의 값을 랜덤으로 돌린 인덱스값
-                GameObject obj = Instantiate(_instance.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, _instance.itemList[(int)table[tableindex]].itemPrefab.transform.rotation); //생성
-                obj.GetComponent<DropItem>().item.itemtype = _instance.itemList[(int)table[tableindex]].itemtype; //생성된 드랍아이템의 아이템 타입을 아이템데이터베이스 형식으로 바꿈
-                obj.GetComponent<DropItem>().item.itemName = _instance.itemList[(int)table[tableindex]].itemName;
-                obj.GetComponent<DropItem>().item.itemGrade = _instance.itemList[(int)table[tableindex]].itemGrade;
-                obj.GetComponent<DropItem>().item.itemCount = _instance.itemList[(int)table[tableindex]].itemCount;
-                obj.GetComponent<DropItem>().item.use = _instance.itemList[(int)table[tableindex]].use;
+                GameObject obj = Instantiate(instance.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instance.itemList[(int)table[tableindex]].itemPrefab.transform.rotation); //생성
+                obj.GetComponent<DropItem>().item.itemtype = instance.itemList[(int)table[tableindex]].itemtype; //생성된 드랍아이템의 아이템 타입을 아이템데이터베이스 형식으로 바꿈
+                obj.GetComponent<DropItem>().item.itemName = instance.itemList[(int)table[tableindex]].itemName;
+                obj.GetComponent<DropItem>().item.itemGrade = instance.itemList[(int)table[tableindex]].itemGrade;
+                obj.GetComponent<DropItem>().item.itemCount = instance.itemList[(int)table[tableindex]].itemCount;
+                obj.GetComponent<DropItem>().item.use = instance.itemList[(int)table[tableindex]].use;
             }
 
 
             else if (firstrage < 10)
             {
                 ArrayList table = new ArrayList();
-                for (int i = 0; i < _instance.itemList.Count; i++)
+                for (int i = 0; i < instance.itemList.Count; i++)
                 {
-                    if (_instance.itemList[i].itemGrade == (ITemGrade)2)
+                    if (instance.itemList[i].itemGrade == (ITemGrade)2)
                     {
                         table.Add(i);
                     }
                 }
                 int tableindex = Random.Range(0, table.Count);
-                GameObject obj = Instantiate(_instance.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, _instance.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
-                obj.GetComponent<DropItem>().item.itemtype = _instance.itemList[(int)table[tableindex]].itemtype;
-                obj.GetComponent<DropItem>().item.itemName = _instance.itemList[(int)table[tableindex]].itemName;
-                obj.GetComponent<DropItem>().item.itemGrade = _instance.itemList[(int)table[tableindex]].itemGrade;
-                obj.GetComponent<DropItem>().item.itemCount = _instance.itemList[(int)table[tableindex]].itemCount;
-                obj.GetComponent<DropItem>().item.use = _instance.itemList[(int)table[tableindex]].use;
+                GameObject obj = Instantiate(instance.itemList[(int)table[tableindex]].itemPrefab, monsterTansform.position, instance.itemList[(int)table[tableindex]].itemPrefab.transform.rotation);
+                obj.GetComponent<DropItem>().item.itemtype = instance.itemList[(int)table[tableindex]].itemtype;
+                obj.GetComponent<DropItem>().item.itemName = instance.itemList[(int)table[tableindex]].itemName;
+                obj.GetComponent<DropItem>().item.itemGrade = instance.itemList[(int)table[tableindex]].itemGrade;
+                obj.GetComponent<DropItem>().item.itemCount = instance.itemList[(int)table[tableindex]].itemCount;
+                obj.GetComponent<DropItem>().item.use = instance.itemList[(int)table[tableindex]].use;
             }
         } 
     }

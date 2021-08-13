@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if(!m_bEnd) EndGame("Game Over");
+                if(!m_bEnd) EndGame("Lose");
             }
         }
         

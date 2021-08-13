@@ -118,7 +118,10 @@ public class BossMonster : Monster
                 break;
             case State.DEAD:
                 if (die == null)
+                {
+                    m_NavMeshAgent.SetDestination(this.transform.position);
                     die = StartCoroutine(Die());
+                }
                 break;
         }
     }

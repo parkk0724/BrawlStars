@@ -52,6 +52,8 @@ public class BoxMan : Hero
                 if (m_nHP <= 0) StartCoroutine(Die());
             }
         }
+
+        Debug.Log(m_bOnBush);
     }
     public override void Attack()
     {

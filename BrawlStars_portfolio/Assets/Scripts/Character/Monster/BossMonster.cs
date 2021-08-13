@@ -52,7 +52,7 @@ public class BossMonster : Monster
 
         m_fMaxMoveTime = 3.0f;
         m_fMaxIdleTime = 1.0f;
-        m_fBasicAttackRange = 2.0f;
+        m_fBasicAttackRange = 2.5f;
         m_fSkill1_AttackRange = 10.0f;
         m_fSkill2_AttackRange = 7.0f;
         this.GetComponentInChildren<Animation_Event>().endAttack = EndAttack;
@@ -85,6 +85,20 @@ public class BossMonster : Monster
                 CheckPhase();
             }
         }
+
+        // 히어로가 부쉬에서 나갔을 때
+        if (!HeroOnBush() && m_bBushAttack || !HeroOnBush() && m_tfTarget == null)
+        {
+            m_bBushAttack = false;
+            m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+        }
+
+        // 히어로가 부쉬에 들어갔을 때
+        if (HeroOnBush() && m_tfTarget != null && !m_bBushAttack)
+        {
+            m_tfTarget = null;
+            ChangeState(State.PATROL);
+        }
     }
 
     protected override void ChangeState(State state)
@@ -95,7 +109,6 @@ public class BossMonster : Monster
         switch (m_eState)
         {
             case State.IDLE:
-                
                 m_NavMeshAgent.SetDestination(this.transform.position);
                 m_Animator.SetBool("bMove", false);
                 m_fCurTime = 0.0f;
@@ -103,7 +116,7 @@ public class BossMonster : Monster
             case State.MOVE:
                 if (m_tfTarget == null)
                 {
-                    m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+                    ChangeState(State.PATROL);
                 }
                 else
                 {
@@ -115,6 +128,13 @@ public class BossMonster : Monster
             case State.ATTACK:
                 m_NavMeshAgent.SetDestination(this.transform.position);
                 Attack();
+                break;
+            case State.PATROL:
+                if (RandomPoint(out m_vDestination))
+                {
+                    m_NavMeshAgent.SetDestination(m_vDestination); // 랜덤하게 포인트를 정해서 갈수있는 곳일경우 이동
+                    m_Animator.SetBool("bMove", true);
+                }
                 break;
             case State.DEAD:
                 if (die == null)
@@ -139,9 +159,24 @@ public class BossMonster : Monster
             case State.ATTACK:
                 // 한번만 호출되면 될것같아서 changestate로 옮김
                 break;
+            case State.PATROL:
+                Patrol();
+                break;
             case State.DEAD:
                 // 마찬가지
                 break;
+        }
+    }
+
+    public void Patrol()
+    {
+        if (Vector3.Distance(this.transform.position, m_vDestination) < 3.0f)
+        {
+            ChangeState(State.IDLE);
+        }
+        else if (m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
+        {
+            ChangeState(State.ATTACK);
         }
     }
     public override void Idle()
@@ -152,6 +187,12 @@ public class BossMonster : Monster
         }
         else
         {
+            if (m_tfTarget == null)
+            {
+                ChangeState(State.PATROL);
+                return;
+            }
+
             if (m_bPhase[1])
             {
                 if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fSkill1_AttackRange)
@@ -174,7 +215,6 @@ public class BossMonster : Monster
                     ChangeState(State.MOVE);
                 }
             }
-           
             else
             {
                 if (Vector3.Distance(this.transform.position, m_tfTarget.position) <= m_fBasicAttackRange)

@@ -5,10 +5,15 @@ using UnityEngine.AI;
 
 public class Monster : Character
 {
-    protected enum State { IDLE, MOVE, ATTACK, DEAD }
+    protected delegate bool DelegateHeroOnBush();
+    protected DelegateHeroOnBush HeroOnBush;
+    protected bool m_bBushAttack = false;
+    protected enum State { IDLE, MOVE, PATROL, ATTACK, DEAD }
     protected State m_eState = State.IDLE;
     protected NavMeshAgent m_NavMeshAgent;
     protected Transform m_tfTarget;
+    protected Vector3 m_vDestination;
+    float m_fRandomMoveRange = 0.0f;
     protected virtual void Start()
     {
         m_UITextDamage = GameObject.Find("UI").GetComponentInChildren<UITextDamage>();
@@ -21,8 +26,10 @@ public class Monster : Character
         m_nDEF = 5;
         m_fAttackSpeed = 1.0f;
         m_fRange = 10.0f;
+        m_fRandomMoveRange = 10.0f;
         m_NavMeshAgent = this.GetComponent<NavMeshAgent>();
         m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+        HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
     }
 
     // Update is called once per frame
@@ -72,24 +79,8 @@ public class Monster : Character
         }
     }
 
-    public virtual void Idle()
-    {
-
-    }
-    public override void Move()
-    {
-        if (m_tfTarget == null)
-        {
-            m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
-        }
-        else
-        {
-            Vector3 pos = m_tfTarget.position; // 점프대에서 점프하면 y값이 변화하여 navMesh에서 인식을 못함
-            pos.y = 0;
-            m_NavMeshAgent.SetDestination(pos); // target따라다니도록 목적지를 매번 갱신
-            if (m_NavMeshAgent.remainingDistance < 1.0f) ChangeState(State.ATTACK); // 목저지와 거리가 1.0f보다 작다면 공격전환
-        }
-    }
+    public virtual void Idle() {}
+    public override void Move() {}
     public override IEnumerator Die()
     {
 
@@ -103,7 +94,30 @@ public class Monster : Character
     }
     public virtual void Attack()
     {
-        ChangeState(State.MOVE); // test용
-        //if (m_NavMeshAgent.remainingDistance > 1.0f) ChangeState(State.MOVE); // 목저지와 거리가 1.0f보다 크다면 이동전환
+    }
+
+    public override void Hit(int damage, Color c)
+    {
+        base.Hit(damage, c);
+
+        m_bBushAttack = true;
+        m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+    }
+
+    public bool RandomPoint(out Vector3 result)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            Vector3 rndPoint = this.transform.position + Random.insideUnitSphere * m_fRandomMoveRange; // 랜덤하게 이 오브젝트 주면 위치를 가져옴
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(rndPoint, out hit, 1.0f, NavMesh.AllAreas)) // 랜덤한 위치가 NavMesh로 이동할 수 있는지 확인
+            {
+                result = hit.position; // 가능하면 그 위치값 내보냄
+                return true;
+            }
+        }
+
+        result = Vector3.zero;
+        return false;
     }
 }

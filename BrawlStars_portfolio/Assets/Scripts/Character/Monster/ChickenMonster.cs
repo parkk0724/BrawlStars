@@ -7,9 +7,7 @@ public class ChickenMonster : Monster
 {
     float m_fCurTime = 0.0f;
     float m_fMaxIdleTime = 0.0f;
-    float m_fRandomMoveRange = 0.0f;
     float m_fRunSpeed = 0.0f;
-    Vector3 m_vDestination;
 
     private void Awake()
     {
@@ -26,7 +24,6 @@ public class ChickenMonster : Monster
         m_fAttackSpeed = 1.0f;
         m_fRange = 5.0f;
         m_fMaxIdleTime = 5.0f;
-        m_fRandomMoveRange = 10.0f;
         m_fRunSpeed = 3.0f;
     }
 
@@ -38,6 +35,12 @@ public class ChickenMonster : Monster
         }
         m_fCurTime += Time.deltaTime;
         ProgressState();
+
+        // 히어로가 부쉬에서 나갔을 때
+        if (!HeroOnBush() && m_bBushAttack)
+        {
+            m_bBushAttack = false;
+        }
     }
 
     protected override void ChangeState(State state)
@@ -49,6 +52,7 @@ public class ChickenMonster : Monster
         {
             case State.IDLE:
                 {
+                    m_NavMeshAgent.SetDestination(this.transform.position);
                     m_fCurTime = 0.0f;
                     m_Animator.SetBool("bMove", false);
                     int rnd = Random.Range(0, 2);
@@ -98,31 +102,14 @@ public class ChickenMonster : Monster
                 break;
         }
     }
-
-    bool RandomPoint(out Vector3 result)
-    {
-        for(int i = 0; i < 30; i++)
-        {
-            Vector3 rndPoint = this.transform.position + Random.insideUnitSphere * m_fRandomMoveRange; // 랜덤하게 이 오브젝트 주면 위치를 가져옴
-            NavMeshHit hit;
-            if(NavMesh.SamplePosition(rndPoint,out hit, 1.0f, NavMesh.AllAreas)) // 랜덤한 위치가 NavMesh로 이동할 수 있는지 확인
-            {
-                result = hit.position; // 가능하면 그 위치값 내보냄
-                return true;
-            }
-        }
-
-        result = Vector3.zero;
-        return false;
-    }
-
     public override void Idle()
     {
         if(m_fCurTime >= m_fMaxIdleTime)
         {
             ChangeState(State.MOVE);
         }
-        else if (m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
+        else if (!HeroOnBush() && m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange ||
+                HeroOnBush() && m_bBushAttack && m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
         {
             ChangeState(State.ATTACK);
         }
@@ -134,7 +121,8 @@ public class ChickenMonster : Monster
         {
             ChangeState(State.IDLE);
         }
-        else if (m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
+        else if (!HeroOnBush() && m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange ||
+                 HeroOnBush() && m_bBushAttack && m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
         {
             ChangeState(State.ATTACK);
         }
@@ -142,7 +130,7 @@ public class ChickenMonster : Monster
 
     public override void Attack()
     {
-        if (!m_tfTarget.gameObject.activeSelf || Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fRange)
+        if (!m_tfTarget.gameObject.activeSelf || Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fRange * 2 || HeroOnBush() && !m_bBushAttack)
         {
             ChangeState(State.IDLE);
             m_Animator.SetTrigger("tIdle");
@@ -170,5 +158,6 @@ public class ChickenMonster : Monster
     {
         base.Hit(damage, c);
         m_NavMeshAgent.velocity = Vector3.zero;
+        ChangeState(State.ATTACK);
     }
 }

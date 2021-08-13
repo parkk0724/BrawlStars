@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MeinMenu : MonoBehaviour
@@ -16,7 +17,12 @@ public class MeinMenu : MonoBehaviour
     GameObject Soldier;
     GameObject BoxMan;
     GameObject Bear;
-    GameObject Jester;       
+    GameObject Jester;
+
+    GameObject Soldier_Arrow;
+    GameObject BoxMan_Arrow;
+    GameObject Bear_Arrow;
+    GameObject Jester_Arrow;
     private void Start()
     {
         MainSound.SetActive(true);
@@ -25,6 +31,11 @@ public class MeinMenu : MonoBehaviour
         Bear = GameObject.Find("Bear_Select");
         Jester = GameObject.Find("Jester_Select");
         Warnning = GameObject.Find("Warn");
+
+        Soldier_Arrow = GameObject.Find("SoldierArrow");
+        BoxMan_Arrow = GameObject.Find("BoxManArrow");
+        Bear_Arrow = GameObject.Find("BearArrow");
+        Jester_Arrow = GameObject.Find("JesterArrow");
     }
     public void OnClick_CharacterSelect()
     {
@@ -47,8 +58,11 @@ public class MeinMenu : MonoBehaviour
 
         if (selected_character)
             SceneManager.LoadScene("Browl_Stars");
-        else                    
-            Warnning.GetComponent<Canvas>().enabled = true;        
+        else
+        {
+            //Warnning_UI.instance.UI_Play();
+            Warnning.GetComponent<Canvas>().enabled = true;
+        }
     }
     public void OnClick_Close()
     {
@@ -65,6 +79,11 @@ public class MeinMenu : MonoBehaviour
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
         Bear.GetComponent<Animator>().SetBool("bSelect", false);
         Jester.GetComponent<Animator>().SetBool("bSelect", false);
+
+        Soldier_Arrow.GetComponent<RawImage>().enabled = true;
+        BoxMan_Arrow.GetComponent<RawImage>().enabled = false;
+        Bear_Arrow.GetComponent<RawImage>().enabled = false;
+        Jester_Arrow.GetComponent<RawImage>().enabled = false;
     }
 
     public void BoxMan_Select()
@@ -76,6 +95,11 @@ public class MeinMenu : MonoBehaviour
         BoxMan.GetComponent<Animator>().SetBool("bSelect", true);
         Bear.GetComponent<Animator>().SetBool("bSelect", false);
         Jester.GetComponent<Animator>().SetBool("bSelect", false);
+
+        Soldier_Arrow.GetComponent<RawImage>().enabled = false;
+        BoxMan_Arrow.GetComponent<RawImage>().enabled = true;
+        Bear_Arrow.GetComponent<RawImage>().enabled = false;
+        Jester_Arrow.GetComponent<RawImage>().enabled = false;
     }
 
     public void Bear_Select()
@@ -87,6 +111,11 @@ public class MeinMenu : MonoBehaviour
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
         Bear.GetComponent<Animator>().SetBool("bSelect", true);
         Jester.GetComponent<Animator>().SetBool("bSelect", false);
+
+        Soldier_Arrow.GetComponent<RawImage>().enabled = false;
+        BoxMan_Arrow.GetComponent<RawImage>().enabled = false;
+        Bear_Arrow.GetComponent<RawImage>().enabled = true;
+        Jester_Arrow.GetComponent<RawImage>().enabled = false;
     }
 
     public void Jester_Select()
@@ -98,5 +127,10 @@ public class MeinMenu : MonoBehaviour
         BoxMan.GetComponent<Animator>().SetBool("bSelect", false);
         Bear.GetComponent<Animator>().SetBool("bSelect", false);
         Jester.GetComponent<Animator>().SetBool("bSelect", true);
+
+        Soldier_Arrow.GetComponent<RawImage>().enabled = false;
+        BoxMan_Arrow.GetComponent<RawImage>().enabled = false;
+        Bear_Arrow.GetComponent<RawImage>().enabled = false;
+        Jester_Arrow.GetComponent<RawImage>().enabled = true;
     }
 }

@@ -188,7 +188,7 @@ MonoBehaviour:
   m_bMoveStart: 0
   m_bMoveValid: 1
   m_bCheckStart: 0
-  m_fTargetRange: 20
+  m_fTargetRange: 7
   m_lmEnemyLayer:
     serializedVersion: 2
     m_Bits: 256

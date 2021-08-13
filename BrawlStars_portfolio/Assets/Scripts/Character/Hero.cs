@@ -63,10 +63,11 @@ public class Hero : Character
     Coroutine Fe;
     bool[] b_active = { false,false,false,false };
     float m_fCurtime;
-    
-    
 
     public List<Item> items = new List<Item>();
+
+    protected bool m_bOnBush = false;
+    public bool GetOnBush() { return m_bOnBush; }
     public bool GetJump() { return m_bMoveValid; }
     public float GetFever() { return m_fFever; }
     public float GetMaxFever() { return m_fMaxFever; }
@@ -323,6 +324,11 @@ public class Hero : Character
                 dropitem.Death();
             }
         }
+
+        if(other.gameObject.layer == LayerMask.NameToLayer("Bush"))
+        {
+            m_bOnBush = true;
+        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -355,7 +361,11 @@ public class Hero : Character
                if (Jump2 != null) StopCoroutine(Jump2);
                Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
            }
+        }
 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Bush"))
+        {
+            m_bOnBush = true;
         }
     }
 
@@ -364,6 +374,11 @@ public class Hero : Character
         if (other.tag == "Jump" || other.tag == "Jump2")
         {
             m_Jump_curDelay = 0.0f;
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Bush"))
+        {
+            m_bOnBush = false;
         }
     }
     public override IEnumerator Die()

@@ -29,15 +29,19 @@ public class Soldier : Hero
         Fire_Sound = GameObject.Find("BazookaFire");
     }
     public override void Attack()
-    {       
-          if (m_fStamina >= 1.0f)
-          {
-              if (Input.GetMouseButtonDown(0))
-              {
-                  m_fStamina -= 1.0f;
-                  m_Animator.SetTrigger("tBAttack");
-              }
-          }        
+    {
+         if (m_fStamina >= 1.0f)
+         {
+             if (Input.GetMouseButtonDown(0))
+             {
+                 m_fStamina -= 1.0f;
+                 m_Animator.SetTrigger("tBAttack");
+             }
+             if (Input.GetKeyDown(KeyCode.Space))
+             {
+                 Roll();
+             }
+         }
           if (Input.GetMouseButtonUp(0))
           {
               SetRotStart(false);
@@ -92,4 +96,79 @@ public class Soldier : Hero
         m_bRotStart = b;
     }
 
+    private void Roll()
+    {
+        Vector3 rot = this.transform.eulerAngles;
+
+        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 0.0f;
+            StartCoroutine(Roll_Move(rot));
+        }
+        else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        {
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 180.0f;
+            StartCoroutine(Roll_Move(rot));
+        }
+        else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            m_Animator.SetTrigger("tRoll");
+            rot.y = -90.0f;
+            StartCoroutine(Roll_Move(rot));
+        }
+        else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        {
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 90.0f;
+            StartCoroutine(Roll_Move(rot));
+        }
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            m_Animator.SetTrigger("tRoll");
+            rot.y = -45.0f;
+            StartCoroutine(Roll_Move(rot));
+        }
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
+        {
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 45.0f;
+            StartCoroutine(Roll_Move(rot));
+        }
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
+        {
+            m_Animator.SetTrigger("tRoll");
+            rot.y = -135.0f;
+            StartCoroutine(Roll_Move(rot));
+        }
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
+        {
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 135.0f;
+            StartCoroutine(Roll_Move(rot));
+        }                     
+    }
+
+    IEnumerator Roll_Move(Vector3 Rot)
+    {
+        this.transform.rotation = Quaternion.Euler(Rot);//Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(Rot), 40 * Time.deltaTime);
+        Vector3 dir = this.transform.forward;
+        float dist = 0.0f;
+
+        while(dist <= 4.0f)
+        {
+            float delta = 5.0f * Time.deltaTime;
+            dist += delta;
+
+            if (dist > 4.0f)
+            {
+                delta = 4.0f - (dist - delta);
+            }
+
+            this.transform.Translate(dir * delta, Space.World);
+
+            yield return null;
+        }
+    }
 }

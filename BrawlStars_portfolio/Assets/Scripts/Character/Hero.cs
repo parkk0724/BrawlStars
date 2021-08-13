@@ -25,7 +25,7 @@ public class Hero : Character
     public float m_fJump_Speed = 0.0f;   
     public GameObject m_objCharacter;
 
-    private GameObject m_objPlayerDir;
+    protected GameObject m_objPlayerDir;
     private GameObject m_objUIDie;
     private TMPro.TMP_Text m_tDie;
     private ParticleSystem m_ptsRevival;
@@ -54,10 +54,10 @@ public class Hero : Character
     Coroutine Jump2;
 
     [Header("RecoveryItem")]
-    private GameObject m_objHp;
-    private GameObject m_objStamina;
-    private GameObject m_objFever;
-    private GameObject m_objInvicible;
+    [SerializeField]private GameObject m_objHp;
+    [SerializeField]private GameObject m_objStamina;
+    [SerializeField]private GameObject m_objFever;
+    [SerializeField]private GameObject m_objInvicible;
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
@@ -90,16 +90,20 @@ public class Hero : Character
     {
         m_Jump_StartSound = GameObject.Find("JumpStart");
         m_objTargetEffect = GameObject.Find("TargetIndicator").GetComponent<ParticleSystem>();
-        m_objHp = GameObject.Find("HPPotionEffect");
-        //m_objHp.SetActive(false);
-        m_objStamina = GameObject.Find("STPotionEffect");
-        //m_objStamina.SetActive(false);
-        m_objFever = GameObject.Find("FVPotionEffect");
-        //m_objFever.SetActive(false);
-        m_objInvicible = GameObject.Find("IncivibleEffect");
-        //m_objInvicible.SetActive(false);
-        GameObject revivalEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/RevivalEffect"), transform.parent);
+        GameObject inviEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/IncivibleEffect"), transform.parent);
+        inviEffect.SetActive(false);
+        m_objInvicible = inviEffect.gameObject;
+        GameObject FvEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/FVPotionEffect"), transform.parent);
+        FvEffect.SetActive(false);
+        m_objFever = FvEffect.gameObject;
+        GameObject SpEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/STPotionEffect"), transform.parent);
+        SpEffect.SetActive(false);
+        m_objStamina = SpEffect.gameObject;
+        GameObject HpeFFect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/HPPotionEffect"), transform.parent);
+        HpeFFect.SetActive(false);
+        m_objHp = HpeFFect.gameObject;
         GameObject JumpEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/JumpEffect"), transform.parent);
+        GameObject revivalEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/RevivalEffect"), transform.parent);
         revivalEffect.SetActive(false);
         m_ptsRevival = revivalEffect.GetComponent<ParticleSystem>();
 

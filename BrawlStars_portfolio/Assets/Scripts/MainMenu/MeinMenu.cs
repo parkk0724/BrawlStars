@@ -58,6 +58,7 @@ public class MeinMenu : MonoBehaviour
 
     public void Soldier_Select()
     {
+        ClickSound.GetComponent<AudioSource>().Play();
         selected_character = true;
         DataManager.instance.select_character = DataManager.instance.Characters[101];
         Soldier.GetComponent<Animator>().SetBool("bSelect", true);
@@ -68,6 +69,7 @@ public class MeinMenu : MonoBehaviour
 
     public void BoxMan_Select()
     {
+        ClickSound.GetComponent<AudioSource>().Play();
         selected_character = true;
         DataManager.instance.select_character = DataManager.instance.Characters[102];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);
@@ -78,6 +80,7 @@ public class MeinMenu : MonoBehaviour
 
     public void Bear_Select()
     {
+        ClickSound.GetComponent<AudioSource>().Play();
         selected_character = true;
         DataManager.instance.select_character = DataManager.instance.Characters[103];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);
@@ -88,6 +91,7 @@ public class MeinMenu : MonoBehaviour
 
     public void Jester_Select()
     {
+        ClickSound.GetComponent<AudioSource>().Play();
         selected_character = true;
         DataManager.instance.select_character = DataManager.instance.Characters[104];
         Soldier.GetComponent<Animator>().SetBool("bSelect", false);

@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public enum Start_State { NONE, START }
     public Start_State m_Start = Start_State.NONE;
-    enum ESC_State { NONE, ESC };
-    ESC_State m_ESC_state = ESC_State.NONE;      
+    public enum ESC_State { NONE, ESC };
+    public ESC_State m_ESC_state = ESC_State.NONE;      
 
     private bool m_bEnd = false;
 
@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
                     {
                         if (Input.GetKeyDown(KeyCode.Escape))
                         {
+                            ESC_UI_Button click = GameObject.Find("ESC_UI").GetComponent<ESC_UI_Button>();
+                            click.PlayClickSound();
                             ESC_UI.Instance.Print_UI();
                             m_ESC_state = ESC_State.ESC;
                             Time.timeScale = 0.0f; // 업데이트 돌아가는 시간을 멈추는 코드 (단점, 코르틴, 등 시간에 구애받지 않는 함수는 적용 x)
@@ -81,6 +83,8 @@ public class GameManager : MonoBehaviour
                     {
                         if (Input.GetKeyDown(KeyCode.Escape))
                         {
+                            ESC_UI_Button click = GameObject.Find("ESC_UI").GetComponent<ESC_UI_Button>();
+                            click.PlayClickSound();
                             ESC_UI.Instance.Exit_UI();
                             m_ESC_state = ESC_State.NONE;
                             Time.timeScale = 1.0f;

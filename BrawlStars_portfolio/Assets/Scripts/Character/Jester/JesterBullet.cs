@@ -37,7 +37,7 @@ public class JesterBullet : MonoBehaviour
         {
             if(hit.transform.gameObject.GetComponent<Monster>())
             {
-                GameObject player = GameObject.Find("Jester");
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
                 Jester jester = player.GetComponent<Jester>();
 
                 jester.FeverUp();

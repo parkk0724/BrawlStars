@@ -25,6 +25,7 @@ public class Jester : Hero
     //UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
+        m_AfootSound = GetComponent<AudioSource>();
         this.GetComponentInChildren<JesterAnimationEv>().FootEffect = FootSound;
         m_fAttackStamina = 1.0f;
         base.Start();

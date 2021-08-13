@@ -36,7 +36,7 @@ public class ESC_UI : MonoBehaviour
         BGM_Bar = GameObject.Find("BGM_Bar");
         BGM_Bar.GetComponent<Slider>().value = 1.0f;
         SE_Bar = GameObject.Find("SideSound_Bar");
-        SE_Bar.GetComponent<Slider>().value = 1.0f;
+        SE_Bar.GetComponent<Slider>().value = 0.5f;
     }
 
     private void Update()

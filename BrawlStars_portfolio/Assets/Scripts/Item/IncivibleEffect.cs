@@ -9,6 +9,10 @@ public class IncivibleEffect : MonoBehaviour
     [SerializeField] ParticleSystem m_pProtectBoom;
     [SerializeField] AudioSource m_aShield;
     // Update is called once per frame
+    private void Awake()
+    {
+        m_aShield = GetComponent<AudioSource>();
+    }
     void Update()
     {
         GameObject Boss = GameObject.Find("BossMonster");

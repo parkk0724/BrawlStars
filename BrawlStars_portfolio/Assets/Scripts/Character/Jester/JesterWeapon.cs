@@ -13,12 +13,14 @@ public class JesterWeapon : MonoBehaviour
     public ParticleSystem Shooteffect;
     public ParticleSystem Shooteffect_1;
     [SerializeField] AudioSource ShotSound;
+    SoundManager soundManager;
     //public ParticleSystem Shooteffect_2;
     public UnityAction onFever = null;
     Animator anim;
     void Start()
     {
-        ShotSound = GetComponent<AudioSource>();
+        soundManager = FindObjectOfType<SoundManager>();
+        ShotSound =soundManager.Jestershot.GetComponent<AudioSource>();
         anim = this.GetComponent<Animator>();
         this.GetComponentInParent<JesterAnimationEv>().OnShot_0 = Shoot_0;
         this.GetComponentInParent<JesterAnimationEv>().OnShot_1 = Shoot_1;

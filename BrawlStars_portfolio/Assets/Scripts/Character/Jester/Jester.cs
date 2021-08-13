@@ -18,6 +18,7 @@ public class Jester : Hero
     public GameObject m_skILL_Range = null;
 
     [SerializeField] AudioSource m_AfootSound;
+    SoundManager soundManager;
     UnityEngine.Coroutine skill = null;
     float m_fAttackStamina = 0.0f;
     public LayerMask myMask = 0;
@@ -25,7 +26,8 @@ public class Jester : Hero
     //UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
-        m_AfootSound = GetComponent<AudioSource>();
+        soundManager = FindObjectOfType<SoundManager>();
+        m_AfootSound = soundManager.FootWalk.GetComponent<AudioSource>();
         this.GetComponentInChildren<JesterAnimationEv>().FootEffect = FootSound;
         m_fAttackStamina = 1.0f;
         base.Start();

@@ -98,39 +98,77 @@ public class Soldier : Hero
 
     private void Roll()
     {
+        Vector3 rot = this.transform.eulerAngles;
+
         if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
-            this.transform.LookAt(m_objPlayerDir.transform.forward);
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 0.0f;
+            StartCoroutine(Roll_Move(rot));
         }
         else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
-            this.transform.LookAt(-m_objPlayerDir.transform.forward);
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 180.0f;
+            StartCoroutine(Roll_Move(rot));
         }
         else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
-            this.transform.LookAt(-m_objPlayerDir.transform.right);
+            m_Animator.SetTrigger("tRoll");
+            rot.y = -90.0f;
+            StartCoroutine(Roll_Move(rot));
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
-            this.transform.LookAt(m_objPlayerDir.transform.right);
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 90.0f;
+            StartCoroutine(Roll_Move(rot));
         }
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
-            this.transform.LookAt((m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized);
+            m_Animator.SetTrigger("tRoll");
+            rot.y = -45.0f;
+            StartCoroutine(Roll_Move(rot));
         }
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S))
         {
-            this.transform.LookAt((m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 45.0f;
+            StartCoroutine(Roll_Move(rot));
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
         {
-            this.transform.LookAt((-m_objPlayerDir.transform.forward - m_objPlayerDir.transform.right).normalized);
+            m_Animator.SetTrigger("tRoll");
+            rot.y = -135.0f;
+            StartCoroutine(Roll_Move(rot));
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
         {
-            this.transform.LookAt((-m_objPlayerDir.transform.forward + m_objPlayerDir.transform.right).normalized);
-        }
-        m_Animator.SetTrigger("tRoll");
+            m_Animator.SetTrigger("tRoll");
+            rot.y = 135.0f;
+            StartCoroutine(Roll_Move(rot));
+        }                     
     }
 
+    IEnumerator Roll_Move(Vector3 Rot)
+    {
+        this.transform.rotation = Quaternion.Euler(Rot);//Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(Rot), 40 * Time.deltaTime);
+        Vector3 dir = this.transform.forward;
+        float dist = 0.0f;
+
+        while(dist <= 4.0f)
+        {
+            float delta = 5.0f * Time.deltaTime;
+            dist += delta;
+
+            if (dist > 4.0f)
+            {
+                delta = 4.0f - (dist - delta);
+            }
+
+            this.transform.Translate(dir * delta, Space.World);
+
+            yield return null;
+        }
+    }
 }

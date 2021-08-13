@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Browl_Stars.unity
-    guid: 5d4340c58ac53d44a9dfd3ac4c7add67
+    path: Assets/Scenes/MainMenu/MainMenu.unity
+    guid: 7649dd223c6f6b04989ac1d781176f16
   - enabled: 1
     path: Assets/Scenes/MainMenu/CharacterSelect.unity
     guid: 7f6bf49b8fd8bfd41b6c098c21d113ea
   - enabled: 1
-    path: Assets/Scenes/MainMenu/MainMenu.unity
-    guid: 7649dd223c6f6b04989ac1d781176f16
+    path: Assets/Scenes/Loading.unity
+    guid: a96558e6965cbba4884efa3a15e8e507
+  - enabled: 1
+    path: Assets/Scenes/Browl_Stars.unity
+    guid: 5d4340c58ac53d44a9dfd3ac4c7add67
   - enabled: 1
     path: Assets/Scenes/TestScene/EndLogunity.unity
     guid: 7f712442366221a4fbe86efa4db83724

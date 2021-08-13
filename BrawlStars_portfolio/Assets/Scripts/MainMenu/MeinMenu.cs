@@ -57,7 +57,7 @@ public class MeinMenu : MonoBehaviour
         ClickSound.GetComponent<AudioSource>().Play();
 
         if (selected_character)
-            SceneManager.LoadScene("Browl_Stars");
+            SceneManager.LoadScene("Loading");
         else
         {
             //Warnning_UI.instance.UI_Play();

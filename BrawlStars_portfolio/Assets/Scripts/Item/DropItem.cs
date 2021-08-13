@@ -81,7 +81,7 @@ public class DropItem : MonoBehaviour
         Vector3 Endpos_2 = StartPos + dir_2 * 2;
 
         float dist = Vector3.Distance(this.transform.position, player.transform.position);
-        float Speed = 1f;
+        float Speed = 2f;
         float delta = 0;
 
         if (dist > 4)

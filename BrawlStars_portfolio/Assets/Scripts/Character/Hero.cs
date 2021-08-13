@@ -470,7 +470,7 @@ public class Hero : Character
     #region SearchTarget
     protected void SearchTarget()
     {
-        float Shortdist = 8;
+        float Shortdist = 7;
         Transform shorTarget = null;
         Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
         if (EnemyCollider.Length > 0)
@@ -524,7 +524,7 @@ public class Hero : Character
     #region SerchTargetEffect
     protected void SearchTargetEffect()
     {
-        float Shortdist = 8;
+        float Shortdist = 7;
         Transform shorTarget = null;
         Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer);
         if (EnemyCollider.Length > 0)

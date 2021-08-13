@@ -12,13 +12,23 @@ public class JesterBullet : MonoBehaviour
     Vector3 Originpos;
     public LayerMask layerMask_t = 0;
     public LayerMask layerMask_o = 0;
+    [SerializeField] AudioSource ShotSound;
+    [SerializeField] AudioSource ShotSound_2;
+    SoundManager soundManager;
+    Coroutine SoundEffect;
+    Coroutine SoundEffect_2;
     void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
+        ShotSound = soundManager.Jestershoteffect.GetComponent<AudioSource>();
+        ShotSound_2 = soundManager.Jestershoteffect_2.GetComponent<AudioSource>();
+        ShotSound_2.volume = 100;
         Destroy(this.gameObject, 2f);
         Originpos = this.transform.position;
     }
-    public void SetDamage(float f) { m_fDamage = f; }
+    
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -43,14 +53,19 @@ public class JesterBullet : MonoBehaviour
                 jester.FeverUp();
                 //jester.GetATK() / 2,
                 hit.transform.gameObject.GetComponent<Monster>().Hit(50, Color.red);
-                initBullet();
+                if (SoundEffect_2 != null) StopCoroutine(SoundEffect_2);
+                SoundEffect_2 = StartCoroutine(initBullet_2(ShotSound_2));
+
+
             }
         }
 
 
         if(Physics.Raycast(curPos ,nextPos-curPos ,out hit ,dist_2 , layerMask_o))
         {
-            initBullet();
+            if (SoundEffect != null) StopCoroutine(SoundEffect);
+            SoundEffect = StartCoroutine(initBullet(ShotSound));
+            
         }
 
 
@@ -59,11 +74,32 @@ public class JesterBullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void initBullet()
+    IEnumerator initBullet(AudioSource source)
     {
         GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
         Destroy(obj.gameObject, 0.2f);
         Destroy(this.gameObject);
+        source.Play();
+        yield return new WaitForSeconds(0.1f);
+        source.Stop();
+        yield return new WaitForSeconds(0.1f);
+        source.Play();
+
+    }
+    IEnumerator initBullet_2(AudioSource source)
+    {
+        GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
+        Destroy(obj.gameObject, 0.2f);
+        Destroy(this.gameObject);
+        source.Play();
+        yield return new WaitForSeconds(0.1f);
+        source.Stop();
+        yield return new WaitForSeconds(0.1f);
+        source.Play();
+        yield return new WaitForSeconds(0.1f);
+        source.Stop();
+        yield return new WaitForSeconds(0.1f);
+        source.Play();
     }
     private void OnTriggerEnter(Collider other)
     {

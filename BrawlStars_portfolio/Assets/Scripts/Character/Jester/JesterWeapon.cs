@@ -21,6 +21,7 @@ public class JesterWeapon : MonoBehaviour
     {
         soundManager = FindObjectOfType<SoundManager>();
         ShotSound =soundManager.Jestershot.GetComponent<AudioSource>();
+        ShotSound.volume = 0.3f;
         anim = this.GetComponent<Animator>();
         this.GetComponentInParent<JesterAnimationEv>().OnShot_0 = Shoot_0;
         this.GetComponentInParent<JesterAnimationEv>().OnShot_1 = Shoot_1;

@@ -22,6 +22,8 @@ public class SoundManager : MonoBehaviour
     public GameObject SkillBazooka;
 
     public GameObject Jestershot;
+    public GameObject Jestershoteffect;
+    public GameObject Jestershoteffect_2;
 
     GameObject BGM;
     GameObject SoundEffect;
@@ -38,7 +40,8 @@ public class SoundManager : MonoBehaviour
         BazookaExplosion = GameObject.Find("BazookaExplosion");
         SkillBazooka = GameObject.Find("SkillBazooka");
         Jestershot = GameObject.Find("JesterShot");
-
+        Jestershoteffect = GameObject.Find("JesterShoteffect");
+        Jestershoteffect_2 = GameObject.Find("JesterShoteffect_2");
 
         BGM = GameObject.Find("BGM");
         SoundEffect = GameObject.Find("SoundEffect");

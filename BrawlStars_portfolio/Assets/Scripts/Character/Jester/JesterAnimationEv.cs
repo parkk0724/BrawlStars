@@ -6,13 +6,19 @@ using UnityEngine.Events;
 public class JesterAnimationEv : MonoBehaviour
 {
     // Start is called before the first frame update
+    AudioSource WalkSound = null;
+
     public UnityAction OnShot_0 = null;
     public UnityAction OnShot_1 = null;
     public UnityAction OnShot_2 = null;
     public UnityAction Anim_end = null;
+
     public UnityAction FireEffect = null;
     public UnityAction FootEffect = null;
+
     public GameObject Effect;
+    public Transform Lfoot_pos;
+    public Transform Rfoot_pos;
     public Transform EffectPos;
     void Start()
     {
@@ -57,5 +63,13 @@ public class JesterAnimationEv : MonoBehaviour
     void v_FootEffect()
     {
         FootEffect?.Invoke();
+    }
+    private void Run_Effect_R()
+    {
+        GameObject Run_R = Instantiate(Effect, Rfoot_pos.position, Quaternion.identity);
+    }
+    private void Run_Effect_L ()
+    {
+        GameObject Run_L = Instantiate(Effect, Rfoot_pos.position, Quaternion.identity);
     }
 }

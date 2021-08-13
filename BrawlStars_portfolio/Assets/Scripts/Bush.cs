@@ -24,7 +24,7 @@ public class Bush : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") || other.CompareTag("Monster") || other.CompareTag("Bullet"))
+        if(other.CompareTag("Player") || other.CompareTag("Monster"))
         {
             m_audioSource.Play();
             m_meshRenderer.material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
@@ -34,7 +34,7 @@ public class Bush : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Monster") || other.CompareTag("Bullet"))
+        if (other.CompareTag("Player") || other.CompareTag("Monster"))
         {
             m_meshRenderer.material.shader = Shader.Find("Standard");
             m_meshRenderer.material.color = new Color(1, 1, 1, 1);

@@ -36,18 +36,21 @@ public class BoxMan : Hero
 
     protected override void Update()
     {
-        if (!m_bDie)
+        if (m_Start == Start_State.START)
         {
-            m_fCurBodyAttack += Time.deltaTime;
-            RecoveryStamina();
-            Move();
-            Attack();
-            invicibleitem();
-            SearchTargetEffect();
-            TargetEffect();
+            if (!m_bDie)
+            {
+                m_fCurBodyAttack += Time.deltaTime;
+                RecoveryStamina();
+                Move();
+                Attack();
+                invicibleitem();
+                SearchTargetEffect();
+                TargetEffect();
 
-            if (m_bRotStart) LookEnemy();
-            if (m_nHP <= 0) StartCoroutine(Die());
+                if (m_bRotStart) LookEnemy();
+                if (m_nHP <= 0) StartCoroutine(Die());
+            }
         }
     }
     public override void Attack()

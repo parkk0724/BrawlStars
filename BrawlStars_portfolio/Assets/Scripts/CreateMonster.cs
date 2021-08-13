@@ -6,15 +6,15 @@ public class CreateMonster : MonoBehaviour
 {
     GameObject m_objMonster;
     [SerializeField] float m_fCreateTime = 0.0f;
-    Transform[] m_tfPoint;
+    Transform[] m_tfPoint = null;
     private void Awake()
     {
         m_objMonster = Resources.Load<GameObject>("Prefabs/Character/MonsterChicken");
     }
     void Start()
     {
-
-        m_tfPoint = this.GetComponentsInChildren<Transform>();
+        m_tfPoint = new Transform[transform.childCount];
+        for (int i = 0; i < m_tfPoint.Length; i++) m_tfPoint[i] = transform.GetChild(i);
         StartCoroutine(Create());
         m_fCreateTime = 5.0f;
     }
@@ -31,10 +31,10 @@ public class CreateMonster : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(m_fCreateTime);
-            if(m_tfPoint[length - 1].childCount < 6)
+            if(m_tfPoint[0].childCount < 6)
             {
                 int rnd = Random.Range(0, length - 2);
-                GameObject obj = Instantiate(m_objMonster, m_tfPoint[rnd].position, Quaternion.identity, m_tfPoint[length - 1]);
+                GameObject obj = Instantiate(m_objMonster, m_tfPoint[rnd].position, Quaternion.identity, m_tfPoint[0]);
                 obj.SetActive(true);
             }
         }

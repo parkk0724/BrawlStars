@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
     public GameObject Jestershot;
     public GameObject Jestershoteffect;
     public GameObject Jestershoteffect_2;
+    public GameObject Jestershoteffect_3;
 
     GameObject BGM;
     GameObject SoundEffect;
@@ -42,6 +43,7 @@ public class SoundManager : MonoBehaviour
         Jestershot = GameObject.Find("JesterShot");
         Jestershoteffect = GameObject.Find("JesterShoteffect");
         Jestershoteffect_2 = GameObject.Find("JesterShoteffect_2");
+        Jestershoteffect_3 = GameObject.Find("JesterShoteffect_3");
 
         BGM = GameObject.Find("BGM");
         SoundEffect = GameObject.Find("SoundEffect");

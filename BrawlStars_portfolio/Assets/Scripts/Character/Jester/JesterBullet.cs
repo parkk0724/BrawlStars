@@ -14,6 +14,7 @@ public class JesterBullet : MonoBehaviour
     public LayerMask layerMask_o = 0;
     [SerializeField] AudioSource ShotSound;
     [SerializeField] AudioSource ShotSound_2;
+    AudioSource ShotSound_3;
     SoundManager soundManager;
     Coroutine SoundEffect;
     Coroutine SoundEffect_2;
@@ -22,7 +23,8 @@ public class JesterBullet : MonoBehaviour
         soundManager = FindObjectOfType<SoundManager>();
         ShotSound = soundManager.Jestershoteffect.GetComponent<AudioSource>();
         ShotSound_2 = soundManager.Jestershoteffect_2.GetComponent<AudioSource>();
-        ShotSound_2.volume = 100;
+        ShotSound_2.volume = 1;
+        ShotSound_3 = soundManager.Jestershoteffect_3.GetComponent<AudioSource>();
         Destroy(this.gameObject, 2f);
         Originpos = this.transform.position;
     }
@@ -95,9 +97,9 @@ public class JesterBullet : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         source.Stop();
         yield return new WaitForSeconds(0.1f);
-        source.Play();
+        ShotSound_3.Play();
         yield return new WaitForSeconds(0.1f);
-        source.Stop();
+        ShotSound_3.Stop();
         yield return new WaitForSeconds(0.1f);
         source.Play();
     }

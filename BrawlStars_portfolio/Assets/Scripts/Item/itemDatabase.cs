@@ -19,7 +19,7 @@ public class itemDatabase : MonoBehaviour
             instance = this;
         }
     }
-    public List<Item> itemList = new List<Item>();
+    //public List<Item> itemList = new List<Item>();
     GameObject[] monster;
     int itemDorp_Nomal = 1;
     int itemDorp_Boss = 3;
@@ -29,10 +29,10 @@ public class itemDatabase : MonoBehaviour
     {
         LoadItemTextData();
         #region FirstSolution ITemList
-        itemList.Add(new Item(ITemType.Potion, USE.HP, ITemGrade.D, "HpPotion", 50, Resources.Load<GameObject>("Prefabs/Item/HpPotion")));
-        itemList.Add(new Item(ITemType.Potion, USE.STAMINA, ITemGrade.D, "StaminaPotion", 2, Resources.Load<GameObject>("Prefabs/Item/StaminaPotion")));
-        itemList.Add(new Item(ITemType.Potion, USE.FEVER, ITemGrade.D, "FeverPotion", 50, Resources.Load<GameObject>("Prefabs/Item/FeverPotion")));
-        itemList.Add(new Item(ITemType.Potion, USE.INVINCIBLE, ITemGrade.C, "InviciblePotion", 0, Resources.Load<GameObject>("Prefabs/Item/InviciblePotion")));
+        //itemList.Add(new Item(ITemType.Potion, USE.HP, ITemGrade.D, "HpPotion", 50, Resources.Load<GameObject>("Prefabs/Item/HpPotion")));
+        //itemList.Add(new Item(ITemType.Potion, USE.STAMINA, ITemGrade.D, "StaminaPotion", 2, Resources.Load<GameObject>("Prefabs/Item/StaminaPotion")));
+        //itemList.Add(new Item(ITemType.Potion, USE.FEVER, ITemGrade.D, "FeverPotion", 50, Resources.Load<GameObject>("Prefabs/Item/FeverPotion")));
+        //itemList.Add(new Item(ITemType.Potion, USE.INVINCIBLE, ITemGrade.C, "InviciblePotion", 0, Resources.Load<GameObject>("Prefabs/Item/InviciblePotion")));
         #endregion
     }
     void Update()
@@ -72,7 +72,7 @@ public class itemDatabase : MonoBehaviour
             {
                 return;
             }
-            else if (DropRange < 9)
+            else if (DropRange < 4)
             {
                 ArrayList table = new ArrayList();
 

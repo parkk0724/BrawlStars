@@ -59,7 +59,7 @@ public class Hero : Character
     [SerializeField]private GameObject m_objFever;
     [SerializeField]private GameObject m_objInvicible;
     [SerializeField]private ParticleSystem m_objGhost;
-    public Material[] m_mymat = null;
+    public GameObject[] mymat = null;
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
@@ -117,7 +117,6 @@ public class Hero : Character
     }
     protected virtual void Start()
     {
-        
         m_objPlayerDir = GameObject.Find("PlayerDirection");
         m_objUIDie = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIDie"), GameObject.Find("UI").transform);
         m_objUIDie.SetActive(false);
@@ -323,10 +322,10 @@ public class Hero : Character
                         {
                             b_active[4] = false;
                             m_fCurtime_2 = 0;
-                            m_objGhost.gameObject.SetActive(true);
+                            //m_objGhost.gameObject.SetActive(true);
                         }
+                        b_active[4] = true;
                     }
-                    b_active[4] = true;
                     #region ##FirstSolution
                     /*
                     switch (dropitem.GetItem().use) 
@@ -710,11 +709,13 @@ public class Hero : Character
         if(b_active[4])
         {
             m_fCurtime_2 += Time.deltaTime;
-            m_objGhost.gameObject.transform.position = this.transform.position;
-            m_objGhost.gameObject.SetActive(true);
-            this.gameObject.layer = LayerMask.NameToLayer("Ghost");
-            if(m_fCurtime_2 > 6)
+            //m_objGhost.gameObject.transform.position = this.transform.position;
+            //m_objGhost.gameObject.SetActive(true);
+            this.gameObject.layer = 17;
+            Debug.Log("!!!");
+            if (m_fCurtime_2 > 6)
             {
+                
                 b_active[4] = false;
                 m_fCurtime_2 = 0;
                 //m_mymat[0].color = new Color(1, 1, 1, 0.3f);
@@ -726,7 +727,7 @@ public class Hero : Character
             //m_mymat[0].color = new Color(1, 1, 1, 1);
             //m_mymat[1].color = new Color(1, 1, 1, 1);
             this.gameObject.layer = 7;
-            m_objGhost.gameObject.SetActive(false);
+            //m_objGhost.gameObject.SetActive(false);
         }
     }
    IEnumerator RecoverHP() //Hp»∏∫π ¿Ã∆Â∆Æ

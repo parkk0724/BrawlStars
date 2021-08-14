@@ -39,12 +39,12 @@ public class MeinMenu : MonoBehaviour
     }
     public void OnClick_CharacterSelect()
     {
-        ClickSound.SetActive(true);
+        ClickSound.GetComponent<AudioSource>().Play();
         SceneManager.LoadScene("CharacterSelect");
     }
     public void OnClick_Quit()
     {
-        ClickSound.SetActive(true);
+        ClickSound.GetComponent<AudioSource>().Play();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 # else

@@ -13,7 +13,7 @@ public class Loading : MonoBehaviour
         loading_progress = this.GetComponentInChildren<Slider>();
         loading_progress.value = 0.0f;
 
-       // StartCoroutine(Loding());
+        StartCoroutine(Loding());
     }
     private IEnumerator Loding()
     {

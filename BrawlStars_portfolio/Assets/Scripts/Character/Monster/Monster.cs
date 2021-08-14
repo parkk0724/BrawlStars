@@ -29,7 +29,7 @@ public class Monster : Character
         m_fRandomMoveRange = 10.0f;
         m_NavMeshAgent = this.GetComponent<NavMeshAgent>();
         m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
-        HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
+        if (m_tfTarget != null) HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
     }
 
     // Update is called once per frame

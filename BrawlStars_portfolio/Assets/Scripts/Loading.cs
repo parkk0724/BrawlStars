@@ -12,9 +12,13 @@ public class Loading : MonoBehaviour
     {
         loading_progress = this.GetComponentInChildren<Slider>();
         loading_progress.value = 0.0f;
-
-       // StartCoroutine(Loding());
     }
+
+    private void Start()
+    {
+        StartCoroutine(Loding());
+    }
+
     private IEnumerator Loding()
     {
         float fillAmonut = 0.0f;
@@ -24,6 +28,8 @@ public class Loading : MonoBehaviour
 
         while (loading_progress.value < 1.0f)
         {
+            Debug.Log(operation.progress);
+
             if (loading_progress.value >= 1.0f && operation.progress >= 1.0f)
             {
                 operation.allowSceneActivation = true;
@@ -35,5 +41,7 @@ public class Loading : MonoBehaviour
                         
             yield return null;
         }
+
+        operation.allowSceneActivation = true;
     }
  }

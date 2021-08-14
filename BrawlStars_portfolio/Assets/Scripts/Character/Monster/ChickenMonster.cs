@@ -37,7 +37,9 @@ public class ChickenMonster : Monster
         ProgressState();
 
         // 히어로가 부쉬에서 나갔을 때
-        if (!HeroOnBush() && m_bBushAttack)
+        if(m_tfTarget == null) m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+        else if (HeroOnBush == null) HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
+        else if (!HeroOnBush() && m_bBushAttack)
         {
             m_bBushAttack = false;
         }
@@ -108,6 +110,8 @@ public class ChickenMonster : Monster
         {
             ChangeState(State.MOVE);
         }
+        else if (m_tfTarget == null) m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+        else if (HeroOnBush == null) HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
         else if (!HeroOnBush() && m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange ||
                 HeroOnBush() && m_bBushAttack && m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
         {
@@ -121,6 +125,8 @@ public class ChickenMonster : Monster
         {
             ChangeState(State.IDLE);
         }
+        else if (m_tfTarget == null) m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+        else if (HeroOnBush == null) HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
         else if (!HeroOnBush() && m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange ||
                  HeroOnBush() && m_bBushAttack && m_tfTarget != null && Vector3.Distance(m_tfTarget.position, this.transform.position) < m_fRange)
         {
@@ -130,7 +136,9 @@ public class ChickenMonster : Monster
 
     public override void Attack()
     {
-        if (!m_tfTarget.gameObject.activeSelf || Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fRange * 2 || HeroOnBush() && !m_bBushAttack)
+        if (m_tfTarget == null) m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+        else if (HeroOnBush == null) HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
+        else if (!m_tfTarget.gameObject.activeSelf || Vector3.Distance(this.transform.position, m_tfTarget.position) > m_fRange * 2 || HeroOnBush() && !m_bBushAttack)
         {
             ChangeState(State.IDLE);
             m_Animator.SetTrigger("tIdle");

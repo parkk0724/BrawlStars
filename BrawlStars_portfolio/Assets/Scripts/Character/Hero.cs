@@ -446,7 +446,6 @@ public class Hero : Character
 
         while (count > 0)
         {
-            Debug.Log(count);
             m_tDie.text = count.ToString();
             yield return new WaitForSeconds(1);
             count--;
@@ -457,7 +456,6 @@ public class Hero : Character
     }
     public void Revival()
     {
-        Debug.Log("Revival");
         StartCoroutine(RevivalEffect());
         this.transform.position = m_vOriginPos;
         this.transform.rotation = Quaternion.Euler(m_vOriginRot);

@@ -230,6 +230,8 @@ public class BossMonster : Monster
     }
     public override void Move()
     {
+        if (m_tfTarget == null) return;
+
         int rnd = Random.Range(1, 100);
         if (m_bPhase[1])
         {

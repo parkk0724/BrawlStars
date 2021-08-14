@@ -55,12 +55,64 @@ public class itemDatabase : MonoBehaviour {
                     {
                         Transform monsterTransform;
                         monsterTransform = monster[i].transform;
-                        ItemDrop(monsterTransform, DropCount);
+                        Dropitem(monsterTransform, DropCount);
                     }
                 }
             }
         }
     }
+
+    void Dropitem(Transform monsterTansform, int _itemCount)
+    {
+        for (int z = 0; z < _itemCount; z++) // 아이템 드랍 몇번 할꺼냐
+        {
+            int DropRange = Random.Range(0, 10);
+            if (DropRange < 4)
+            {
+                return;
+            }
+            else if (DropRange < 9)
+            {
+                ArrayList table = new ArrayList();
+                for (int i = 0; i < ItemData.Count; i++)
+                {
+                    if (instance.ItemData[i][i].itemGrade == "D") // 등급비교
+                    {
+                        table.Add(i);//테이블에 아이템의 인덱스값을 저장
+                    }
+                }
+                int tableindex = Random.Range(0, table.Count);// 테이블의 값을 랜덤으로 돌린 인덱스값
+                GameObject obj = Resources.Load<GameObject>(instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemPrefab);
+                obj.GetComponent<DropItem>().reitem.itemtype = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemtype;
+                obj.GetComponent<DropItem>().reitem.itemName = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemName;
+                obj.GetComponent<DropItem>().reitem.itemGrade = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemGrade;
+                obj.GetComponent<DropItem>().reitem.itemCount = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemCount;
+                obj.GetComponent<DropItem>().reitem.uSEitem = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].uSEitem;
+                Instantiate(obj, monsterTansform.position, obj.transform.rotation);
+            }
+            else if (DropRange < 10)
+            {
+                ArrayList table = new ArrayList();
+                for (int i = 0; i < instance.itemList.Count; i++)
+                {
+                    if (instance.itemList[i].itemGrade == (ITemGrade)2)
+                    {
+                        table.Add(i);
+                    }
+                }
+                int tableindex = Random.Range(0, table.Count);
+                //생성된 드랍아이템의 아이템 타입을 아이템데이터베이스 형식으로 바꿈
+                GameObject obj = Resources.Load<GameObject>(instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemPrefab);
+                obj.GetComponent<DropItem>().reitem.itemtype = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemtype;
+                obj.GetComponent<DropItem>().reitem.itemName = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemName;
+                obj.GetComponent<DropItem>().reitem.itemGrade = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemGrade;
+                obj.GetComponent<DropItem>().reitem.itemCount = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].itemCount;
+                obj.GetComponent<DropItem>().reitem.uSEitem = instance.ItemData[(int)table[tableindex]][(int)table[tableindex]].uSEitem;
+                Instantiate(obj, monsterTansform.position, obj.transform.rotation);
+            }
+        }
+    }
+#region FirstSolution // 처음에 만든 아이템 드랍방식
     public void ItemDrop(Transform monsterTansform, int _itemCount) // 아이템드랍
     {
         for (int z = 0; z < _itemCount; z++) // 아이템 드랍 몇번 할꺼냐
@@ -110,8 +162,8 @@ public class itemDatabase : MonoBehaviour {
             }
         } 
     }
-
-    void LoadItemTextData()
+#endregion
+    void LoadItemTextData() //데이터화 시켜서 불러옴
     {
         TextAsset textAsset = Resources.Load<TextAsset>("TextData/Item");
 

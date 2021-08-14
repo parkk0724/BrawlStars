@@ -105,13 +105,13 @@ public class itemDatabase : MonoBehaviour
                 List<reitem> mydate = new List<reitem>(); //새로운 리스트를 만들어서 그곳에 값을 저장하고
                 mydate = instance.ItemData[(int)table[tableindex]];// 그것을 넣는다
                 GameObject obj = Resources.Load<GameObject>(mydate[0].itemPrefab);
-                obj.GetComponent<DropItem>().reitem.Key = mydate[0].Key;
+                obj.GetComponent<DropItem>().reitem.Key = mydate[0].Key; //데이터를 넣는다
                 obj.GetComponent<DropItem>().reitem.itemtype = mydate[0].itemtype;
                 obj.GetComponent<DropItem>().reitem.itemName = mydate[0].itemName;
                 obj.GetComponent<DropItem>().reitem.itemGrade = mydate[0].itemGrade;
                 obj.GetComponent<DropItem>().reitem.itemCount = mydate[0].itemCount;
                 obj.GetComponent<DropItem>().reitem.uSEitem = mydate[0].uSEitem;
-                Instantiate(obj, monsterTansform.position, obj.transform.rotation); //데이터를 넣는다
+                Instantiate(obj, monsterTansform.position, obj.transform.rotation); //생성시킨다
             }
             else if (DropRange < 10)
             {

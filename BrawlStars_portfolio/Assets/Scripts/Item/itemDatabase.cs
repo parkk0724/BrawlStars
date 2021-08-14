@@ -74,7 +74,7 @@ public class itemDatabase : MonoBehaviour {
             else if (DropRange < 9)
             {
                 ArrayList table = new ArrayList();
-                for (int i = 0; i < ItemData.Count; i++)
+                for (int i = 0; i < instance.ItemData.Count; i++)
                 {
                     if (instance.ItemData[i][i].itemGrade == "D") // 등급비교
                     {
@@ -93,11 +93,11 @@ public class itemDatabase : MonoBehaviour {
             else if (DropRange < 10)
             {
                 ArrayList table = new ArrayList();
-                for (int i = 0; i < instance.itemList.Count; i++)
+                for (int i = 0; i < instance.ItemData.Count; i++)
                 {
-                    if (instance.itemList[i].itemGrade == (ITemGrade)2)
+                    if (instance.ItemData[i][i].itemGrade == "C") // 등급비교
                     {
-                        table.Add(i);
+                        table.Add(i);//테이블에 아이템의 인덱스값을 저장
                     }
                 }
                 int tableindex = Random.Range(0, table.Count);
@@ -113,6 +113,7 @@ public class itemDatabase : MonoBehaviour {
         }
     }
 #region FirstSolution // 처음에 만든 아이템 드랍방식
+    /*
     public void ItemDrop(Transform monsterTansform, int _itemCount) // 아이템드랍
     {
         for (int z = 0; z < _itemCount; z++) // 아이템 드랍 몇번 할꺼냐
@@ -161,7 +162,7 @@ public class itemDatabase : MonoBehaviour {
                 obj.GetComponent<DropItem>().item.use = instance.itemList[(int)table[tableindex]].use;
             }
         } 
-    }
+    }*/
 #endregion
     void LoadItemTextData() //데이터화 시켜서 불러옴
     {

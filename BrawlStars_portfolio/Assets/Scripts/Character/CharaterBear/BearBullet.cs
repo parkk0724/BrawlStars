@@ -9,6 +9,7 @@ public class BearBullet : MonoBehaviour
     public float curTime = 0.0f;
     public float BulletSpeed = 2f;
     public float BulletLiveMaxTime = 2.0f;
+    int cnt = 0;
     public UnityAction OnFeverUp = null;
     public GameObject HitEffect;
     Vector3 TargetDirVector; 
@@ -22,28 +23,26 @@ public class BearBullet : MonoBehaviour
         ribody.velocity = this.transform.forward * BulletSpeed;
         */
         // OnFeverUp = GetComponent<>
-        TargetDirVector = this.transform.forward.normalized * BulletSpeed * Time.deltaTime;
+        TargetDirVector = this.transform.forward.normalized * BulletSpeed;
     }
 
     private void Update()
     {
-        this.transform.Translate(TargetDirVector, Space.World);
-        Debug.Log(TargetDirVector);
+        this.transform.Translate(TargetDirVector * Time.deltaTime, Space.World);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Obstacle")
-            Destroy(gameObject);
+        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Obstacle") Destroy(gameObject);
 
         if (other.gameObject.tag == "Monster")
         { 
             this.transform.position = other.transform.position;
             OnFeverUp();
             GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation); // 이펙트 생성
-            obj.transform.localScale *= 4;
-            other.GetComponent<Monster>()?.Hit(damage, Color.red);
-            Destroy(obj, 1.0f);
+            obj.transform.localScale *= 4;                                                             // 이펙트 크기 키움
+            other.GetComponent<Monster>()?.Hit(damage, Color.red);                                     // 몬스터 히트
+            //Destroy(obj, 1.0f);                                                                        // 이펙트 지우기
             SearchTarget();
         }
     }
@@ -91,15 +90,17 @@ public class BearBullet : MonoBehaviour
 
         if (ResultTarget != null)
         {
+            Debug.Log("리절트 타겟 not null");
             // 검출된 콜라이더를 향해 방향 잡고
             Vector3 dir = ResultTarget.position - this.transform.position;
             dir.y = 0;
             dir.Normalize();
 
-            Debug.Log("dir: " +dir);
+            Debug.Log("상대 이름:" + ResultTarget.name + "위치: " + ResultTarget.position);
             dir.y = 0.3f;
-            TargetDirVector = (dir * BulletSpeed) * Time.deltaTime ;
+            TargetDirVector = dir * BulletSpeed;
         }
+        else Debug.Log("ResultTarget null");
     }
 }
 

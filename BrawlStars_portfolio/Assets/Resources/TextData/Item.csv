@@ -3,4 +3,4 @@ Key,ITemType,use,itemGrade,itemName,itemCount,itemPrefab
 2,Potion,STAMINA,D,StaminaPotion,3,Prefabs/Item/StaminaPotion
 3,Potion,FEVER,D,FeverPotion,50,Prefabs/Item/FeverPotion
 4,Potion,INVINCIBLE,C,InviciblePotion,0,Prefabs/Item/InviciblePotion
-5,Potion,Ghost,C,GhostPotion,0,Prefabs/Item/GhostPotion
+5,Potion,GHOST,C,GhostPotion,0,Prefabs/Item/GhostPotion

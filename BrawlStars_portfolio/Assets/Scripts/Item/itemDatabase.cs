@@ -80,7 +80,6 @@ public class itemDatabase : MonoBehaviour
                 {
                     for (int i = 0; i < keyValue.Value.Count; i++)
                     {
-                        Debug.Log(keyValue.Value[i].itemGrade);
                         if (keyValue.Value[i].itemGrade == "D") //키 벨루의 아이템 등급을 비교한다
                         {
                             table.Add(keyValue.Key);
@@ -120,7 +119,6 @@ public class itemDatabase : MonoBehaviour
                 {
                     for (int i = 0; i < keyValue.Value.Count; i++)
                     {
-                        Debug.Log(keyValue.Value[i].itemGrade);
                         if (keyValue.Value[i].itemGrade == "C")
                         {
                             table.Add(keyValue.Key);

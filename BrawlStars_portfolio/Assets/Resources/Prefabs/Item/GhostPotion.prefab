@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3062127196562595257}
   - component: {fileID: 3051847629898776331}
   - component: {fileID: 1347463459582121553}
+  - component: {fileID: -1501567417410536256}
+  - component: {fileID: -1931285142780910207}
   m_Layer: 10
   m_Name: GhostPotion
   m_TagString: Item
@@ -103,3 +105,31 @@ MonoBehaviour:
     itemGrade: 
     itemPrefab: 
   check: 0
+--- !u!136 &-1501567417410536256
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3028790192961345953}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.6070578
+  m_Height: 1.6070579
+  m_Direction: 1
+  m_Center: {x: -0.00000044703484, y: -0.00049293035, z: 0.1613593}
+--- !u!136 &-1931285142780910207
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3028790192961345953}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.4291059
+  m_Height: 1.4291059
+  m_Direction: 1
+  m_Center: {x: -0.17795235, y: -0.0894685, z: 0.1613593}

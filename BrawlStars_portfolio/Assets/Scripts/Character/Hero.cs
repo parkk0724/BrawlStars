@@ -58,11 +58,14 @@ public class Hero : Character
     [SerializeField]private GameObject m_objStamina;
     [SerializeField]private GameObject m_objFever;
     [SerializeField]private GameObject m_objInvicible;
+    [SerializeField]private ParticleSystem m_objGhost;
+    public Material[] m_mymat = null;
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
-    bool[] b_active = { false,false,false,false };
+    bool[] b_active = { false,false,false,false,false };
     float m_fCurtime;
+    float m_fCurtime_2;
 
     public List<reitem> items = new List<reitem>();
 
@@ -114,11 +117,11 @@ public class Hero : Character
     }
     protected virtual void Start()
     {
+        
         m_objPlayerDir = GameObject.Find("PlayerDirection");
         m_objUIDie = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIDie"), GameObject.Find("UI").transform);
         m_objUIDie.SetActive(false);
         m_tDie = m_objUIDie.GetComponentInChildren<TMPro.TMP_Text>();
-
         Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
         Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;        
         m_bMoveStart = true;
@@ -172,6 +175,7 @@ public class Hero : Character
                         if (Fe != null) StopCoroutine(Fe);
                         Fe = StartCoroutine(RecoverFV());
                     }
+                    Ghostitem();
                     invicibleitem();
                     SearchTargetEffect();
                     TargetEffect();
@@ -313,6 +317,16 @@ public class Hero : Character
                         }
                         b_active[3] = true;
                     }
+                    else if(dropitem.GetItem().uSEitem == "GHOST")
+                    {
+                        if(b_active[4])
+                        {
+                            b_active[4] = false;
+                            m_fCurtime_2 = 0;
+                            m_objGhost.gameObject.SetActive(true);
+                        }
+                    }
+                    b_active[4] = true;
                     #region ##FirstSolution
                     /*
                     switch (dropitem.GetItem().use) 
@@ -689,6 +703,30 @@ public class Hero : Character
         {
             this.gameObject.layer = 7;
             m_objInvicible.gameObject.SetActive(false);
+        }
+    }
+    void Ghostitem()
+    {
+        if(b_active[4])
+        {
+            m_fCurtime_2 += Time.deltaTime;
+            m_objGhost.gameObject.transform.position = this.transform.position;
+            m_objGhost.gameObject.SetActive(true);
+            this.gameObject.layer = LayerMask.NameToLayer("Ghost");
+            if(m_fCurtime_2 > 6)
+            {
+                b_active[4] = false;
+                m_fCurtime_2 = 0;
+                //m_mymat[0].color = new Color(1, 1, 1, 0.3f);
+                //m_mymat[1].color = new Color(1, 1, 1, 0.3f);
+            }
+        }
+        else
+        {
+            //m_mymat[0].color = new Color(1, 1, 1, 1);
+            //m_mymat[1].color = new Color(1, 1, 1, 1);
+            this.gameObject.layer = 7;
+            m_objGhost.gameObject.SetActive(false);
         }
     }
    IEnumerator RecoverHP() //Hp»∏∫π ¿Ã∆Â∆Æ

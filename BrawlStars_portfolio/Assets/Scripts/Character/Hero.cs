@@ -364,7 +364,7 @@ public class Hero : Character
                             b_active[3] = true;
                             break;
                     }*/
-                    #endregion
+                    #endregion 霉锅掳贸府规过
                 }
                 else
                 {

@@ -68,7 +68,7 @@ public class itemDatabase : MonoBehaviour
         for (int z = 0; z < _itemCount; z++) // 아이템 드랍 몇번 할꺼냐
         {
             int DropRange = Random.Range(0, 10);
-            if (DropRange < 1)
+            if (DropRange < 3)
             {
                 return;
             }
@@ -76,7 +76,7 @@ public class itemDatabase : MonoBehaviour
             {
                 ArrayList table = new ArrayList();
 
-                foreach (var keyValue in ItemData)
+                foreach (var keyValue in ItemData) //for문 사용시 이상하게 잘안됨
                 {
                     for (int i = 0; i < keyValue.Value.Count; i++)
                     {

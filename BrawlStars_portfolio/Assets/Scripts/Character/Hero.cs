@@ -62,6 +62,7 @@ public class Hero : Character
     AudioSource m_AgetitemSound;
     AudioSource m_Aghost;
     public SkinnedMeshRenderer[] m_meshRenderer;
+    public Renderer[] m_renderer;
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
@@ -725,22 +726,33 @@ public class Hero : Character
             m_fCurtime_2 += Time.deltaTime;
             m_objGhost.gameObject.transform.position = this.transform.position;
             m_objGhost.gameObject.SetActive(true);
-            
+            this.gameObject.layer = LayerMask.NameToLayer("Ghost");
+
             for (int i = 0; i < m_meshRenderer.Length; i++) //스킨렌더가 아닌 사람이 있어서 for문사용
             {
                 m_meshRenderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+                #region 알파테스트
                 //Color startColor = m_meshRenderer[i].material.color = new Color(1, 1, 1, 1f);
                 //Color EndColor = m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
-                ////mytime += Time.deltaTime;
+                //mytime += Time.deltaTime;
                 //m_meshRenderer[i].material.color = Color.Lerp(startColor, EndColor, 0.05f);
                 //if (m_meshRenderer[i].material.color.a < 0.3)
                 //{
                 //    m_meshRenderer[i].material.color = EndColor;
                 //}
+                #endregion
                 m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
             }
-          
-            this.gameObject.layer = LayerMask.NameToLayer("Ghost");
+            if (m_renderer.Length > 0)
+            {
+                for (int i = 0; i < m_renderer.Length; i++)
+                {
+                    m_renderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+                    m_renderer[i].material.color = new Color(1, 1, 1, 0.3f);
+                }
+            }
+
+           
             m_fMove_Speed = 8f;
             if (m_fCurtime_2 > 6)
             {
@@ -755,6 +767,15 @@ public class Hero : Character
                 m_meshRenderer[i].material.shader = Shader.Find("Standard");
                 m_meshRenderer[i].material.color = new Color(1, 1, 1, 1);
             }
+            if (m_renderer.Length > 0)
+            {
+                for (int i = 0; i < m_renderer.Length; i++)
+                {
+                    m_renderer[i].material.shader = Shader.Find("Standard");
+                    m_renderer[i].material.color = new Color(1, 1, 1, 1);
+                }
+            }
+
             this.gameObject.layer = 7;
             m_objGhost.gameObject.SetActive(false);
             m_fMove_Speed = 5f;

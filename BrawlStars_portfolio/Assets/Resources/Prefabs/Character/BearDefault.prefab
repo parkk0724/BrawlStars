@@ -1671,6 +1671,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15eeb19b03cfb644c87e39860ed5f253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  run_effect: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+  Lfoot_pos: {fileID: 4398901564499708191}
+  Rfoot_pos: {fileID: 4398901565551044621}
 --- !u!1 &4398901565331940515
 GameObject:
   m_ObjectHideFlags: 0

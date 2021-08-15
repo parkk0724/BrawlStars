@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class DropItem : MonoBehaviour
 {
-    public Item item;
+    //public Item item;
+    public reitem reitem;
     public bool check = false;
-    public void setItem(Item _item)
+   
+    public reitem GetItem()
     {
-        item.itemtype = _item.itemtype;
-        item.use = _item.use;
-        item.itemGrade = _item.itemGrade;
-        item.itemName = _item.itemName;
-        item.itemCount = _item.itemCount;
-    }
-    public Item GetItem()
-    {
-        return item;
+        return reitem;
     }
     public void Death()
     {

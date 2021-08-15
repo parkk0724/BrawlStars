@@ -58,13 +58,16 @@ public class Hero : Character
     [SerializeField]private GameObject m_objStamina;
     [SerializeField]private GameObject m_objFever;
     [SerializeField]private GameObject m_objInvicible;
+    [SerializeField]private ParticleSystem m_objGhost;
+    public SkinnedMeshRenderer[] m_meshRenderer;
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
-    bool[] b_active = { false,false,false,false };
+    bool[] b_active = { false,false,false,false,false };
     float m_fCurtime;
+    float m_fCurtime_2;
 
-    public List<Item> items = new List<Item>();
+    public List<reitem> items = new List<reitem>();
 
     protected bool m_bOnBush = false;
     public bool GetOnBush() { return m_bOnBush; }
@@ -91,6 +94,9 @@ public class Hero : Character
     {
         m_Jump_StartSound = GameObject.Find("JumpStart");
         m_objTargetEffect = GameObject.Find("TargetIndicator").GetComponent<ParticleSystem>();
+        GameObject GhostEffct = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GhostEffect"), transform.parent);
+        GhostEffct.SetActive(false);
+        m_objGhost = GhostEffct.GetComponent<ParticleSystem>();
         GameObject inviEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/IncivibleEffect"), transform.parent);
         inviEffect.SetActive(false);
         m_objInvicible = inviEffect.gameObject;
@@ -114,11 +120,11 @@ public class Hero : Character
     }
     protected virtual void Start()
     {
+        
         m_objPlayerDir = GameObject.Find("PlayerDirection");
         m_objUIDie = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIDie"), GameObject.Find("UI").transform);
         m_objUIDie.SetActive(false);
         m_tDie = m_objUIDie.GetComponentInChildren<TMPro.TMP_Text>();
-
         Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
         Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;        
         m_bMoveStart = true;
@@ -172,6 +178,7 @@ public class Hero : Character
                         if (Fe != null) StopCoroutine(Fe);
                         Fe = StartCoroutine(RecoverFV());
                     }
+                    Ghostitem();
                     invicibleitem();
                     SearchTargetEffect();
                     TargetEffect();
@@ -265,8 +272,66 @@ public class Hero : Character
             {
                 DropItem dropitem = other.GetComponent<DropItem>();
 
-                if (dropitem.GetItem().itemtype == ITemType.Potion)
+                if (dropitem.GetItem().itemtype == "Potion")
                 {
+                    if(dropitem.GetItem().uSEitem == "HP")
+                    {
+                        m_nHP += dropitem.GetItem().itemCount; //아이템 카운트 숫자값 받아와서 더해줌 
+                        if (b_active[0] && m_objHp.activeSelf) //Dropitem에서 받아옴
+                        {
+                            b_active[0] = false;
+                            m_objHp.gameObject.SetActive(false);
+                        }
+                        b_active[0] = true;
+                        if (m_nHP > m_nMaxHP)
+                            m_nHP = m_nMaxHP;
+                    }
+                    else if(dropitem.GetItem().uSEitem == "STAMINA")
+                    {
+                        m_fStamina += dropitem.GetItem().itemCount;
+                        if (b_active[1] && m_objStamina.activeSelf)
+                        {
+                            b_active[1] = false;
+                            m_objStamina.gameObject.SetActive(false);
+                        }
+                        b_active[1] = true;
+                        if (m_fStamina > m_fMaxStamina)
+                            m_fStamina = m_fMaxStamina;
+                    }
+                    else if(dropitem.GetItem().uSEitem == "FEVER")
+                    {
+                        m_fFever += dropitem.GetItem().itemCount;
+                        if (b_active[2] && m_objFever.activeSelf)
+                        {
+                            b_active[2] = false;
+                            m_objFever.gameObject.SetActive(false);
+                        }
+                        b_active[2] = true;
+                        if (m_fFever > m_fMaxFever)
+                            m_fFever = m_fMaxFever;
+                    }
+                    else if(dropitem.GetItem().uSEitem == "INVINCIBLE")
+                    {
+                        if (b_active[3])
+                        {
+                            b_active[3] = false;
+                            m_fCurtime = 0;
+                            m_objInvicible.gameObject.SetActive(false);
+                        }
+                        b_active[3] = true;
+                    }
+                    else if(dropitem.GetItem().uSEitem == "GHOST")
+                    {
+                        if(b_active[4])
+                        {
+                            b_active[4] = false;
+                            m_fCurtime_2 = 0;
+                            //m_objGhost.gameObject.SetActive(true);
+                        }
+                        b_active[4] = true;
+                    }
+                    #region ##FirstSolution
+                    /*
                     switch (dropitem.GetItem().use) 
                     {
                         case USE.HP:
@@ -315,7 +380,8 @@ public class Hero : Character
                             }
                             b_active[3] = true;
                             break;
-                    }
+                    }*/
+                    #endregion 첫번째처리방법
                 }
                 else
                 {
@@ -397,7 +463,6 @@ public class Hero : Character
 
         while (count > 0)
         {
-            Debug.Log(count);
             m_tDie.text = count.ToString();
             yield return new WaitForSeconds(1);
             count--;
@@ -408,7 +473,6 @@ public class Hero : Character
     }
     public void Revival()
     {
-        Debug.Log("Revival");
         StartCoroutine(RevivalEffect());
         this.transform.position = m_vOriginPos;
         this.transform.rotation = Quaternion.Euler(m_vOriginRot);
@@ -482,7 +546,7 @@ public class Hero : Character
         if (Vector3.Dot(m_objPlayerDir, this.transform.forward) >= 0.97f && Vector3.Dot(m_objPlayerDir, this.transform.forward) <= 1.03f) //솔져 자꾸 방향틀면 각도 제대로 못잡는 문제때문에 오차 예외처리 한것
             this.transform.forward = m_objPlayerDir;
     }
-    #region SearchTarget
+    #region SearchTarget 몬스터를 콜라이더로 담아서 타겟팅
     protected void SearchTarget() //타겟팅 될때만 업데이트 되도록 처리
     {
         float Shortdist = 7;
@@ -508,7 +572,7 @@ public class Hero : Character
         m_tfResultTarget = shorTarget; // 최종값
     }
     #endregion
-    #region Lookenemy
+    #region Lookenemy // 타겟팅을 바라보는 기능
     protected void LookEnemy()
     {
         if (m_tfResultTarget == null)
@@ -536,7 +600,7 @@ public class Hero : Character
         }
     }
     #endregion
-    #region SerchTargetEffect
+    #region SerchTargetEffect // 타겟팅에 업데이트문으로 파티클 생성
     protected void SearchTargetEffect() //업데이트 문에서 계속 몬스터를 체크해주면서 처리
     {
         float Shortdist = 7;
@@ -619,11 +683,11 @@ public class Hero : Character
         m_bMoveValid = true;
     }
 
-        private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }
-    #region ItemEffect
+    #region ItemEffect //아이템 이펙트 수정 여기서
     virtual protected void invicibleitem() //무적아이템이펙트  콜라이더 때문에 별도의 스크립트에서 나머지 이펙트 처리
     {
         if (b_active[3])
@@ -642,6 +706,41 @@ public class Hero : Character
         {
             this.gameObject.layer = 7;
             m_objInvicible.gameObject.SetActive(false);
+        }
+    }
+    virtual protected void Ghostitem()
+    {
+        if(b_active[4])
+        {
+            
+            m_fCurtime_2 += Time.deltaTime;
+            m_objGhost.gameObject.transform.position = this.transform.position;
+            m_objGhost.gameObject.SetActive(true);
+            for (int i = 0; i < m_meshRenderer.Length; i++) //스킨렌더가 아닌 사람이 있어서 for문사용
+            {
+                m_meshRenderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+                m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
+            }
+          
+            this.gameObject.layer = LayerMask.NameToLayer("Ghost");
+
+            m_fMove_Speed = 8f;
+            if (m_fCurtime_2 > 6)
+            {
+                b_active[4] = false;
+                m_fCurtime_2 = 0;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < m_meshRenderer.Length; i++)
+            {
+                m_meshRenderer[i].material.shader = Shader.Find("Standard");
+                m_meshRenderer[i].material.color = new Color(1, 1, 1, 1);
+            }
+            this.gameObject.layer = 7;
+            m_objGhost.gameObject.SetActive(false);
+            m_fMove_Speed = 5f;
         }
     }
    IEnumerator RecoverHP() //Hp회복 이펙트

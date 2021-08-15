@@ -51,7 +51,7 @@ public class ResultUICtrl : MonoBehaviour
     { 
         // ---------------------------------------- 점수처리(남은 클리어 타임) ------------------------------
         
-        while (fTime >= 30.0f && nGrade < 4)
+        while (fTime >= 30.0f && nGrade < 3)
         {
             fTime -= 30.0f;                     // 30초 마다 별 한 개씩 생성.
             nGrade++;
@@ -71,7 +71,7 @@ public class ResultUICtrl : MonoBehaviour
         float fMin = fTime / 60;
         int Min = (int)fMin;
 
-        float Sec = fTime % 60;
+        int Sec = (int)(fTime % 60);
 
         TimeTxt.text = Min + " : " + Sec;
     }

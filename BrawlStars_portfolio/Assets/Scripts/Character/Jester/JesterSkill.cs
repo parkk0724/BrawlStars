@@ -284,10 +284,9 @@ public class JesterSkill : MonoBehaviour
                 StartCoroutine(Dizzy());
                 break;
             case SkillState.Death:
-
                 DeathAttack();
                 DestEffect();
-                DestEffect();
+
                 State = SkillState.DESTROY;
                 break;
 

@@ -716,15 +716,15 @@ public class Hero : Character
             m_fCurtime_2 += Time.deltaTime;
             m_objGhost.gameObject.transform.position = this.transform.position;
             m_objGhost.gameObject.SetActive(true);
-            m_meshRenderer[0].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
-            m_meshRenderer[0].material.color = new Color(1, 1, 1, 0.3f);
-            m_meshRenderer[1].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
-            m_meshRenderer[1].material.color = new Color(1, 1, 1, 0.3f);
-            m_meshRenderer[2].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
-            m_meshRenderer[2].material.color = new Color(1, 1, 1, 0.3f);
+            for (int i = 0; i < m_meshRenderer.Length; i++) //스킨렌더가 아닌 사람이 있어서 for문사용
+            {
+                m_meshRenderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+                m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
+            }
+          
             this.gameObject.layer = LayerMask.NameToLayer("Ghost");
 
-            m_fMove_Speed = 10f;
+            m_fMove_Speed = 8f;
             if (m_fCurtime_2 > 6)
             {
                 b_active[4] = false;
@@ -733,12 +733,11 @@ public class Hero : Character
         }
         else
         {
-            m_meshRenderer[0].material.shader = Shader.Find("Standard");
-            m_meshRenderer[0].material.color = new Color(1, 1, 1, 1);
-            m_meshRenderer[1].material.shader = Shader.Find("Standard");
-            m_meshRenderer[1].material.color = new Color(1, 1, 1, 1);
-            m_meshRenderer[2].material.shader = Shader.Find("Standard");
-            m_meshRenderer[2].material.color = new Color(1, 1, 1, 1);
+            for (int i = 0; i < m_meshRenderer.Length; i++)
+            {
+                m_meshRenderer[i].material.shader = Shader.Find("Standard");
+                m_meshRenderer[i].material.color = new Color(1, 1, 1, 1);
+            }
             this.gameObject.layer = 7;
             m_objGhost.gameObject.SetActive(false);
             m_fMove_Speed = 5f;

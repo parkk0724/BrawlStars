@@ -387,7 +387,6 @@ MonoBehaviour:
   m_meshRenderer:
   - {fileID: 4398901564458759681}
   - {fileID: 4398901565133919529}
-  - {fileID: 0}
   items: []
   myAnimator: {fileID: 4398901565269653911}
   myWeapon: {fileID: 0}

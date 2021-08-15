@@ -59,6 +59,8 @@ public class Hero : Character
     [SerializeField]private GameObject m_objFever;
     [SerializeField]private GameObject m_objInvicible;
     [SerializeField]private ParticleSystem m_objGhost;
+    AudioSource m_AgetitemSound;
+    AudioSource m_Aghost;
     public SkinnedMeshRenderer[] m_meshRenderer;
     Coroutine Hp;
     Coroutine St;
@@ -67,6 +69,7 @@ public class Hero : Character
     float m_fCurtime;
     float m_fCurtime_2;
 
+    SoundManager soundManager;
     public List<reitem> items = new List<reitem>();
 
     protected bool m_bOnBush = false;
@@ -120,7 +123,9 @@ public class Hero : Character
     }
     protected virtual void Start()
     {
-        
+        soundManager = FindObjectOfType<SoundManager>();
+        m_AgetitemSound = soundManager.ItemGet.GetComponent<AudioSource>();
+        m_Aghost = soundManager.Ghost.GetComponent<AudioSource>();
         m_objPlayerDir = GameObject.Find("PlayerDirection");
         m_objUIDie = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIDie"), GameObject.Find("UI").transform);
         m_objUIDie.SetActive(false);
@@ -279,10 +284,12 @@ public class Hero : Character
                         m_nHP += dropitem.GetItem().itemCount; //아이템 카운트 숫자값 받아와서 더해줌 
                         if (b_active[0] && m_objHp.activeSelf) //Dropitem에서 받아옴
                         {
+                           
                             b_active[0] = false;
                             m_objHp.gameObject.SetActive(false);
                         }
                         b_active[0] = true;
+                        m_AgetitemSound.Play();
                         if (m_nHP > m_nMaxHP)
                             m_nHP = m_nMaxHP;
                     }
@@ -295,6 +302,7 @@ public class Hero : Character
                             m_objStamina.gameObject.SetActive(false);
                         }
                         b_active[1] = true;
+                        m_AgetitemSound.Play();
                         if (m_fStamina > m_fMaxStamina)
                             m_fStamina = m_fMaxStamina;
                     }
@@ -307,6 +315,7 @@ public class Hero : Character
                             m_objFever.gameObject.SetActive(false);
                         }
                         b_active[2] = true;
+                         m_AgetitemSound.Play();
                         if (m_fFever > m_fMaxFever)
                             m_fFever = m_fMaxFever;
                     }
@@ -329,6 +338,7 @@ public class Hero : Character
                             //m_objGhost.gameObject.SetActive(true);
                         }
                         b_active[4] = true;
+                        m_Aghost.Play();
                     }
                     #region ##FirstSolution
                     /*
@@ -712,18 +722,25 @@ public class Hero : Character
     {
         if(b_active[4])
         {
-            
             m_fCurtime_2 += Time.deltaTime;
             m_objGhost.gameObject.transform.position = this.transform.position;
             m_objGhost.gameObject.SetActive(true);
+            
             for (int i = 0; i < m_meshRenderer.Length; i++) //스킨렌더가 아닌 사람이 있어서 for문사용
             {
                 m_meshRenderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+                //Color startColor = m_meshRenderer[i].material.color = new Color(1, 1, 1, 1f);
+                //Color EndColor = m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
+                ////mytime += Time.deltaTime;
+                //m_meshRenderer[i].material.color = Color.Lerp(startColor, EndColor, 0.05f);
+                //if (m_meshRenderer[i].material.color.a < 0.3)
+                //{
+                //    m_meshRenderer[i].material.color = EndColor;
+                //}
                 m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
             }
           
             this.gameObject.layer = LayerMask.NameToLayer("Ghost");
-
             m_fMove_Speed = 8f;
             if (m_fCurtime_2 > 6)
             {

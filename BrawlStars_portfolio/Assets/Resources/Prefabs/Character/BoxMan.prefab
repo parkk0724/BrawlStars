@@ -1779,6 +1779,11 @@ MonoBehaviour:
   m_objStamina: {fileID: 2174841388310051998, guid: 1a423fb0861c5a34cb2bda7968d10f8c, type: 3}
   m_objFever: {fileID: 5039942850610566560, guid: 41c2f04d003d57142becd597edb12df0, type: 3}
   m_objInvicible: {fileID: 8539904587373690469, guid: c82b2f003435ddf419ad758d1151f017, type: 3}
+  m_objGhost: {fileID: 0}
+  m_meshRenderer:
+  - {fileID: 1103757744428493341}
+  - {fileID: 1103757745450606123}
+  - {fileID: 4605352158623090616}
   items: []
   m_objDirBasicAttack: {fileID: 2068740142501937109}
   m_objDirSkillAttack: {fileID: 4878837545480129230}
@@ -2347,6 +2352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 238dc08009a35274085400a929cf8cbe, type: 3}
+--- !u!137 &4605352158623090616 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5416553806754953150, guid: 238dc08009a35274085400a929cf8cbe, type: 3}
+  m_PrefabInstance: {fileID: 8413297629938970630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4605352158628009628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5416553806760257178, guid: 238dc08009a35274085400a929cf8cbe, type: 3}

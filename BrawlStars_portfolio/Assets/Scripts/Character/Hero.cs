@@ -59,7 +59,7 @@ public class Hero : Character
     [SerializeField]private GameObject m_objFever;
     [SerializeField]private GameObject m_objInvicible;
     [SerializeField]private ParticleSystem m_objGhost;
-    public GameObject[] mymat = null;
+    public SkinnedMeshRenderer[] m_meshRenderer;
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
@@ -117,6 +117,7 @@ public class Hero : Character
     }
     protected virtual void Start()
     {
+        
         m_objPlayerDir = GameObject.Find("PlayerDirection");
         m_objUIDie = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIDie"), GameObject.Find("UI").transform);
         m_objUIDie.SetActive(false);
@@ -679,7 +680,7 @@ public class Hero : Character
         m_bMoveValid = true;
     }
 
-        private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, m_fRange);
     }
@@ -704,30 +705,38 @@ public class Hero : Character
             m_objInvicible.gameObject.SetActive(false);
         }
     }
-    void Ghostitem()
+    virtual protected void Ghostitem()
     {
         if(b_active[4])
         {
             m_fCurtime_2 += Time.deltaTime;
-            //m_objGhost.gameObject.transform.position = this.transform.position;
-            //m_objGhost.gameObject.SetActive(true);
+            m_objGhost.gameObject.transform.position = this.transform.position;
+            m_objGhost.gameObject.SetActive(true);
+            m_meshRenderer[0].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+            m_meshRenderer[0].material.color = new Color(1, 1, 1, 0.3f);
+            m_meshRenderer[1].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+            m_meshRenderer[1].material.color = new Color(1, 1, 1, 0.3f);
+            m_meshRenderer[2].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+            m_meshRenderer[2].material.color = new Color(1, 1, 1, 0.3f);
             this.gameObject.layer = 17;
-            Debug.Log("!!!");
+            Debug.Log(this.gameObject.layer);
+
             if (m_fCurtime_2 > 6)
             {
-                
                 b_active[4] = false;
                 m_fCurtime_2 = 0;
-                //m_mymat[0].color = new Color(1, 1, 1, 0.3f);
-                //m_mymat[1].color = new Color(1, 1, 1, 0.3f);
             }
         }
         else
         {
-            //m_mymat[0].color = new Color(1, 1, 1, 1);
-            //m_mymat[1].color = new Color(1, 1, 1, 1);
+            m_meshRenderer[0].material.shader = Shader.Find("Standard");
+            m_meshRenderer[0].material.color = new Color(1, 1, 1, 1);
+            m_meshRenderer[1].material.shader = Shader.Find("Standard");
+            m_meshRenderer[1].material.color = new Color(1, 1, 1, 1);
+            m_meshRenderer[2].material.shader = Shader.Find("Standard");
+            m_meshRenderer[2].material.color = new Color(1, 1, 1, 1);
             this.gameObject.layer = 7;
-            //m_objGhost.gameObject.SetActive(false);
+            m_objGhost.gameObject.SetActive(false);
         }
     }
    IEnumerator RecoverHP() //Hp»∏∫π ¿Ã∆Â∆Æ

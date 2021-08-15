@@ -10,10 +10,14 @@ public class JumpEffect : MonoBehaviour
     GameObject player;
     public ParticleSystem particle;
     public ParticleSystem DestinationParticle;
+    public AudioSource m_aJumpDestination;
+    SoundManager soundManager;
     float curtime;
     float jumpdelay;
     void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
+        m_aJumpDestination = soundManager.EndJump.GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player");
         curtime = 0;
     }
@@ -62,6 +66,7 @@ public class JumpEffect : MonoBehaviour
                     {
                         if (Jumpdelaytime())
                         {
+                            m_aJumpDestination.Play();
                             DestinationParticle.gameObject.SetActive(true);
                             jumpdelay = 0;
                         }

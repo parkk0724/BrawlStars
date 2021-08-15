@@ -6,10 +6,10 @@ using UnityEngine.UI;
 using System;
 public class GameManager : MonoBehaviour
 {
-    public enum Start_State { NONE, START }
-    public Start_State m_Start = Start_State.NONE;
-    public enum ESC_State { NONE, ESC };
-    public ESC_State m_ESC_state = ESC_State.NONE;      
+    [HideInInspector] public enum Start_State { NONE, START }
+    [HideInInspector] public Start_State m_Start = Start_State.NONE;
+    [HideInInspector] public enum ESC_State { NONE, ESC };
+    [HideInInspector] public ESC_State m_ESC_state = ESC_State.NONE;      
 
     private bool m_bEnd = false;
 

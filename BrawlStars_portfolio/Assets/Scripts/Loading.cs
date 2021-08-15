@@ -18,12 +18,12 @@ public class Loading : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Loding());
-        StartCoroutine(Explane());
+        StartCoroutine(Loding());       
     }
 
     private IEnumerator Loding()
     {
+        StartCoroutine(Explane());
         float fillAmonut = 0.0f;
 
         AsyncOperation operation = SceneManager.LoadSceneAsync("Browl_Stars");
@@ -31,14 +31,12 @@ public class Loading : MonoBehaviour
 
         while (loading_progress.value < 1.0f)
         {
-            Debug.Log(operation.progress);
-
             if (loading_progress.value >= 1.0f && operation.progress >= 1.0f)
             {
                 operation.allowSceneActivation = true;
             }
 
-            fillAmonut += Time.deltaTime / 8.0f;
+            fillAmonut += Time.deltaTime / 7.0f;
 
             loading_progress.value = fillAmonut;
 
@@ -49,9 +47,11 @@ public class Loading : MonoBehaviour
     }
     private IEnumerator Explane()
     {
-        explane_Text.text = "박스맨과 제스터는 마우스 버튼 홀드를 통하여 직접 타겟을 설정 할 수 있습니다";
-        yield return new WaitForSeconds(2.0f);
-        explane_Text.text = "일반 몬스터를 죽이면 게임에 필요한 아이템을 획득 할 수 있습니다.";
-        yield return new WaitForSeconds(0.5f);
+        explane_Text.text = "Boxman and Jester can set targets directly through the mouse button hold.";
+        yield return new WaitForSeconds(4.0f);
+        explane_Text.text = "If you kill a regular monster, you can get the items you need for the game playing.";
+        yield return new WaitForSeconds(4.0f);
+        explane_Text.text = "The jumpers can jump after about 1 second of waiting time above.";
+        yield return new WaitForSeconds(5.0f);
     }
 }

@@ -15,11 +15,16 @@ public class ResultUICtrl : MonoBehaviour
     private AudioSource BackgroundMuisc;
     private int nGrade = 0;
 
+    private AudioSource win_lose_Sound;
+    private AudioSource Click_Sound;
+
     private void Start()
     {
         InitTrans();
         SetStars(GameManager.instance.m_fTime);     // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
         SetClearTime(GameManager.instance.m_fTime); // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
+
+        Sound(); // 결과에 따라 사운드 다르게 재생 -유석-
     }
     private void Update()
     {
@@ -78,13 +83,29 @@ public class ResultUICtrl : MonoBehaviour
     
     void Retry()
     {
+        Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
+        Click_Sound.Play();
         SceneManager.LoadScene("Browl_Stars");
     }
 
     void LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
-        
+        Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
+        Click_Sound.Play();
+        SceneManager.LoadScene("MainMenu");        
+    }
+
+    void Sound()
+    {
+        if (GameManager.instance.m_fTime <= 0.0f)
+        {
+            win_lose_Sound = GameObject.Find("Lose").GetComponent<AudioSource>();
+        }
+        else
+        {
+            win_lose_Sound = GameObject.Find("Win").GetComponent<AudioSource>();
+        }
+        win_lose_Sound.Play();
     }
 }
 

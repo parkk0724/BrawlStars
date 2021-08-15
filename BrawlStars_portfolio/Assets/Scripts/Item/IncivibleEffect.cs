@@ -8,10 +8,12 @@ public class IncivibleEffect : MonoBehaviour
     [SerializeField] ParticleSystem m_pProtectDir;
     [SerializeField] ParticleSystem m_pProtectBoom;
     [SerializeField] AudioSource m_aShield;
+    SoundManager soundManager;
     // Update is called once per frame
     private void Awake()
     {
-        m_aShield = GetComponent<AudioSource>();
+        soundManager = FindObjectOfType<SoundManager>();
+        m_aShield = soundManager.InviciblePotion.GetComponent<AudioSource>();
     }
     void Update()
     {

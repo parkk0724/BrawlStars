@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
 
     public GameObject ItemGet;
     public GameObject Ghost;
+    public GameObject InviciblePotion;
 
     GameObject BGM;
     GameObject SoundEffect;
@@ -52,6 +53,8 @@ public class SoundManager : MonoBehaviour
         EndJump = GameObject.Find("EndJump");
         ItemGet = GameObject.Find("ItemGet");
         Ghost = GameObject.Find("GhostSound");
+        InviciblePotion = GameObject.Find("Shield");
+
 
         BGM = GameObject.Find("BGM");
         SoundEffect = GameObject.Find("SoundEffect");

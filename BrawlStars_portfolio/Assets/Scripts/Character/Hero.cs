@@ -94,6 +94,9 @@ public class Hero : Character
     {
         m_Jump_StartSound = GameObject.Find("JumpStart");
         m_objTargetEffect = GameObject.Find("TargetIndicator").GetComponent<ParticleSystem>();
+        GameObject GhostEffct = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GhostEffect"), transform.parent);
+        GhostEffct.SetActive(false);
+        m_objGhost = GhostEffct.GetComponent<ParticleSystem>();
         GameObject inviEffect = Instantiate(Resources.Load<GameObject>("Prefabs/Particles/IncivibleEffect"), transform.parent);
         inviEffect.SetActive(false);
         m_objInvicible = inviEffect.gameObject;
@@ -709,6 +712,7 @@ public class Hero : Character
     {
         if(b_active[4])
         {
+            
             m_fCurtime_2 += Time.deltaTime;
             m_objGhost.gameObject.transform.position = this.transform.position;
             m_objGhost.gameObject.SetActive(true);
@@ -718,9 +722,9 @@ public class Hero : Character
             m_meshRenderer[1].material.color = new Color(1, 1, 1, 0.3f);
             m_meshRenderer[2].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
             m_meshRenderer[2].material.color = new Color(1, 1, 1, 0.3f);
-            this.gameObject.layer = 17;
-            Debug.Log(this.gameObject.layer);
+            this.gameObject.layer = LayerMask.NameToLayer("Ghost");
 
+            m_fMove_Speed = 10f;
             if (m_fCurtime_2 > 6)
             {
                 b_active[4] = false;
@@ -737,6 +741,7 @@ public class Hero : Character
             m_meshRenderer[2].material.color = new Color(1, 1, 1, 1);
             this.gameObject.layer = 7;
             m_objGhost.gameObject.SetActive(false);
+            m_fMove_Speed = 5f;
         }
     }
    IEnumerator RecoverHP() //Hp»∏∫π ¿Ã∆Â∆Æ

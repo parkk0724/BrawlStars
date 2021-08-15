@@ -68,11 +68,11 @@ public class itemDatabase : MonoBehaviour
         for (int z = 0; z < _itemCount; z++) // 아이템 드랍 몇번 할꺼냐
         {
             int DropRange = Random.Range(0, 10);
-            if (DropRange < 3)
+            if (DropRange < 1)
             {
                 return;
             }
-            else if (DropRange < 4)
+            else if (DropRange < 5)
             {
                 ArrayList table = new ArrayList();
 

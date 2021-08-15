@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public GameObject PlayStart;
+    public GameObject Brawl;
     public GameObject Playing;
     public GameObject Playing_Angry;
 
@@ -34,6 +35,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         PlayStart = GameObject.Find("Start");
+        Brawl = GameObject.Find("Brawl");
         Playing = GameObject.Find("Playing");
         Portal = GameObject.Find("PortalSound");
         PortalMove = GameObject.Find("PortalStart");

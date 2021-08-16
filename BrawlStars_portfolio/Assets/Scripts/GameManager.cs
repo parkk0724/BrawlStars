@@ -103,6 +103,10 @@ public class GameManager : MonoBehaviour
             else
             {
                 if(!m_bEnd) EndGame("Lose");
+                BossMonster boss = this.GetComponentInParent<BossMonster>();
+                Hero hero = GameObject.Find("Player").GetComponentInChildren<Hero>();
+                hero.m_Start = Hero.Start_State.NONE;
+                boss.m_Start = BossMonster.Start_State.NONE;
             }
         }
         

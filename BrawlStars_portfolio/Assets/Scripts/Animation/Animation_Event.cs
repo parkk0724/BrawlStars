@@ -107,5 +107,9 @@ public class Animation_Event : MonoBehaviour
     private void BossMonsterDie()
     {
         GameManager.instance.EndGame("Win");
+        BossMonster boss = this.GetComponentInParent<BossMonster>();
+        Hero hero = GameObject.Find("Player").GetComponentInChildren<Hero>();
+        hero.m_Start = Hero.Start_State.NONE;
+        boss.m_Start = BossMonster.Start_State.NONE;
     }
 }

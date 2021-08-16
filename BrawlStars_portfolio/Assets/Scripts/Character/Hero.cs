@@ -169,6 +169,7 @@ public class Hero : Character
                     Move();
                     Attack();
                     ItemEffect();
+                    Ghostitem();
                     invicibleitem();
                     SearchTargetEffect();
                     TargetEffect();

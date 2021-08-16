@@ -61,6 +61,7 @@ public class Hero : Character
     [SerializeField]private ParticleSystem m_objGhost;
     AudioSource m_AgetitemSound;
     AudioSource m_Aghost;
+    AudioSource m_AgetInvicible;
     public SkinnedMeshRenderer[] m_meshRenderer;
     public Renderer[] m_renderer;
     Coroutine Hp;
@@ -69,8 +70,6 @@ public class Hero : Character
     bool[] b_active = { false,false,false,false,false };
     float m_fCurtime;
     float m_fCurtime_2;
-
-    SoundManager soundManager;
     public List<reitem> items = new List<reitem>();
 
     protected bool m_bOnBush = false;
@@ -124,9 +123,10 @@ public class Hero : Character
     }
     protected virtual void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
-        m_AgetitemSound = soundManager.ItemGet.GetComponent<AudioSource>();
-        m_Aghost = soundManager.Ghost.GetComponent<AudioSource>();
+        m_AgetitemSound = GameObject.Find("ItemGet").GetComponent<AudioSource>();
+        m_Aghost = GameObject.Find("GhostSound").GetComponent<AudioSource>();
+        m_AgetInvicible = GameObject.Find("incivibleStart").GetComponent<AudioSource>();
+
         m_objPlayerDir = GameObject.Find("PlayerDirection");
         m_objUIDie = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIDie"), GameObject.Find("UI").transform);
         m_objUIDie.SetActive(false);
@@ -329,6 +329,7 @@ public class Hero : Character
                             m_objInvicible.gameObject.SetActive(false);
                         }
                         b_active[3] = true;
+                        m_AgetInvicible.Play();
                     }
                     else if(dropitem.GetItem().uSEitem == "GHOST")
                     {

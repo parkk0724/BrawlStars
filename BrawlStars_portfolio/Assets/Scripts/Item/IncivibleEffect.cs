@@ -13,7 +13,7 @@ public class IncivibleEffect : MonoBehaviour
     private void Awake()
     {
         soundManager = FindObjectOfType<SoundManager>();
-        m_aShield = soundManager.InviciblePotion.GetComponent<AudioSource>();
+        m_aShield = soundManager.m_InviciblePotion.GetComponent<AudioSource>();
     }
     void Update()
     {

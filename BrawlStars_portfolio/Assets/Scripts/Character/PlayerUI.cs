@@ -19,6 +19,7 @@ public class PlayerUI : MonoBehaviour
     void Start()
     {
         m_Hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
+        m_FeverGuage.fillAmount = 1.0f;
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class PlayerUI : MonoBehaviour
     {
 
         float feverGauge = m_Hero.GetFever() / m_Hero.GetMaxFever();
-        m_FeverGuage.fillAmount = feverGauge;
+        m_FeverGuage.fillAmount = 1.0f - feverGauge;
 
        //Color c = m_FeverGuage.color;
        //c.a = 0.5f;

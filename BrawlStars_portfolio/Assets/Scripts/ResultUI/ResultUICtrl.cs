@@ -18,11 +18,17 @@ public class ResultUICtrl : MonoBehaviour
     private AudioSource win_lose_Sound;
     private AudioSource Click_Sound;
 
+    private Transform CharacterPos;
+
     private void Start()
     {
         InitTrans();
         SetStars(GameManager.instance.m_fTime);     // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
         SetClearTime(GameManager.instance.m_fTime); // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
+
+        //선택된 캐릭터 렌더 텍스쳐로 보이게 하기 위해 프리팹 소환
+        CharacterPos = GameObject.Find("CharacterPos").transform;
+        CreateCharacter();
 
         Sound(); // 결과에 따라 사운드 다르게 재생 -유석-
     }
@@ -106,6 +112,12 @@ public class ResultUICtrl : MonoBehaviour
             win_lose_Sound = GameObject.Find("Win").GetComponent<AudioSource>();
         }
         win_lose_Sound.Play();
+    }
+
+    void CreateCharacter()
+    {
+        GameObject obj = Resources.Load<GameObject>(DataManager.instance.select_character.charPrefab);
+        GameObject Character = Instantiate(obj, CharacterPos.position, CharacterPos.rotation);
     }
 }
 

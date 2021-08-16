@@ -18,6 +18,9 @@ public class ResultUICtrl : MonoBehaviour
     private AudioSource win_lose_Sound;
     private AudioSource Click_Sound;
 
+    private Canvas Quit;
+    private Button Setting;
+
     private Transform CharacterPos;
 
     private void Start()
@@ -28,6 +31,9 @@ public class ResultUICtrl : MonoBehaviour
 
         //선택된 캐릭터 렌더 텍스쳐로 보이게 하기 위해 프리팹 소환
         CharacterPos = GameObject.Find("CharacterPos").transform;
+        Quit = GameObject.Find("Touch").GetComponent<Canvas>();
+        Setting = GameObject.Find("Setting").GetComponent<Button>();
+        Setting.onClick.AddListener(OnClick_Setting);
         CreateCharacter();
 
         Sound(); // 결과에 따라 사운드 다르게 재생 -유석-
@@ -55,8 +61,8 @@ public class ResultUICtrl : MonoBehaviour
             else if (trs.name == "BtnMainMenu")     { BtnMainMenu = trs.GetComponent<Button>(); }
         }
 
-        BtnRetry.onClick.AddListener(Retry);
-        BtnMainMenu.onClick.AddListener(LoadMainMenu);
+       // BtnRetry.onClick.AddListener(Retry);
+       // BtnMainMenu.onClick.AddListener(LoadMainMenu);
     }
     void SetStars(float fTime)
     { 
@@ -118,6 +124,15 @@ public class ResultUICtrl : MonoBehaviour
     {
         GameObject obj = Resources.Load<GameObject>(DataManager.instance.select_character.charPrefab);
         GameObject Character = Instantiate(obj, CharacterPos.position, CharacterPos.rotation);
+    }
+
+    void OnClick_Setting()
+    {
+        BtnRetry.onClick.AddListener(Retry);
+        BtnMainMenu.onClick.AddListener(LoadMainMenu);
+        Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
+        Click_Sound.Play();
+        Quit.enabled = true;
     }
 }
 

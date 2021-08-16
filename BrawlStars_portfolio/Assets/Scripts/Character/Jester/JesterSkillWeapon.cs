@@ -8,9 +8,10 @@ public class JesterSkillWeapon : MonoBehaviour
     private float damage;
     public GameObject effect;
     JesterSkill jesterskill;
-
+    AudioSource m_knifeSound;
     void Start()
     {
+        m_knifeSound = GameObject.Find("knifeSound").GetComponent<AudioSource>();
         jesterskill = GetComponentInParent<JesterSkill>();
         damage = 10f;
     }
@@ -35,7 +36,8 @@ public class JesterSkillWeapon : MonoBehaviour
             other.GetComponent<Monster>().Hit((int)damage, Color.red);
             if(effect.activeSelf)
             {
-                effect.transform.position = other.transform.position;
+                effect.transform.position = this.transform.position;
+                m_knifeSound.Play();
             }
         }
     }

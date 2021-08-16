@@ -82,7 +82,7 @@ public class itemDatabase : MonoBehaviour
                     {
                         if (keyValue.Value[i].itemGrade == "D") //키 벨루의 아이템 등급을 비교한다
                         {
-                            table.Add(keyValue.Key);
+                            table.Add(keyValue.Key); //키값넣음
                         }
                     }
                 }
@@ -101,15 +101,10 @@ public class itemDatabase : MonoBehaviour
                 #endregion
                 int tableindex = Random.Range(0, table.Count);// 테이블의 값을 랜덤으로 돌린 인덱스값
 
-                List<reitem> mydate = new List<reitem>(); //새로운 리스트를 만들어서 그곳에 값을 저장하고
-                mydate = instance.ItemData[(int)table[tableindex]];// 그것을 넣는다
-                GameObject obj = Resources.Load<GameObject>(mydate[0].itemPrefab);
-                obj.GetComponent<DropItem>().reitem.Key = mydate[0].Key; //데이터를 넣는다
-                obj.GetComponent<DropItem>().reitem.itemtype = mydate[0].itemtype;
-                obj.GetComponent<DropItem>().reitem.itemName = mydate[0].itemName;
-                obj.GetComponent<DropItem>().reitem.itemGrade = mydate[0].itemGrade;
-                obj.GetComponent<DropItem>().reitem.itemCount = mydate[0].itemCount;
-                obj.GetComponent<DropItem>().reitem.uSEitem = mydate[0].uSEitem;
+                List<reitem> mydata = new List<reitem>(); //새로운 리스트를 만들어서 그곳에 값을 저장하고
+                mydata = instance.ItemData[(int)table[tableindex]];// 그것을 넣는다
+                GameObject obj = Resources.Load<GameObject>(mydata[0].itemPrefab);
+                InsertObj(obj, mydata);
                 Instantiate(obj, monsterTansform.position, obj.transform.rotation); //생성시킨다
             }
             else if (DropRange < 10)
@@ -127,15 +122,10 @@ public class itemDatabase : MonoBehaviour
                 }
                 int tableindex = Random.Range(0, table.Count);
                 //생성된 드랍아이템의 아이템 타입을 아이템데이터베이스 형식으로 바꿈
-                List<reitem> mydate = new List<reitem>();
-                mydate = instance.ItemData[(int)table[tableindex]];
-                GameObject obj = Resources.Load<GameObject>(mydate[0].itemPrefab);
-                obj.GetComponent<DropItem>().reitem.Key = mydate[0].Key;
-                obj.GetComponent<DropItem>().reitem.itemtype = mydate[0].itemtype;
-                obj.GetComponent<DropItem>().reitem.itemName = mydate[0].itemName;
-                obj.GetComponent<DropItem>().reitem.itemGrade = mydate[0].itemGrade;
-                obj.GetComponent<DropItem>().reitem.itemCount = mydate[0].itemCount;
-                obj.GetComponent<DropItem>().reitem.uSEitem = mydate[0].uSEitem;
+                List<reitem> mydata = new List<reitem>();
+                mydata = instance.ItemData[(int)table[tableindex]];
+                GameObject obj = Resources.Load<GameObject>(mydata[0].itemPrefab);
+                InsertObj(obj, mydata);
                 Instantiate(obj, monsterTansform.position, obj.transform.rotation);
             }
         }
@@ -210,5 +200,16 @@ public class itemDatabase : MonoBehaviour
 
             ItemData.Add(int.Parse(data[0]), myitem);
         }
+    }
+
+    //함수로 빼놓음 8/16
+    void InsertObj(GameObject obj, List<reitem> mydata)
+    {
+        obj.GetComponent<DropItem>().reitem.Key = mydata[0].Key;
+        obj.GetComponent<DropItem>().reitem.itemtype = mydata[0].itemtype;
+        obj.GetComponent<DropItem>().reitem.itemName = mydata[0].itemName;
+        obj.GetComponent<DropItem>().reitem.itemGrade = mydata[0].itemGrade;
+        obj.GetComponent<DropItem>().reitem.itemCount = mydata[0].itemCount;
+        obj.GetComponent<DropItem>().reitem.uSEitem = mydata[0].uSEitem;
     }
 }

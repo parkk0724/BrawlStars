@@ -168,23 +168,7 @@ public class Hero : Character
                     RecoveryStamina();
                     Move();
                     Attack();
-
-                    if (b_active[0])
-                    {
-                        if (Hp != null) StopCoroutine(Hp);
-                        Hp = StartCoroutine(RecoverHP());
-                    }
-                    if (b_active[1])
-                    {
-                        if (St != null) StopCoroutine(St);
-                        St = StartCoroutine(RecoverST());
-                    }
-                    if (b_active[2])
-                    {
-                        if (Fe != null) StopCoroutine(Fe);
-                        Fe = StartCoroutine(RecoverFV());
-                    }
-                    Ghostitem();
+                    ItemEffect();
                     invicibleitem();
                     SearchTargetEffect();
                     TargetEffect();
@@ -727,7 +711,8 @@ public class Hero : Character
             m_fCurtime_2 += Time.deltaTime;
             m_objGhost.gameObject.transform.position = this.transform.position;
             m_objGhost.gameObject.SetActive(true);
-            this.gameObject.layer = LayerMask.NameToLayer("Ghost");
+            //this.gameObject.layer = LayerMask.NameToLayer("Ghost"); //레이어 적용이 안되는 오류 발견 하나가 적용되면 나머지 하나가 적용이 안됨
+            m_fMove_Speed = 8f;
 
             for (int i = 0; i < m_meshRenderer.Length; i++) //스킨렌더가 아닌 사람이 있어서 for문사용
             {
@@ -752,9 +737,6 @@ public class Hero : Character
                     m_renderer[i].material.color = new Color(1, 1, 1, 0.3f);
                 }
             }
-
-           
-            m_fMove_Speed = 8f;
             if (m_fCurtime_2 > 6)
             {
                 b_active[4] = false;
@@ -777,7 +759,7 @@ public class Hero : Character
                 }
             }
 
-            this.gameObject.layer = 7;
+            //this.gameObject.layer = 7;
             m_objGhost.gameObject.SetActive(false);
             m_fMove_Speed = 5f;
         }

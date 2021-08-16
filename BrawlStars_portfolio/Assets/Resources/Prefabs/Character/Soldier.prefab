@@ -188,7 +188,7 @@ MonoBehaviour:
   m_bMoveStart: 0
   m_bMoveValid: 1
   m_bCheckStart: 0
-  m_fTargetRange: 7
+  m_fTargetRange: 12
   m_lmEnemyLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -203,6 +203,7 @@ MonoBehaviour:
   - {fileID: 1305341027694205300}
   - {fileID: 1305341027105343378}
   - {fileID: 8977609459997341806}
+  m_renderer: []
   items: []
   pickingmask:
     serializedVersion: 2

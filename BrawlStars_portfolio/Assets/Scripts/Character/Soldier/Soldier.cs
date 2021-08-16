@@ -53,14 +53,9 @@ public class Soldier : Hero
               {
                   bazooka_Skill_Destination = GameObject.Find("skillbullet_destination").transform;
                   m_Animator.SetTrigger("tSAttack");
-                  SetRotStart(false);
                   m_fFever = 0.0f;
               }
           }        
-         if (Input.GetMouseButtonUp(1))
-           {
-               SetRotStart(false);
-           }        
     }
 
     private void Basic_Fire()
@@ -89,6 +84,8 @@ public class Soldier : Hero
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet2);
         yield return new WaitForSeconds(t / 3.0f);
         Bazooka_Bullet_Initiate(bazooka_Skill_bullet3);
+        yield return new WaitForSeconds(t / 5.0f);
+        SetRotStart(false);
         yield return null;
     }
     public void SetRotStart(bool b)

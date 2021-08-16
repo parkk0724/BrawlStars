@@ -561,7 +561,7 @@ public class Hero : Character
     #region SearchTarget 몬스터를 콜라이더로 담아서 타겟팅
     protected void SearchTarget() //타겟팅 될때만 업데이트 되도록 처리
     {
-        float Shortdist = 7;
+        float Shortdist = 10;
         Transform shorTarget = null;
         Collider[] EnemyCollider = Physics.OverlapSphere(this.transform.position, m_fTargetRange, m_lmEnemyLayer); // 주변의 검출된 콜라이더 검출
         if (EnemyCollider.Length > 0)

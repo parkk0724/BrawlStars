@@ -7,6 +7,7 @@ public class Main_Camera_Moving : MonoBehaviour
     public GameObject playercamera;
     public GameObject player;
     public GameObject Boss;
+    public GameObject Chicken;
 
     public float speed = 0.0f;
     public bool startmove = true;

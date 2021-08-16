@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
     public GameObject Jestershoteffect_2;
     public GameObject Jestershoteffect_3;
     public GameObject m_BoomSound;
+    public GameObject m_JesterSkill_knife;
 
     public GameObject m_ItemGet;
     public GameObject m_Ghost;
@@ -52,12 +53,15 @@ public class SoundManager : MonoBehaviour
         Jestershoteffect = GameObject.Find("JesterShoteffect");
         Jestershoteffect_2 = GameObject.Find("JesterShoteffect_2");
         Jestershoteffect_3 = GameObject.Find("JesterShoteffect_3");
+        m_JesterSkill_knife = GameObject.Find("knifeSound");
         EndJump = GameObject.Find("EndJump");
         m_ItemGet = GameObject.Find("ItemGet");
         m_Ghost = GameObject.Find("GhostSound");
         m_InviciblePotion = GameObject.Find("Shield");
         m_AgetInvicible = GameObject.Find("m_AgetInvicible");
         m_BoomSound = GameObject.Find("JesterBoom");
+
+
 
 
         BGM = GameObject.Find("BGM");

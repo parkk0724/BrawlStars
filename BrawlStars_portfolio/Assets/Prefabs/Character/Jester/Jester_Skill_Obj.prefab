@@ -470,6 +470,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4404048840447601897, guid: b8cf17bf888a46a499255c00ef0bb690, type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404048840447601897, guid: b8cf17bf888a46a499255c00ef0bb690, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404048840447601897, guid: b8cf17bf888a46a499255c00ef0bb690, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404048840465951145, guid: b8cf17bf888a46a499255c00ef0bb690, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404048840465951145, guid: b8cf17bf888a46a499255c00ef0bb690, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404048840465951145, guid: b8cf17bf888a46a499255c00ef0bb690, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8141167854329728358, guid: b8cf17bf888a46a499255c00ef0bb690, type: 3}
       propertyPath: DistRange
       value: 2

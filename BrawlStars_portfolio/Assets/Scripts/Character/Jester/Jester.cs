@@ -17,8 +17,8 @@ public class Jester : Hero
     public GameObject m_objJesterSkill = null;
     public GameObject m_skILL_Range = null;
 
-    [SerializeField] AudioSource m_AfootSound;
-    SoundManager soundManager;
+    AudioSource m_AfootSound;
+    AudioSource m_SkillBoomSound;
     UnityEngine.Coroutine skill = null;
     float m_fAttackStamina = 0.0f;
     public LayerMask myMask = 0;
@@ -26,8 +26,8 @@ public class Jester : Hero
     //UnityEngine.Coroutine j_Attack = null;
     protected override void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
-        m_AfootSound = soundManager.FootWalk.GetComponent<AudioSource>();
+        m_AfootSound = GameObject.Find("FootWalk").GetComponent<AudioSource>();
+        m_SkillBoomSound = GameObject.Find("JesterBoom").GetComponent<AudioSource>();
         this.GetComponentInChildren<JesterAnimationEv>().FootEffect = FootSound;
         m_fAttackStamina = 1.0f;
         base.Start();
@@ -213,12 +213,19 @@ public class Jester : Hero
             {
                 m_skILL_Range.SetActive(false);
                 m_objtsBoom.gameObject.transform.position = m_objDirSkillAttack.transform.position;
+
                 Vector3 newPos = 
-                    new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1,1));
+                    new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1),
+                    m_objtsBoom.gameObject.transform.position.y, 
+                    m_objtsBoom.gameObject.transform.position.z + Random.Range(-1,1));
                 Vector3 newPos_1 =
-                    new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), m_objtsBoom.gameObject.transform.position.y, m_objtsBoom.gameObject.transform.position.z + Random.Range(-1, 1));
+                    new Vector3(m_objtsBoom.gameObject.transform.position.x + Random.Range(-1,1), 
+                    m_objtsBoom.gameObject.transform.position.y,
+                    m_objtsBoom.gameObject.transform.position.z + Random.Range(-1, 1));
+
                 if (skill != null) StopCoroutine(skill);
                 skill = StartCoroutine(Effect());
+
                 Instantiate(m_objJesterSkill, newPos, Quaternion.identity);
                 Instantiate(m_objJesterSkill, newPos_1, Quaternion.identity);
             }
@@ -240,6 +247,7 @@ public class Jester : Hero
     IEnumerator Effect()
     {
         GameObject obj = Instantiate(m_objtsBoom.gameObject, m_objDirSkillAttack.transform.position, m_objDirSkillAttack.transform.rotation);
+        m_SkillBoomSound.Play();
         yield return new WaitForSeconds(2);
         Destroy(obj);
     }

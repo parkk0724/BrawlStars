@@ -83,21 +83,21 @@ public class BossMonster : Monster
                 m_fCurTime += Time.deltaTime;
                 ProgressState();
                 CheckPhase();
+
+                // 히어로가 부쉬에서 나갔을 때
+                if (!HeroOnBush() && m_bBushAttack || !HeroOnBush() && m_tfTarget == null)
+                {
+                    m_bBushAttack = false;
+                    m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+                }
+
+                // 히어로가 부쉬에 들어갔을 때
+                if (HeroOnBush() && m_tfTarget != null && !m_bBushAttack)
+                {
+                    m_tfTarget = null;
+                    ChangeState(State.PATROL);
+                }
             }
-        }
-
-        // 히어로가 부쉬에서 나갔을 때
-        if (!HeroOnBush() && m_bBushAttack || !HeroOnBush() && m_tfTarget == null)
-        {
-            m_bBushAttack = false;
-            m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
-        }
-
-        // 히어로가 부쉬에 들어갔을 때
-        if (HeroOnBush() && m_tfTarget != null && !m_bBushAttack)
-        {
-            m_tfTarget = null;
-            ChangeState(State.PATROL);
         }
     }
 

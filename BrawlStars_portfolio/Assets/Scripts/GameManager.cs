@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float m_fMaxDelayPortal = 10.0f;
 
     public float m_fTime { get; private set; }
+    public float m_fClearTime { get; private set; }
     public float m_fMaxTime { get; private set; }
 
     private void Awake()
@@ -118,6 +119,7 @@ public class GameManager : MonoBehaviour
     public void EndGame(string s)
     {
         m_bEnd = true;
+        m_fClearTime = m_fTime; // 클리어시간 = 현재시간; 결과화면창에서 받아오기 위함.
         ESC_UI.Instance.SE_Bar.GetComponent<Slider>().value = 0;
 
         m_soundManager.Playing.SetActive(false);

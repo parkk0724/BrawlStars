@@ -14,6 +14,8 @@ public class ResultUICtrl : MonoBehaviour
     private Button BtnMainMenu;
     private AudioSource BackgroundMuisc;
     private int nGrade = 0;
+    private TextMeshProUGUI PlayerTxt;
+    private TextMeshProUGUI BossTxt;
 
     private AudioSource win_lose_Sound;
     private AudioSource Click_Sound;
@@ -26,8 +28,9 @@ public class ResultUICtrl : MonoBehaviour
     private void Start()
     {
         InitTrans();
-        SetStars(GameManager.instance.m_fTime);     // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
-        SetClearTime(GameManager.instance.m_fTime); // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
+        //SetStars(GameManager.instance.m_fClearTime);     // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
+        SetClearTime(GameManager.instance.m_fClearTime); // 정상구동 할려면 파라미터 GameManager.instance.m_fTime 로 바꿀 것
+        SetWinLostText();
 
         //선택된 캐릭터 렌더 텍스쳐로 보이게 하기 위해 프리팹 소환
         CharacterPos = GameObject.Find("CharacterPos").transform;
@@ -40,10 +43,12 @@ public class ResultUICtrl : MonoBehaviour
     }
     private void Update()
     {
-        for(int i = 0; i < nGrade; i++)
+        /*
+        for (int i = 0; i < nGrade; i++)
         {
             arrObjs[i].transform.Rotate(Vector3.up * Time.deltaTime * 100f);
         }
+        */
     }
 
     private void InitTrans()
@@ -53,21 +58,31 @@ public class ResultUICtrl : MonoBehaviour
 
         foreach (Transform trs in TempObjs)
         {
-            if (trs.name == "Star1")                { arrObjs[0] = trs; }
-            else if (trs.name == "Star2")           { arrObjs[1] = trs; }
-            else if (trs.name == "Star3")           { arrObjs[2] = trs; }
+            if (trs.name == "Star1") { arrObjs[0] = trs; }
+            else if (trs.name == "Star2") { arrObjs[1] = trs; }
+            else if (trs.name == "Star3") { arrObjs[2] = trs; }
             else if (trs.name == "TxtClearTimeNum") { TimeTxt = trs.GetComponent<TextMeshProUGUI>(); }
-            else if (trs.name == "BtnRetry")        { BtnRetry = trs.GetComponent<Button>(); }
-            else if (trs.name == "BtnMainMenu")     { BtnMainMenu = trs.GetComponent<Button>(); }
+            else if (trs.name == "BtnRetry") { BtnRetry = trs.GetComponent<Button>(); }
+            else if (trs.name == "BtnMainMenu") { BtnMainMenu = trs.GetComponent<Button>(); }
+            else if (trs.name == "Win/Lose_Text(character)") { PlayerTxt = trs.GetComponent<TextMeshProUGUI>(); }
+            else if (trs.name == "Win/Lose_Text(Boss)") { BossTxt = trs.GetComponent<TextMeshProUGUI>(); }
         }
 
-       // BtnRetry.onClick.AddListener(Retry);
-       // BtnMainMenu.onClick.AddListener(LoadMainMenu);
+        // BtnRetry.onClick.AddListener(Retry);
+        // BtnMainMenu.onClick.AddListener(LoadMainMenu);
+    }
+    void SetWinLostText()
+    {
+        if (GameManager.instance.m_fClearTime <= 0)
+        {
+            PlayerTxt.text = "Lose";
+            BossTxt.text = "Win";
+        }
     }
     void SetStars(float fTime)
-    { 
+    {
         // ---------------------------------------- 점수처리(남은 클리어 타임) ------------------------------
-        
+
         while (fTime >= 30.0f && nGrade < 3)
         {
             fTime -= 30.0f;                     // 30초 마다 별 한 개씩 생성.
@@ -75,7 +90,7 @@ public class ResultUICtrl : MonoBehaviour
         }
 
         // -------------------------------------- 점수에 따른 별 출력 --------------------------------------
-        for (int i = 0; i < nGrade; i++)         
+        for (int i = 0; i < nGrade; i++)
         {
             arrObjs[i].gameObject.SetActive(true);
         }
@@ -92,7 +107,7 @@ public class ResultUICtrl : MonoBehaviour
 
         TimeTxt.text = Min + " : " + Sec;
     }
-    
+
     void Retry()
     {
         Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
@@ -104,7 +119,7 @@ public class ResultUICtrl : MonoBehaviour
     {
         Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
         Click_Sound.Play();
-        SceneManager.LoadScene("MainMenu");        
+        SceneManager.LoadScene("MainMenu");
     }
 
     void Sound()
@@ -128,8 +143,10 @@ public class ResultUICtrl : MonoBehaviour
 
     void OnClick_Setting()
     {
-        BtnRetry.onClick.AddListener(Retry);
-        BtnMainMenu.onClick.AddListener(LoadMainMenu);
+        GameObject.Find("Touch").GetComponent<Canvas>().enabled = true; // 세팅 아이콘 클릭시 UI 출력
+
+        BtnRetry.onClick.AddListener(Retry);            // 버튼에 retry 안 들어가는 문제
+        BtnMainMenu.onClick.AddListener(LoadMainMenu);  // 버튼에 LoadMainMenu 안 들어가는 문제
         Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
         Click_Sound.Play();
         Quit.enabled = true;

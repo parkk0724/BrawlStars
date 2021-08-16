@@ -5,13 +5,23 @@ using UnityEngine.AI;
 
 public class ChickenMonster : Monster
 {
+    public enum Start_State { NONE, START }
+    public Start_State m_Start = Start_State.NONE;
+
     float m_fCurTime = 0.0f;
     float m_fMaxIdleTime = 0.0f;
     float m_fRunSpeed = 0.0f;
 
+    BossMonster Boss;
     private void Awake()
     {
         m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/Monster"), transform);
+    }
+
+    private void OnEnable()
+    {
+        Boss = GameObject.Find("BossMonster").GetComponentInChildren<BossMonster>();
+        m_Start = Start_State.START;
     }
     protected override void Start()
     {
@@ -29,19 +39,27 @@ public class ChickenMonster : Monster
 
     private void Update()
     {
-        if (m_nHP <= 0)
+        if (m_Start == Start_State.START)
         {
-            ChangeState(State.DEAD);
-        }
-        m_fCurTime += Time.deltaTime;
-        ProgressState();
+            if (m_nHP <= 0)
+            {
+                ChangeState(State.DEAD);
+            }
+            m_fCurTime += Time.deltaTime;
+            ProgressState();
 
-        // 히어로가 부쉬에서 나갔을 때
-        if(m_tfTarget == null) m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
-        else if (HeroOnBush == null) HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
-        else if (!HeroOnBush() && m_bBushAttack)
+            // 히어로가 부쉬에서 나갔을 때
+            if (m_tfTarget == null) m_tfTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+            else if (HeroOnBush == null) HeroOnBush = m_tfTarget.GetComponent<Hero>().GetOnBush;
+            else if (!HeroOnBush() && m_bBushAttack)
+            {
+                m_bBushAttack = false;
+            }
+        }
+
+        if (Boss.GetHp() <= 0.0f)
         {
-            m_bBushAttack = false;
+            m_Start = Start_State.NONE;
         }
     }
 

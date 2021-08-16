@@ -47,15 +47,15 @@ public class Soldier : Hero
               SetRotStart(false);
           }
 
-         //if (m_fFever >= m_fMaxFever)
-         //{
+         if (m_fFever >= m_fMaxFever)
+         {
               if (Input.GetMouseButton(1))
               {
                   bazooka_Skill_Destination = GameObject.Find("skillbullet_destination").transform;
                   m_Animator.SetTrigger("tSAttack");
                   m_fFever = 0.0f;
               }
-          //}        
+          }        
     }
 
     private void Basic_Fire()

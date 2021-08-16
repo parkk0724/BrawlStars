@@ -809,4 +809,23 @@ public class Hero : Character
         b_active[2] = false;
     }
     #endregion
+
+    protected void ItemEffect()
+    {
+        if (b_active[0])
+        {
+            if (Hp != null) StopCoroutine(Hp);
+            Hp = StartCoroutine(RecoverHP());
+        }
+        if (b_active[1])
+        {
+            if (St != null) StopCoroutine(St);
+            St = StartCoroutine(RecoverST());
+        }
+        if (b_active[2])
+        {
+            if (Fe != null) StopCoroutine(Fe);
+            Fe = StartCoroutine(RecoverFV());
+        }
+    }
 }

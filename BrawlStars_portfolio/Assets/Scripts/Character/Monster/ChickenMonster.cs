@@ -77,6 +77,7 @@ public class ChickenMonster : Monster
                 }
                 break;
             case State.ATTACK:
+                m_Sound.PlaySound(m_Sound.m_MonsterFollow);
                 m_Animator.SetTrigger("tRun");
                 m_NavMeshAgent.speed *= m_fRunSpeed;
                 m_NavMeshAgent.SetDestination(m_tfTarget.position);

@@ -7,6 +7,7 @@ public class PortalControl : MonoBehaviour
     public ParticleSystem m_ptsPortalIn;
     public ParticleSystem m_ptsPortalOut;
     public GameObject m_PortalMoveSound;
+    public GameObject m_PortalEndSound;
     private ParticleSystem[] m_ptsPortalEffect;
     public Image m_BarImage;
     public Transform[] m_tfPortals;
@@ -91,6 +92,7 @@ public class PortalControl : MonoBehaviour
         m_ptsPortalOut.Play();
         GameManager.instance.SetCurDelayPortal(0.0f);
         yield return new WaitForSeconds(1);
+        m_PortalEndSound.GetComponent<AudioSource>().Play();
         other.gameObject.SetActive(true);
         m_bPortalOn = false;
         StopPortalEffect();

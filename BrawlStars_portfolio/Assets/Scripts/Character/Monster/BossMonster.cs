@@ -30,12 +30,9 @@ public class BossMonster : Monster
 
     Coroutine die = null;
     Coroutine rot = null;
-
-    SoundManager m_Sound;
     public bool Getactive() { return m_bSkil2_active; }
     private void Awake()
     {
-        m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
         m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/BossMonster"), transform);
         main = GameObject.Find("StartCamerPosition").GetComponent<Main_Camera_Moving>();
     }
@@ -432,6 +429,7 @@ public class BossMonster : Monster
             //rot = StartCoroutine(LookAtTarget(m_tfTarget));
             this.transform.LookAt(m_tfTarget);
             m_Animator.SetTrigger("tBAttack");
+            m_Sound.PlaySound(m_Sound.m_BossPunch);
         }
         else
         {
@@ -458,11 +456,11 @@ public class BossMonster : Monster
         //rot = StartCoroutine(LookAtTarget(m_tfTarget));
         this.transform.LookAt(m_tfTarget);
         m_Animator.SetTrigger("tSkillAttack2");
-        
+        m_Sound.PlaySound(m_Sound.m_BossSkill);
+
     }
     void EndAttack()
     {
-        
         ChangeState(State.IDLE);
     }
 
@@ -477,6 +475,7 @@ public class BossMonster : Monster
 
     void BossMonFire(int n)
     {
+        m_Sound.PlaySound(m_Sound.m_BossFirePunch);
         Instantiate(m_objBullet, m_FirePos[n].position, m_FirePos[n].rotation);
     }
 
@@ -549,5 +548,12 @@ public class BossMonster : Monster
         Rot.y += e;
         this.transform.rotation = Quaternion.Euler(Rot);
         rot = null;
+    }
+
+    public override void Hit(int damage, Color c)
+    {
+        base.Hit(damage, c);
+
+        m_Sound.PlaySound(m_Sound.m_BossHit);
     }
 }

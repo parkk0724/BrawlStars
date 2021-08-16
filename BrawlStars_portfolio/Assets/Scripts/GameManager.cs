@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour
     private GameObject BoxMan;
     private GameObject Bear;
     private GameObject Jester;
-
+    private SoundManager m_soundManager;
     static private GameManager _instance;
+    
     static public GameManager instance
     { 
         get
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
         BoxMan = GameObject.Find("BoxMan");
         Bear = GameObject.Find("BearDefault");
         Jester = GameObject.Find("Jester");
+        m_soundManager = GameObject.Find("Sound").GetComponent<SoundManager>();
     }
     void Start()
     {
@@ -109,12 +111,17 @@ public class GameManager : MonoBehaviour
     public float GetCurDelayPortal() { return m_fCurDelayPortal; }
     public void SetCurDelayPortal(float t) { m_fCurDelayPortal = t; }
     public float GetMaxDelayPortal() { return m_fMaxDelayPortal; }
-
-    //public void LoadResultScene() { SceneManager.LoadScene("EndLogunity"); }
     public void EndGame(string s)
     {
         m_bEnd = true;
         ESC_UI.Instance.SE_Bar.GetComponent<Slider>().value = 0;
+
+        m_soundManager.Playing.SetActive(false);
+        m_soundManager.Playing_Angry.SetActive(false);
+
+        if (s == "Win") m_soundManager.PlaySound(m_soundManager.m_Win);
+        else m_soundManager.PlaySound(m_soundManager.m_Lose);
+
         StartCoroutine(GameOver(s));
     }
     public IEnumerator GameOver(string s)
@@ -142,8 +149,6 @@ public class GameManager : MonoBehaviour
 
             yield return true;
         }
-        
-        //LoadResultScene();
     }
 
     public void ChangeState()

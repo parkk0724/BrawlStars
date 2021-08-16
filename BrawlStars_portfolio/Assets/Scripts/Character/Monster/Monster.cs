@@ -13,9 +13,11 @@ public class Monster : Character
     protected NavMeshAgent m_NavMeshAgent;
     protected Transform m_tfTarget;
     protected Vector3 m_vDestination;
+    protected SoundManager m_Sound;
     float m_fRandomMoveRange = 0.0f;
     protected virtual void Start()
     {
+        m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
         m_UITextDamage = GameObject.Find("UI").GetComponentInChildren<UITextDamage>();
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;

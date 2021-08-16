@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour
 
     public GameObject Portal;
     public GameObject PortalMove;
+    public GameObject PortalEnd;
     public GameObject JumpMove;
     public GameObject EndJump;
     public GameObject FootWalk;
@@ -34,6 +35,16 @@ public class SoundManager : MonoBehaviour
     public GameObject m_InviciblePotion;
     public GameObject m_AgetInvicible;
 
+    public GameObject m_Win;
+    public GameObject m_Lose;
+
+    public GameObject m_BossPunch;
+    public GameObject m_BossFirePunch;
+    public GameObject m_BossHit;
+    public GameObject m_BossSkill;
+    public GameObject m_MonsterFollow;
+
+
     GameObject BGM;
     GameObject SoundEffect;
     void Start()
@@ -43,6 +54,7 @@ public class SoundManager : MonoBehaviour
         Playing = GameObject.Find("Playing");
         Portal = GameObject.Find("PortalSound");
         PortalMove = GameObject.Find("PortalStart");
+        PortalEnd = GameObject.Find("PortalEnd");
         JumpMove = GameObject.Find("JumpStart");
         Playing_Angry = GameObject.Find("Playing(angry)");
         FootWalk = GameObject.Find("FootWalk");
@@ -60,11 +72,15 @@ public class SoundManager : MonoBehaviour
         m_InviciblePotion = GameObject.Find("Shield");
         m_AgetInvicible = GameObject.Find("m_AgetInvicible");
         m_BoomSound = GameObject.Find("JesterBoom");
+        m_Win = GameObject.Find("Win");
+        m_Lose = GameObject.Find("Lose");
+        m_BossPunch = GameObject.Find("BossPunch");
+        m_BossFirePunch = GameObject.Find("BossFirePunch");
+        m_BossHit = GameObject.Find("BossHit");
+        m_BossSkill = GameObject.Find("BossSkill");
+        m_MonsterFollow = GameObject.Find("MonsterFollow");
 
-
-
-
-        BGM = GameObject.Find("BGM");
+    BGM = GameObject.Find("BGM");
         SoundEffect = GameObject.Find("SoundEffect");
     }
 

@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Loading.unity
     guid: a96558e6965cbba4884efa3a15e8e507
   - enabled: 1
-    path: Assets/Scenes/Browl_Stars.unity
+    path: Assets/Scenes/Browl_Stars/Browl_Stars.unity
     guid: 5d4340c58ac53d44a9dfd3ac4c7add67
   - enabled: 1
     path: Assets/Scenes/TestScene/EndLogunity.unity

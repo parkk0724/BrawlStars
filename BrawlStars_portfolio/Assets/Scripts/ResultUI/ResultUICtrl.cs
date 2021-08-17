@@ -20,9 +20,6 @@ public class ResultUICtrl : MonoBehaviour
     private AudioSource win_lose_Sound;
     private AudioSource Click_Sound;
 
-    private Canvas Quit;
-    private Button Setting;
-
     private Transform CharacterPos;
 
     private void Start()
@@ -34,9 +31,6 @@ public class ResultUICtrl : MonoBehaviour
 
         //선택된 캐릭터 렌더 텍스쳐로 보이게 하기 위해 프리팹 소환
         CharacterPos = GameObject.Find("CharacterPos").transform;
-        Quit = GameObject.Find("Touch").GetComponent<Canvas>();
-        Setting = GameObject.Find("Setting").GetComponent<Button>();
-        Setting.onClick.AddListener(OnClick_Setting);
         CreateCharacter();
 
         Sound(); // 결과에 따라 사운드 다르게 재생 -유석-
@@ -108,19 +102,6 @@ public class ResultUICtrl : MonoBehaviour
         TimeTxt.text = Min + " : " + Sec;
     }
 
-    void Retry()
-    {
-        Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
-        Click_Sound.Play();
-        SceneManager.LoadScene("Browl_Stars");
-    }
-
-    void LoadMainMenu()
-    {
-        Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
-        Click_Sound.Play();
-        SceneManager.LoadScene("MainMenu");
-    }
 
     void Sound()
     {
@@ -139,17 +120,6 @@ public class ResultUICtrl : MonoBehaviour
     {
         GameObject obj = Resources.Load<GameObject>(DataManager.instance.select_character.charPrefab);
         GameObject Character = Instantiate(obj, CharacterPos.position, CharacterPos.rotation);
-    }
-
-    void OnClick_Setting()
-    {
-        GameObject.Find("Touch").GetComponent<Canvas>().enabled = true; // 세팅 아이콘 클릭시 UI 출력
-
-        BtnRetry.onClick.AddListener(Retry);            // 버튼에 retry 안 들어가는 문제
-        BtnMainMenu.onClick.AddListener(LoadMainMenu);  // 버튼에 LoadMainMenu 안 들어가는 문제
-        Click_Sound = GameObject.Find("ClickSound").GetComponent<AudioSource>();
-        Click_Sound.Play();
-        Quit.enabled = true;
     }
 }
 

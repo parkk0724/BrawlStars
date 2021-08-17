@@ -49,6 +49,7 @@ public class ReadyUi : MonoBehaviour
             m_bcoActive = false;
             if(m_cReady != null)StopCoroutine(m_cReady);
         }
+        #region update¹®µ¹·Áº½
         //m_fCurtime += Time.deltaTime;
         //if (m_fCurtime > 2)
         //{
@@ -69,6 +70,7 @@ public class ReadyUi : MonoBehaviour
         //        }
         //    }
         //}
+        #endregion
 
     }
     IEnumerator Ready(float time)
@@ -86,6 +88,7 @@ public class ReadyUi : MonoBehaviour
                 
                 yield return new WaitForSeconds(2);
                 m_bStop = false;
+                x1 = 0;
             }
             if (!m_bStop)
             {

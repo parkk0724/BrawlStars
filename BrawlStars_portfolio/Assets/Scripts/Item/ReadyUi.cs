@@ -30,8 +30,8 @@ public class ReadyUi : MonoBehaviour
         m_rRTransform = m_iRe_image.GetComponent<RectTransform>();
         m_rATransform = m_iad_yimage.GetComponent<RectTransform>();
         //m_rGTransform = m_iGo.GetComponent<RectTransform>();
-        endPos = new Vector3(-70, 0);
-        endPos_1 = new Vector3(70, 0);
+        endPos = new Vector3(-75, 0);
+        endPos_1 = new Vector3(75, 0);
 
         
     }

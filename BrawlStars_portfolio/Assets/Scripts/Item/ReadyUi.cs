@@ -9,6 +9,7 @@ public class ReadyUi : MonoBehaviour
     public Image m_iRe_image;
     public Image m_iad_yimage;
     public Image m_iGo;
+    public float m_fendPos = 150;
     private RectTransform m_rRTransform;
     private RectTransform m_rATransform;
     private RectTransform m_rGTransform;
@@ -30,8 +31,8 @@ public class ReadyUi : MonoBehaviour
         m_rRTransform = m_iRe_image.GetComponent<RectTransform>();
         m_rATransform = m_iad_yimage.GetComponent<RectTransform>();
         //m_rGTransform = m_iGo.GetComponent<RectTransform>();
-        endPos = new Vector3(-75, 0);
-        endPos_1 = new Vector3(75, 0);
+        endPos = new Vector3(-m_fendPos, 0); //수치조절여기서
+        endPos_1 = new Vector3(m_fendPos, 0);
 
         
     }

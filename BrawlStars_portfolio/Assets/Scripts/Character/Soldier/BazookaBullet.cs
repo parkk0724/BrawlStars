@@ -15,10 +15,6 @@ public class BazookaBullet : MonoBehaviour
 
     float m_fDamage = 25.0f;
 
-    BoxCollider collider_size = null;
-
-    Rigidbody myRigid;
-
     Vector3 curPos;
     Vector3 prePos;
 
@@ -27,15 +23,21 @@ public class BazookaBullet : MonoBehaviour
     Coroutine bulletflying;
 
     SoundManager m_Sound;
+
+    Transform bulletPos;
+
+    private void OnEnable()
+    {
+        bulletPos = GameObject.Find("Bazooka_Bullet").transform;
+        bulletflying = StartCoroutine(BulletFlying());
+        gameObject.GetComponent<TrailRenderer>().enabled = true;
+    }
+
     private void Start()
     {
         m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
-        collider_size = this.GetComponent<BoxCollider>();
-        myRigid = this.GetComponent<Rigidbody>();
-        bulletflying = StartCoroutine(BulletFlying());
     }
-       
-
+      
     IEnumerator BulletFlying()
     {
         dist += 0.7f;// 바주카포에서 발사하는 높이가 0높이보다 크므로 sin그래프에서 중간부터 시작하는건데 정확한 수치 계산이 지금은 힘들어서 일단 0.7만큼 보정함
@@ -94,7 +96,10 @@ public class BazookaBullet : MonoBehaviour
                     Fever_up?.Invoke();
                 }
             }
-            Destroy(this.gameObject);
+            dist = 0.0f;
+            gameObject.GetComponent<TrailRenderer>().Clear();
+            gameObject.GetComponent<TrailRenderer>().enabled = false;
+            gameObject.SetActive(false);
         }
     }
 }

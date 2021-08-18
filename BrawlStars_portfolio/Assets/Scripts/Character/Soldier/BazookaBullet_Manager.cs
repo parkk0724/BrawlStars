@@ -20,7 +20,7 @@ public class BazookaBullet_Manager : MonoBehaviour
         }
     }
 
-    private Transform bulletPos;
+    public Transform bulletPos;
     private int poolCount = 10;
 
     public List<GameObject> bullets = new List<GameObject>();
@@ -40,9 +40,7 @@ public class BazookaBullet_Manager : MonoBehaviour
 
     public void EnableBullet()
     {
-        GameObject bulletPos = GameObject.Find("BazookaBullet_Manager");
-        bulletPos.transform.position = GameObject.Find("Bazooka_Bullet").transform.position;
-        bulletPos.transform.rotation = GameObject.Find("Bazooka_Bullet").transform.rotation;
+        bulletPos = GameObject.Find("Bazooka_Bullet").transform;
 
         foreach (GameObject bullet in bullets)
         {
@@ -50,7 +48,12 @@ public class BazookaBullet_Manager : MonoBehaviour
 
             if (!bullet.activeSelf)
             {
+                //Time.timeScale = 0.1f;
+                bullet.transform.position = bulletPos.position;
+                bullet.transform.rotation = bulletPos.rotation;
+
                 bullet.SetActive(true);
+
                 BazookaBullet basic_bullet = bullet.GetComponent<BazookaBullet>();
                 basic_bullet.Fever_up = Soldier.instance.FeverUp;
                 break;

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion_effect: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
+  Explosion_Sound: {fileID: 0}
   speed: 16
   range: 10
   height: 3
@@ -179,8 +180,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.016757965
-        value: 0.31428528
+        time: 0.33190918
+        value: 0.27290344
         inSlope: 0
         outSlope: 0
         tangentMode: 0

@@ -834,6 +834,6 @@ public class Hero : Character
         mat.DisableKeyword("_ALPHATEST_ON");
         mat.DisableKeyword("_ALPHABLEND_ON");
         mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        mat.renderQueue = -1;
+        mat.renderQueue = 1000;
     }
 }

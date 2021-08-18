@@ -60,7 +60,7 @@ public class Soldier : Hero
                   m_Animator.SetTrigger("tSAttack");
                   m_fFever = 0.0f;
               }
-          }        
+         }        
     }
 
     private void Basic_Fire()

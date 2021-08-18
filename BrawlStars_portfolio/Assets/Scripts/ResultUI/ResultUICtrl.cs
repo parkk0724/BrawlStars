@@ -21,6 +21,7 @@ public class ResultUICtrl : MonoBehaviour
     private AudioSource Click_Sound;
 
     private Transform CharacterPos;
+    private Animator Player_Anim;
 
     private void Start()
     {
@@ -120,6 +121,10 @@ public class ResultUICtrl : MonoBehaviour
     {
         GameObject obj = Resources.Load<GameObject>(DataManager.instance.select_character.charPrefab);
         GameObject Character = Instantiate(obj, CharacterPos.position, CharacterPos.rotation);
+        Player_Anim = Character.GetComponentInChildren<Animator>();
+
+        if (GameManager.instance.m_fTime >0.0f)
+            Player_Anim.SetTrigger("tVictory");
     }
 }
 

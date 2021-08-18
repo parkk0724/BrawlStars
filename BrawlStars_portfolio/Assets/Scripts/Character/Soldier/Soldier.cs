@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Soldier : Hero
 {
+    static public Soldier instance;
+
     public LayerMask pickingmask;
     public GameObject bazooka_Basic_bullet;    
     public GameObject bazooka_Skill_bullet1;
@@ -24,6 +26,7 @@ public class Soldier : Hero
 
     protected override void Start()
     {
+        instance = this;
         base.Start();
         BazookaBullet_Manager.instance.CreateBullet();
         this.GetComponentInChildren<Animation_Event>().bazooka_basic_fire = Basic_Fire;
@@ -39,10 +42,10 @@ public class Soldier : Hero
                  m_fStamina -= 1.0f;
                  m_Animator.SetTrigger("tBAttack");
              }
-             if (Input.GetKeyDown(KeyCode.Space))
-             {
-                 Roll();
-             }
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     Roll();
+            // }
          }
           if (Input.GetMouseButtonUp(0))
           {
@@ -62,10 +65,8 @@ public class Soldier : Hero
 
     private void Basic_Fire()
     {
-        Bazooka_Bullet_Initiate(bazooka_Basic_bullet);
+        BazookaBullet_Manager.instance.EnableBullet();  
         Fire_Sound.GetComponent<AudioSource>().Play();
-        BazookaBullet basic_bullet = Bullet.GetComponent<BazookaBullet>();
-        basic_bullet.Fever_up = FeverUp;
     }
     private void Skill_Fire()
     {

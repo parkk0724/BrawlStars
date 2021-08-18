@@ -13,7 +13,6 @@ public class BazookaBullet_Manager : MonoBehaviour
             if (!_instance)
             {
                 GameObject obj = new GameObject("BazookaBullet_Manager");
-                obj.transform.SetParent(GameObject.Find("Soldier").transform);
                 _instance = obj.AddComponent<BazookaBullet_Manager>();
             }
 
@@ -21,7 +20,10 @@ public class BazookaBullet_Manager : MonoBehaviour
         }
     }
 
+    private Transform bulletPos;
     private int poolCount = 10;
+
+    public List<GameObject> bullets = new List<GameObject>();
 
     public void CreateBullet()
     {
@@ -31,6 +33,28 @@ public class BazookaBullet_Manager : MonoBehaviour
             GameObject bullet = Instantiate(prefabs, transform);
             bullet.name = "BazookaBullet_" + i;
             bullet.SetActive(false);
+
+            bullets.Add(bullet);
+        }
+    }
+
+    public void EnableBullet()
+    {
+        GameObject bulletPos = GameObject.Find("BazookaBullet_Manager");
+        bulletPos.transform.position = GameObject.Find("Bazooka_Bullet").transform.position;
+        bulletPos.transform.rotation = GameObject.Find("Bazooka_Bullet").transform.rotation;
+
+        foreach (GameObject bullet in bullets)
+        {
+            if (bullet == null) continue;
+
+            if (!bullet.activeSelf)
+            {
+                bullet.SetActive(true);
+                BazookaBullet basic_bullet = bullet.GetComponent<BazookaBullet>();
+                basic_bullet.Fever_up = Soldier.instance.FeverUp;
+                break;
+            }
         }
     }
 }

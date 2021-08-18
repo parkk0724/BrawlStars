@@ -11,24 +11,23 @@ public class JesterBullet : MonoBehaviour
     Vector3 Originpos;
     public LayerMask layerMask_t = 0;
     public LayerMask layerMask_o = 0;
-    [SerializeField] AudioSource ShotSound;
-    [SerializeField] AudioSource ShotSound_2;
+    AudioSource ShotSound;
+    AudioSource ShotSound_2;
     AudioSource ShotSound_3;
-    SoundManager soundManager;
     Coroutine SoundEffect;
     Coroutine SoundEffect_2;
+    Transform jesterWapon;
     void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
-        ShotSound = soundManager.Jestershoteffect.GetComponent<AudioSource>();
-        ShotSound_2 = soundManager.Jestershoteffect_2.GetComponent<AudioSource>();
-        ShotSound_3 = soundManager.Jestershoteffect_3.GetComponent<AudioSource>();
-        Destroy(this.gameObject, 2f);
-        Originpos = this.transform.position;
-    }
-    
 
-    
+        ShotSound = GameObject.Find("JesterShoteffect").GetComponent<AudioSource>();
+        ShotSound_2 = GameObject.Find("JesterShoteffect_2").GetComponent<AudioSource>();
+        ShotSound_3 = GameObject.Find("JesterShoteffect_3").GetComponent<AudioSource>();
+        jesterWapon = GameObject.Find("MiniGunDefault").GetComponent<Transform>();
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -37,14 +36,14 @@ public class JesterBullet : MonoBehaviour
         Vector3 nextPos = curPos + this.transform.forward * Speed * Time.deltaTime;
 
         this.transform.position = nextPos;
-        float dist = Vector3.Distance(Originpos, nextPos);
+        float dist = Vector3.Distance(jesterWapon.position, nextPos);
         float dist_2 = Vector3.Distance(curPos, nextPos);
 
 
         RaycastHit hit;
-        if(Physics.Raycast(curPos ,nextPos-curPos ,out hit ,dist_2 , layerMask_t))
+        if (Physics.Raycast(curPos, nextPos - curPos, out hit, dist_2, layerMask_t))
         {
-            if(hit.transform.gameObject.GetComponent<Monster>())
+            if (hit.transform.gameObject.GetComponent<Monster>())
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 Jester jester = player.GetComponent<Jester>();
@@ -59,24 +58,24 @@ public class JesterBullet : MonoBehaviour
         }
 
 
-        if(Physics.Raycast(curPos ,nextPos-curPos ,out hit ,dist_2 , layerMask_o))
+        if (Physics.Raycast(curPos, nextPos - curPos, out hit, dist_2, layerMask_o))
         {
             if (SoundEffect != null) StopCoroutine(SoundEffect);
             SoundEffect = StartCoroutine(initBullet(ShotSound));
-            
+
         }
 
 
-        if(dist > 10)
+        if (dist > 8)
         {
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
     }
     IEnumerator initBullet(AudioSource source)
     {
         GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
         Destroy(obj.gameObject, 0.2f);
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
         source.Play();
         yield return new WaitForSeconds(0.1f);
         source.Play();
@@ -86,7 +85,7 @@ public class JesterBullet : MonoBehaviour
     {
         GameObject obj = Instantiate(HitEffect, this.transform.position, this.transform.rotation);
         Destroy(obj.gameObject, 0.2f);
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
         source.Play();
         yield return new WaitForSeconds(0.1f);
         source.Play();

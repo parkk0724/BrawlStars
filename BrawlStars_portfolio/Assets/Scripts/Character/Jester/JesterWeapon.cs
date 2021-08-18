@@ -7,7 +7,7 @@ public class JesterWeapon : MonoBehaviour
 {
     // Start is called before the first frame update
     public Transform[] m_tBulletPos;
-    public  GameObject m_objbullet;
+    public GameObject m_objbullet;
     public Transform m_tBulletPosCase;
     public GameObject m_objBulletCase;
     public ParticleSystem Shooteffect;
@@ -17,10 +17,12 @@ public class JesterWeapon : MonoBehaviour
     //public ParticleSystem Shooteffect_2;
     public UnityAction onFever = null;
     Animator anim;
+
     void Start()
     {
+        JesterBulletmanager.instance.AddBullet("JesterBullet", 30);
         soundManager = FindObjectOfType<SoundManager>();
-        ShotSound =soundManager.Jestershot.GetComponent<AudioSource>();
+        ShotSound = soundManager.Jestershot.GetComponent<AudioSource>();
         ShotSound.volume = 0.3f;
         anim = this.GetComponent<Animator>();
         this.GetComponentInParent<JesterAnimationEv>().OnShot_0 = Shoot_0;
@@ -32,23 +34,21 @@ public class JesterWeapon : MonoBehaviour
     void Shoot_0()
     {
         anim.SetTrigger("doShoot");
-        GameObject obj =Instantiate(m_objbullet, m_tBulletPos[0].position, m_tBulletPos[0].rotation);
+        JesterBulletmanager.instance.Fire("JesterBullet", m_tBulletPos[0]);
         ShotSound.Play();
-        //JesterBullet bullet = obj.GetComponent<JesterBullet>();
-        //bullet.Fever = onFever;
         BullutCaseInit(2);
     }
     void Shoot_1()
     {
-        //anim.SetTrigger("doShoot");
-        Instantiate(m_objbullet, m_tBulletPos[1].position, m_tBulletPos[1].rotation);
+        JesterBulletmanager.instance.Fire("JesterBullet", m_tBulletPos[1]);
+        //Instantiate(m_objbullet, m_tBulletPos[1].position, m_tBulletPos[1].rotation);
         BullutCaseInit(2);
         ShotSound.Stop();
     }
     void Shoot_2()
     {
-        //anim.SetTrigger("doShoot");
-        Instantiate(m_objbullet, m_tBulletPos[2].position, m_tBulletPos[2].rotation);
+        JesterBulletmanager.instance.Fire("JesterBullet", m_tBulletPos[2]);
+        //nstantiate(m_objbullet, m_tBulletPos[2].position, m_tBulletPos[2].rotation);
         BullutCaseInit(2);
     }
     void Anim_end()
@@ -73,3 +73,4 @@ public class JesterWeapon : MonoBehaviour
         Destroy(instanBulletCase, time);
     }
 }
+

@@ -717,7 +717,7 @@ public class Hero : Character
 
             for (int i = 0; i < m_meshRenderer.Length; i++) //스킨렌더가 아닌 사람이 있어서 for문사용
             {
-                m_meshRenderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+                //m_meshRenderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
                 #region 알파테스트
                 //Color startColor = m_meshRenderer[i].material.color = new Color(1, 1, 1, 1f);
                 //Color EndColor = m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
@@ -734,7 +734,7 @@ public class Hero : Character
             {
                 for (int i = 0; i < m_renderer.Length; i++)
                 {
-                    m_renderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+                    //m_renderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
                     m_renderer[i].material.color = new Color(1, 1, 1, 0.3f);
                 }
             }

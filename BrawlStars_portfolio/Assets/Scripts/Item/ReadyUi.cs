@@ -15,7 +15,7 @@ public class ReadyUi : MonoBehaviour
     private RectTransform m_rGTransform;
     Coroutine m_cReady;
     private float m_fCurtime = 0;
-    float curtime = 0;
+    float m_fgotime = 0;
     Vector3 OriginPos;
     Vector3 OriginPos_1;
     Vector3 endPos;
@@ -24,17 +24,22 @@ public class ReadyUi : MonoBehaviour
     bool m_bStop = true;
     float x1;
     float x2;
+    /// <summary>
+    /// 
+    /// </summary>
+    Color alpha;
+    float F_time = 20f;
     void Start()
     {
         OriginPos = new Vector3(-600, 0);
         OriginPos_1 = new Vector3(600, 0);
         m_rRTransform = m_iRe_image.GetComponent<RectTransform>();
         m_rATransform = m_iad_yimage.GetComponent<RectTransform>();
-        //m_rGTransform = m_iGo.GetComponent<RectTransform>();
+        m_rGTransform = m_iGo.GetComponent<RectTransform>();
         endPos = new Vector3(-m_fendPos, 0); //수치조절여기서
         endPos_1 = new Vector3(m_fendPos, 0);
+        alpha = m_iGo.color;
 
-        
     }
 
     // Update is called once per frame
@@ -97,6 +102,27 @@ public class ReadyUi : MonoBehaviour
                 m_rRTransform.anchoredPosition = endPos + new Vector3(-x2, 0);
                 m_rATransform.anchoredPosition = endPos_1 + new Vector3(x2, 0);
             }
+            yield return new WaitForSeconds(2);
+            while (alpha .a< 1f)
+            {
+                m_fgotime += Time.deltaTime / F_time;
+                alpha.a = Mathf.Lerp(0, 1, m_fgotime);
+                m_iGo.color = alpha;
+
+                yield return null;
+            }
+            m_fgotime = 0;
+            yield return new WaitForSeconds(1);
+            while (alpha.a > 0)
+            {
+                m_fgotime += Time.deltaTime / F_time;
+                alpha.a = Mathf.Lerp(1, 0, m_fgotime);
+                m_iGo.color = alpha;
+
+                yield return null;
+            }
+            m_iGo.gameObject.SetActive(false);
+            yield return null;
         }
     }
 }

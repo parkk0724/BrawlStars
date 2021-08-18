@@ -827,7 +827,7 @@ public class Hero : Character
     }
     void tranMatStand(Material mat)
     {
-        mat.SetFloat("_Mode", 1);
+        mat.SetFloat("_Mode", 0);
         mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
         mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
         mat.SetInt("_ZWrite", 1);

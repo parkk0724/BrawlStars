@@ -41,18 +41,20 @@ public class StartText : MonoBehaviour
             }
             m_fgotime = 0;
             yield return new WaitForSeconds(1);
-            
+
             while (alpha.a >0 )
             {
-                F_time = 40;
+                F_time = 60;
                 m_fgotime += Time.deltaTime / F_time ;
                 m_rGTransform.sizeDelta = m_rGTransform.sizeDelta  * 0.99990f;
                 alpha.a = Mathf.Lerp(1, 0, m_fgotime);
                 m_iGo.color = alpha;
 
                 yield return null;
+                if(alpha.a ==0)
+                    m_iGo.gameObject.SetActive(false);
             }
-            m_iGo.gameObject.SetActive(false);
+            
         } 
     }
 }

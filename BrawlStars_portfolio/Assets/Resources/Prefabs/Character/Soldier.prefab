@@ -198,7 +198,7 @@ MonoBehaviour:
   m_objStamina: {fileID: 2174841388310051998, guid: 1a423fb0861c5a34cb2bda7968d10f8c, type: 3}
   m_objFever: {fileID: 5039942850610566560, guid: 41c2f04d003d57142becd597edb12df0, type: 3}
   m_objInvicible: {fileID: 8539904587373690469, guid: c82b2f003435ddf419ad758d1151f017, type: 3}
-  m_objGhost: {fileID: 0}
+  m_objGhost: {fileID: 7676190760061212283, guid: e5bea08ab35d52847b974a78a1d6536b, type: 3}
   m_meshRenderer:
   - {fileID: 1305341027694205300}
   - {fileID: 1305341027105343378}

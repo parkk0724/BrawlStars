@@ -27,13 +27,14 @@ public class BazookaBullet : MonoBehaviour
     Coroutine bulletflying;
 
     SoundManager m_Sound;
-    void Start()
+    private void Start()
     {
         m_Sound = GameObject.Find("Sound").GetComponent<SoundManager>();
         collider_size = this.GetComponent<BoxCollider>();
         myRigid = this.GetComponent<Rigidbody>();
         bulletflying = StartCoroutine(BulletFlying());
     }
+       
 
     IEnumerator BulletFlying()
     {

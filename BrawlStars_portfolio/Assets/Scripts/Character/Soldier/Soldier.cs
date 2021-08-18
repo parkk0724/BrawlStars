@@ -21,6 +21,11 @@ public class Soldier : Hero
     public float Jump_Height = 0.0f;
 
     Animation_Event animation_event;
+
+    private void Awake()
+    {
+        BazookaBullet_Manager.instance.CreateBullet();
+    }
     protected override void Start()
     {
         base.Start();

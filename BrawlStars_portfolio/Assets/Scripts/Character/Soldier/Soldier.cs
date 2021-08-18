@@ -22,13 +22,10 @@ public class Soldier : Hero
 
     Animation_Event animation_event;
 
-    private void Awake()
-    {
-        BazookaBullet_Manager.instance.CreateBullet();
-    }
     protected override void Start()
     {
         base.Start();
+        BazookaBullet_Manager.instance.CreateBullet();
         this.GetComponentInChildren<Animation_Event>().bazooka_basic_fire = Basic_Fire;
         this.GetComponentInChildren<Animation_Event>().bazooka_skill_fire = Skill_Fire;
         Fire_Sound = GameObject.Find("BazookaFire");

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class JesterBullet : MonoBehaviour
 {
-    private float m_fDamage = 0;
     public UnityAction Fever = null;
     public GameObject HitEffect = null;
     float Speed = 20f;
@@ -23,7 +22,6 @@ public class JesterBullet : MonoBehaviour
         soundManager = FindObjectOfType<SoundManager>();
         ShotSound = soundManager.Jestershoteffect.GetComponent<AudioSource>();
         ShotSound_2 = soundManager.Jestershoteffect_2.GetComponent<AudioSource>();
-        ShotSound_2.volume = 1;
         ShotSound_3 = soundManager.Jestershoteffect_3.GetComponent<AudioSource>();
         Destroy(this.gameObject, 2f);
         Originpos = this.transform.position;
@@ -34,7 +32,6 @@ public class JesterBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //rigid.velocity = transform.forward * 20f;
 
         Vector3 curPos = this.transform.position;
         Vector3 nextPos = curPos + this.transform.forward * Speed * Time.deltaTime;
@@ -53,8 +50,7 @@ public class JesterBullet : MonoBehaviour
                 Jester jester = player.GetComponent<Jester>();
 
                 jester.FeverUp();
-                //jester.GetATK() / 2,
-                hit.transform.gameObject.GetComponent<Monster>().Hit(50, Color.red);
+                hit.transform.gameObject.GetComponent<Monster>().Hit(jester.GetATK() / 2, Color.red);
                 if (SoundEffect_2 != null) StopCoroutine(SoundEffect_2);
                 SoundEffect_2 = StartCoroutine(initBullet_2(ShotSound_2));
 
@@ -83,8 +79,6 @@ public class JesterBullet : MonoBehaviour
         Destroy(this.gameObject);
         source.Play();
         yield return new WaitForSeconds(0.1f);
-        source.Stop();
-        yield return new WaitForSeconds(0.1f);
         source.Play();
 
     }
@@ -94,12 +88,6 @@ public class JesterBullet : MonoBehaviour
         Destroy(obj.gameObject, 0.2f);
         Destroy(this.gameObject);
         source.Play();
-        yield return new WaitForSeconds(0.1f);
-        source.Stop();
-        yield return new WaitForSeconds(0.1f);
-        ShotSound_3.Play();
-        yield return new WaitForSeconds(0.1f);
-        ShotSound_3.Stop();
         yield return new WaitForSeconds(0.1f);
         source.Play();
     }

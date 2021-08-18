@@ -33,7 +33,7 @@ public class StartText : MonoBehaviour
             {
                 
                 m_fgotime += Time.deltaTime / F_time;
-                m_rGTransform.sizeDelta = m_rGTransform.sizeDelta * Time.deltaTime / Time.deltaTime * 1.00005f ;
+                m_rGTransform.sizeDelta = m_rGTransform.sizeDelta * 1.00005f ;
                 alpha.a = Mathf.Lerp(0, 1, m_fgotime);
                 m_iGo.color = alpha;
 
@@ -41,18 +41,18 @@ public class StartText : MonoBehaviour
             }
             m_fgotime = 0;
             yield return new WaitForSeconds(1);
+            
             while (alpha.a >0 )
             {
-               
-                m_fgotime += Time.deltaTime / F_time;
-                m_rGTransform.sizeDelta = m_rGTransform.sizeDelta * Time.deltaTime / Time.deltaTime * 0.99995f;
+                F_time = 40;
+                m_fgotime += Time.deltaTime / F_time ;
+                m_rGTransform.sizeDelta = m_rGTransform.sizeDelta  * 0.99990f;
                 alpha.a = Mathf.Lerp(1, 0, m_fgotime);
                 m_iGo.color = alpha;
 
                 yield return null;
             }
             m_iGo.gameObject.SetActive(false);
-            yield return null;
         } 
     }
 }

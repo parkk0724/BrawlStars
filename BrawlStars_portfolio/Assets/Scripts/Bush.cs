@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Bush : MonoBehaviour
 {
+    public enum BlendMode { Opaque, Transparent }
+
     MeshRenderer m_meshRenderer;
 
     AudioSource m_audioSource;
@@ -27,7 +29,8 @@ public class Bush : MonoBehaviour
         if(other.CompareTag("Player") || other.CompareTag("Monster"))
         {
             m_audioSource.Play();
-            m_meshRenderer.material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+            SetupMaterialWithBlendMode(m_meshRenderer.material, BlendMode.Transparent);
+            //m_meshRenderer.material.shader = Shader.Find("Legacy Shaders/Transparent/BumpedDiffuse");
             m_meshRenderer.material.color = new Color(1, 1, 1, 0.2f);
         }
     }
@@ -36,8 +39,34 @@ public class Bush : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.CompareTag("Monster"))
         {
-            m_meshRenderer.material.shader = Shader.Find("Standard");
+            SetupMaterialWithBlendMode(m_meshRenderer.material, BlendMode.Opaque);
+            //m_meshRenderer.material.shader = Shader.Find("Standard");
             m_meshRenderer.material.color = new Color(1, 1, 1, 1);
         }
     }
+
+	public static void SetupMaterialWithBlendMode(Material material, BlendMode blendMode)
+	{
+		switch (blendMode)
+		{
+			case BlendMode.Opaque:
+				material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+				material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+				material.SetInt("_ZWrite", 1);
+				material.DisableKeyword("_ALPHATEST_ON");
+				material.DisableKeyword("_ALPHABLEND_ON");
+				material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+				material.renderQueue = -1;
+				break;
+			case BlendMode.Transparent:
+				material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+				material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+				material.SetInt("_ZWrite", 0);
+				material.DisableKeyword("_ALPHATEST_ON");
+				material.DisableKeyword("_ALPHABLEND_ON");
+				material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
+				material.renderQueue = 3000;
+				break;
+		}
+	}
 }

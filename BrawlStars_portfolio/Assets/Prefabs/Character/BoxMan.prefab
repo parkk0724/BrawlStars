@@ -79,26 +79,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UITextDamage: {fileID: 0}
   m_nHP: 0
+  m_Start: 0
   m_lmPicking_Mask:
     serializedVersion: 2
     m_Bits: 64
   m_fMove_Speed: 4
   m_fRotate_Speed: 250
-  m_ptsRevival: {fileID: 8631990687542669049, guid: e4ba53ab533a87441b4fea2b8fa10316, type: 3}
-  m_objPlayerDir: {fileID: 0}
+  m_fJump_Height: 0
+  m_fJump_Speed: 0
   m_objCharacter: {fileID: 5161410722356486619}
-  m_objUIDie: {fileID: 0}
-  m_tDie: {fileID: 0}
   m_fTargetRotSpeed: 1000
   m_objTargetEffect: {fileID: 381403434161168781, guid: 4a6d375a94e053d428399128d0b533e0, type: 3}
   m_tfResultTarget: {fileID: 0}
   m_bRotStart: 0
   m_bMoveStart: 0
+  m_bMoveValid: 1
   m_bCheckStart: 0
   m_fTargetRange: 10
   m_lmEnemyLayer:
     serializedVersion: 2
     m_Bits: 256
+  m_Jump_maxDelay: 0
+  m_Jump_StartSound: {fileID: 0}
+  m_objHp: {fileID: 0}
+  m_objStamina: {fileID: 0}
+  m_objFever: {fileID: 0}
+  m_objInvicible: {fileID: 0}
+  m_objGhost: {fileID: 0}
+  m_meshRenderer: []
+  m_renderer: []
+  items: []
   m_objDirBasicAttack: {fileID: 6072526116935248996}
   m_objDirSkillAttack: {fileID: 812137236332059007}
   m_fMaxMouseButton: 0
@@ -417,7 +427,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

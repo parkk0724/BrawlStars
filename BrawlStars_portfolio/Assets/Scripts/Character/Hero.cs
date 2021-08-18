@@ -22,7 +22,7 @@ public class Hero : Character
     public float m_fMove_Speed = 5.0f;
     public float m_fRotate_Speed = 0.0f;
     public float m_fJump_Height = 0.0f;
-    public float m_fJump_Speed = 0.0f;   
+    public float m_fJump_Speed = 0.0f;
     public GameObject m_objCharacter;
 
     protected GameObject m_objPlayerDir;
@@ -40,7 +40,7 @@ public class Hero : Character
     public bool m_bMoveStart;
     public bool m_bMoveValid = true; // 점프대 사용 시 이동 막는 bool값
     public bool m_bCheckStart = false;
-    public float m_fTargetRange = 0f;    
+    public float m_fTargetRange = 0f;
     public LayerMask m_lmEnemyLayer = 0;
 
     [Header("Jump")]
@@ -54,11 +54,11 @@ public class Hero : Character
     Coroutine Jump2;
 
     [Header("RecoveryItem")]
-    [SerializeField]private GameObject m_objHp;
-    [SerializeField]private GameObject m_objStamina;
-    [SerializeField]private GameObject m_objFever;
-    [SerializeField]private GameObject m_objInvicible;
-    [SerializeField]private ParticleSystem m_objGhost;
+    [SerializeField] private GameObject m_objHp;
+    [SerializeField] private GameObject m_objStamina;
+    [SerializeField] private GameObject m_objFever;
+    [SerializeField] private GameObject m_objInvicible;
+    [SerializeField] private ParticleSystem m_objGhost;
     AudioSource m_AgetitemSound;
     AudioSource m_Aghost;
     AudioSource m_AgetInvicible;
@@ -67,7 +67,7 @@ public class Hero : Character
     Coroutine Hp;
     Coroutine St;
     Coroutine Fe;
-    bool[] b_active = { false,false,false,false,false };
+    bool[] b_active = { false, false, false, false, false };
     float m_fCurtime;
     float m_fCurtime_2;
     public List<reitem> items = new List<reitem>();
@@ -118,7 +118,7 @@ public class Hero : Character
         m_ptsRevival = revivalEffect.GetComponent<ParticleSystem>();
 
         m_boxCollider = GetComponent<BoxCollider>();
-        m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/Hero"),transform);
+        m_objIndicator = Instantiate(Resources.Load<GameObject>("Prefabs/Indicators/Hero"), transform);
         m_Jump_StartSound = GameObject.Find("JumpStart");
     }
     protected virtual void Start()
@@ -132,7 +132,7 @@ public class Hero : Character
         m_objUIDie.SetActive(false);
         m_tDie = m_objUIDie.GetComponentInChildren<TMPro.TMP_Text>();
         Jump_Destination_Pos1 = GameObject.Find("Jump_Destination_Pos1").transform;
-        Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;        
+        Jump_Destination_Pos2 = GameObject.Find("Jump_Destination_Pos2").transform;
         m_bMoveStart = true;
         m_Animator = this.GetComponentInChildren<Animator>();
         m_vOriginPos = this.transform.position;
@@ -265,12 +265,12 @@ public class Hero : Character
 
                 if (dropitem.GetItem().itemtype == "Potion")
                 {
-                    if(dropitem.GetItem().uSEitem == "HP")
+                    if (dropitem.GetItem().uSEitem == "HP")
                     {
                         m_nHP += dropitem.GetItem().itemCount; //아이템 카운트 숫자값 받아와서 더해줌 
                         if (b_active[0] && m_objHp.activeSelf) //Dropitem에서 받아옴
                         {
-                           
+
                             b_active[0] = false;
                             m_objHp.gameObject.SetActive(false);
                         }
@@ -279,7 +279,7 @@ public class Hero : Character
                         if (m_nHP > m_nMaxHP)
                             m_nHP = m_nMaxHP;
                     }
-                    else if(dropitem.GetItem().uSEitem == "STAMINA")
+                    else if (dropitem.GetItem().uSEitem == "STAMINA")
                     {
                         m_fStamina += dropitem.GetItem().itemCount;
                         if (b_active[1] && m_objStamina.activeSelf)
@@ -292,7 +292,7 @@ public class Hero : Character
                         if (m_fStamina > m_fMaxStamina)
                             m_fStamina = m_fMaxStamina;
                     }
-                    else if(dropitem.GetItem().uSEitem == "FEVER")
+                    else if (dropitem.GetItem().uSEitem == "FEVER")
                     {
                         m_fFever += dropitem.GetItem().itemCount;
                         if (b_active[2] && m_objFever.activeSelf)
@@ -301,11 +301,11 @@ public class Hero : Character
                             m_objFever.gameObject.SetActive(false);
                         }
                         b_active[2] = true;
-                         m_AgetitemSound.Play();
+                        m_AgetitemSound.Play();
                         if (m_fFever > m_fMaxFever)
                             m_fFever = m_fMaxFever;
                     }
-                    else if(dropitem.GetItem().uSEitem == "INVINCIBLE")
+                    else if (dropitem.GetItem().uSEitem == "INVINCIBLE")
                     {
                         if (b_active[3])
                         {
@@ -316,9 +316,9 @@ public class Hero : Character
                         b_active[3] = true;
                         m_AgetInvicible.Play();
                     }
-                    else if(dropitem.GetItem().uSEitem == "GHOST")
+                    else if (dropitem.GetItem().uSEitem == "GHOST")
                     {
-                        if(b_active[4])
+                        if (b_active[4])
                         {
                             b_active[4] = false;
                             m_fCurtime_2 = 0;
@@ -388,7 +388,7 @@ public class Hero : Character
             }
         }
 
-        if(other.gameObject.layer == LayerMask.NameToLayer("Bush"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Bush"))
         {
             m_bOnBush = true;
         }
@@ -404,26 +404,26 @@ public class Hero : Character
                 m_fCurBodyAttack = 0.0f;
             }
         }
-        if (other.tag == "Jump" )
+        if (other.tag == "Jump")
         {
-          
-           m_Jump_curDelay += Time.deltaTime;
-           if (m_Jump_curDelay > m_Jump_maxDelay)
-           {
-               if (Jump1 != null) StopCoroutine(Jump1);
-               Jump1 = StartCoroutine(Jump(Jump_Destination_Pos1));
-           }
+
+            m_Jump_curDelay += Time.deltaTime;
+            if (m_Jump_curDelay > m_Jump_maxDelay)
+            {
+                if (Jump1 != null) StopCoroutine(Jump1);
+                Jump1 = StartCoroutine(Jump(Jump_Destination_Pos1));
+            }
 
         }
         if (other.tag == "Jump2")
         {
 
-           m_Jump_curDelay += Time.deltaTime;
-           if (m_Jump_curDelay > m_Jump_maxDelay)
-           {
-               if (Jump2 != null) StopCoroutine(Jump2);
-               Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
-           }
+            m_Jump_curDelay += Time.deltaTime;
+            if (m_Jump_curDelay > m_Jump_maxDelay)
+            {
+                if (Jump2 != null) StopCoroutine(Jump2);
+                Jump2 = StartCoroutine(Jump(Jump_Destination_Pos2));
+            }
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Bush"))
@@ -574,7 +574,7 @@ public class Hero : Character
     {
         if (m_tfResultTarget == null)
         {
-            m_objTargetEffect.Stop(); 
+            m_objTargetEffect.Stop();
         }
         else
         {
@@ -584,7 +584,7 @@ public class Hero : Character
             Vector3 Bot = new Vector3(dir.x, 0, dir.z);
             Bot.Normalize();
             float r = Mathf.Acos(Vector3.Dot(Bot, this.transform.forward)); //라디안
-            float angle = 180.0f * r / Mathf.PI; 
+            float angle = 180.0f * r / Mathf.PI;
             float r2 = Vector3.Dot(Bot, this.transform.right);
             if (r2 < 0.0f) rotDir = -1.0f;
 
@@ -622,7 +622,7 @@ public class Hero : Character
         }
         m_tfEfResultTarget = shorTarget; // 최종값
     }
-   protected void TargetEffect()
+    protected void TargetEffect()
     {
         if (m_tfEfResultTarget == null) //타겟이 null이면 이펙트가 스탑함
         {
@@ -630,7 +630,7 @@ public class Hero : Character
         }
         else
         {
-            
+
             Vector3 pos = m_tfEfResultTarget.transform.position;
             pos.y = 1.0f;
             m_objTargetEffect.gameObject.transform.position = pos;
@@ -641,7 +641,7 @@ public class Hero : Character
         }
     }
     #endregion
-    
+
     IEnumerator Jump(Transform destination)
     {
         m_Jump_StartSound.GetComponent<AudioSource>().Play();
@@ -693,7 +693,7 @@ public class Hero : Character
             m_objInvicible.gameObject.transform.position = this.transform.position;
             m_objInvicible.gameObject.SetActive(true);
             this.gameObject.layer = 9;
-            if(m_fCurtime > 6)
+            if (m_fCurtime > 6)
             {
                 b_active[3] = false;
                 m_fCurtime = 0;
@@ -707,7 +707,7 @@ public class Hero : Character
     }
     virtual protected void Ghostitem()
     {
-        if(b_active[4])
+        if (b_active[4])
         {
             m_fCurtime_2 += Time.deltaTime;
             m_objGhost.gameObject.transform.position = this.transform.position;
@@ -717,7 +717,6 @@ public class Hero : Character
 
             for (int i = 0; i < m_meshRenderer.Length; i++) //스킨렌더가 아닌 사람이 있어서 for문사용
             {
-                //m_meshRenderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
                 #region 알파테스트
                 //Color startColor = m_meshRenderer[i].material.color = new Color(1, 1, 1, 1f);
                 //Color EndColor = m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
@@ -728,13 +727,16 @@ public class Hero : Character
                 //    m_meshRenderer[i].material.color = EndColor;
                 //}
                 #endregion
+                m_meshRenderer[i].material.shader = Shader.Find("Standard");
+                transMat(m_meshRenderer[i].material);
                 m_meshRenderer[i].material.color = new Color(1, 1, 1, 0.3f);
             }
             if (m_renderer.Length > 0)
             {
                 for (int i = 0; i < m_renderer.Length; i++)
                 {
-                    //m_renderer[i].material.shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
+                    m_renderer[i].material.shader = Shader.Find("Standard");
+                    transMat(m_renderer[i].material);
                     m_renderer[i].material.color = new Color(1, 1, 1, 0.3f);
                 }
             }
@@ -749,6 +751,7 @@ public class Hero : Character
             for (int i = 0; i < m_meshRenderer.Length; i++)
             {
                 m_meshRenderer[i].material.shader = Shader.Find("Standard");
+                tranMatStand(m_meshRenderer[i].material);
                 m_meshRenderer[i].material.color = new Color(1, 1, 1, 1);
             }
             if (m_renderer.Length > 0)
@@ -756,16 +759,16 @@ public class Hero : Character
                 for (int i = 0; i < m_renderer.Length; i++)
                 {
                     m_renderer[i].material.shader = Shader.Find("Standard");
+                    tranMatStand(m_renderer[i].material);
                     m_renderer[i].material.color = new Color(1, 1, 1, 1);
                 }
             }
 
-            //this.gameObject.layer = 7;
             m_objGhost.gameObject.SetActive(false);
             m_fMove_Speed = 5f;
         }
     }
-   IEnumerator RecoverHP() //Hp회복 이펙트
+    IEnumerator RecoverHP() //Hp회복 이펙트
     {
 
         m_objHp.gameObject.transform.position = this.transform.position;
@@ -773,7 +776,7 @@ public class Hero : Character
         yield return new WaitForSeconds(1f);
         m_objHp.gameObject.SetActive(false);
         b_active[0] = false;
-        
+
     }
     IEnumerator RecoverST()//St회복 이펙트
     {
@@ -810,5 +813,27 @@ public class Hero : Character
             if (Fe != null) StopCoroutine(Fe);
             Fe = StartCoroutine(RecoverFV());
         }
+    }
+    void transMat(Material mat)
+    {
+        mat.SetFloat("_Mode", 3);
+        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mat.SetInt("_ZWrite", 0);
+        mat.DisableKeyword("_ALPHATEST_ON");
+        mat.DisableKeyword("_ALPHABLEND_ON");
+        mat.EnableKeyword("_ALPHAPREMULTIPLY_ON");
+        mat.renderQueue = 3000;
+    }
+    void tranMatStand(Material mat)
+    {
+        mat.SetFloat("_Mode", 1);
+        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mat.SetInt("_ZWrite", 1);
+        mat.DisableKeyword("_ALPHATEST_ON");
+        mat.DisableKeyword("_ALPHABLEND_ON");
+        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mat.renderQueue = -1;
     }
 }
